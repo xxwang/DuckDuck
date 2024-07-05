@@ -1,0 +1,11 @@
+--swiftversion 5.8
+
+--disable blankLinesAroundMark
+--disable redundantInit
+--disable unusedArguments
+--disable enumnamespaces
+--disable redundantReturn
+
+--disable redundantSelf
+--disable redundantStaticSelf
+--disable strongifiedSelf
