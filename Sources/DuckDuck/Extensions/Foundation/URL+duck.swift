@@ -79,7 +79,7 @@ public extension DDExtension where Base == URL {
     /// - Parameter key: 键
     /// - Returns: 参数字符串
     func queryValue(for key: String) -> String? {
-        return URLComponents(string: self.value.absoluteString)?
+        return URLComponents(string: self.base.absoluteString)?
             .queryItems?
             .first(where: { $0.name == key })?
             .value
@@ -93,7 +93,7 @@ public extension DDExtension where Base == URL {
     /// - Returns: 结果`URL`
     func deleteAllPathComponents() -> URL {
         var url: URL = self.base
-        for _ in 0 ..< self.value.pathComponents.count - 1 {
+        for _ in 0 ..< self.base.pathComponents.count - 1 {
             url.deleteLastPathComponent()
         }
         return url
@@ -106,8 +106,8 @@ public extension DDExtension where Base == URL {
     ///     print(url) // prints "https://domain.com/"
     ///
     func deleteAllPathComponents() {
-        for _ in 0 ..< self.value.pathComponents.count - 1 {
-            self.value.deleteLastPathComponent()
+        for _ in 0 ..< self.base.pathComponents.count - 1 {
+            self.base.deleteLastPathComponent()
         }
     }
 
@@ -118,12 +118,12 @@ public extension DDExtension where Base == URL {
     ///
     /// - Returns: 新的`URL`
     func droppedScheme() -> URL? {
-        if let scheme = self.value.scheme {
-            let droppedScheme = String(self.value.absoluteString.dropFirst(scheme.count + 3))
+        if let scheme = self.base.scheme {
+            let droppedScheme = String(self.base.absoluteString.dropFirst(scheme.count + 3))
             return URL(string: droppedScheme)
         }
-        guard self.value.host != nil else { return self.base }
-        let droppedScheme = String(self.value.absoluteString.dropFirst(2))
+        guard self.base.host != nil else { return self.base }
+        let droppedScheme = String(self.base.absoluteString.dropFirst(2))
         return URL(string: droppedScheme)
     }
 

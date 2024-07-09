@@ -15,6 +15,6 @@ public extension DDExtension where Base == Range<String.Index> {
     /// - Parameter string: `Range`所在字符串
     /// - Returns: `NSRange`
     func as2NSRange(in string: String) -> NSRange {
-        return NSRange(self.value, in: string)
+        return NSRange(self.base, in: string)
     }
 }

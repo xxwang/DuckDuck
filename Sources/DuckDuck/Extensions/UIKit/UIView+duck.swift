@@ -106,7 +106,7 @@ public extension DDExtension where Base: UIView {
 
     /// `self`所在控制器
     var controller: UIViewController? {
-        var nextResponder: UIResponder? = self.value
+        var nextResponder: UIResponder? = self.base
         repeat {
             nextResponder = nextResponder?.next
             if let viewController = nextResponder as? UIViewController {
@@ -118,7 +118,7 @@ public extension DDExtension where Base: UIView {
 
     /// 递归查找`self`及子视图中的第一响应者
     var firstResponder: UIView? {
-        if self.base.isFirstResponder { return self.value }
+        if self.base.isFirstResponder { return self.base }
         for subView in self.base.subviews {
             if let firstResponder = subView.dd.firstResponder {
                 return firstResponder
@@ -155,7 +155,7 @@ public extension DDExtension where Base: UIView {
     ///   - borderColor: 视图的边框颜色
     ///   - backgroundColor: 视图的背景色
     func stressView(_ borderWidth: CGFloat = 1, borderColor: UIColor = UIColor.dd.random, backgroundColor: UIColor = UIColor.dd.random) {
-        guard CommonHelper.isDebug else { return }
+        guard DDHelper.isDebug else { return }
         guard self.base.subviews.count > 0 else { return }
 
         for subview in self.base.subviews {

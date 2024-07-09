@@ -13,11 +13,11 @@ extension Bool: DDExtensionable {}
 public extension DDExtension where Base == Bool {
     /// 转换为`Int`
     var as2Int: Int {
-        return self.value ? 1 : 0
+        return self.base ? 1 : 0
     }
 
     /// 转换为`String`
     var as2String: String {
-        return self.value ? "true" : "false"
+        return self.base ? "true" : "false"
     }
 }

@@ -106,7 +106,7 @@ public extension DDExtension where Base: UIWindow {
     /// - Parameter isLandscape:是否是横屏
     static func changeOrientation(isLandscape: Bool) {
         if isLandscape { // 横屏
-            guard !CommonHelper.isLandscape else { return }
+            guard !DDHelper.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")
@@ -115,7 +115,7 @@ public extension DDExtension where Base: UIWindow {
             UIDevice.current.setValue(orientationTarget, forKey: "orientation")
 
         } else { // 竖屏
-            guard CommonHelper.isLandscape else { return }
+            guard DDHelper.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")

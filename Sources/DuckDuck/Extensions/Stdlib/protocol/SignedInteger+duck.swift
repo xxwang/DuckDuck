@@ -18,6 +18,6 @@ public extension SignedInteger {
 public extension DDExtension where Base: SignedInteger {
     /// 绝对值
     var abs: Self {
-        return Swift.abs(self.value) as! Self
+        return Swift.abs(self.base) as! Self
     }
 }

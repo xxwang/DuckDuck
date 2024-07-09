@@ -12,7 +12,7 @@ import UIKit
 public extension DDExtension where Base: CGMutablePath {
     /// 转换成`CGPath`
     var as2CGPath: CGPath {
-        return self.value.copy()!
+        return self.base.copy()!
     }
 }
 

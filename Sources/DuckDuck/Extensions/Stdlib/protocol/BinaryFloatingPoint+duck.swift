@@ -18,42 +18,42 @@ public extension BinaryFloatingPoint {
 public extension DDExtension where Base: BinaryFloatingPoint {
     /// 转换为`Bool`
     var as2Bool: Bool {
-        return self.value > 0 ? true : false
+        return self.base > 0 ? true : false
     }
 
     /// 转换为`Int`
     var as2Int: Int {
-        return Int(self.value)
+        return Int(self.base)
     }
 
     /// 转换为`Int64`
     var as2Int64: Int64 {
-        return Int64(self.value)
+        return Int64(self.base)
     }
 
     /// 转换为`UInt`
     var as2UInt: UInt {
-        return UInt(self.value)
+        return UInt(self.base)
     }
 
     /// 转换为`UInt64`
     var as2UInt64: UInt64 {
-        return UInt64(self.value)
+        return UInt64(self.base)
     }
 
     /// 转换为`Float`
     var as2Float: Float {
-        return Float(self.value)
+        return Float(self.base)
     }
 
     /// 转换为`Double`
     var as2Double: Double {
-        return Double(self.value)
+        return Double(self.base)
     }
 
     /// 转换为`CGFloat`
     var as2CGFloat: CGFloat {
-        return CGFloat(self.value)
+        return CGFloat(self.base)
     }
 
     /// 转换为`NSNumber`
@@ -98,17 +98,17 @@ public extension DDExtension where Base: BinaryFloatingPoint {
 
     /// 绝对值
     var abs: Base {
-        return Swift.abs(self.value)
+        return Swift.abs(self.base)
     }
 
     /// 向上取整
     var ceil: Base {
-        return Foundation.ceil(self.value)
+        return Foundation.ceil(self.base)
     }
 
     /// 向下取整
     var floor: Base {
-        return Foundation.floor(self.value)
+        return Foundation.floor(self.base)
     }
 
     /// 四舍五入取整

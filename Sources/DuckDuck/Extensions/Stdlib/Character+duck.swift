@@ -13,7 +13,7 @@ extension Character: DDExtensionable {}
 public extension DDExtension where Base == Character {
     /// 转换为`String`
     var as2String: String {
-        return String(self.value)
+        return String(self.base)
     }
 
     /// 随机产生一个字符`(a-z | A-Z | 0-9)`

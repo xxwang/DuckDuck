@@ -18,42 +18,42 @@ public extension BinaryInteger {
 public extension DDExtension where Base: BinaryInteger {
     /// 转换为`Bool`
     var as2Bool: Bool {
-        return self.value > 0 ? true : false
+        return self.base > 0 ? true : false
     }
 
     /// 转换为`Int`
     var as2Int: Int {
-        return Int(self.value)
+        return Int(self.base)
     }
 
     /// 转换为`Int64`
     var as2Int64: Int64 {
-        return Int64(self.value)
+        return Int64(self.base)
     }
 
     /// 转换为`UInt`
     var as2UInt: UInt {
-        return UInt(self.value)
+        return UInt(self.base)
     }
 
     /// 转换为`UInt64`
     var as2UInt64: UInt64 {
-        return UInt64(self.value)
+        return UInt64(self.base)
     }
 
     /// 转换为`Float`
     var as2Float: Float {
-        return Float(self.value)
+        return Float(self.base)
     }
 
     /// 转换为`Double`
     var as2Double: Double {
-        return Double(self.value)
+        return Double(self.base)
     }
 
     /// 转换为`CGFloat`
     var as2CGFloat: CGFloat {
-        return CGFloat(self.value)
+        return CGFloat(self.base)
     }
 
     /// 转换为`NSNumber`
@@ -73,7 +73,7 @@ public extension DDExtension where Base: BinaryInteger {
 
     /// 转换为`String`
     var as2String: String {
-        return String(self.value)
+        return String(self.base)
     }
 
     /// 转换为`Character`
@@ -110,12 +110,12 @@ public extension DDExtension where Base: BinaryInteger {
 
     /// 判断整数是否是奇数
     var isOdd: Bool {
-        return (self.value % 2) != 0
+        return (self.base % 2) != 0
     }
 
     /// 判断整数是否是偶数
     var isEven: Bool {
-        return (self.value % 2) == 0
+        return (self.base % 2) == 0
     }
 
     /// 转字节数组(`UInt8`数组)
@@ -126,7 +126,7 @@ public extension DDExtension where Base: BinaryInteger {
     var bytes: [UInt8] {
         var result = [UInt8]()
         result.reserveCapacity(MemoryLayout<Base>.size)
-        var value = self.value
+        var value = self.base
         for _ in 0 ..< MemoryLayout<Self>.size {
             result.append(UInt8(truncatingIfNeeded: value))
             value >>= 8
