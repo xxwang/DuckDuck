@@ -8,8 +8,7 @@
 import Foundation
 
 public extension BinaryFloatingPoint {
-    typealias YE = DDExtension<Self>
-    var ya: YE {
+    var dd: DDExtension<Self> {
         return DDExtension(self)
     }
 }
