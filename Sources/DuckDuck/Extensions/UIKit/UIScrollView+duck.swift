@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIScrollView {
-    public typealias Associatedtype = UIScrollView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIScrollView
+    override open class func `default`() -> Associatedtype {
         return UIScrollView()
     }
 }
@@ -279,4 +279,3 @@ public extension UIScrollView {
         return self
     }
 }
-

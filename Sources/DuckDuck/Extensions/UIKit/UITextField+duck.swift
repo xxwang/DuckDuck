@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UITextField {
-    public typealias Associatedtype = UITextField
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITextField
+    override open class func `default`() -> Associatedtype {
         return UITextField()
     }
 }

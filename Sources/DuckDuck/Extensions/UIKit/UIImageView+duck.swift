@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIImageView {
-    public typealias Associatedtype = UIImageView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIImageView
+    override open class func `default`() -> Associatedtype {
         return UIImageView()
     }
 }

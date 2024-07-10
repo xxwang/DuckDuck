@@ -1,6 +1,6 @@
 //
 //  CGVector+duck.swift
-//  
+//
 //
 //  Created by 王哥 on 2024/7/10.
 //

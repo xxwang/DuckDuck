@@ -1,5 +1,5 @@
 //
-//  UIButton+duck.swift
+//  UIButton+ya.swift
 //
 //
 //  Created by 王哥 on 2024/6/25.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-
 // MARK: - Defaultable
 public extension UIButton {
-    public typealias Associatedtype = UIButton
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIButton
+    override open class func `default`() -> Associatedtype {
         return UIButton()
     }
 }
@@ -185,4 +184,3 @@ public extension UIButton {
         return self
     }
 }
-

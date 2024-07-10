@@ -30,8 +30,8 @@ public extension DDExtension where Base: UITableViewCell {
 
 // MARK: - Defaultable
 public extension UITableViewCell {
-    public typealias Associatedtype = UITableViewCell
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITableViewCell
+    override open class func `default`() -> Associatedtype {
         return UITableViewCell()
     }
 }

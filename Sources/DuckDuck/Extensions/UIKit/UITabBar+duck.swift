@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UITabBar {
-    public typealias Associatedtype = UITabBar
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITabBar
+    override open class func `default`() -> Associatedtype {
         return UITabBar()
     }
 }
@@ -186,9 +186,8 @@ public extension UITabBar {
     /// - Returns:`Self`
     @discardableResult
     func dd_corner(corners: UIRectCorner, radius: CGFloat) -> Self {
-        // TODO: - 
+        // TODO: -
         self.dd_roundCorners(radius: radius, corners: corners)
         return self
     }
 }
-

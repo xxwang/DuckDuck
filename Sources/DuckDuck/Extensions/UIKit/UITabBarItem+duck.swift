@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UITabBarItem: Defaultable {
-    public typealias Associatedtype = UITabBarItem
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITabBarItem
+    override open class func `default`() -> Associatedtype {
         return UITabBarItem()
     }
 }

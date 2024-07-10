@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UISwitch {
-    public typealias Associatedtype = UISwitch
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UISwitch
+    override open class func `default`() -> Associatedtype {
         return UISwitch()
     }
 }

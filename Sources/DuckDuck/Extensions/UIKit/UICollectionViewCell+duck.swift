@@ -31,9 +31,8 @@ public extension DDExtension where Base: UICollectionViewCell {
 
 // MARK: - Defaultable
 public extension UICollectionViewCell {
-
-    public typealias Associatedtype = UICollectionViewCell
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UICollectionViewCell
+    override open class func `default`() -> Associatedtype {
         return UICollectionViewCell()
     }
 }

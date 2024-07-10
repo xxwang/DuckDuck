@@ -10,8 +10,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension CATextLayer {
-    public typealias Associatedtype = CATextLayer
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = CATextLayer
+    override open class func `default`() -> Associatedtype {
         return CATextLayer()
     }
 }

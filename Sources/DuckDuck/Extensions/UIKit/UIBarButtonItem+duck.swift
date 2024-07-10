@@ -79,8 +79,8 @@ extension UIBarButtonItem: AssociatedEventBlock {
 
 // MARK: - Defaultable
 public extension UIBarButtonItem {
-    public typealias Associatedtype = UIBarButtonItem
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIBarButtonItem
+    override open class func `default`() -> Associatedtype {
         return UIBarButtonItem()
     }
 }

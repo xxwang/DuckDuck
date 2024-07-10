@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIViewController {
-    public typealias Associatedtype = UIViewController
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIViewController
+    override open class func `default`() -> Associatedtype {
         return UIViewController()
     }
 }
@@ -49,7 +49,7 @@ public extension UIViewController {
     }
 }
 
-//MARK: - view
+// MARK: - view
 public extension UIViewController {
     /// 设置控制器根视图背景颜色
     /// - Parameter backgroundColor: 要设置的背景颜色

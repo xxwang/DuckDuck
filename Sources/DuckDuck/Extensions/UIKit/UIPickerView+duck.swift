@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIPickerView {
-    public typealias Associatedtype = UIPickerView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIPickerView
+    override open class func `default`() -> Associatedtype {
         return UIPickerView()
     }
 }
@@ -35,4 +35,3 @@ public extension UIPickerView {
         return self
     }
 }
-

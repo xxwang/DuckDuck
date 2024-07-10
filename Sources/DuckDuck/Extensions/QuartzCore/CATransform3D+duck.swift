@@ -167,4 +167,3 @@ extension CATransform3D: Equatable {
         CATransform3DEqualToTransform(lhs, rhs)
     }
 }
-

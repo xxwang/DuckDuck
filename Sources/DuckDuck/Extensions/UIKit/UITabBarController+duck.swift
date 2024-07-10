@@ -14,8 +14,8 @@ public extension DDExtension where Base: UITabBarController {
         get { return self.current?.selectedIndex ?? 0 }
         set { self.current?.selectedIndex = newValue }
     }
-    
-    /// 当前作为`rootViewController` 
+
+    /// 当前作为`rootViewController`
     static var current: UITabBarController? {
         guard let tabBarController = UIWindow.dd.mainWindow?.rootViewController as? UITabBarController else {
             return nil
@@ -28,8 +28,8 @@ extension UITabBarController: DDExtensionable {}
 
 // MARK: - Defaultable
 public extension UITabBarController {
-    public typealias Associatedtype = UITabBarController
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITabBarController
+    override open class func `default`() -> Associatedtype {
         return UITabBarController()
     }
 }
@@ -74,6 +74,3 @@ public extension UITabBarController {
         return self
     }
 }
-
-
-

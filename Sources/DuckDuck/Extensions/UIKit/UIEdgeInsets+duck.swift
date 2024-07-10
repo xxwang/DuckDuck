@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIEdgeInsets {
-    public typealias Associatedtype = UIEdgeInsets
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIEdgeInsets
+    override open class func `default`() -> Associatedtype {
         return UIEdgeInsets.zero
     }
 }
@@ -114,4 +114,3 @@ public extension UIEdgeInsets {
         lhs.right += rhs.right
     }
 }
-

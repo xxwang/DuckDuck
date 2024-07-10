@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIAlertController {
-    public typealias Associatedtype = UIAlertController
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIAlertController
+    override open class func `default`() -> Associatedtype {
         return UIAlertController(title: nil, message: nil, preferredStyle: .alert)
     }
 }

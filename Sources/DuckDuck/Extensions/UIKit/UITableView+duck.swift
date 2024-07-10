@@ -7,11 +7,10 @@
 
 import UIKit
 
-
 // MARK: - Defaultable
 public extension UITableView {
-    public typealias Associatedtype = UITableView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITableView
+    override open class func `default`() -> Associatedtype {
         let tableView = UITableView(frame: .zero, style: .grouped)
             .dd_rowHeight(UITableView.automaticDimension)
             .dd_estimatedRowHeight(50)
@@ -255,4 +254,3 @@ public extension UITableView {
         return self
     }
 }
-

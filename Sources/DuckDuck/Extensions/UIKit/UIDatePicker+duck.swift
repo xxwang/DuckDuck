@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIDatePicker {
-    public typealias Associatedtype = UIDatePicker
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIDatePicker
+    override open class func `default`() -> Associatedtype {
         return UIDatePicker()
     }
 }
@@ -63,4 +63,3 @@ public extension UIDatePicker {
         return self
     }
 }
-

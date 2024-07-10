@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UICollectionViewFlowLayout: Defaultable {
-    public typealias Associatedtype = UICollectionViewFlowLayout
+    typealias Associatedtype = UICollectionViewFlowLayout
     @objc open class func `default`() -> Associatedtype {
         return UICollectionViewFlowLayout()
     }
@@ -115,4 +115,3 @@ public extension UICollectionViewFlowLayout {
         return self
     }
 }
-

@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIStackView {
-    public typealias Associatedtype = UIStackView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIStackView
+    override open class func `default`() -> Associatedtype {
         return UIStackView()
     }
 }

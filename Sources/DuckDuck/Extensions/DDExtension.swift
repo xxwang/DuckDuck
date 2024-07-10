@@ -25,7 +25,7 @@ public extension DDExtensionable {
 // MARK: - DDExtension
 public class DDExtension<Base> {
     var base: Base
-    
+
     init(_ base: Base) {
         self.base = base
     }

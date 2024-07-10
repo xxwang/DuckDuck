@@ -9,7 +9,6 @@ import AVFAudio
 
 // MARK: - 静态方法
 public extension DDExtension where Base: AVAudioSession {
-    
     /// 蓝牙耳机支持
     static func setAudioSessionActive(_ isActive: Bool = true) {
         let session = AVAudioSession.sharedInstance()

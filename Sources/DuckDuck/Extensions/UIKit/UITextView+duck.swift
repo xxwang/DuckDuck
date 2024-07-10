@@ -9,15 +9,14 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UITextView {
-    public typealias Associatedtype = UITextView
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UITextView
+    override open class func `default`() -> Associatedtype {
         return UITextView()
     }
 }
 
 // MARK: - 链式语法
 public extension UITextView {
-    
     /// 设置是否可以编辑
     /// - Parameter isEditable: 是否可以编辑
     /// - Returns:`Self`
@@ -26,8 +25,7 @@ public extension UITextView {
         self.isEditable = isEditable
         return self
     }
-    
-    
+
     /// 清空内容
     /// - Returns:`Self`
     @discardableResult

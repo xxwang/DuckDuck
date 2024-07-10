@@ -17,4 +17,3 @@ public extension DDExtension where Base: MKMultiPoint {
         return coords
     }
 }
-

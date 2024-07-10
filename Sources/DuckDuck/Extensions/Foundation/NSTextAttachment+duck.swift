@@ -1,6 +1,6 @@
 //
 //  NSTextAttachment+duck.swift
-//  
+//
 //
 //  Created by 王哥 on 2024/7/4.
 //
@@ -17,8 +17,8 @@ public extension DDExtension where Base: NSTextAttachment {
 
 // MARK: - Defaultable
 public extension NSTextAttachment {
-    public typealias Associatedtype = NSTextAttachment
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = NSTextAttachment
+    override open class func `default`() -> Associatedtype {
         return NSTextAttachment()
     }
 }

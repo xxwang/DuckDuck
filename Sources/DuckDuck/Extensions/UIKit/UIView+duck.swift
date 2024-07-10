@@ -138,7 +138,6 @@ public extension DDExtension where Base: UIView {
     }
 }
 
-
 // MARK: - 常用方法
 public extension DDExtension where Base: UIView {
     /// 强制更新布局(立即更新)
@@ -412,9 +411,9 @@ public extension DDExtension where Base: UIView {
     }
 }
 
-//MARK: - Defaultable
+// MARK: - Defaultable
 public extension UIView: Defaultable {
-    public typealias Associatedtype = UIView
+    typealias Associatedtype = UIView
     @objc open class func `default`() -> Associatedtype {
         return UIView()
     }

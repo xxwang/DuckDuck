@@ -11,7 +11,6 @@ public class DDHelper {}
 
 // MARK: - 环境判断
 public extension DDHelper {
-    
     /// 是否是模拟器
     static var isSimulator: Bool {
         #if targetEnvironment(simulator)
@@ -33,7 +32,6 @@ public extension DDHelper {
 
 // MARK: - 设备判断
 public extension DDHelper {
-    
     /// 是否是`iPad`
     static var isIPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad

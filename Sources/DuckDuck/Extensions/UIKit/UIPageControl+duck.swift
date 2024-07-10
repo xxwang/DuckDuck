@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIPageControl {
-    public typealias Associatedtype = UIPageControl
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIPageControl
+    override open class func `default`() -> Associatedtype {
         return UIPageControl()
     }
 }
@@ -62,4 +62,3 @@ public extension UIPageControl {
         return self
     }
 }
-

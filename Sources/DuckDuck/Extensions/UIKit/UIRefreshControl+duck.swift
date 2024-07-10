@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UIRefreshControl {
-    public typealias Associatedtype = UIRefreshControl
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIRefreshControl
+    override open class func `default`() -> Associatedtype {
         return UIRefreshControl()
     }
 }

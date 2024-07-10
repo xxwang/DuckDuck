@@ -49,11 +49,10 @@ extension UISlider: AssociatedEventBlock {
     }
 }
 
-
 // MARK: - Defaultable
 public extension UISlider {
-    public typealias Associatedtype = UISlider
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UISlider
+    override open class func `default`() -> Associatedtype {
         return UISlider()
     }
 }
@@ -143,4 +142,3 @@ public extension UISlider {
         return self
     }
 }
-

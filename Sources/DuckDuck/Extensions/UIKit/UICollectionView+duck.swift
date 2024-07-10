@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UICollectionView: Defaultable {
-    public typealias Associatedtype = UICollectionView
+    typealias Associatedtype = UICollectionView
     @objc open class func `default`() -> Associatedtype {
         let layout = UICollectionViewFlowLayout()
         return UICollectionView(frame: .zero, collectionViewLayout: layout)

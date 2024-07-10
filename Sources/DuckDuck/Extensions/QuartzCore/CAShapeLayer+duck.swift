@@ -10,8 +10,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension CAShapeLayer {
-    public typealias Associatedtype = CAShapeLayer
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = CAShapeLayer
+    override open class func `default`() -> Associatedtype {
         return CAShapeLayer()
     }
 }

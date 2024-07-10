@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - Defaultable
 public extension NSMutableParagraphStyle {
-    public typealias Associatedtype = NSMutableParagraphStyle
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = NSMutableParagraphStyle
+    override open class func `default`() -> Associatedtype {
         return NSMutableParagraphStyle()
             .dd_hyphenationFactor(1.0)
             .dd_firstLineHeadIndent(0.0)
@@ -103,4 +103,3 @@ public extension NSMutableParagraphStyle {
         return self
     }
 }
-

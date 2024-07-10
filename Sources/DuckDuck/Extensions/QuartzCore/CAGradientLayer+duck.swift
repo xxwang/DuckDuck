@@ -26,8 +26,8 @@ public extension CAGradientLayer {
 
 // MARK: - Defaultable
 public extension CAGradientLayer {
-    public typealias Associatedtype = CAGradientLayer
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = CAGradientLayer
+    override open class func `default`() -> Associatedtype {
         return CAGradientLayer()
     }
 }
@@ -83,4 +83,3 @@ public extension CAGradientLayer {
         return self
     }
 }
-

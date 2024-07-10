@@ -9,12 +9,11 @@ import UIKit
 
 // MARK: - Defaultable
 public extension UILabel {
-    public typealias Associatedtype = UILabel
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UILabel
+    override open class func `default`() -> Associatedtype {
         return UILabel()
     }
 }
-
 
 // MARK: - 链式语法
 public extension UILabel {
@@ -35,7 +34,7 @@ public extension UILabel {
         self.attributedText = attributedText
         return self
     }
-    
+
     /// 设置文字行数
     /// - Parameter lines:行数
     /// - Returns:`Self`
@@ -108,7 +107,7 @@ public extension UILabel {
     }
 }
 
-//MARK: - 属性文本链式语法
+// MARK: - 属性文本链式语法
 public extension UILabel {
     /// 设置特定范围的字体
     /// - Parameters:
@@ -215,4 +214,5 @@ public extension UILabel {
         let mAttributedString = attributedText?.dd.as2NSMutableAttributedString.dd_image(image, bounds: bounds, index: index)
         self.attributedText = mAttributedString
         return self
-    }}
+    }
+}

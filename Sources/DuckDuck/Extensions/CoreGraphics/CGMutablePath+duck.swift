@@ -18,8 +18,8 @@ public extension DDExtension where Base: CGMutablePath {
 
 // MARK: - Defaultable
 public extension CGMutablePath {
-    public typealias Associatedtype = CGMutablePath
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = CGMutablePath
+    override open class func `default`() -> Associatedtype {
         return CGMutablePath()
     }
 }

@@ -10,7 +10,6 @@ import UIKit
 public protocol Loadable {}
 
 public extension Loadable where Self: UIView {
-    
     /// 加载与类同名的`xib`
     /// - Parameters:
     ///   - nibName: `xib`文件名称
@@ -23,11 +22,9 @@ public extension Loadable where Self: UIView {
         }
         return view
     }
-
 }
 
 public extension Loadable where Self: UIViewController {
-    
     /// 加载`storyboard`中的控制器
     /// - Parameters:
     ///   - identifier: 控制器对应标识,默认使用`控制器类名称`

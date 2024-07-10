@@ -1,6 +1,6 @@
 //
 //  UIWindow+duck.swift
-//  
+//
 //
 //  Created by 王哥 on 2024/6/18.
 //
@@ -24,9 +24,9 @@ public extension DDExtension where Base: UIWindow {
         if resultWindow?.windowLevel == .normal {
             return resultWindow
         }
-        self.windows.forEach {
-            if $0.windowLevel == .normal {
-                resultWindow = $0
+        for window in self.windows {
+            if window.windowLevel == .normal {
+                resultWindow = window
             }
         }
         return resultWindow
@@ -195,13 +195,11 @@ public extension DDExtension where Base: UIWindow {
 
 // MARK: - Defaultable
 public extension UIWindow {
-    public typealias Associatedtype = UIWindow
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = UIWindow
+    override open class func `default`() -> Associatedtype {
         return UIWindow(frame: kScreenBounds)
     }
 }
 
 // MARK: - 链式语法
-public extension UIWindow {
-    
-}
+public extension UIWindow {}

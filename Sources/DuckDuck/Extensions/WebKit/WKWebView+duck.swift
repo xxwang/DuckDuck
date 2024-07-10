@@ -9,9 +9,9 @@ import WebKit
 
 // MARK: - Defaultable
 public extension WKWebView {
-    public typealias Associatedtype = WKWebView
-    
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = WKWebView
+
+    override open class func `default`() -> Associatedtype {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.selectionGranularity = .dynamic
@@ -22,7 +22,7 @@ public extension WKWebView {
         } else {
             configuration.preferences.javaScriptEnabled = true
         }
-        
+
         return WKWebView(frame: .zero, configuration: configuration)
     }
 }
@@ -42,7 +42,7 @@ public extension WKWebView {
     /// - Parameter delegate: 代理
     /// - Returns: `Self`
     @discardableResult
-    func  uiDelegate(_ delegate: WKUIDelegate?) -> Self {
+    func uiDelegate(_ delegate: WKUIDelegate?) -> Self {
         uiDelegate = delegate
         return self
     }
@@ -53,12 +53,13 @@ public extension WKWebView {
     @discardableResult
     func dd_load(_ string: String?) -> Self {
         guard let string,
-              let url = URL(string: string) else {
+              let url = URL(string: string)
+        else {
             return self
         }
         let request = URLRequest(url: url)
         self.load(request)
-        
+
         return self
     }
 
@@ -72,7 +73,7 @@ public extension WKWebView {
         }
         let request = URLRequest(url: url)
         self.load(request)
-        
+
         return self
     }
 
@@ -97,4 +98,3 @@ public extension WKWebView {
         return self
     }
 }
-

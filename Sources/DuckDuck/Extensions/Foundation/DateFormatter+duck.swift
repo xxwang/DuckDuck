@@ -26,8 +26,8 @@ public extension DateFormatter {
 
 // MARK: - Defaultable
 public extension DateFormatter {
-    public typealias Associatedtype = DateFormatter
-    open override class func `default`() -> Associatedtype {
+    typealias Associatedtype = DateFormatter
+    override open class func `default`() -> Associatedtype {
         return DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
     }
 }

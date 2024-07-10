@@ -64,4 +64,3 @@ public extension Emitterable where Self: UIViewController {
             .forEach { $0.removeFromSuperlayer() }
     }
 }
-
