@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Locale: DDExtensionable {}
+extension Locale: DDExtensionable {}
 
 // MARK: - 方法
 public extension DDExtension where Base == Locale {

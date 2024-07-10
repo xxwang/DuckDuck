@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension DateComponents: DDExtensionable {}
+extension DateComponents: DDExtensionable {}
 
 // MARK: - 链式语法
 public extension DateComponents {

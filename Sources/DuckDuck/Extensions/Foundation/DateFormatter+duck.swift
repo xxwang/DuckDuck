@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension DateFormatter: DDExtensionable {}
+extension DateFormatter: DDExtensionable {}
 
 // MARK: - 构造方法
 public extension DateFormatter {
