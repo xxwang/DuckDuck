@@ -7,6 +7,36 @@
 
 import UIKit
 
+// MARK: - 属性
+public extension DDExtension where Base == UIEdgeInsets {
+    /// 返回水平方向`edges`
+    var dd_horizontal: CGFloat {
+        return self.base.left + self.base.right
+    }
+
+    /// 返回垂直方向`edges`
+    var dd_vertical: CGFloat {
+        return self.base.top + self.base.bottom
+    }
+}
+
+// MARK: - 构造方法
+public extension UIEdgeInsets {
+    /// 创建4个方向相等的`UIEdgeInsets`
+    /// - Parameter inset:用于四个方向的值
+    init(inset: CGFloat) {
+        self.init(top: inset, left: inset, bottom: inset, right: inset)
+    }
+
+    /// 创建一个水平方向与垂直方向平分的`UIEdgeInsets`
+    /// - Parameters:
+    ///   - horizontal:水平方向大小
+    ///   - vertical:垂直方向大小
+    init(horizontal: CGFloat, vertical: CGFloat) {
+        self.init(top: vertical / 2, left: horizontal / 2, bottom: vertical / 2, right: horizontal / 2)
+    }
+}
+
 // MARK: - Defaultable
 extension UIEdgeInsets: Defaultable {
     public typealias Associatedtype = UIEdgeInsets
