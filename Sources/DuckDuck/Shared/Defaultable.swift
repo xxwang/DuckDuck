@@ -7,7 +7,8 @@
 
 import Foundation
 
-public protocol Defaultable: NSObjectProtocol where Self: NSObject {
+// public protocol Defaultable: NSObjectProtocol where Self: NSObject
+public protocol Defaultable {
     /// 关联类型
     associatedtype Associatedtype
     /// 生成默认对象

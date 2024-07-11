@@ -17,14 +17,12 @@ public extension DDExtension where Base: UITabBarController {
 
     /// 当前作为`rootViewController`
     static var current: UITabBarController? {
-        guard let tabBarController = UIWindow.dd.mainWindow?.rootViewController as? UITabBarController else {
+        guard let tabBarController = UIWindow.dd.window?.rootViewController as? UITabBarController else {
             return nil
         }
         return tabBarController
     }
 }
-
-extension UITabBarController: DDExtensionable {}
 
 // MARK: - Defaultable
 public extension UITabBarController {

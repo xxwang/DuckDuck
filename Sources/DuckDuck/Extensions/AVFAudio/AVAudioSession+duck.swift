@@ -16,7 +16,7 @@ public extension DDExtension where Base: AVAudioSession {
             try session.setCategory(.playback, mode: .default, options: [.allowBluetoothA2DP, .mixWithOthers])
             try session.setActive(isActive)
         } catch {
-            WGLog.error(error.localizedDescription)
+            DDLog.error(error.localizedDescription)
         }
     }
 }

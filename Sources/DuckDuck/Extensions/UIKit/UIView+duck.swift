@@ -412,8 +412,8 @@ public extension DDExtension where Base: UIView {
 }
 
 // MARK: - Defaultable
-public extension UIView: Defaultable {
-    typealias Associatedtype = UIView
+extension UIView: Defaultable {
+    public typealias Associatedtype = UIView
     @objc open class func `default`() -> Associatedtype {
         return UIView()
     }

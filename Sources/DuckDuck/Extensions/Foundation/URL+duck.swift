@@ -8,7 +8,7 @@
 import AVFoundation
 import UIKit
 
-extension URL: WGable {}
+extension URL: DDExtensionable {}
 
 // MARK: - 构造方法
 public extension URL {

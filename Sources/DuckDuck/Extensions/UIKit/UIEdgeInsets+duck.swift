@@ -8,9 +8,9 @@
 import UIKit
 
 // MARK: - Defaultable
-public extension UIEdgeInsets {
-    typealias Associatedtype = UIEdgeInsets
-    override open class func `default`() -> Associatedtype {
+extension UIEdgeInsets: Defaultable {
+    public typealias Associatedtype = UIEdgeInsets
+    public static func `default`() -> Associatedtype {
         return UIEdgeInsets.zero
     }
 }

@@ -120,7 +120,7 @@ public extension DDExtension where Base: BinaryInteger {
     /// 转字节数组(`UInt8`数组)
     ///
     ///     var number = Int16(-128)
-    ///     print(number.wg.bytes) ->  "[255, 128]"
+    ///     print(number.dd.bytes) ->  "[255, 128]"
     ///
     var bytes: [UInt8] {
         var result = [UInt8]()

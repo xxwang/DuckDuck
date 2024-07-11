@@ -8,9 +8,9 @@
 import UIKit
 
 // MARK: - Defaultable
-public extension UIViewController {
-    typealias Associatedtype = UIViewController
-    override open class func `default`() -> Associatedtype {
+extension UIViewController: Defaultable {
+    public typealias Associatedtype = UIViewController
+    @objc open class func `default`() -> Associatedtype {
         return UIViewController()
     }
 }

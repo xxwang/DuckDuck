@@ -22,8 +22,8 @@ public extension DDExtension where Base: UINavigationItem {
 }
 
 // MARK: - Defaultable
-public extension UINavigationItem: Defaultable {
-    typealias Associatedtype = UINavigationItem
+extension UINavigationItem: Defaultable {
+    public typealias Associatedtype = UINavigationItem
 
     @objc open class func `default`() -> Associatedtype {
         return UINavigationItem()

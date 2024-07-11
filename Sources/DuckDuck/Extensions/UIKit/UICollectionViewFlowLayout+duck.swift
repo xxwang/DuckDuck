@@ -7,8 +7,9 @@
 
 import UIKit
 
-public extension UICollectionViewFlowLayout: Defaultable {
-    typealias Associatedtype = UICollectionViewFlowLayout
+extension UICollectionViewFlowLayout: Defaultable {
+    public typealias Associatedtype = UICollectionViewFlowLayout
+
     @objc open class func `default`() -> Associatedtype {
         return UICollectionViewFlowLayout()
     }

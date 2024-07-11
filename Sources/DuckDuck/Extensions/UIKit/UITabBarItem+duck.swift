@@ -8,9 +8,10 @@
 import UIKit
 
 // MARK: - Defaultable
-public extension UITabBarItem: Defaultable {
-    typealias Associatedtype = UITabBarItem
-    override open class func `default`() -> Associatedtype {
+extension UITabBarItem: Defaultable {
+    public typealias Associatedtype = UITabBarItem
+
+    @objc public class func `default`() -> Associatedtype {
         return UITabBarItem()
     }
 }
