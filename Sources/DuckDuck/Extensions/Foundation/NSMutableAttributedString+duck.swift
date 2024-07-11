@@ -18,6 +18,7 @@ public extension DDExtension where Base == NSMutableAttributedString {
 // MARK: - Defaultable
 public extension NSMutableAttributedString {
     typealias Associatedtype = NSMutableAttributedString
+
     override open class func `default`() -> Associatedtype {
         return NSMutableAttributedString()
     }

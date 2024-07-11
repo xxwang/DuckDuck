@@ -16,9 +16,9 @@ public extension DDExtension where Base: NSTextAttachment {
 }
 
 // MARK: - Defaultable
-public extension NSTextAttachment {
-    typealias Associatedtype = NSTextAttachment
-    override open class func `default`() -> Associatedtype {
+extension NSTextAttachment: Defaultable {
+    public typealias Associatedtype = NSTextAttachment
+    @objc open class func `default`() -> Associatedtype {
         return NSTextAttachment()
     }
 }

@@ -113,3 +113,12 @@ public extension NSAttributedString {
         lhs + NSAttributedString(string: rhs)
     }
 }
+
+// MARK: - Defaultable
+extension NSAttributedString: Defaultable {
+    public typealias Associatedtype = NSAttributedString
+
+    @objc open class func `default`() -> Associatedtype {
+        return NSAttributedString()
+    }
+}

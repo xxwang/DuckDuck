@@ -73,14 +73,14 @@ extension UIBarButtonItem: AssociatedEventBlock {
     /// 事件处理
     /// - Parameter event:事件发生者
     @objc func eventHandler(_ event: UIBarButtonItem) {
-        self.block?(event)
+        self.eventBlock?(event)
     }
 }
 
 // MARK: - Defaultable
-public extension UIBarButtonItem {
-    typealias Associatedtype = UIBarButtonItem
-    override open class func `default`() -> Associatedtype {
+extension UIBarButtonItem: Defaultable {
+    public typealias Associatedtype = UIBarButtonItem
+    @objc open class func `default`() -> Associatedtype {
         return UIBarButtonItem()
     }
 }

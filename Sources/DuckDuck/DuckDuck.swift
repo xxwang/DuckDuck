@@ -7,6 +7,6 @@ struct DuckDuck {
 
 extension DuckDuck {
     static func sayHello() {
-        print(text)
+        DDLog.info(self.text)
     }
 }

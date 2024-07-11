@@ -63,7 +63,7 @@ public extension UISlider {
     /// - Parameter value: 值
     /// - Returns: `Self`
     func dd_value(_ value: Float) -> Self {
-        self.base = value
+        self.value = value
         return self
     }
 

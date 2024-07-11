@@ -25,9 +25,9 @@ public extension DateFormatter {
 }
 
 // MARK: - Defaultable
-public extension DateFormatter {
-    typealias Associatedtype = DateFormatter
-    override open class func `default`() -> Associatedtype {
+extension DateFormatter: Defaultable {
+    public typealias Associatedtype = DateFormatter
+    @objc open class func `default`() -> Associatedtype {
         return DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
     }
 }
