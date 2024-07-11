@@ -7,6 +7,73 @@
 
 import UIKit
 
+// MARK: - 计算属性
+public extension DDExtension where Base: UITextField {
+    /// 内容是否为空
+    var isEmpty: Bool {
+        return (self.base.text).dd.isNilOrEmpty
+    }
+}
+
+// MARK: - 方法
+public extension DDExtension where Base: UITextField {
+    /// 清空内容
+    func clear() {
+        self.base.text = nil
+        self.base.attributedText = nil
+    }
+
+    /// 将工具栏添加到`UITextField`的`inputAccessoryView`
+    /// - Parameters:
+    ///   - items: 工具栏中的选项
+    ///   - height: 工具栏高度
+    /// - Returns: `UIToolbar`
+    @discardableResult
+    func addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
+        let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: kScreenWidth, height: height)))
+        toolBar.setItems(items, animated: false)
+        self.base.inputAccessoryView = toolBar
+        return toolBar
+    }
+
+    /// 限制字数的输入
+    /// 调用位置
+    /// `func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool`
+    ///
+    /// - Parameters:
+    ///   - range:范围
+    ///   - text:输入的文字
+    ///   - maxCharacters:限制字数
+    ///   - regex:可输入内容(正则)
+    /// - Returns:返回是否可输入
+    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+        guard !text.isEmpty else { return true }
+        guard let oldContent = self.base.text else { return false }
+
+        if let _ = self.base.markedTextRange {
+            // 有高亮联想中
+            guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
+            // 无高亮
+            // 正则的判断
+            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            // 联想选中键盘
+            let allContent = oldContent.dd.subString(to: range.location) + text
+            if allContent.count > maxCharacters {
+                let newContent = allContent.dd_subString(to: maxCharacters)
+                self.base.text = newContent
+                return false
+            }
+        } else {
+            guard !text.dd.isNineKeyBoard() else { return true }
+            // 正则的判断
+            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            // 如果数字大于指定位数,不能输入
+            guard oldContent.count + text.count <= maxCharacters else { return false }
+        }
+        return true
+    }
+}
+
 // MARK: - Defaultable
 public extension UITextField {
     typealias Associatedtype = UITextField

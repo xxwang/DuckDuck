@@ -7,6 +7,69 @@
 
 import UIKit
 
+// MARK: - 方法
+public extension DDExtension where Base: UINavigationController {
+    /// 把控制器压入导航栈中
+    /// - Parameters:
+    ///   - viewController: 要入栈的控制器
+    ///   - animated: 是否动画
+    ///   - completion: 完成回调
+    func push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        self.base.pushViewController(viewController, animated: animated)
+        CATransaction.commit()
+    }
+
+    /// 把控制器人栈中移除
+    /// - Parameters:
+    ///   - animated: 是否动画
+    ///   - completion: 完成回调
+    func pop(animated: Bool = true, completion: (() -> Void)? = nil) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        self.base.popViewController(animated: animated)
+        CATransaction.commit()
+    }
+
+    /// 设置导航条为透明
+    /// - Parameter tintColor: 导航条`tintColor`
+    func transparent(with tintColor: UIColor = .white) {
+        self.base.navigationBar
+            .dd_isTranslucent(true)
+            .dd_backgroundImage(UIImage())
+            .dd_backgroundColor(.clear)
+            .dd_shadowImage(UIImage())
+            .dd_tintColor(tintColor)
+            .dd_barTintColor(.clear)
+            .dd_titleTextAttributes([.foregroundColor: tintColor])
+    }
+
+    /// 设置全局返回手势
+    /// - Parameter isOpen: 是否开启
+    func fullScreenBackGesture(_ isOpen: Bool) {
+        if isOpen {
+            guard let popGestureRecognizer = self.base.interactivePopGestureRecognizer,
+                  let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject]
+            else {
+                return
+            }
+            guard let targetObjc = targets.first else { return }
+            guard let target = targetObjc.value(forKey: "target") else { return }
+            let action = Selector(("handleNavigationTransition:"))
+
+            let panGR = UIPanGestureRecognizer(target: target, action: action)
+            self.base.view.addGestureRecognizer(panGR)
+        } else {
+            self.base.view.gestureRecognizers?.filter { ges in
+                ges is UIPanGestureRecognizer
+            }.forEach { ges in
+                ges.dd.removeGesture()
+            }
+        }
+    }
+}
+
 // MARK: - 链式语法
 public extension UINavigationController {
     /// 设置导航控制器代理

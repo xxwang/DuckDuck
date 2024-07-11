@@ -7,6 +7,141 @@
 
 import UIKit
 
+// MARK: - 关联键
+private class AssociateKeys {
+    static var placeholder: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDEL".hashValue)
+    static var placeholderLabel: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDELABEL".hashValue)
+    static var placeholdFont: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDFONT".hashValue)
+    static var placeholdColor: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDCOLOR".hashValue)
+    static var placeholderOrigin: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDERORIGIN".hashValue)
+}
+
+// MARK: - 方法
+public extension DDExtension where Base: UITextView {
+    /// 限制输入的字数
+    ///
+    /// 调用位置
+    /// `func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool`
+    ///
+    /// - Parameters:
+    ///   - range:范围
+    ///   - text:输入的文字
+    ///   - maxCharacters:限制字数
+    ///   - regex:可输入内容(正则)
+    /// - Returns:返回是否可输入
+    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+        guard !text.isEmpty else { return true }
+        guard let oldContent = self.base.text else { return false }
+
+        if let _ = self.base.markedTextRange {
+            // 有高亮联想中
+            guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
+            // 无高亮
+            // 正则的判断
+            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            // 联想选中键盘
+            let allContent = oldContent.dd.subString(to: range.location) + text
+            if allContent.count > maxCharacters {
+                let newContent = allContent.dd.subString(to: maxCharacters)
+                self.base.text = newContent
+                return false
+            }
+        } else {
+            guard !text.dd.isNineKeyBoard() else { return true }
+            // 正则的判断
+            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            // 如果数字大于指定位数,不能输入
+            guard oldContent.count + text.count <= maxCharacters else { return false }
+        }
+        return true
+    }
+
+    /// 添加链接文本(链接为空时则表示普通文本)
+    /// - Parameters:
+    ///   - string:文本
+    ///   - withURLString:链接
+    func appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
+        // 新增的文本内容(使用默认设置的字体样式)
+        let addAttributes = [NSAttributedString.Key.font: font]
+        let linkAttributedString = NSMutableAttributedString(string: linkString, attributes: addAttributes)
+
+        // 判断是否是链接文字
+        if let linkAddr {
+            linkAttributedString.beginEditing()
+            linkAttributedString.addAttribute(NSAttributedString.Key.link,
+                                              value: linkAddr,
+                                              range: linkString.dd.fullNSRange)
+            linkAttributedString.endEditing()
+        }
+
+        self.base.attributedText = self.base.attributedText
+            .dd.as2NSMutableAttributedString
+            .dd_append(linkAttributedString)
+    }
+
+    /// 转换特殊符号标签字段
+    func resolveHashTags() {
+        let nsText: NSString = self.base.text! as NSString
+
+        // 使用默认设置的字体样式
+        let m_attributedText = (self.base.text ?? "").dd.as2NSMutableAttributedString.dd_font(self.base.font)
+
+        // 用来记录遍历字符串的索引位置
+        var bookmark = 0
+        // 用于拆分的特殊符号
+        let charactersSet = CharacterSet(charactersIn: "@#")
+
+        // 先将字符串按空格和分隔符拆分
+        let sentences: [String] = self.base.text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+
+        for sentence in sentences {
+            // 如果是url链接则跳过
+            if !sentence.dd.isValidUrl() {
+                // 再按特殊符号拆分
+                let words: [String] = sentence.components(separatedBy: charactersSet)
+                var bookmark2 = bookmark
+                for i in 0 ..< words.count {
+                    let word = words[i]
+                    let keyword = dd_chopOffNonAlphaNumericCharacters(word as String) ?? ""
+                    if keyword != "", i > 0 {
+                        // 使用自定义的scheme来表示各种特殊链接,比如:mention:hangge
+                        // 使得这些字段会变蓝色且可点击
+                        // 匹配的范围
+                        let remainingRangeLength = min(nsText.length - bookmark2 + 1, word.count + 2)
+                        let remainingRange = NSRange(location: bookmark2 - 1, length: remainingRangeLength)
+                        // print(keyword, bookmark2, remainingRangeLength)
+                        // 获取转码后的关键字,用于url里的值
+                        // (确保链接的正确性,比如url链接直接用中文就会有问题)
+                        let encodeKeyword = keyword.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                        // 匹配@某人
+                        var matchRange = nsText.range(of: "@\(keyword)", options: .literal, range: remainingRange)
+                        m_attributedText.addAttribute(NSAttributedString.Key.link, value: "test1:\(encodeKeyword)", range: matchRange)
+                        // 匹配#话题#
+                        matchRange = nsText.range(of: "#\(keyword)#", options: .literal, range: remainingRange)
+                        m_attributedText.addAttribute(NSAttributedString.Key.link, value: "test2:\(encodeKeyword)", range: matchRange)
+                        // attrString.addAttributes([NSAttributedString.Key.link :"test2:\(encodeKeyword)"], range:matchRange)
+                    }
+                    // 移动坐标索引记录
+                    bookmark2 += word.count + 1
+                }
+            }
+            // 移动坐标索引记录
+            bookmark += sentence.count + 1
+        }
+        // print(nsText.length, bookmark)
+        // 最终赋值
+        self.base.attributedText = m_attributedText
+    }
+
+    /// 过滤部多余的非数字和字符的部分
+    /// - Parameter text:@hangge.123 -> @hangge
+    /// - Returns:返回过滤后的字符串
+    private func chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
+        let nonAlphaNumericCharacters = CharacterSet.alphanumerics.inverted
+        return text.components(separatedBy: nonAlphaNumericCharacters).first
+    }
+}
+
 // MARK: - Defaultable
 public extension UITextView {
     typealias Associatedtype = UITextView
