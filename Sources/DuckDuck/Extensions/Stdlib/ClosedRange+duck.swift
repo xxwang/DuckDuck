@@ -7,10 +7,10 @@
 
 import Foundation
 
-// MARK: - 计算属性
-public extension DDExtension where Base == ClosedRange<Int> {
+// MARK: - 类型转换
+public extension ClosedRange<Int> {
     /// 转换为索引数组
-    var as2Indexs: [Int] {
-        return self.base.map { $0 }
+    func dd_indexs() -> [Int] {
+        return self.map { $0 }
     }
 }

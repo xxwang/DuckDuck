@@ -7,13 +7,13 @@
 
 import StoreKit
 
-// MARK: - 计算属性
-public extension DDExtension where Base: SKProduct {
+// MARK: - 属性
+public extension SKProduct {
     /// 本地化商品价格
-    var priceLocale: String? {
+    func dd_priceLocale() -> String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = self.base.priceLocale
-        return formatter.string(from: self.base.price)
+        formatter.locale = self.priceLocale
+        return formatter.string(from: self.price)
     }
 }

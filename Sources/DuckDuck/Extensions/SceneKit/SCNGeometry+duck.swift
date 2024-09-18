@@ -9,9 +9,9 @@ import SceneKit
 import UIKit
 
 // MARK: - 属性
-public extension DDExtension where Base: SCNGeometry {
+public extension SCNGeometry {
     /// 返回几何体边界框的大小
-    var boundingSize: SCNVector3 {
-        return (self.base.boundingBox.max - self.base.boundingBox.min).dd.abs
+    func dd_boundingSize() -> SCNVector3 {
+        return (self.boundingBox.max - self.boundingBox.min).dd_abs()
     }
 }

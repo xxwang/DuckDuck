@@ -7,17 +7,15 @@
 
 import Foundation
 
-extension Bool: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == Bool {
+// MARK: - 类型转换
+public extension Bool {
     /// 转换为`Int`
-    var as2Int: Int {
-        return self.base ? 1 : 0
+    func dd_Int() -> Int {
+        return self ? 1 : 0
     }
 
     /// 转换为`String`
-    var as2String: String {
-        return self.base ? "true" : "false"
+    func dd_String() -> String {
+        return self ? "true" : "false"
     }
 }

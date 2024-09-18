@@ -7,17 +7,18 @@
 
 import Foundation
 
-extension Character: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == Character {
+// MARK: - 类型转换
+public extension Character {
     /// 转换为`String`
-    var as2String: String {
-        return String(self.base)
+    func dd_String() -> String {
+        return String(self)
     }
+}
 
+//MARK: - 静态方法
+public extension Character {
     /// 随机产生一个字符`(a-z | A-Z | 0-9)`
-    static var random: Character {
+    static func dd_random() -> Character {
         return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()!
     }
 }

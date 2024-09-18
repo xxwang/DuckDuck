@@ -8,30 +8,28 @@
 import SceneKit
 import UIKit
 
-extension SCNVector3: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == SCNVector3 {
+// MARK: - 属性
+public extension SCNVector3 {
     /// 返回`向量分量`的`绝对值`
     ///
-    ///     SCNVector3(2, -3, -6).dd.abs -> SCNVector3(2, 3, 6)
-    var abs: SCNVector3 {
-        return SCNVector3(Swift.abs(self.base.x), Swift.abs(self.base.y), Swift.abs(self.base.z))
+    ///     SCNVector3(2, -3, -6).dd_abs() -> SCNVector3(2, 3, 6)
+    func dd_abs() -> SCNVector3 {
+        return SCNVector3(Swift.abs(self.x), Swift.abs(self.y), Swift.abs(self.z))
     }
 
     /// 返回`向量`的`长度`
     ///
-    ///     SCNVector3(2, 3, 6).dd.length -> 7
-    var length: Float {
-        return sqrt(pow(self.base.x, 2) + pow(self.base.y, 2) + pow(self.base.z, 2))
+    ///     SCNVector3(2, 3, 6).dd_length() -> 7
+    func dd_length() -> Float {
+        return sqrt(pow(self.x, 2) + pow(self.y, 2) + pow(self.z, 2))
     }
 
     /// 返回`单位`或`规格化``向量`,其`length=1`
     ///
-    ///     SCNVector3(2, 3, 6).dd.normalized  -> SCNVector3(2/7, 3/7, 6/7)
-    var normalized: SCNVector3 {
-        let length = sqrt(pow(self.base.x, 2) + pow(self.base.y, 2) + pow(self.base.z, 2))
-        return SCNVector3(self.base.x / length, self.base.y / length, self.base.z / length)
+    ///     SCNVector3(2, 3, 6).dd_normalized()  -> SCNVector3(2/7, 3/7, 6/7)
+    func dd_normalized() -> SCNVector3 {
+        let length = sqrt(pow(self.x, 2) + pow(self.y, 2) + pow(self.z, 2))
+        return SCNVector3(self.x / length, self.y / length, self.z / length)
     }
 }
 

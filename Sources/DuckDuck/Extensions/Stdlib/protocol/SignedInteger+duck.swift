@@ -7,16 +7,10 @@
 
 import Foundation
 
+// MARK: - 方法
 public extension SignedInteger {
-    var dd: DDExtension<Self> {
-        return DDExtension(self)
-    }
-}
-
-// MARK: - 计算属性
-public extension DDExtension where Base: SignedInteger {
     /// 绝对值
-    var abs: Self {
-        return Swift.abs(self.base) as! Self
+    func dd_abs() -> Self {
+        return Swift.abs(self)
     }
 }

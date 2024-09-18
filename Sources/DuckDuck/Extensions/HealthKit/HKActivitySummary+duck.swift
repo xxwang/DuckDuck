@@ -8,19 +8,19 @@
 import HealthKit
 
 // MARK: - 判断
-public extension DDExtension where Base: HKActivitySummary {
+public extension HKActivitySummary {
     /// 是否完成设定的站立目标(小时数)
-    var isCompleteStandHoursGoal: Bool {
-        return self.base.appleStandHoursGoal.compare(self.base.appleStandHours) != .orderedDescending
+    func dd_isCompleteStandHoursGoal() -> Bool {
+        return self.appleStandHoursGoal.compare(self.appleStandHours) != .orderedDescending
     }
 
     /// 检查是否达到设置的锻炼时间
-    var isCompleteExerciseTimeGoal: Bool {
-        return self.base.appleExerciseTimeGoal.compare(self.base.appleExerciseTime) != .orderedDescending
+    func dd_isCompleteExerciseTimeGoal() -> Bool {
+        return self.appleExerciseTimeGoal.compare(self.appleExerciseTime) != .orderedDescending
     }
 
     /// 检查是否达到设置的活动能量
-    var isCompleteActiveEnergyBurnedGoal: Bool {
-        return self.base.activeEnergyBurnedGoal.compare(self.base.activeEnergyBurned) != .orderedDescending
+    func dd_isCompleteActiveEnergyBurnedGoal() -> Bool {
+        return self.activeEnergyBurnedGoal.compare(self.activeEnergyBurned) != .orderedDescending
     }
 }

@@ -8,12 +8,12 @@
 import MapKit
 
 // MARK: - 属性
-public extension DDExtension where Base: MKMultiPoint {
+public extension MKMultiPoint {
     /// 表示`MKMultiPoint`的坐标数组
-    var coordinates: [CLLocationCoordinate2D] {
-        let pointCount = self.base.pointCount
+    func dd_coordinates() -> [CLLocationCoordinate2D] {
+        let pointCount = self.pointCount
         var coords = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: pointCount)
-        self.base.getCoordinates(&coords, range: NSRange(location: 0, length: pointCount))
+        self.getCoordinates(&coords, range: NSRange(location: 0, length: pointCount))
         return coords
     }
 }

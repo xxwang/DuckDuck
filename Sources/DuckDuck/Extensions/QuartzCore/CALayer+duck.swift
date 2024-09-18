@@ -289,9 +289,9 @@ public extension DDExtension where Base: CALayer {
     ///   - removedOnCompletion:动画完成是否移除
     ///   - option:动画选项
     func addKeyframeAnimationRotation(_ values: [Any] = [
-        -5.dd.as2CGFloat.dd.as2radians,
-        5.dd.as2CGFloat.dd.as2radians,
-        -5.dd.as2CGFloat.dd.as2radians,
+        -5.dd_CGFloat().dd_radians(),
+        5.dd_CGFloat().dd_radians(),
+        -5.dd_CGFloat().dd_radians(),
     ],
     keyTimes: [NSNumber]?,
     duration: TimeInterval = 1.0,

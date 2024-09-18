@@ -19,7 +19,7 @@ public extension DDExtension where Base: BinaryInteger {
     var as2Bool: Bool {
         return self.base > 0 ? true : false
     }
-
+    
     /// 转换为`Int`
     var as2Int: Int {
         return Int(self.base)

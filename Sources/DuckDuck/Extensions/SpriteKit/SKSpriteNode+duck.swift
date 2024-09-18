@@ -8,11 +8,11 @@
 import SpriteKit
 
 // MARK: - 方法
-public extension DDExtension where Base: SKSpriteNode {
+public extension SKSpriteNode {
     /// 等比例填充
     /// - Parameter fillSize:边界尺寸
-    func aspectFill(to fillSize: CGSize) {
-        guard let textureSize = self.base.texture?.size() else { return }
+    func dd_aspectFill(to fillSize: CGSize) {
+        guard let textureSize = self.texture?.size() else { return }
 
         let width = textureSize.width
         let height = textureSize.height
@@ -22,6 +22,6 @@ public extension DDExtension where Base: SKSpriteNode {
         let horizontalRatio = fillSize.width / width
         let verticalRatio = fillSize.height / height
         let ratio = horizontalRatio < verticalRatio ? horizontalRatio : verticalRatio
-        self.base.size = CGSize(width: width * ratio, height: height * ratio)
+        self.size = CGSize(width: width * ratio, height: height * ratio)
     }
 }
