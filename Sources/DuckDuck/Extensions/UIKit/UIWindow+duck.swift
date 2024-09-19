@@ -8,23 +8,23 @@
 import UIKit
 
 // MARK: - Window
-public extension DDExtension where Base: UIWindow {
+public extension UIWindow {
     /// 获取一个有效的`UIWindow`
-    static var window: UIWindow? {
+    static func dd_window() -> UIWindow? {
         var resultWindow: UIWindow?
-        if let delegateWindow = self.delegateWindow {
+        if let delegateWindow = self.dd_delegateWindow() {
             resultWindow = delegateWindow
         }
-        if let keyWindow = self.keyWindow {
+        if let keyWindow = self.dd_keyWindow() {
             resultWindow = keyWindow
         }
-        if let fistWindow = self.windows.last {
+        if let fistWindow = self.dd_windows().last {
             resultWindow = fistWindow
         }
         if resultWindow?.windowLevel == .normal {
             return resultWindow
         }
-        for window in self.windows {
+        for window in self.dd_windows() {
             if window.windowLevel == .normal {
                 resultWindow = window
             }
@@ -33,9 +33,9 @@ public extension DDExtension where Base: UIWindow {
     }
 
     /// 应用当前的`keyWindow`
-    static var keyWindow: UIWindow? {
+    static func dd_keyWindow() -> UIWindow? {
         if #available(iOS 13.0, *) {
-            return self.windows.filter(\.isKeyWindow).last
+            return self.dd_windows().filter(\.isKeyWindow).last
         } else {
             if let window = UIApplication.shared.keyWindow { return window }
         }
@@ -43,14 +43,14 @@ public extension DDExtension where Base: UIWindow {
     }
 
     /// 获取`AppDelegate`的`window`(`iOS13`之后`非自定义项目框架`, 该属性为`nil`)
-    static var delegateWindow: UIWindow? {
+    static func dd_delegateWindow() -> UIWindow? {
         guard let delegateWindow = UIApplication.shared.delegate?.window else { return nil }
         guard let window = delegateWindow else { return nil }
         return window
     }
 
     /// 所有`connectedScenes`的`UIWindow`
-    static var windows: [UIWindow] {
+    static func dd_windows() -> [UIWindow] {
         var windows: [UIWindow] = []
         if #available(iOS 13.0, *) {
             for connectedScene in UIApplication.shared.connectedScenes {
@@ -68,32 +68,32 @@ public extension DDExtension where Base: UIWindow {
 }
 
 // MARK: - UIViewController
-public extension DDExtension where Base: UIWindow {
+public extension UIWindow {
     /// 获取可用窗口的根控制器
     /// - Returns: `UIViewController?`
-    static var rootViewController: UIViewController? {
-        return self.window?.rootViewController
+    static func dd_rootViewController() -> UIViewController? {
+        return self.dd_window()?.rootViewController
     }
 
     /// 获取基准控制器的最顶层控制器
     /// - Parameter base:基准控制器
     /// - Returns:返回 `UIViewController`
-    static func topViewController(_ base: UIViewController? = UIWindow.dd.rootViewController) -> UIViewController? {
+    static func dd_topViewController(_ base: UIViewController? = UIWindow.dd_rootViewController()) -> UIViewController? {
         guard let base else { return nil }
 
         // 导航控制器
         if let navigationController = base as? UINavigationController {
-            return self.topViewController(navigationController.visibleViewController)
+            return self.dd_topViewController(navigationController.visibleViewController)
         }
 
         // 标签控制器
         if let tabBarController = base as? UITabBarController {
-            return self.topViewController(tabBarController.selectedViewController)
+            return self.dd_topViewController(tabBarController.selectedViewController)
         }
 
         // 被startViewController present出来的的视图控制器
         if let presentedViewController = base.presentedViewController {
-            return self.topViewController(presentedViewController.presentedViewController)
+            return self.dd_topViewController(presentedViewController.presentedViewController)
         }
 
         return base
@@ -101,10 +101,10 @@ public extension DDExtension where Base: UIWindow {
 }
 
 // MARK: - 屏幕方向
-public extension DDExtension where Base: UIWindow {
+public extension UIWindow {
     /// 屏幕方向切换
     /// - Parameter isLandscape:是否是横屏
-    static func changeOrientation(isLandscape: Bool) {
+    static func dd_changeOrientation(isLandscape: Bool) {
         if isLandscape { // 横屏
             guard !DDHelper.isLandscape else { return }
             // 重置方向
@@ -127,7 +127,7 @@ public extension DDExtension where Base: UIWindow {
 }
 
 // MARK: - rootViewController
-public extension DDExtension where Base: UIWindow {
+public extension UIWindow {
     /// 动画方式设置`rootViewController`
     /// - Parameters:
     ///   - rootVC: 要设置的`viewController`
@@ -136,13 +136,13 @@ public extension DDExtension where Base: UIWindow {
     ///   - options: 动画选项
     ///   - competion: 完成回调
     /// - Returns: `Self`
-    static func switchRootVC(with rootVC: UIViewController,
-                             animated: Bool = true,
-                             duration: TimeInterval = 0.25,
-                             options: UIView.AnimationOptions = .transitionFlipFromRight,
-                             competion: (() -> Void)?)
+    static func dd_switchRootVC(with rootVC: UIViewController,
+                                animated: Bool = true,
+                                duration: TimeInterval = 0.25,
+                                options: UIView.AnimationOptions = .transitionFlipFromRight,
+                                competion: (() -> Void)?)
     {
-        guard let window = self.window else { return }
+        guard let window = self.dd_window() else { return }
         if animated { // 需要动画切换
             UIView.transition(with: window, duration: duration, options: options) {
                 let oldState = UIView.areAnimationsEnabled
@@ -167,15 +167,15 @@ public extension DDExtension where Base: UIWindow {
     ///   - animationSubtype: 动画子类型
     ///   - timingFunction: 定时功能
     ///   - competion: 完成回调
-    static func switchRootVC(with rootVC: UIViewController,
-                             animated: Bool = true,
-                             duration: TimeInterval = 0.25,
-                             animationType: CATransitionType = .fade,
-                             animationSubtype: CATransitionSubtype? = .fromRight,
-                             timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
-                             competion: (() -> Void)? = nil)
+    static func dd_switchRootVC(with rootVC: UIViewController,
+                                animated: Bool = true,
+                                duration: TimeInterval = 0.25,
+                                animationType: CATransitionType = .fade,
+                                animationSubtype: CATransitionSubtype? = .fromRight,
+                                timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
+                                competion: (() -> Void)? = nil)
     {
-        guard let window = self.window else { return }
+        guard let window = self.dd_window() else { return }
         if animated {
             // 转场动画
             let animation = CATransition()
