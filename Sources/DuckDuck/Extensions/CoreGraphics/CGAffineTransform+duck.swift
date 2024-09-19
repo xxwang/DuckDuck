@@ -8,12 +8,10 @@
 import CoreGraphics
 import UIKit
 
-extension CGAffineTransform: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == CGAffineTransform {
+// MARK: - 类型转换
+public extension CGAffineTransform {
     /// `CGAffineTransform`转换为`CATransform3D`
-    var as2CATransform3D: CATransform3D {
-        return CATransform3DMakeAffineTransform(self.base)
+    func dd_CATransform3D() -> CATransform3D {
+        return CATransform3DMakeAffineTransform(self)
     }
 }

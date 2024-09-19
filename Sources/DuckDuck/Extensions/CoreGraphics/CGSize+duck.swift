@@ -8,56 +8,54 @@
 import CoreGraphics
 import UIKit
 
-extension CGSize: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == CGSize {
+// MARK: - 属性
+public extension CGSize {
     /// 获取`宽高比`
-    var aspectRatio: CGFloat {
-        guard self.base.height != 0 else { return 0 }
-        return self.base.width / self.base.height
+    func dd_aspectRatio() -> CGFloat {
+        guard self.height != 0 else { return 0 }
+        return self.width / self.height
     }
 
     /// 获取`宽高最大值`
-    var maxDimension: CGFloat {
-        return max(self.base.width, self.base.height)
+    func dd_maxDimension() -> CGFloat {
+        return max(self.width, self.height)
     }
 
     /// 获取`宽高最小值`
-    var minDimension: CGFloat {
-        return min(self.base.width, self.base.height)
+    func dd_minDimension() -> CGFloat {
+        return min(self.width, self.height)
     }
 }
 
 // MARK: - 方法
-public extension DDExtension where Base == CGSize {
+public extension CGSize {
     /// 以`size``最小``宽高比`缩放`CGSize`(不超过`size`)
     ///
     ///     let rect = CGSize(width:120, height:80)
     ///     let parentSize  = CGSize(width:100, height:50)
-    ///     let newSize = rect.dd.aspectFit(to:parentSize)
+    ///     let newSize = rect.dd_aspectFit(to:parentSize)
     ///     // newSize.width = 75 , newSize = 50
     ///
     /// - Parameter size: 边界`CGSize`
     /// - Returns: 缩放后的`CGSize`
-    func aspectFit(to size: CGSize) -> CGSize {
-        let minRatio = min(size.width / self.base.width, size.height / self.base.height)
-        return CGSize(width: self.base.width * minRatio, height: self.base.height * minRatio)
+    func dd_aspectFit(to size: CGSize) -> CGSize {
+        let minRatio = min(size.width / self.width, size.height / self.height)
+        return CGSize(width: self.width * minRatio, height: self.height * minRatio)
     }
 
     /// 以`size``最大``宽高比`缩放`CGSize`(不超过`size`)
     ///
     ///     let size = CGSize(width:20, height:120)
     ///     let parentSize  = CGSize(width:100, height:60)
-    ///     let newSize = size.dd.aspectFit(to:parentSize)
+    ///     let newSize = size.dd_aspectFit(to:parentSize)
     ///     // newSize.width = 100 , newSize = 60
     ///
     /// - Parameter size: 边界`CGSize`
     /// - Returns: 缩放后的`CGSize`
     func dd_aspectFill(to size: CGSize) -> CGSize {
-        let maxRatio = max(size.width / self.base.width, size.height / self.base.height)
-        let aWidth = min(self.base.width * maxRatio, size.width)
-        let aHeight = min(self.base.height * maxRatio, size.height)
+        let maxRatio = max(size.width / self.width, size.height / self.height)
+        let aWidth = min(self.width * maxRatio, size.width)
+        let aHeight = min(self.height * maxRatio, size.height)
         return CGSize(width: aWidth, height: aHeight)
     }
 }

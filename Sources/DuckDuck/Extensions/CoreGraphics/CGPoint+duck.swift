@@ -11,12 +11,12 @@ import Foundation
 extension CGPoint: DDExtensionable {}
 
 // MARK: - 方法
-public extension DDExtension where Base == CGPoint {
+public extension CGPoint {
     /// 计算两个`CGPoint`之间的`距离`
     /// - Parameter point: 要计算的结束点
     /// - Returns: `CGFloat`
-    func distance(to point: CGPoint) -> CGFloat {
-        return sqrt(pow(point.x - self.base.x, 2) + pow(point.y - self.base.y, 2))
+    func dd_distance(to point: CGPoint) -> CGFloat {
+        return sqrt(pow(point.x - self.x, 2) + pow(point.y - self.y, 2))
     }
 }
 

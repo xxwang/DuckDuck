@@ -8,10 +8,10 @@
 import CoreGraphics
 import UIKit
 
-extension CGPath: DDExtensionable {}
-public extension DDExtension where Base: CGPath {
+//MARK: - 类型转换
+public extension CGPath {
     /// 转换为可变路径
-    var as2CGMutablePath: CGMutablePath {
-        return CGMutablePath().dd_addPath(self.base)
+    func dd_CGMutablePath() -> CGMutablePath {
+        return CGMutablePath().dd_addPath(self)
     }
 }

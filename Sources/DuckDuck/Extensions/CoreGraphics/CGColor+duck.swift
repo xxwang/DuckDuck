@@ -8,12 +8,10 @@
 import CoreGraphics
 import UIKit
 
-extension CGColor: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base: CGColor {
+// MARK: - 类型转换
+public extension CGColor {
     /// `CGColor`转`UIColor`
-    var as2UIColor: UIColor {
-        return UIColor(cgColor: self.base)
+    func dd_UIColor() -> UIColor {
+        return UIColor(cgColor: self)
     }
 }

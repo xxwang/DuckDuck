@@ -8,11 +8,11 @@
 import CoreGraphics
 import UIKit
 
-// MARK: - 计算属性
-public extension DDExtension where Base: CGMutablePath {
+// MARK: - 类型转换
+public extension CGMutablePath {
     /// 转换成`CGPath`
-    var as2CGPath: CGPath {
-        return self.base.copy()!
+    func dd_CGPath() -> CGPath {
+        return self.copy()!
     }
 }
 

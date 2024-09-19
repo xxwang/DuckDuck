@@ -8,18 +8,16 @@
 import CoreGraphics
 import UIKit
 
-extension CGVector: DDExtensionable {}
-
-// MARK: - 计算属性
-public extension DDExtension where Base == CGVector {
+// MARK: - 属性
+public extension CGVector {
     /// 向量的`旋转角度-弧度`
-    var angle: CGFloat {
-        return atan2(self.base.dy, self.base.dx)
+    func dd_angle() -> CGFloat {
+        return atan2(self.dy, self.dx)
     }
 
     /// 向量的`长度`
-    var magnitude: CGFloat {
-        return sqrt((self.base.dx * self.base.dx) + (self.base.dy * self.base.dy))
+    func dd_magnitude() -> CGFloat {
+        return sqrt((self.dx * self.dx) + (self.dy * self.dy))
     }
 }
 
