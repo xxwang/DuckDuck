@@ -8,42 +8,33 @@
 import UIKit
 
 // MARK: - 属性
-public extension DDExtension where Base: UISegmentedControl {
+public extension UISegmentedControl {
     /// 图片数组
-    var images: [UIImage] {
+    var dd_images: [UIImage] {
         get {
-            let range = 0 ..< self.base.numberOfSegments
-            return range.compactMap { self.base.imageForSegment(at: $0) }
+            let range = 0 ..< self.numberOfSegments
+            return range.compactMap { self.imageForSegment(at: $0) }
         }
         set {
-            self.base.removeAllSegments()
+            self.removeAllSegments()
             for (index, image) in newValue.enumerated() {
-                self.base.insertSegment(with: image, at: index, animated: false)
+                self.insertSegment(with: image, at: index, animated: false)
             }
         }
     }
 
     /// 标题数组
-    var titles: [String] {
+    var dd_titles: [String] {
         get {
-            let range = 0 ..< self.base.numberOfSegments
-            return range.compactMap { self.base.titleForSegment(at: $0) }
+            let range = 0 ..< self.numberOfSegments
+            return range.compactMap { self.titleForSegment(at: $0) }
         }
         set {
-            self.base.removeAllSegments()
+            self.removeAllSegments()
             for (index, title) in newValue.enumerated() {
-                self.base.insertSegment(withTitle: title, at: index, animated: false)
+                self.insertSegment(withTitle: title, at: index, animated: false)
             }
         }
-    }
-}
-
-// MARK: - Defaultable
-public extension UISegmentedControl {
-    typealias Associatedtype = UISegmentedControl
-
-    @objc override class func `default`() -> Associatedtype {
-        return UISegmentedControl()
     }
 }
 

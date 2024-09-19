@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UITabBar {
-    typealias Associatedtype = UITabBar
-    override open class func `default`() -> Associatedtype {
-        return UITabBar()
-    }
-}
-
 // MARK: - 链式语法
 public extension UITabBar {
     /// 是否半透明

@@ -8,26 +8,17 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UISearchBar {
+public extension UISearchBar {
     /// 搜索栏中的`UITextField`(如果适用)
-    var textField: UITextField? {
+    var dd_textField: UITextField? {
         if #available(iOS 13.0, *) {
-            return self.base.searchTextField
+            return self.searchTextField
         }
-        let subViews = self.base.subviews.flatMap(\.subviews)
+        let subViews = self.subviews.flatMap(\.subviews)
         guard let textField = (subViews.filter { $0 is UITextField }).first as? UITextField else {
             return nil
         }
         return textField
-    }
-}
-
-// MARK: - Defaultable
-public extension UISearchBar {
-    typealias Associatedtype = UISearchBar
-
-    @objc override class func `default`() -> Associatedtype {
-        return UISearchBar()
     }
 }
 

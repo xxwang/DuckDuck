@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIStackView {
-    typealias Associatedtype = UIStackView
-    override open class func `default`() -> Associatedtype {
-        return UIStackView()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIStackView {
     /// 布局时是否参照基准线,默认是 `false`(决定了垂直轴如果是文本的话,是否按照 `baseline` 来参与布局)

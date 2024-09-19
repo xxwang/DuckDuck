@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIPageControl {
-    typealias Associatedtype = UIPageControl
-    override open class func `default`() -> Associatedtype {
-        return UIPageControl()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIPageControl {
     /// 设置当前选中指示器颜色

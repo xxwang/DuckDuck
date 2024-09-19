@@ -7,10 +7,8 @@
 
 import UIKit
 
-// MARK: - Defaultable
 public extension UITableView {
-    typealias Associatedtype = UITableView
-    override open class func `default`() -> Associatedtype {
+    static func `default`() -> UITableView {
         let tableView = UITableView(frame: .zero, style: .grouped)
             .dd_rowHeight(UITableView.automaticDimension)
             .dd_estimatedRowHeight(50)

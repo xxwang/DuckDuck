@@ -8,52 +8,44 @@
 import UIKit
 
 // MARK: - 方法
-public extension DDExtension where Base: UISlider {
+public extension UISlider {
     /// 设置`value`值
     /// - Parameters:
     ///   - value:要设置的值
     ///   - animated:是否动画
     ///   - duration:动画时间
     ///   - completion:完成回调
-    func setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
+    func dd_setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, animations: {
-                self.base.setValue(value, animated: true)
+                self.setValue(value, animated: true)
             }, completion: { _ in
                 completion?()
             })
         } else {
-            self.base.setValue(value, animated: false)
+            self.setValue(value, animated: false)
             completion?()
         }
     }
 }
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var kBlockKey = UnsafeRawPointer(bitPattern: ("UISlider" + "EventBlockKey").hashValue)
 }
 
 // MARK: - AssociatedAttributes
 extension UISlider: AssociatedEventBlock {
     public typealias T = Float
-    public var eventBlock: EventBlock? {
-        get { AssociatedObject.get(self, &AssociateKeys.kBlockKey) as? EventBlock }
-        set { AssociatedObject.set(self, &AssociateKeys.kBlockKey, newValue) }
+    public var dd_eventBlock: DDEventBlock? {
+        get { AssociatedObject.get(self, &DDAssociateKeys.kBlockKey) as? DDEventBlock }
+        set { AssociatedObject.set(self, &DDAssociateKeys.kBlockKey, newValue) }
     }
 
     /// 事件处理
     /// - Parameter event:事件发生者
-    @objc func sliderValueChanged(_ sender: UISlider) {
-        self.eventBlock?(sender.value)
-    }
-}
-
-// MARK: - Defaultable
-public extension UISlider {
-    typealias Associatedtype = UISlider
-    override open class func `default`() -> Associatedtype {
-        return UISlider()
+    @objc func dd_sliderValueChanged(_ sender: UISlider) {
+        self.dd_eventBlock?(sender.value)
     }
 }
 
@@ -137,8 +129,8 @@ public extension UISlider {
     ///   - controlEvent: 事件类型
     /// - Returns: `Self`
     func dd_callback(_ block: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
-        self.eventBlock = block
-        self.addTarget(self, action: #selector(sliderValueChanged), for: controlEvent)
+        self.dd_eventBlock = block
+        self.addTarget(self, action: #selector(dd_sliderValueChanged), for: controlEvent)
         return self
     }
 }

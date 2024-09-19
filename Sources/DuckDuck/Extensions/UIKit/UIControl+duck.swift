@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
     static var HitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
 }
@@ -34,12 +34,12 @@ private extension UIControl {
     /// - Parameter hitTime:时长
     func dd_doubleHit(hitTime: Double = 1) {
         self.dd_hitTime = hitTime
-        self.addTarget(self, action: #selector(preventDoubleHit), for: .touchUpInside)
+        self.addTarget(self, action: #selector(dd_preventDoubleHit), for: .touchUpInside)
     }
 
     /// 防止重复点击实现
     /// - Parameter sender:被点击的`UIControl`
-    @objc func preventDoubleHit(_ sender: UIControl) {
+    @objc func dd_preventDoubleHit(_ sender: UIControl) {
         self.isUserInteractionEnabled = false
         DispatchQueue.dd_delay_execute(delay: self.dd_hitTime ?? 1.0) { [weak self] in
             guard let self else { return }
@@ -49,16 +49,8 @@ private extension UIControl {
 
     /// 事件处理方法
     /// - Parameter sender:事件发起者
-    @objc func controlEventHandler(_ sender: UIControl) {
+    @objc func dd_controlEventHandler(_ sender: UIControl) {
         if let block = self.dd_block { block(sender) }
-    }
-}
-
-// MARK: - Defaultable
-public extension UIControl {
-    typealias Associatedtype = UIControl
-    override open class func `default`() -> Associatedtype {
-        return UIControl()
     }
 }
 
@@ -150,7 +142,7 @@ public extension UIControl {
     @discardableResult
     func dd_callback(_ block: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
         self.dd_block = block
-        self.addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
+        self.addTarget(self, action: #selector(dd_controlEventHandler(_:)), for: controlEvent)
         return self
     }
 }

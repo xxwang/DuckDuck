@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UISwitch {
-    typealias Associatedtype = UISwitch
-    override open class func `default`() -> Associatedtype {
-        return UISwitch()
-    }
-}
-
 // MARK: - 链式语法
 public extension UISwitch {
     /// 切换开关状态

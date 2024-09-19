@@ -1,5 +1,5 @@
-import XCTest
 @testable import DuckDuck
+import XCTest
 
 final class DuckDuckTests: XCTestCase {
     func testExample() throws {

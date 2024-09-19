@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIPickerView {
-    typealias Associatedtype = UIPickerView
-    override open class func `default`() -> Associatedtype {
-        return UIPickerView()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIPickerView {
     /// 设置代理

@@ -8,32 +8,16 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UICollectionViewCell {
-    /// 标识符(使用类名注册时)
-    static var identifier: String {
-        // 获取完整类名
-        let classNameString = NSStringFromClass(Base.self)
-        // 获取类名
-        return classNameString.components(separatedBy: ".").last!
-    }
-
+public extension UICollectionViewCell {
     /// 获取`cell`所在的`UICollectionView`
     /// - Returns: `UICollectionView`
-    var collectionView: UICollectionView? {
-        for view in sequence(first: self.base.superview, next: { $0?.superview }) {
+    func dd_collectionView() -> UICollectionView? {
+        for view in sequence(first: self.superview, next: { $0?.superview }) {
             if let collectionView = view as? UICollectionView {
                 return collectionView
             }
         }
         return nil
-    }
-}
-
-// MARK: - Defaultable
-public extension UICollectionViewCell {
-    typealias Associatedtype = UICollectionViewCell
-    override open class func `default`() -> Associatedtype {
-        return UICollectionViewCell()
     }
 }
 

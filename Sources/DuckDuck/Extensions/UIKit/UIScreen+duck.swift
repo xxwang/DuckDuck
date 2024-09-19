@@ -7,15 +7,15 @@
 
 import UIKit
 
-public enum ScreenShotType {
+public enum DDScreenShotType {
     case screenshot
     case recording
 }
 
-public extension DDExtension where Base: UIScreen {
+public extension UIScreen {
     /// 检查截屏或者录屏并发送通知
     /// - Parameter block:回调
-    static func detectScreenShot(_ block: @escaping (ScreenShotType) -> Void) {
+    static func dd_detectScreenShot(_ block: @escaping (DDScreenShotType) -> Void) {
         let mainQueue = OperationQueue.main
         NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             block(.screenshot)

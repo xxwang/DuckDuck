@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-extension UIViewController: Defaultable {
-    public typealias Associatedtype = UIViewController
-    @objc open class func `default`() -> Associatedtype {
-        return UIViewController()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIViewController {
     /// 设置控制用户界面样式(亮色/黑暗)

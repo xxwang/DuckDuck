@@ -8,27 +8,19 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UITabBarController {
+public extension UITabBarController {
     /// `UITabBarController`选中索引
     static var selectIndex: Int {
-        get { return self.current?.selectedIndex ?? 0 }
-        set { self.current?.selectedIndex = newValue }
+        get { return self.current()?.selectedIndex ?? 0 }
+        set { self.current()?.selectedIndex = newValue }
     }
 
     /// 当前作为`rootViewController`
-    static var current: UITabBarController? {
-        guard let tabBarController = UIWindow.dd.window?.rootViewController as? UITabBarController else {
+    static func current() -> UITabBarController? {
+        guard let tabBarController = UIWindow.dd_window()?.rootViewController as? UITabBarController else {
             return nil
         }
         return tabBarController
-    }
-}
-
-// MARK: - Defaultable
-public extension UITabBarController {
-    typealias Associatedtype = UITabBarController
-    override open class func `default`() -> Associatedtype {
-        return UITabBarController()
     }
 }
 

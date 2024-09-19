@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIAlertController {
-    typealias Associatedtype = UIAlertController
-    override open class func `default`() -> Associatedtype {
-        return UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-    }
-}
-
 // MARK: - 链式语法
 public extension UIAlertController {
     /// 设置标题

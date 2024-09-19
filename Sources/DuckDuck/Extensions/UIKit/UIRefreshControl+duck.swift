@@ -7,10 +7,5 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIRefreshControl {
-    typealias Associatedtype = UIRefreshControl
-    override open class func `default`() -> Associatedtype {
-        return UIRefreshControl()
-    }
-}
+// MARK: - 链式语法
+public extension UIRefreshControl {}

@@ -8,11 +8,11 @@
 import UIKit
 
 // MARK: - 方法
-public extension DDExtension where Base: UINavigationBar {
+public extension UINavigationBar {
     /// 设置导航条为透明
     /// - Parameter tintColor:`tintColor`
-    func setTransparent(with tintColor: UIColor = .white) {
-        self.base.dd_isTranslucent(true)
+    func dd_setTransparent(with tintColor: UIColor = .white) {
+        self.dd_isTranslucent(true)
             .dd_backgroundColor(.clear)
             .dd_backgroundImage(UIImage())
             .dd_barTintColor(.clear)
@@ -25,20 +25,20 @@ public extension DDExtension where Base: UINavigationBar {
     /// - Parameters:
     ///   - background:背景颜色
     ///   - text:文字颜色
-    func setColors(background: UIColor, text: UIColor) {
-        self.base.isTranslucent = false
-        self.base.backgroundColor = background
-        self.base.barTintColor = background
-        self.base.setBackgroundImage(UIImage(), for: .default)
-        self.base.tintColor = text
-        self.base.titleTextAttributes = [.foregroundColor: text]
+    func dd_setColors(background: UIColor, text: UIColor) {
+        self.isTranslucent = false
+        self.backgroundColor = background
+        self.barTintColor = background
+        self.setBackgroundImage(UIImage(), for: .default)
+        self.tintColor = text
+        self.titleTextAttributes = [.foregroundColor: text]
     }
 
     /// 修改`statusBar`的背景颜色
     /// - Parameter color:要设置的颜色
-    func setStatusBarBackgroundColor(with color: UIColor) {
-        guard self.base.dd_statusBar == nil else {
-            self.base.dd_statusBar?.backgroundColor = color
+    func dd_setStatusBarBackgroundColor(with color: UIColor) {
+        guard self.dd_statusBar == nil else {
+            self.dd_statusBar?.backgroundColor = color
             return
         }
 
@@ -47,20 +47,20 @@ public extension DDExtension where Base: UINavigationBar {
             y: -kStatusBarHeight,
             width: kScreenWidth,
             height: kStatusBarHeight
-        )).dd_add2(self.base)
+        )).dd_add2(self)
         statusBar.backgroundColor = .clear
-        self.base.dd_statusBar = statusBar
+        self.dd_statusBar = statusBar
     }
 
     /// 移除`statusBar`
-    func removeStatusBar() {
-        self.base.dd_statusBar?.removeFromSuperview()
-        self.base.dd_statusBar = nil
+    func dd_removeStatusBar() {
+        self.dd_statusBar?.removeFromSuperview()
+        self.dd_statusBar = nil
     }
 }
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var StatusBarKey = UnsafeRawPointer(bitPattern: ("UINavigationBar" + "StatusBarKey").hashValue)
 }
 
@@ -68,17 +68,8 @@ private class AssociateKeys {
 private extension UINavigationBar {
     /// 通过 Runtime 的属性关联添加自定义 View
     var dd_statusBar: UIView? {
-        get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
-        set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-    }
-}
-
-// MARK: - WGDefaultable
-public extension UINavigationBar {
-    typealias Associatedtype = UINavigationBar
-
-    override class func `default`() -> Associatedtype {
-        return UINavigationBar()
+        get { AssociatedObject.get(self, &DDAssociateKeys.StatusBarKey) as? UIView }
+        set { AssociatedObject.set(self, &DDAssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 

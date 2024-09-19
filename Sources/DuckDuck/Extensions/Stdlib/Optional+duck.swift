@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Collection
-public extension Collection? {
+public extension Optional where Wrapped: Collection {
     /// 判断可选集protocol合类型是否为空或者`nil`
     /// - Returns: `Bool`
     func dd_isNilOrEmpty() -> Bool {

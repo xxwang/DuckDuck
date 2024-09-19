@@ -7,14 +7,6 @@
 
 import UIKit
 
-extension UICollectionViewFlowLayout: Defaultable {
-    public typealias Associatedtype = UICollectionViewFlowLayout
-
-    @objc open class func `default`() -> Associatedtype {
-        return UICollectionViewFlowLayout()
-    }
-}
-
 // MARK: - 链式语法
 public extension UICollectionViewFlowLayout {
     /// 设置滚动方向间距

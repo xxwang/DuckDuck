@@ -7,15 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-extension UITabBarItem: Defaultable {
-    public typealias Associatedtype = UITabBarItem
-
-    @objc public class func `default`() -> Associatedtype {
-        return UITabBarItem()
-    }
-}
-
 // MARK: - 链式语法
 public extension UITabBarItem {
     /// 设置标题

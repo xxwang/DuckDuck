@@ -8,9 +8,9 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UIColor {
+public extension UIColor {
     /// 生成一个随机颜色
-    static var random: UIColor {
+    static func dd_random() -> UIColor {
         let red = Int.random(in: 0 ... 255)
         let green = Int.random(in: 0 ... 255)
         let blue = Int.random(in: 0 ... 255)
@@ -18,9 +18,9 @@ public extension DDExtension where Base: UIColor {
     }
 
     /// (设置/获取)颜色的透明度
-    var alpha: CGFloat {
-        get { self.base.cgColor.alpha }
-        set { self.base.withAlphaComponent(newValue) }
+    var dd_alpha: CGFloat {
+        get { self.cgColor.alpha }
+        set { self.withAlphaComponent(newValue) }
     }
 }
 
@@ -114,7 +114,7 @@ public extension UIColor {
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: UIColor {}
+public extension UIColor {}
 
 // MARK: - 链式语法
 public extension UIColor {

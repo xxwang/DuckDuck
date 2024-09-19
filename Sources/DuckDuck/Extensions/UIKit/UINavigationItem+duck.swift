@@ -8,25 +8,16 @@
 import UIKit
 
 // MARK: - 方法
-public extension DDExtension where Base: UINavigationItem {
+public extension UINavigationItem {
     /// 设置导航栏`titleView`为图片
     /// - Parameters:
     ///   - image: 要设置的图片
     ///   - size: 大小
-    func titleView(with image: UIImage, size: CGSize = CGSize(width: 100, height: 30)) {
+    func dd_titleView(with image: UIImage, size: CGSize = CGSize(width: 100, height: 30)) {
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: size))
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
-        self.base.titleView = imageView
-    }
-}
-
-// MARK: - Defaultable
-extension UINavigationItem: Defaultable {
-    public typealias Associatedtype = UINavigationItem
-
-    @objc open class func `default`() -> Associatedtype {
-        return UINavigationItem()
+        self.titleView = imageView
     }
 }
 

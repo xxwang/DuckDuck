@@ -8,56 +8,56 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UILabel {
+public extension UILabel {
     /// 获取字体的大小
-    var fontSize: CGFloat {
+    func dd_fontSize() -> CGFloat {
         let context = NSStringDrawingContext()
-        context.minimumScaleFactor = self.base.minimumScaleFactor
-        return self.base.font.pointSize * context.actualScaleFactor
+        context.minimumScaleFactor = self.minimumScaleFactor
+        return self.font.pointSize * context.actualScaleFactor
     }
 
     /// 获取内容需要的高度(需要在`UILabel`宽度确定的情况下)
-    var requiredHeight: CGFloat {
+    func dd_requiredHeight() -> CGFloat {
         let label = UILabel.default()
-            .dd_frame(CGRect(x: 0, y: 0, width: self.base.frame.width, height: .greatestFiniteMagnitude))
+            .dd_frame(CGRect(x: 0, y: 0, width: self.frame.width, height: .greatestFiniteMagnitude))
             .dd_lineBreakMode(.byWordWrapping)
-            .dd_font(self.base.font)
-            .dd_text(self.base.text)
-            .dd_attributedText(self.base.attributedText)
+            .dd_font(self.font)
+            .dd_text(self.text)
+            .dd_attributedText(self.attributedText)
             .dd_sizeToFit()
-        return label.dd.height
+        return label.dd_height
     }
 
     /// 获取`UILabel`的每一行字符串(需要`UILabel`具有宽度值)
-    var textLines: [String] {
-        return (self.base.text ?? "").dd.lines(self.base.dd.width, font: self.base.font!)
+    func dd_textLines() -> [String] {
+        return (self.text ?? "").dd_lines(self.dd_width, font: self.font!)
     }
 
     /// 获取`UILabel`第一行内容
-    var firstLineString: String? {
-        self.linesContent().first
+    func dd_firstLineString() -> String? {
+        return self.dd_linesContent().first
     }
 
     /// 判断`UILabel`中的内容是否被截断
-    var isTruncated: Bool {
-        guard let labelText = self.base.text else { return false }
+    func dd_isTruncated() -> Bool {
+        guard let labelText = self.text else { return false }
         // 计算理论上显示所有文字需要的尺寸
-        let theorySize = CGSize(width: self.base.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let theorySize = CGSize(width: self.bounds.width, height: CGFloat.greatestFiniteMagnitude)
         // 计算文本大小
         let labelTextSize = (labelText as NSString)
             .boundingRect(
                 with: theorySize,
                 options: .usesLineFragmentOrigin,
-                attributes: [.font: self.base.font!],
+                attributes: [.font: self.font!],
                 context: nil
             )
 
         // 计算理论上需要的行数
-        let labelTextLines = Int(Foundation.ceil(labelTextSize.height / self.base.font.lineHeight))
+        let labelTextLines = Int(Foundation.ceil(labelTextSize.height / self.font.lineHeight))
         // 实际可显示的行数
-        var labelShowLines = Int(Foundation.floor(bounds.size.height / self.base.font.lineHeight))
-        if self.base.numberOfLines != 0 {
-            labelShowLines = min(labelShowLines, self.base.numberOfLines)
+        var labelShowLines = Int(Foundation.floor(bounds.size.height / self.font.lineHeight))
+        if self.numberOfLines != 0 {
+            labelShowLines = min(labelShowLines, self.numberOfLines)
         }
         // 比较两个行数来判断是否被截断
         return labelTextLines > labelShowLines
@@ -85,24 +85,24 @@ public extension UILabel {
 }
 
 // MARK: - 获取UILabel中内容大小
-public extension DDExtension where Base: UILabel {
+public extension UILabel {
     /// 获取`UILabel`中`字符串`的CGSize
     /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func textSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
-        return self.base.text?.dd.stringSize(lineWidth, font: self.base.font) ?? .zero
+    func dd_textSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
+        return self.text?.dd_stringSize(lineWidth, font: self.font) ?? .zero
     }
 
     /// 获取`UILabel`中`属性字符串`的CGSize
     /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func attributedTextSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
-        return self.base.attributedText?.dd.attributedSize(lineWidth) ?? .zero
+    func dd_attributedTextSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
+        return self.attributedText?.dd_attributedSize(lineWidth) ?? .zero
     }
 }
 
 // MARK: - 属性字符串
-public extension DDExtension where Base: UILabel {
+public extension UILabel {
     /// 设置图片/文字的混合内容
     /// - Parameters:
     ///   - text: 文本字符串
@@ -113,31 +113,31 @@ public extension DDExtension where Base: UILabel {
     ///   - isOrgin: 是否使用图片原始大小
     /// - Returns: `NSMutableAttributedString`
     @discardableResult
-    func blend(_ text: String?,
-               images: [UIImage?] = [],
-               spacing: CGFloat = 5,
-               scale: CGFloat,
-               position: Int = 0,
-               isOrgin: Bool = false) -> NSMutableAttributedString
+    func dd_blend(_ text: String?,
+                  images: [UIImage?] = [],
+                  spacing: CGFloat = 5,
+                  scale: CGFloat,
+                  position: Int = 0,
+                  isOrgin: Bool = false) -> NSMutableAttributedString
     {
         // 头部字符串
-        let headString = text?.dd.subString(to: position) ?? ""
+        let headString = text?.dd_subString(to: position) ?? ""
         let attributedString = NSMutableAttributedString(string: headString)
 
         for image in images {
             guard let image else { continue }
 
             // 计算图片宽高
-            let imageHeight = (isOrgin ? image.size.height : self.base.font.pointSize) * scale
+            let imageHeight = (isOrgin ? image.size.height : self.font.pointSize) * scale
             let imageWidth = (image.size.width / image.size.height) * imageHeight
             // 附件的Y坐标位置
-            let attachTop = (self.base.font.lineHeight - self.base.font.pointSize) / 2
+            let attachTop = (self.font.lineHeight - self.font.pointSize) / 2
 
             // 使用图片附件创建属性字符串
-            let imageAttributedString = NSTextAttachment.default()
+            let imageAttributedString = NSTextAttachment()
                 .dd_image(image)
                 .dd_bounds(CGRect(x: -3, y: -attachTop, width: imageWidth, height: imageHeight))
-                .dd.as2NSAttributedString
+                .dd_NSAttributedString()
 
             // 将图片属性字符串追加到`attribuedString`
             attributedString.append(imageAttributedString)
@@ -146,16 +146,16 @@ public extension DDExtension where Base: UILabel {
         }
 
         // 尾部字符串
-        let tailString = text?.dd.subString(from: position) ?? ""
+        let tailString = text?.dd_subString(from: position) ?? ""
         attributedString.append(NSAttributedString(string: tailString))
 
         // 图文间距需要减去默认的空格宽度
-        let spaceW = " ".dd.stringSize(.greatestFiniteMagnitude, font: self.base.font).width
+        let spaceW = " ".dd_stringSize(.greatestFiniteMagnitude, font: self.font).width
         let range = NSRange(location: 0, length: images.count * 2)
         attributedString.addAttribute(.kern, value: spacing - spaceW, range: range)
 
         // 设置属性字符串到`UILabel`
-        self.base.attributedText = attributedString
+        self.attributedText = attributedString
 
         return attributedString
     }
@@ -167,7 +167,7 @@ public extension DDExtension where Base: UILabel {
     ///   - wordSpacing: 字间距
     /// - Returns: `NSMutableAttributedString`
     @discardableResult
-    func setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
+    func dd_setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
         // 段落样式
         let style = NSMutableParagraphStyle.default()
             .dd_lineBreakMode(.byCharWrapping)
@@ -179,13 +179,13 @@ public extension DDExtension where Base: UILabel {
             .dd_headIndent(0)
             .dd_tailIndent(0)
 
-        let attrString = text.dd.as2NSMutableAttributedString
+        let attrString = text.dd_NSMutableAttributedString()
             .dd_addAttributes([
                 .paragraphStyle: style,
                 .kern: wordSpacing,
-                .font: self.base.font ?? .systemFont(ofSize: 14),
+                .font: self.font ?? .systemFont(ofSize: 14),
             ])
-        self.base.attributedText = attrString
+        self.attributedText = attrString
         return attrString
     }
 
@@ -196,21 +196,22 @@ public extension DDExtension where Base: UILabel {
     ///   - wordSpacing:字间距
     ///   - paragraphSpacing:段落间距
     /// - Returns:行数及每行内容
-    func linesContent(_ labelWidth: CGFloat? = nil,
-                      lineSpacing: CGFloat = 0.0,
-                      wordSpacing: CGFloat = 0.0,
-                      paragraphSpacing: CGFloat = 0.0) -> [String]
+    func dd_linesContent(_ labelWidth: CGFloat? = nil,
+                         lineSpacing: CGFloat = 0.0,
+                         wordSpacing: CGFloat = 0.0,
+                         paragraphSpacing: CGFloat = 0.0) -> [String]
     {
-        guard let text = self.base.text, let font = self.base.font else { return [] }
+        guard let text = self.text, let font = self.font else { return [] }
         // UILabel的宽度
         let labelWidth: CGFloat = labelWidth ?? bounds.width
 
         // 段落样式
         let style = NSMutableParagraphStyle.default()
-            .dd_lineBreakMode(self.base.lineBreakMode)
-            .dd_alignment(self.base.textAlignment)
+            .dd_lineBreakMode(self.lineBreakMode)
+            .dd_alignment(self.textAlignment)
             .dd_lineSpacing(lineSpacing)
             .dd_paragraphSpacing(paragraphSpacing)
+
         // 属性列表
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
@@ -219,7 +220,7 @@ public extension DDExtension where Base: UILabel {
         ]
 
         // 创建属性字符串并设置属性
-        let attributedString = text.dd.as2NSMutableAttributedString.dd_addAttributes(attributes)
+        let attributedString = text.dd_NSMutableAttributedString().dd_addAttributes(attributes)
         // 创建框架设置器
         let frameSetter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
 
@@ -235,17 +236,9 @@ public extension DDExtension where Base: UILabel {
         // 获取每行内容
         for line in lines {
             let lineRange = CTLineGetStringRange(line as! CTLine)
-            result.append(text.dd.subString(from: lineRange.location, length: lineRange.length))
+            result.append(text.dd_subString(from: lineRange.location, length: lineRange.length))
         }
         return result
-    }
-}
-
-// MARK: - Defaultable
-public extension UILabel {
-    typealias Associatedtype = UILabel
-    override open class func `default`() -> Associatedtype {
-        return UILabel()
     }
 }
 
@@ -350,7 +343,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
-        let attribuedString = attributedText?.dd.as2NSMutableAttributedString.dd_font(font, for: range)
+        let attribuedString = attributedText?.dd_NSMutableAttributedString().dd_font(font, for: range)
         self.attributedText = attribuedString
         return self
     }
@@ -362,7 +355,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_foregroundColor(color, for: range)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_foregroundColor(color, for: range)
         self.attributedText = attributedString
         return self
     }
@@ -372,7 +365,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_lineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_lineSpacing(spacing, for: (text ?? "").dd.fullNSRange)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_lineSpacing(spacing, for: (self.text ?? "").dd_fullNSRange())
         self.attributedText = attributedString
         return self
     }
@@ -382,7 +375,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_wordSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_wordSpacing(spacing, for: (self.text ?? "").dd.fullNSRange)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_wordSpacing(spacing, for: (self.text ?? "").dd_fullNSRange())
         self.attributedText = attributedString
         return self
     }
@@ -395,7 +388,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_underline(color, stytle: style, for: range)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_underline(color, stytle: style, for: range)
         self.attributedText = attributedString
         return self
     }
@@ -406,7 +399,7 @@ public extension UILabel {
     ///   - range:范围
     @discardableResult
     func dd_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_strikethrough(color, for: range)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_strikethrough(color, for: range)
         self.attributedText = attributedString
         return self
     }
@@ -416,7 +409,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_firstLineHeadIndent(indent)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_firstLineHeadIndent(indent)
         self.attributedText = attributedString
         return self
     }
@@ -428,7 +421,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func dd_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
-        let attributedString = attributedText?.dd.as2NSMutableAttributedString.dd_obliqueness(inclination, for: range)
+        let attributedString = attributedText?.dd_NSMutableAttributedString().dd_obliqueness(inclination, for: range)
         self.attributedText = attributedString
         return self
     }
@@ -445,7 +438,7 @@ public extension UILabel {
         bounds: CGRect = .zero,
         index: Int = 0
     ) -> Self {
-        let mAttributedString = attributedText?.dd.as2NSMutableAttributedString.dd_image(image, bounds: bounds, index: index)
+        let mAttributedString = attributedText?.dd_NSMutableAttributedString().dd_image(image, bounds: bounds, index: index)
         self.attributedText = mAttributedString
         return self
     }

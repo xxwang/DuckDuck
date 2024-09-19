@@ -30,6 +30,3 @@ public class DDExtension1<Base> {
         self.base = base
     }
 }
-
-// MARK: - 继承DDExtensionable的类型
-extension NSObject: DDExtensionable1 {}

@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIScrollView {
-    typealias Associatedtype = UIScrollView
-    override open class func `default`() -> Associatedtype {
-        return UIScrollView()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIScrollView {
     /// 设置代理

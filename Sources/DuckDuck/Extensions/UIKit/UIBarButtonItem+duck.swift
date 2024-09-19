@@ -51,14 +51,14 @@ public extension UIBarButtonItem {
         // 设置响应方法
         if let target, let action { button.addTarget(target, action: action, for: .touchUpInside) }
         // 设置图标与标题之间的间距
-        button.dd.spacing(3)
+        button.dd_spacing(3)
 
         self.init(customView: button)
     }
 }
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var kBlockKey = UnsafeRawPointer(bitPattern: ("UIBarButtonItem" + "BlockKey").hashValue)
 }
 
@@ -74,14 +74,6 @@ extension UIBarButtonItem: AssociatedEventBlock {
     /// - Parameter event:事件发生者
     @objc func eventHandler(_ event: UIBarButtonItem) {
         self.eventBlock?(event)
-    }
-}
-
-// MARK: - Defaultable
-extension UIBarButtonItem: Defaultable {
-    public typealias Associatedtype = UIBarButtonItem
-    @objc open class func `default`() -> Associatedtype {
-        return UIBarButtonItem()
     }
 }
 

@@ -8,31 +8,23 @@
 import UIKit
 
 // MARK: - 计算属性
-public extension DDExtension where Base: UITableViewCell {
+public extension UITableViewCell {
     /// 标识符(使用类名注册时)
-    var identifier: String {
+    func dd_identifier() -> String {
         // 获取完整类名
-        let classNameString = NSStringFromClass(Base.self)
+        let classNameString = NSStringFromClass(Self.self)
         // 获取类名
         return classNameString.components(separatedBy: ".").last!
     }
 
     /// `cell`所在`UITableView`
-    var tableView: UITableView? {
-        for view in sequence(first: self.base.superview, next: { $0?.superview }) {
+    func dd_tableView() -> UITableView? {
+        for view in sequence(first: self.superview, next: { $0?.superview }) {
             if let tableView = view as? UITableView {
                 return tableView
             }
         }
         return nil
-    }
-}
-
-// MARK: - Defaultable
-public extension UITableViewCell {
-    typealias Associatedtype = UITableViewCell
-    override open class func `default`() -> Associatedtype {
-        return UITableViewCell()
     }
 }
 

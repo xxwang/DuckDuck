@@ -8,12 +8,12 @@
 import UIKit
 
 // MARK: - 方法
-public extension DDExtension where Base: UICollectionView {
+public extension UICollectionView {
     /// 刷新`UICollectionView`的数据,刷新后调用回调
     /// - Parameter completion:完成回调
-    func reloadData(_ completion: (() -> Void)? = nil) {
+    func dd_reloadData(_ completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0, animations: {
-            self.base.reloadData()
+            self.reloadData()
         }, completion: { _ in
             completion?()
         })
@@ -21,19 +21,19 @@ public extension DDExtension where Base: UICollectionView {
 }
 
 // MARK: - UICollectionViewCell
-public extension DDExtension where Base: UICollectionView {
+public extension UICollectionView {
     /// 使用类名注册`UICollectionViewCell`
     /// - Parameter name:`UICollectionViewCell`类型
-    func register<T: UICollectionViewCell>(cellWithClass name: T.Type) {
-        self.base.register(T.self, forCellWithReuseIdentifier: name.dd.identifier)
+    func dd_register<T: UICollectionViewCell>(cellWithClass name: T.Type) {
+        self.register(T.self, forCellWithReuseIdentifier: name.dd_identifier())
     }
 
     /// 使用类名注册`UICollectionView`
     /// - Parameters:
     ///   - nib:用于创建`collectionView`单元格的`nib`文件
     ///   - name:`UICollectionViewCell`类型
-    func register(nib: UINib?, forCellWithClass name: (some UICollectionViewCell).Type) {
-        self.base.register(nib, forCellWithReuseIdentifier: name.dd.identifier)
+    func dd_register(nib: UINib?, forCellWithClass name: (some UICollectionViewCell).Type) {
+        self.register(nib, forCellWithReuseIdentifier: name.dd_identifier())
     }
 
     /// 向注册`UICollectionViewCell`.仅使用其对应类的`xib`文件
@@ -41,12 +41,12 @@ public extension DDExtension where Base: UICollectionView {
     /// - Parameters:
     ///   - name:`UICollectionViewCell`类型
     ///   - bundleClass:`Bundle`实例将基于的类
-    func register(nibWithCellClass name: (some UICollectionViewCell).Type, at bundleClass: AnyClass? = nil) {
+    func dd_register(nibWithCellClass name: (some UICollectionViewCell).Type, at bundleClass: AnyClass? = nil) {
         var bundle: Bundle?
         if let bundleName = bundleClass {
             bundle = Bundle(for: bundleName)
         }
-        self.base.register(UINib(nibName: name.dd.identifier, bundle: bundle), forCellWithReuseIdentifier: name.dd.identifier)
+        self.register(UINib(nibName: name.dd_identifier(), bundle: bundle), forCellWithReuseIdentifier: name.dd_identifier())
     }
 
     /// 使用类名和索引获取可重用`UICollectionViewCell`
@@ -54,8 +54,8 @@ public extension DDExtension where Base: UICollectionView {
     ///   - name:`UICollectionViewCell`类型
     ///   - indexPath:`UICollectionView`中单元格的位置
     /// - Returns:类名关联的`UICollectionViewCell`对象
-    func dequeueReusableCell<T: UICollectionViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
-        guard let cell = self.base.dequeueReusableCell(withReuseIdentifier: name.dd.identifier, for: indexPath) as? T else {
+    func dd_dequeueReusableCell<T: UICollectionViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+        guard let cell = self.dequeueReusableCell(withReuseIdentifier: name.dd_identifier(), for: indexPath) as? T else {
             fatalError(
                 "Couldn't find UICollectionViewCell for \(String(describing: name)), make sure the cell is registered with collection view")
         }
@@ -64,13 +64,13 @@ public extension DDExtension where Base: UICollectionView {
 }
 
 // MARK: - UICollectionReusableView
-public extension DDExtension where Base: UICollectionView {
+public extension UICollectionView {
     /// 使用类名注册`UICollectionReusableView`
     /// - Parameters:
     ///   - kind:要检索的补充视图的种类.该值由布局对象定义
     ///   - name:`UICollectionReusableView`类型
-    func register<T: UICollectionReusableView>(supplementaryViewOfKind kind: String, withClass name: T.Type) {
-        self.base.register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: name.dd.identifier)
+    func dd_register<T: UICollectionReusableView>(supplementaryViewOfKind kind: String, withClass name: T.Type) {
+        self.register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: name.dd_identifier())
     }
 
     /// 使用类名注册`UICollectionReusableView`
@@ -78,8 +78,8 @@ public extension DDExtension where Base: UICollectionView {
     ///   - nib:用于创建可重用视图的`nib`文件
     ///   - kind:要检索的视图的种类.该值由布局对象定义
     ///   - name:`UICollectionReusableView`类型
-    func register(nib: UINib?, forSupplementaryViewOfKind kind: String, withClass name: (some UICollectionReusableView).Type) {
-        self.base.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))
+    func dd_register(nib: UINib?, forSupplementaryViewOfKind kind: String, withClass name: (some UICollectionReusableView).Type) {
+        self.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))
     }
 
     /// 使用类名和类型获取可重用`UICollectionReusableView`
@@ -88,8 +88,8 @@ public extension DDExtension where Base: UICollectionView {
     ///   - name:`UICollectionReusableView`类型
     ///   - indexPath:单元格在`UICollectionView`中的位置
     /// - Returns:类名关联的`UICollectionReusableView`对象
-    func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: String, withClass name: T.Type, for indexPath: IndexPath) -> T {
-        guard let reusableView = self.base.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: name), for: indexPath) as? T else {
+    func dd_dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: String, withClass name: T.Type, for indexPath: IndexPath) -> T {
+        guard let reusableView = self.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: name), for: indexPath) as? T else {
             fatalError("Couldn't find UICollectionReusableView for \(String(describing: name)), make sure the view is registered with collection view")
         }
         return reusableView
@@ -97,18 +97,18 @@ public extension DDExtension where Base: UICollectionView {
 }
 
 // MARK: - 移动
-public extension DDExtension where Base: UICollectionView {
+public extension UICollectionView {
     /// 开启Item移动(添加长按手势)
-    func allowMoveItem() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self.base, action: #selector(UICollectionView.longPressGRHandler(_:)))
-        self.base.addGestureRecognizer(longPressGestureRecognizer)
+    func dd_allowMoveItem() {
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(UICollectionView.longPressGRHandler(_:)))
+        self.addGestureRecognizer(longPressGestureRecognizer)
     }
 
     /// 禁止Item移动(移除长按手势)
-    func disableMoveItem() {
-        _ = self.base.gestureRecognizers?.map {
+    func dd_disableMoveItem() {
+        _ = self.gestureRecognizers?.map {
             if let gestureRecognizer = $0 as? UILongPressGestureRecognizer {
-                self.base.removeGestureRecognizer(gestureRecognizer)
+                self.removeGestureRecognizer(gestureRecognizer)
             }
         }
     }
@@ -117,7 +117,7 @@ public extension DDExtension where Base: UICollectionView {
 // MARK: - 私有事件处理
 private extension UICollectionView {
     /// 长按手势处理
-    @objc func longPressGRHandler(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func dd_longPressGRHandler(_ gestureRecognizer: UILongPressGestureRecognizer) {
         let point = gestureRecognizer.location(in: gestureRecognizer.view!)
         switch gestureRecognizer.state {
         case .began: // 开始移动
@@ -134,11 +134,8 @@ private extension UICollectionView {
     }
 }
 
-// MARK: - Defaultable
 public extension UICollectionView {
-    typealias Associatedtype = UICollectionView
-
-    override open class func `default`() -> Associatedtype {
+    override static func `default`() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }
@@ -168,7 +165,7 @@ public extension UICollectionView {
     /// - Returns:`Self`
     @discardableResult
     func dd_register<T: UICollectionViewCell>(_ cell: T.Type) -> Self {
-        self.dd.register(cellWithClass: T.self)
+        self.dd_register(cellWithClass: T.self)
         return self
     }
 
@@ -219,7 +216,7 @@ public extension UICollectionView {
     /// - Returns:`Self`
     @discardableResult
     func dd_scrollRectToVisible(_ rect: CGRect, animated: Bool = true) -> Self {
-        guard rect.maxY <= self.dd.bottom else { return self }
+        guard rect.maxY <= self.dd_bottom else { return self }
         self.scrollRectToVisible(rect, animated: animated)
         return self
     }

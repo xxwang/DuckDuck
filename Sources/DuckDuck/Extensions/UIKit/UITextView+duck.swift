@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var placeholder: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDEL".hashValue)
     static var placeholderLabel: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDELABEL".hashValue)
     static var placeholdFont: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: "PLACEHOLDFONT".hashValue)
@@ -17,7 +17,7 @@ private class AssociateKeys {
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: UITextView {
+public extension UITextView {
     /// 限制输入的字数
     ///
     /// 调用位置
@@ -29,27 +29,27 @@ public extension DDExtension where Base: UITextView {
     ///   - maxCharacters:限制字数
     ///   - regex:可输入内容(正则)
     /// - Returns:返回是否可输入
-    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+    func dd_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
         guard !text.isEmpty else { return true }
-        guard let oldContent = self.base.text else { return false }
+        guard let oldContent = self.text else { return false }
 
-        if let _ = self.base.markedTextRange {
+        if let _ = self.markedTextRange {
             // 有高亮联想中
             guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
             // 无高亮
             // 正则的判断
-            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.dd_isMatchRegexp(weakRegex) { return false }
             // 联想选中键盘
-            let allContent = oldContent.dd.subString(to: range.location) + text
+            let allContent = oldContent.dd_subString(to: range.location) + text
             if allContent.count > maxCharacters {
                 let newContent = allContent.dd.subString(to: maxCharacters)
-                self.base.text = newContent
+                self.text = newContent
                 return false
             }
         } else {
-            guard !text.dd.isNineKeyBoard() else { return true }
+            guard !text.dd_isNineKeyBoard() else { return true }
             // 正则的判断
-            if let weakRegex = regex, !text.dd.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.dd_isMatchRegexp(weakRegex) { return false }
             // 如果数字大于指定位数,不能输入
             guard oldContent.count + text.count <= maxCharacters else { return false }
         }
@@ -60,7 +60,7 @@ public extension DDExtension where Base: UITextView {
     /// - Parameters:
     ///   - string:文本
     ///   - withURLString:链接
-    func appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
+    func dd_appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
         // 新增的文本内容(使用默认设置的字体样式)
         let addAttributes = [NSAttributedString.Key.font: font]
         let linkAttributedString = NSMutableAttributedString(string: linkString, attributes: addAttributes)
@@ -70,21 +70,21 @@ public extension DDExtension where Base: UITextView {
             linkAttributedString.beginEditing()
             linkAttributedString.addAttribute(NSAttributedString.Key.link,
                                               value: linkAddr,
-                                              range: linkString.dd.fullNSRange)
+                                              range: linkString.dd_fullNSRange())
             linkAttributedString.endEditing()
         }
 
-        self.base.attributedText = self.base.attributedText
-            .dd.as2NSMutableAttributedString
+        self.attributedText = self.attributedText
+            .dd_NSMutableAttributedString()
             .dd_append(linkAttributedString)
     }
 
     /// 转换特殊符号标签字段
-    func resolveHashTags() {
-        let nsText: NSString = self.base.text! as NSString
+    func dd_resolveHashTags() {
+        let nsText: NSString = self.text! as NSString
 
         // 使用默认设置的字体样式
-        let m_attributedText = (self.base.text ?? "").dd.as2NSMutableAttributedString.dd_font(self.base.font)
+        let m_attributedText = (self.text ?? "").dd_NSMutableAttributedString().dd_font(self.font)
 
         // 用来记录遍历字符串的索引位置
         var bookmark = 0
@@ -92,11 +92,11 @@ public extension DDExtension where Base: UITextView {
         let charactersSet = CharacterSet(charactersIn: "@#")
 
         // 先将字符串按空格和分隔符拆分
-        let sentences: [String] = self.base.text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        let sentences: [String] = self.text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
 
         for sentence in sentences {
             // 如果是url链接则跳过
-            if !sentence.dd.isValidUrl() {
+            if !sentence.dd_isValidURL() {
                 // 再按特殊符号拆分
                 let words: [String] = sentence.components(separatedBy: charactersSet)
                 var bookmark2 = bookmark
@@ -130,23 +130,15 @@ public extension DDExtension where Base: UITextView {
         }
         // print(nsText.length, bookmark)
         // 最终赋值
-        self.base.attributedText = m_attributedText
+        self.attributedText = m_attributedText
     }
 
     /// 过滤部多余的非数字和字符的部分
     /// - Parameter text:@hangge.123 -> @hangge
     /// - Returns:返回过滤后的字符串
-    private func chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
+    private func dd_chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
         let nonAlphaNumericCharacters = CharacterSet.alphanumerics.inverted
         return text.components(separatedBy: nonAlphaNumericCharacters).first
-    }
-}
-
-// MARK: - Defaultable
-public extension UITextView {
-    typealias Associatedtype = UITextView
-    override open class func `default`() -> Associatedtype {
-        return UITextView()
     }
 }
 
@@ -166,7 +158,7 @@ public extension UITextView {
     @discardableResult
     func dd_clear() -> Self {
         self.text = ""
-        self.attributedText = "".dd.as2NSAttributedString
+        self.attributedText = "".dd_NSAttributedString()
         return self
     }
 

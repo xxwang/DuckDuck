@@ -7,14 +7,6 @@
 
 import UIKit
 
-// MARK: - Defaultable
-public extension UIDatePicker {
-    typealias Associatedtype = UIDatePicker
-    override open class func `default`() -> Associatedtype {
-        return UIDatePicker()
-    }
-}
-
 // MARK: - 链式语法
 public extension UIDatePicker {
     /// 设置时区

@@ -9,33 +9,33 @@ import UIKit
 
 /// 按钮所有状态
 private var kStates: [UIControl.State] {
-    [.normal, .selected, .highlighted, .disabled]
+    return [.normal, .selected, .highlighted, .disabled]
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: UIButton {
+public extension UIButton {
     /// 为按钮的所有状态设置同样的图片
     /// - Parameter image:要设置的图片
-    func setImageForAllStates(_ image: UIImage) {
-        kStates.forEach { self.base.setImage(image, for: $0) }
+    func dd_setImageForAllStates(_ image: UIImage) {
+        kStates.forEach { self.setImage(image, for: $0) }
     }
 
     /// 为按钮的所有状态设置同样的标题颜色
     /// - Parameter color:要设置的颜色
-    func setTitleColorForAllStates(_ color: UIColor) {
-        kStates.forEach { self.base.setTitleColor(color, for: $0) }
+    func dd_setTitleColorForAllStates(_ color: UIColor) {
+        kStates.forEach { self.setTitleColor(color, for: $0) }
     }
 
     /// 为按钮的所有状态设置同样的标题
     /// - Parameter title:标题文字
-    func setTitleForAllStates(_ title: String) {
-        kStates.forEach { self.base.setTitle(title, for: $0) }
+    func dd_setTitleForAllStates(_ title: String) {
+        kStates.forEach { self.setTitle(title, for: $0) }
     }
 }
 
 // MARK: - 按钮布局
-public extension DDExtension where Base: UIButton {
-    enum WGImagePosition {
+public extension UIButton {
+    enum DDImagePosition {
         case top
         case bottom
         case left
@@ -47,41 +47,41 @@ public extension DDExtension where Base: UIButton {
     /// - Parameters:
     ///   - spacing:间距
     ///   - position:图片位置
-    func changeLayout(_ spacing: CGFloat, position: WGImagePosition) {
-        let imageRect: CGRect = self.base.imageView?.frame ?? .zero
-        let titleRect: CGRect = self.base.titleLabel?.frame ?? .zero
+    func dd_changeLayout(_ spacing: CGFloat, position: DDImagePosition) {
+        let imageRect: CGRect = self.imageView?.frame ?? .zero
+        let titleRect: CGRect = self.titleLabel?.frame ?? .zero
         let buttonWidth: CGFloat = frame.size.width
         let buttonHeight: CGFloat = frame.size.height
         let totalHeight = titleRect.size.height + spacing + imageRect.size.height
 
         switch position {
         case .left:
-            self.base.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing / 2, bottom: 0, right: -spacing / 2)
-            self.base.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing / 2, bottom: 0, right: spacing / 2)
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing / 2, bottom: 0, right: -spacing / 2)
+            self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing / 2, bottom: 0, right: spacing / 2)
         case .right:
-            self.base.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageRect.size.width + spacing / 2), bottom: 0, right: imageRect.size.width + spacing / 2)
-            self.base.imageEdgeInsets = UIEdgeInsets(top: 0, left: titleRect.size.width + spacing / 2, bottom: 0, right: -(titleRect.size.width + spacing / 2))
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageRect.size.width + spacing / 2), bottom: 0, right: imageRect.size.width + spacing / 2)
+            self.imageEdgeInsets = UIEdgeInsets(top: 0, left: titleRect.size.width + spacing / 2, bottom: 0, right: -(titleRect.size.width + spacing / 2))
         case .top:
-            self.base.titleEdgeInsets = UIEdgeInsets(
+            self.titleEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 + imageRect.size.height + spacing - titleRect.origin.y,
                 left: (buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2,
                 bottom: -((buttonHeight - totalHeight) / 2 + imageRect.size.height + spacing - titleRect.origin.y),
                 right: -(buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2
             )
-            self.base.imageEdgeInsets = UIEdgeInsets(
+            self.imageEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 - imageRect.origin.y,
                 left: buttonWidth / 2 - imageRect.origin.x - imageRect.size.width / 2,
                 bottom: -((buttonHeight - totalHeight) / 2 - imageRect.origin.y),
                 right: -(buttonWidth / 2 - imageRect.origin.x - imageRect.size.width / 2)
             )
         case .bottom:
-            self.base.titleEdgeInsets = UIEdgeInsets(
+            self.titleEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 - titleRect.origin.y,
                 left: (buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2,
                 bottom: -((buttonHeight - totalHeight) / 2 - titleRect.origin.y),
                 right: -(buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2
             )
-            self.base.imageEdgeInsets = UIEdgeInsets(
+            self.imageEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 + titleRect.size.height + spacing - imageRect.origin.y,
                 left: buttonWidth / 2 - imageRect.origin.x - imageRect.size.width / 2,
                 bottom: -((buttonHeight - totalHeight) / 2 + titleRect.size.height + spacing - imageRect.origin.y),
@@ -94,53 +94,53 @@ public extension DDExtension where Base: UIButton {
     /// - Parameters:
     ///   - imageAboveText:设置为true可使图像位于标题文本上方,默认值为false,图像位于文本左侧
     ///   - spacing:标题文本和图像之间的间距
-    func centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
+    func dd_centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
         if imageAboveText {
-            guard let imageSize = self.base.imageView?.image?.size else { return }
-            guard let text = self.base.titleLabel?.text else { return }
-            guard let font = self.base.titleLabel?.font else { return }
+            guard let imageSize = self.imageView?.image?.size else { return }
+            guard let text = self.titleLabel?.text else { return }
+            guard let font = self.titleLabel?.font else { return }
 
             let titleSize = text.size(withAttributes: [.font: font])
 
             let titleOffset = -(imageSize.height + spacing)
-            self.base.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: -imageSize.width, bottom: titleOffset, right: 0.0)
+            self.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: -imageSize.width, bottom: titleOffset, right: 0.0)
 
             let imageOffset = -(titleSize.height + spacing)
-            self.base.imageEdgeInsets = UIEdgeInsets(top: imageOffset, left: 0.0, bottom: 0.0, right: -titleSize.width)
+            self.imageEdgeInsets = UIEdgeInsets(top: imageOffset, left: 0.0, bottom: 0.0, right: -titleSize.width)
 
             let edgeOffset = Swift.abs(titleSize.height - imageSize.height) / 2.0
-            self.base.contentEdgeInsets = UIEdgeInsets(top: edgeOffset, left: 0.0, bottom: edgeOffset, right: 0.0)
+            self.contentEdgeInsets = UIEdgeInsets(top: edgeOffset, left: 0.0, bottom: edgeOffset, right: 0.0)
         } else {
             let insetAmount = spacing / 2
-            self.base.imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
-            self.base.titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
-            self.base.contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+            self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -insetAmount, bottom: 0, right: insetAmount)
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: -insetAmount)
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
         }
     }
 
     /// 调整图标与文字的间距(必须左图右字)
-    func spacing(_ spacing: CGFloat) {
+    func dd_spacing(_ spacing: CGFloat) {
         let spacing = spacing * 0.5
-        self.base.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing, bottom: 0, right: spacing)
-        self.base.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
+        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing, bottom: 0, right: spacing)
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
     }
 }
 
 // MARK: - 计算按钮尺寸
-public extension DDExtension where Base: UIButton {
+public extension UIButton {
     /// 获取指定宽度下字符串的Size
     /// - Parameter lineWidth: 最大行宽度
     /// - Returns: 文字尺寸
-    func titleSize(with lineWidth: CGFloat = kScreenWidth) -> CGSize {
-        if let currentAttributedTitle = self.base.currentAttributedTitle {
-            return currentAttributedTitle.dd.attributedSize(lineWidth)
+    func dd_titleSize(with lineWidth: CGFloat = kScreenWidth) -> CGSize {
+        if let currentAttributedTitle = self.currentAttributedTitle {
+            return currentAttributedTitle.dd_attributedSize(lineWidth)
         }
-        return self.base.titleLabel?.dd.textSize(lineWidth) ?? .zero
+        return self.titleLabel?.dd_textSize(lineWidth) ?? .zero
     }
 }
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIButton" + "CallbackKey").hashValue)
     static var ExpandSizeKey = UnsafeRawPointer(bitPattern: ("UIButton" + "ExpandSizeKey").hashValue)
 }
@@ -149,28 +149,28 @@ private class AssociateKeys {
 extension UIButton: AssociatedEventBlock {
     public typealias T = UIButton
 
-    public var eventBlock: EventBlock? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? EventBlock }
+    public var dd_eventBlock: DDEventBlock? {
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? DDEventBlock }
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
-    @objc func tapAction(_ button: UIButton) {
-        self.eventBlock?(button)
+    @objc func dd_tapAction(_ button: UIButton) {
+        self.dd_eventBlock?(button)
     }
 }
 
 // MARK: - Button扩大点击事件
-public extension DDExtension where Base: UIButton {
+public extension UIButton {
     /// 扩大UIButton的点击区域,向四周扩展10像素的点击范围
     /// - Parameter size:向四周扩展像素的点击范围
-    func expandSize(size: CGFloat = 10) {
-        AssociatedObject.set(self.base, &AssociateKeys.ExpandSizeKey, size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+    func dd_expandSize(size: CGFloat = 10) {
+        AssociatedObject.set(self, &AssociateKeys.ExpandSizeKey, size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
 }
 
 // MARK: - 触摸范围
 public extension UIButton {
-    private func expandRect() -> CGRect {
+    private func dd_expandRect() -> CGRect {
         let expandSize = AssociatedObject.get(self, &AssociateKeys.ExpandSizeKey)
         if expandSize != nil {
             return CGRect(
@@ -185,20 +185,12 @@ public extension UIButton {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let buttonRect = self.expandRect()
+        let buttonRect = self.dd_expandRect()
         if buttonRect.equalTo(bounds) {
             return super.point(inside: point, with: event)
         } else {
             return buttonRect.contains(point)
         }
-    }
-}
-
-// MARK: - Defaultable
-public extension UIButton {
-    typealias Associatedtype = UIButton
-    override open class func `default`() -> Associatedtype {
-        return UIButton()
     }
 }
 
@@ -367,7 +359,7 @@ public extension UIButton {
     /// - Returns: `Self`
     @discardableResult
     func dd_expandClickArea(_ size: CGFloat = 10) -> Self {
-        self.dd.expandSize(size: size)
+        self.dd_expandSize(size: size)
         return self
     }
 }

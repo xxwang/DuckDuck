@@ -8,15 +8,15 @@
 import UIKit
 
 // MARK: - 关联键
-private class AssociateKeys {
+private class DDAssociateKeys {
     static var kBlockKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "kBlockKey").hashValue)
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: UIGestureRecognizer {
+public extension UIGestureRecognizer {
     /// 移除手势识别器
-    func removeGesture() {
-        self.base.view?.removeGestureRecognizer(self.base)
+    func dd_removeGesture() {
+        self.view?.removeGestureRecognizer(self)
     }
 }
 
@@ -24,18 +24,9 @@ public extension DDExtension where Base: UIGestureRecognizer {
 private extension UIGestureRecognizer {
     /// 手势响应方法
     @objc private func dd_invoke() {
-        if let block = AssociatedObject.get(self, &AssociateKeys.kBlockKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
+        if let block = AssociatedObject.get(self, &DDAssociateKeys.kBlockKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
             block(self)
         }
-    }
-}
-
-// MARK: - UIGestureRecognizer
-extension UIGestureRecognizer: Defaultable {
-    public typealias Associatedtype = UIGestureRecognizer
-
-    @objc open class func `default`() -> Associatedtype {
-        return UIGestureRecognizer()
     }
 }
 
@@ -47,7 +38,7 @@ public extension UIGestureRecognizer {
     @discardableResult
     func dd_block(_ block: @escaping (_ recognizer: UIGestureRecognizer) -> Void) -> Self {
         self.addTarget(self, action: #selector(dd_invoke))
-        AssociatedObject.set(self, &AssociateKeys.kBlockKey, block, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AssociatedObject.set(self, &DDAssociateKeys.kBlockKey, block, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }
 

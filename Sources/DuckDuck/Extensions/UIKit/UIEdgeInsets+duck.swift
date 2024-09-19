@@ -8,15 +8,15 @@
 import UIKit
 
 // MARK: - 属性
-public extension DDExtension where Base == UIEdgeInsets {
+public extension UIEdgeInsets {
     /// 返回水平方向`edges`
     var dd_horizontal: CGFloat {
-        return self.base.left + self.base.right
+        return self.left + self.right
     }
 
     /// 返回垂直方向`edges`
     var dd_vertical: CGFloat {
-        return self.base.top + self.base.bottom
+        return self.top + self.bottom
     }
 }
 
@@ -34,14 +34,6 @@ public extension UIEdgeInsets {
     ///   - vertical:垂直方向大小
     init(horizontal: CGFloat, vertical: CGFloat) {
         self.init(top: vertical / 2, left: horizontal / 2, bottom: vertical / 2, right: horizontal / 2)
-    }
-}
-
-// MARK: - Defaultable
-extension UIEdgeInsets: Defaultable {
-    public typealias Associatedtype = UIEdgeInsets
-    public static func `default`() -> Associatedtype {
-        return UIEdgeInsets.zero
     }
 }
 

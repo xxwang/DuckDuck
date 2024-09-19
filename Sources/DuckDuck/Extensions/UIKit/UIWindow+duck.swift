@@ -193,13 +193,5 @@ public extension DDExtension where Base: UIWindow {
     }
 }
 
-// MARK: - Defaultable
-public extension UIWindow {
-    typealias Associatedtype = UIWindow
-    override open class func `default`() -> Associatedtype {
-        return UIWindow(frame: kScreenBounds)
-    }
-}
-
 // MARK: - 链式语法
 public extension UIWindow {}
