@@ -7,8 +7,6 @@
 
 import Foundation
 
-extension DateFormatter: DDExtensionable {}
-
 // MARK: - 构造方法
 public extension DateFormatter {
     /// `DateFormatter`便利构造方法
@@ -24,10 +22,8 @@ public extension DateFormatter {
     }
 }
 
-// MARK: - Defaultable
-extension DateFormatter: Defaultable {
-    public typealias Associatedtype = DateFormatter
-    @objc open class func `default`() -> Associatedtype {
+public extension DateFormatter {
+    static func `default`() -> DateFormatter {
         return DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
     }
 }

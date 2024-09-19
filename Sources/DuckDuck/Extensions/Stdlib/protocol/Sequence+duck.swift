@@ -201,8 +201,8 @@ public extension Sequence {
     ///   - keyPath3: 排序依据`keyPath`
     /// - Returns: 排序后的数组
     func dd_sorted(by keyPath1: KeyPath<Self.Element, some Comparable>,
-                and keyPath2: KeyPath<Self.Element, some Comparable>,
-                and keyPath3: KeyPath<Self.Element, some Comparable>) -> [Self.Element]
+                   and keyPath2: KeyPath<Self.Element, some Comparable>,
+                   and keyPath3: KeyPath<Self.Element, some Comparable>) -> [Self.Element]
     {
         self.sorted {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
@@ -233,7 +233,7 @@ public extension Sequence {
 }
 
 // MARK: - Element:Equatable
-public extension  Sequence where Self.Element: Equatable {
+public extension Sequence where Self.Element: Equatable {
     /// 检查数组是否完全包含`elements`数组
     ///
     ///     [1, 2, 3, 4, 5].dd_contains([1, 2]) -> true

@@ -7,42 +7,42 @@
 
 import UIKit
 
-// MARK: - 计算属性
-public extension DDExtension where Base: NSAttributedString {
+// MARK: - 属性
+public extension NSAttributedString {
     /// 不可变属性字符串转可变属性字符串
-    var as2NSMutableAttributedString: NSMutableAttributedString {
-        return NSMutableAttributedString(attributedString: self.base)
+    func dd_NSMutableAttributedString() -> NSMutableAttributedString {
+        return NSMutableAttributedString(attributedString: self)
     }
 
     /// 获取属性字符串的属性字典
-    var attributes: [NSAttributedString.Key: Any] {
-        guard self.base.length > 0 else { return [:] }
-        return self.base.attributes(at: 0, effectiveRange: nil)
+    func dd_attributes() -> [NSAttributedString.Key: Any] {
+        guard self.length > 0 else { return [:] }
+        return self.attributes(at: 0, effectiveRange: nil)
     }
 
     /// 获取整个属性字符串的`NSRange`
-    var fullNSRange: NSRange {
-        return NSRange(location: 0, length: self.base.length)
+    func dd_fullNSRange() -> NSRange {
+        return NSRange(location: 0, length: self.length)
     }
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: NSAttributedString {
+public extension NSAttributedString {
     /// 获取`subStr`在属性字符串中的`NSRange`
     /// - Parameter subStr: 用于查找的字符串
     /// - Returns: 结果`NSRange`
-    func nsRange(_ subStr: String) -> NSRange {
-        return self.base.string.dd.nsRange(subStr)
+    func dd_NSRange(_ subStr: String) -> NSRange {
+        return self.string.dd_NSRange(subStr)
     }
 
     /// 获取`texts`在属性字符串中的所有`NSRange`
     /// - Parameter texts: 用于查找的字符串数组
     /// - Returns: 结果`[NSRange]`
-    func nsRanges(with texts: [String]) -> [NSRange] {
+    func dd_NSRanges(with texts: [String]) -> [NSRange] {
         var ranges = [NSRange]()
         for str in texts {
-            if self.base.string.contains(str) {
-                let subStrArr = self.base.string.components(separatedBy: str)
+            if self.string.contains(str) {
+                let subStrArr = self.string.components(separatedBy: str)
                 var subStrIndex = 0
                 for i in 0 ..< (subStrArr.count - 1) {
                     let subDivisionStr = subStrArr[i]
@@ -61,15 +61,15 @@ public extension DDExtension where Base: NSAttributedString {
     /// 计算属性字符串在指定的宽度下的`CGSize`
     /// - Parameter lineWidth: 宽度
     /// - Returns: 结果`CGSize`
-    func attributedSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
+    func dd_attributedSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         // .usesDeviceMetrics, .truncatesLastVisibleLine
-        let size = self.base.boundingRect(
+        let size = self.boundingRect(
             with: constraint,
             options: [.usesLineFragmentOrigin, .usesFontLeading],
             context: nil
         ).size
-        return CGSize(width: size.width.dd.ceil, height: size.height.dd.ceil)
+        return CGSize(width: size.width.dd_ceil(), height: size.height.dd_ceil())
     }
 }
 
@@ -111,14 +111,5 @@ public extension NSAttributedString {
     /// - Returns: 新的属性字符串
     static func + (lhs: NSAttributedString, rhs: String) -> NSAttributedString {
         lhs + NSAttributedString(string: rhs)
-    }
-}
-
-// MARK: - Defaultable
-extension NSAttributedString: Defaultable {
-    public typealias Associatedtype = NSAttributedString
-
-    @objc open class func `default`() -> Associatedtype {
-        return NSAttributedString()
     }
 }

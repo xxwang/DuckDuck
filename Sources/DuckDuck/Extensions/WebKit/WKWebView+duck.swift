@@ -7,26 +7,6 @@
 
 import WebKit
 
-// MARK: - Defaultable
-public extension WKWebView {
-    typealias Associatedtype = WKWebView
-
-    override open class func `default`() -> Associatedtype {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
-        configuration.selectionGranularity = .dynamic
-        configuration.preferences = WKPreferences()
-        configuration.preferences.javaScriptCanOpenWindowsAutomatically = false
-        if #available(iOS 14, *) {
-            configuration.defaultWebpagePreferences.allowsContentJavaScript = true
-        } else {
-            configuration.preferences.javaScriptEnabled = true
-        }
-
-        return WKWebView(frame: .zero, configuration: configuration)
-    }
-}
-
 // MARK: - 链式语法
 public extension WKWebView {
     /// 设置导航代理
@@ -42,7 +22,7 @@ public extension WKWebView {
     /// - Parameter delegate: 代理
     /// - Returns: `Self`
     @discardableResult
-    func uiDelegate(_ delegate: WKUIDelegate?) -> Self {
+    func dd_uiDelegate(_ delegate: WKUIDelegate?) -> Self {
         uiDelegate = delegate
         return self
     }

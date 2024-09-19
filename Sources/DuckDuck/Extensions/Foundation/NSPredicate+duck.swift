@@ -7,28 +7,28 @@
 
 import Foundation
 
-// MARK: - 计算属性
-public extension DDExtension where Base: NSPredicate {
+// MARK: - 类型转换
+public extension NSPredicate {
     /// 转换为`NOT`复合谓词
-    var as2NOT: NSCompoundPredicate {
-        return NSCompoundPredicate(notPredicateWithSubpredicate: self.base)
+    func dd_NOT() -> NSCompoundPredicate {
+        return NSCompoundPredicate(notPredicateWithSubpredicate: self)
     }
 }
 
 // MARK: - 方法
-public extension DDExtension where Base: NSPredicate {
+public extension NSPredicate {
     /// 创建一个`AND`复合谓词
     /// - Parameter predicate: 谓词
     /// - Returns: 结果复合谓词
-    func mix2AND(_ predicate: NSPredicate) -> NSCompoundPredicate {
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [self.base, predicate])
+    func dd_mix2AND(_ predicate: NSPredicate) -> NSCompoundPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [self, predicate])
     }
 
     /// 创建一个`OR`复合谓词
     /// - Parameter predicate: 谓词
     /// - Returns: 结果复合谓词
-    func mix2OR(_ predicate: NSPredicate) -> NSCompoundPredicate {
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [self.base, predicate])
+    func dd_mix2OR(_ predicate: NSPredicate) -> NSCompoundPredicate {
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, predicate])
     }
 }
 
@@ -38,7 +38,7 @@ public extension NSPredicate {
     /// - Parameter rhs: `NSPredicate`
     /// - Returns: 结果复合谓词
     static prefix func ! (rhs: NSPredicate) -> NSCompoundPredicate {
-        return rhs.dd.as2NOT
+        return rhs.dd_NOT()
     }
 
     /// 创建一个`AND`复合谓词
@@ -47,7 +47,7 @@ public extension NSPredicate {
     ///   - rhs: `NSPredicate`
     /// - Returns: 结果复合谓词
     static func + (lhs: NSPredicate, rhs: NSPredicate) -> NSCompoundPredicate {
-        return lhs.dd.mix2AND(rhs)
+        return lhs.dd_mix2AND(rhs)
     }
 
     /// 返创建一个`OR`复合谓词
@@ -57,7 +57,7 @@ public extension NSPredicate {
     ///   - rhs: `NSPredicate`
     /// - Returns: 结果复合谓词
     static func | (lhs: NSPredicate, rhs: NSPredicate) -> NSCompoundPredicate {
-        return lhs.dd.mix2OR(rhs)
+        return lhs.dd_mix2OR(rhs)
     }
 
     /// 从左值谓词中减去右值谓词

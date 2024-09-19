@@ -9,13 +9,13 @@ import CoreLocation
 import Foundation
 
 // MARK: - 方法
-public extension DDExtension where Base: CLLocation {
+public extension CLLocation {
     /// 计算`两点之间`的`大圆路径`的`中间点`
     /// - Parameter point: 结束`CLLocation`
     /// - Returns: 中间点`CLLocation`
-    func middleLocation(to point: CLLocation) -> CLLocation {
-        let lat1 = Double.pi * self.base.coordinate.latitude / 180.0
-        let long1 = Double.pi * self.base.coordinate.longitude / 180.0
+    func dd_middleLocation(to point: CLLocation) -> CLLocation {
+        let lat1 = Double.pi * self.coordinate.latitude / 180.0
+        let long1 = Double.pi * self.coordinate.longitude / 180.0
 
         let lat2 = Double.pi * point.coordinate.latitude / 180.0
         let long2 = Double.pi * point.coordinate.longitude / 180.0
@@ -32,9 +32,9 @@ public extension DDExtension where Base: CLLocation {
     /// - Parameters:
     ///   - destination: 参与计算的`CLLocation`
     /// - Returns:`Double`类型方位角, 范围 `0°... 360° `
-    func bearing(to destination: CLLocation) -> Double {
-        let lat1 = Double.pi * self.base.coordinate.latitude / 180.0
-        let long1 = Double.pi * self.base.coordinate.longitude / 180.0
+    func dd_bearing(to destination: CLLocation) -> Double {
+        let lat1 = Double.pi * self.coordinate.latitude / 180.0
+        let long1 = Double.pi * self.coordinate.longitude / 180.0
         let lat2 = Double.pi * destination.coordinate.latitude / 180.0
         let long2 = Double.pi * destination.coordinate.longitude / 180.0
 
@@ -49,18 +49,17 @@ public extension DDExtension where Base: CLLocation {
 }
 
 // MARK: - `CLLocation`数组
-extension Array: DDExtensionable where Element: CLLocation {}
-public extension DDExtension where Base == [CLLocation] {
+public extension [CLLocation] {
     /// 根据地球的曲率,计算数组中每个`CLLocation`距离的总和
     /// - Parameter unit: 距离单位`UnitLength`
     /// - Returns: 指定单位的距离总和
-    func distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
-        guard self.base.count > 1 else {
+    func dd_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
+        guard self.count > 1 else {
             return Measurement(value: 0.0, unit: unit)
         }
         var distance: CLLocationDistance = 0.0
-        for idx in 0 ..< self.base.count - 1 {
-            distance += self.base[idx].distance(from: self.base[idx + 1])
+        for idx in 0 ..< self.count - 1 {
+            distance += self[idx].distance(from: self[idx + 1])
         }
         return Measurement(value: distance, unit: UnitLength.meters).converted(to: unit)
     }

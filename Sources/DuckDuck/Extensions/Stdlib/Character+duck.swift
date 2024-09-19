@@ -15,7 +15,7 @@ public extension Character {
     }
 }
 
-//MARK: - 静态方法
+// MARK: - 静态方法
 public extension Character {
     /// 随机产生一个字符`(a-z | A-Z | 0-9)`
     static func dd_random() -> Character {

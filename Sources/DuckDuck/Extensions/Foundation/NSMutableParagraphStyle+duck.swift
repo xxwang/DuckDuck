@@ -7,10 +7,8 @@
 
 import UIKit
 
-// MARK: - Defaultable
-extension NSMutableParagraphStyle: Defaultable {
-    public typealias Associatedtype = NSMutableParagraphStyle
-    @objc open class func `default`() -> Associatedtype {
+public extension NSMutableParagraphStyle {
+    func `default`() -> NSMutableParagraphStyle {
         return NSMutableParagraphStyle()
             .dd_hyphenationFactor(1.0)
             .dd_firstLineHeadIndent(0.0)

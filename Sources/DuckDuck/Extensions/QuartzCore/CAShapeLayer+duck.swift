@@ -8,14 +8,6 @@
 import QuartzCore
 import UIKit
 
-// MARK: - Defaultable
-public extension CAShapeLayer {
-    typealias Associatedtype = CAShapeLayer
-    override open class func `default`() -> Associatedtype {
-        return CAShapeLayer()
-    }
-}
-
 // MARK: - 链式语法
 public extension CAShapeLayer {
     /// 设置路径

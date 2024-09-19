@@ -16,14 +16,6 @@ public extension CGMutablePath {
     }
 }
 
-// MARK: - Defaultable
-extension CGMutablePath: Defaultable {
-    public typealias Associatedtype = CGMutablePath
-    public static func `default`() -> Associatedtype {
-        return CGMutablePath()
-    }
-}
-
 // MARK: - 链式语法
 public extension CGMutablePath {
     /// 添加路径

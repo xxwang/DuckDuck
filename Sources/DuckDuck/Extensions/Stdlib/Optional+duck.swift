@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK: - Collection
-public extension Optional<Collection> {
+public extension Collection? {
     /// 判断可选集protocol合类型是否为空或者`nil`
     /// - Returns: `Bool`
     func dd_isNilOrEmpty() -> Bool {
-        guard let collection = self else {return true}
+        guard let collection = self else { return true }
         return collection.isEmpty
     }
 }
@@ -61,7 +61,7 @@ public extension Optional {
 }
 
 // MARK: - OR Error相关方法
-public extension Optional<Error> {
+public extension Error? {
     /// 当前类型为可选类型`Error`,如果有值就执行闭包,`error`作为闭包参数
     /// - Parameter else:闭包,`error`作为闭包参数
     func or(_ else: (Error) -> Void) {

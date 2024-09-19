@@ -8,14 +8,6 @@
 import QuartzCore
 import UIKit
 
-// MARK: - Defaultable
-public extension CATextLayer {
-    typealias Associatedtype = CATextLayer
-    override open class func `default`() -> Associatedtype {
-        return CATextLayer()
-    }
-}
-
 // MARK: - 链式语法
 public extension CATextLayer {
     /// 设置文字的内容

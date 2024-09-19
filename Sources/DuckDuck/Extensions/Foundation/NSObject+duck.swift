@@ -7,24 +7,24 @@
 
 import Foundation
 
-public extension DDExtension where Base: NSObject {
+public extension NSObject {
     /// 获取对象的类名字符串
     /// - Returns: 类名字符串
-    var className: String {
-        let name = type(of: self.base).description()
+    func dd_className() -> String {
+        let name = type(of: self).description()
         guard name.contains(".") else { return name }
         return name.components(separatedBy: ".").last ?? ""
     }
 
     /// 获取类的名称字符串
     /// - Returns: 名称字符串
-    static var className: String {
-        String(describing: Self.self)
+    static func dd_className() -> String {
+        return String(describing: Self.self)
     }
 
     /// 获取类中所有的成员变量名称
     /// - Returns: 成员变量名称数组
-    static var members: [String] {
+    static func dd_members() -> [String] {
         var varNames = [String]()
         var count: UInt32 = 0
         let ivarList = class_copyIvarList(Self.self, &count)
@@ -43,14 +43,14 @@ public extension DDExtension where Base: NSObject {
 }
 
 // MARK: - 交换方法
-public extension DDExtension where Base: NSObject {
+public extension NSObject {
     /// 交换类的两个方法(方法前需要`@objc dynamic`修饰)
     /// - Parameters:
     ///   - originalSelector: 原始方法
     ///   - newSelector: 新方法
     /// - Returns: 交换结果
-    class func hookClassMethod(of originalSelector: Selector, with newSelector: Selector) -> Bool {
-        return self.hookMethod(of: originalSelector, with: newSelector, classMethod: true)
+    class func dd_hookClassMethod(of originalSelector: Selector, with newSelector: Selector) -> Bool {
+        return self.dd_hookMethod(of: originalSelector, with: newSelector, classMethod: true)
     }
 
     /// 交换对象的两个方法(方法前需要`@objc dynamic`修饰)
@@ -58,8 +58,8 @@ public extension DDExtension where Base: NSObject {
     ///   - originalSelector: 原始方法
     ///   - newSelector: 新方法
     /// - Returns: 交换结果
-    class func hookInstanceMethod(of originalSelector: Selector, with newSelector: Selector) -> Bool {
-        return self.hookMethod(of: originalSelector, with: newSelector, classMethod: false)
+    class func dd_hookInstanceMethod(of originalSelector: Selector, with newSelector: Selector) -> Bool {
+        return self.dd_hookMethod(of: originalSelector, with: newSelector, classMethod: false)
     }
 
     /// 交换类的两个方法(方法前需要`@objc dynamic`修饰)
@@ -68,9 +68,9 @@ public extension DDExtension where Base: NSObject {
     ///   - newSelector: 新方法
     ///   - classMethod: 是否是类的方法
     /// - Returns: 交换结果
-    class func hookMethod(of originalSelector: Selector, with newSelector: Selector, classMethod: Bool) -> Bool {
+    class func dd_hookMethod(of originalSelector: Selector, with newSelector: Selector, classMethod: Bool) -> Bool {
         if self != NSObject.self { return false }
-        let selfClass: AnyClass = Base.classForCoder()
+        let selfClass: AnyClass = Self.classForCoder()
 
         guard
             let originalMethod = (classMethod
@@ -104,7 +104,7 @@ public extension DDExtension where Base: NSObject {
 }
 
 // MARK: - setValue
-public extension DDExtension where Base: NSObject {
+public extension NSObject {
     /// 初始化方法
     /// - Note: 由于在`swift`中`initialize()`这个方法已经被废弃了,所以需要在`Appdelegate`中调用此方法
     class func dd_initializeMethod() {
@@ -115,23 +115,23 @@ public extension DDExtension where Base: NSObject {
 
     /// 交换设值方法
     private class func dd_hook_setValues() {
-        let onceToken = "Hook_\(NSStringFromClass(Base.classForCoder()))"
-        DispatchQueue.dd.once(token: onceToken) {
-            let oriSel = #selector(Base.setValue(_:forUndefinedKey:))
-            let repSel = #selector(Base.hook_setValue(_:forUndefinedKey:))
-            _ = self.hookInstanceMethod(of: oriSel, with: repSel)
+        let onceToken = "Hook_\(NSStringFromClass(Self.classForCoder()))"
+        DispatchQueue.dd_once(token: onceToken) {
+            let oriSel = #selector(Self.setValue(_:forUndefinedKey:))
+            let repSel = #selector(Self.dd_hook_setValue(_:forUndefinedKey:))
+            _ = self.dd_hookInstanceMethod(of: oriSel, with: repSel)
 
-            let oriSel0 = #selector(Base.value(forUndefinedKey:))
-            let repSel0 = #selector(Base.hook_value(forUndefinedKey:))
-            _ = self.hookInstanceMethod(of: oriSel0, with: repSel0)
+            let oriSel0 = #selector(Self.value(forUndefinedKey:))
+            let repSel0 = #selector(Self.dd_hook_value(forUndefinedKey:))
+            _ = self.dd_hookInstanceMethod(of: oriSel0, with: repSel0)
 
-            let oriSel1 = #selector(Base.setNilValueForKey(_:))
-            let repSel1 = #selector(Base.hook_setNilValueForKey(_:))
-            _ = self.hookInstanceMethod(of: oriSel1, with: repSel1)
+            let oriSel1 = #selector(Self.setNilValueForKey(_:))
+            let repSel1 = #selector(Self.dd_hook_setNilValueForKey(_:))
+            _ = self.dd_hookInstanceMethod(of: oriSel1, with: repSel1)
 
-            let oriSel2 = #selector(Base.setValuesForKeys(_:))
-            let repSel2 = #selector(Base.hook_setValuesForKeys(_:))
-            _ = self.hookInstanceMethod(of: oriSel2, with: repSel2)
+            let oriSel2 = #selector(Self.setValuesForKeys(_:))
+            let repSel2 = #selector(Self.dd_hook_setValuesForKeys(_:))
+            _ = self.dd_hookInstanceMethod(of: oriSel2, with: repSel2)
         }
     }
 }
@@ -141,27 +141,27 @@ private extension NSObject {
     /// - Parameters:
     ///   - value: 值
     ///   - key: 键
-    @objc func hook_setValue(_ value: Any?, forUndefinedKey key: String) {
+    @objc func dd_hook_setValue(_ value: Any?, forUndefinedKey key: String) {
         DDLog.error("setValue(_:forUndefinedKey:), 未知键Key:\(key) 值:\(value ?? "")")
     }
 
     /// 调用`setValue`方法时如果键不存在会调用这个方法
     /// - Parameters:
     ///   - key: 键
-    @objc func hook_value(forUndefinedKey key: String) -> Any? {
+    @objc func dd_hook_value(forUndefinedKey key: String) -> Any? {
         DDLog.error("value(forUndefinedKey:), 未知键:\(key)")
         return nil
     }
 
     /// 给一个非指针对象(如`NSInteger`)赋值 `nil`, 直接忽略
     /// - Parameter key: 键
-    @objc func hook_setNilValueForKey(_ key: String) {
+    @objc func dd_hook_setNilValueForKey(_ key: String) {
         DDLog.error("setNilValueForKey(_:), 不能给非指针对象(如NSInteger)赋值 nil 键:\(key)")
     }
 
     /// 用于替换`setValuesForKeys(_:)`
     /// - Parameter keyedValues: 键值字典
-    @objc func hook_setValuesForKeys(_ keyedValues: [String: Any]) {
+    @objc func dd_hook_setValuesForKeys(_ keyedValues: [String: Any]) {
         for (key, value) in keyedValues {
             DDLog.info("\(key) -- \(value)")
 

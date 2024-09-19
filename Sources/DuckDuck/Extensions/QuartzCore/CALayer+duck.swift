@@ -8,39 +8,32 @@
 import QuartzCore
 import UIKit
 
-public extension DDExtension where Base: CALayer {
-    /// 图层转图片(需要图层已经有`size`)
-    var as2UIImage: UIImage? {
-        self.as2UIImage()
-    }
-
+// MARK: - 方法
+public extension CALayer {
     /// 图层转颜色(`UIColor`)
     /// - Returns: `UIColor?`
-    var as2UIColor: UIColor? {
-        if let image = self.as2UIImage {
+    func dd_UIColor() -> UIColor? {
+        if let image = self.dd_UIImage() {
             return UIColor(patternImage: image)
         }
         return nil
     }
-}
 
-// MARK: - 方法
-public extension DDExtension where Base: CALayer {
     /// `CALayer`转`UIImage?`
     /// - Parameters:
     ///   - scale: 缩放比例
     /// - Returns: `UIImage?`
-    func as2UIImage(scale: CGFloat = 1.0) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.base.frame.size, self.base.isOpaque, scale)
+    func dd_UIImage(scale: CGFloat = 1.0) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, self.isOpaque, scale)
         defer { UIGraphicsEndImageContext() }
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
-        self.base.render(in: ctx)
+        self.render(in: ctx)
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
 
 // MARK: - `CABasicAnimation`
-public extension DDExtension where Base: CALayer {
+public extension CALayer {
     /// `BasicAnimation` 移动到指定`CGPoint`
     /// - Parameters:
     ///   - point: 要移动到的`Point`
@@ -49,16 +42,16 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount: 重复动画次数
     ///   - removedOnCompletion: 在动画完成后是否移除动画
     ///   - option: 动画节奏控制
-    func basicAnimationMovePoint(_ point: CGPoint,
-                                 duration: TimeInterval,
-                                 delay: TimeInterval = 0,
-                                 repeatCount: Float = 1,
-                                 removedOnCompletion: Bool = false,
-                                 option: CAMediaTimingFunctionName = .default)
+    func dd_basicAnimationMovePoint(_ point: CGPoint,
+                                    duration: TimeInterval,
+                                    delay: TimeInterval = 0,
+                                    repeatCount: Float = 1,
+                                    removedOnCompletion: Bool = false,
+                                    option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "position",
-            startValue: self.base.position,
+            startValue: self.position,
             endValue: point,
             duration: duration,
             delay: delay,
@@ -76,16 +69,16 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount: 重复动画次数
     ///   - removedOnCompletion: 在动画完成后是否移除动画
     ///   - option: 动画节奏控制
-    func basicAnimationMoveX(_ moveValue: Any?,
-                             duration: TimeInterval = 2.0,
-                             delay: TimeInterval = 0,
-                             repeatCount: Float = 1,
-                             removedOnCompletion: Bool = false,
-                             option: CAMediaTimingFunctionName = .default)
+    func dd_basicAnimationMoveX(_ moveValue: Any?,
+                                duration: TimeInterval = 2.0,
+                                delay: TimeInterval = 0,
+                                repeatCount: Float = 1,
+                                removedOnCompletion: Bool = false,
+                                option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "transform.translation.x",
-            startValue: self.base.position,
+            startValue: self.position,
             endValue: moveValue,
             duration: duration,
             delay: delay,
@@ -103,16 +96,16 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func basicAnimationMoveY(_ moveValue: Any?,
-                             duration: TimeInterval = 2.0,
-                             delay: TimeInterval = 0,
-                             repeatCount: Float = 1,
-                             removedOnCompletion: Bool = false,
-                             option: CAMediaTimingFunctionName = .default)
+    func dd_basicAnimationMoveY(_ moveValue: Any?,
+                                duration: TimeInterval = 2.0,
+                                delay: TimeInterval = 0,
+                                repeatCount: Float = 1,
+                                removedOnCompletion: Bool = false,
+                                option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "transform.translation.y",
-            startValue: self.base.position,
+            startValue: self.position,
             endValue: moveValue,
             duration: duration,
             delay: delay,
@@ -130,16 +123,16 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationCornerRadius(_ cornerRadius: Any?,
-                               duration: TimeInterval = 2.0,
-                               delay: TimeInterval = 0,
-                               repeatCount: Float = 1,
-                               removedOnCompletion: Bool = false,
-                               option: CAMediaTimingFunctionName = .default)
+    func dd_animationCornerRadius(_ cornerRadius: Any?,
+                                  duration: TimeInterval = 2.0,
+                                  delay: TimeInterval = 0,
+                                  repeatCount: Float = 1,
+                                  removedOnCompletion: Bool = false,
+                                  option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "cornerRadius",
-            startValue: self.base.position,
+            startValue: self.position,
             endValue: cornerRadius,
             duration: duration,
             delay: delay,
@@ -157,14 +150,14 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationScale(_ scaleValue: Any?,
-                        duration: TimeInterval = 2.0,
-                        delay: TimeInterval = 0,
-                        repeatCount: Float = 1,
-                        removedOnCompletion: Bool = true,
-                        option: CAMediaTimingFunctionName = .default)
+    func dd_animationScale(_ scaleValue: Any?,
+                           duration: TimeInterval = 2.0,
+                           delay: TimeInterval = 0,
+                           repeatCount: Float = 1,
+                           removedOnCompletion: Bool = true,
+                           option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "transform.scale",
             startValue: 1,
             endValue: scaleValue,
@@ -184,14 +177,14 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationRotation(_ rotation: Any?,
-                           duration: TimeInterval = 2.0,
-                           delay: TimeInterval = 0,
-                           repeatCount: Float = 1,
-                           removedOnCompletion: Bool = true,
-                           option: CAMediaTimingFunctionName = .default)
+    func dd_animationRotation(_ rotation: Any?,
+                              duration: TimeInterval = 2.0,
+                              delay: TimeInterval = 0,
+                              repeatCount: Float = 1,
+                              removedOnCompletion: Bool = true,
+                              option: CAMediaTimingFunctionName = .default)
     {
-        self.baseBasicAnimation(
+        self.dd_baseBasicAnimation(
             keyPath: "transform.rotation",
             startValue: nil,
             endValue: rotation,
@@ -213,14 +206,14 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func baseBasicAnimation(keyPath: String,
-                            startValue: Any?,
-                            endValue: Any?,
-                            duration: TimeInterval = 2.0,
-                            delay: TimeInterval = 0,
-                            repeatCount: Float = 1,
-                            removedOnCompletion: Bool = false,
-                            option: CAMediaTimingFunctionName = .default)
+    func dd_baseBasicAnimation(keyPath: String,
+                               startValue: Any?,
+                               endValue: Any?,
+                               duration: TimeInterval = 2.0,
+                               delay: TimeInterval = 0,
+                               repeatCount: Float = 1,
+                               removedOnCompletion: Bool = false,
+                               option: CAMediaTimingFunctionName = .default)
     {
         let basicAnimation = CABasicAnimation()
         // 几秒后执行
@@ -243,12 +236,12 @@ public extension DDExtension where Base: CALayer {
         basicAnimation.timingFunction = CAMediaTimingFunction(name: option)
 
         // 添加动画到图层
-        self.base.add(basicAnimation, forKey: nil)
+        self.add(basicAnimation, forKey: nil)
     }
 }
 
 // MARK: - `CAKeyframeAnimation`动画
-public extension DDExtension where Base: CALayer {
+public extension CALayer {
     /// `position`动画(移动是以视图的`锚点`移动的, 默认是视图的`中心点`)
     /// - Parameters:
     ///   - values:位置数组`CGPoint`
@@ -258,15 +251,15 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画选项
-    func addKeyframeAnimationPosition(_ values: [Any],
-                                      keyTimes: [NSNumber]?,
-                                      duration: TimeInterval = 2.0,
-                                      delay: TimeInterval = 0,
-                                      repeatCount: Float = 1,
-                                      removedOnCompletion: Bool = false,
-                                      option: CAMediaTimingFunctionName = .default)
+    func dd_addKeyframeAnimationPosition(_ values: [Any],
+                                         keyTimes: [NSNumber]?,
+                                         duration: TimeInterval = 2.0,
+                                         delay: TimeInterval = 0,
+                                         repeatCount: Float = 1,
+                                         removedOnCompletion: Bool = false,
+                                         option: CAMediaTimingFunctionName = .default)
     {
-        self.baseKeyframeAnimation(
+        self.dd_baseKeyframeAnimation(
             keyPath: "position",
             values: values,
             keyTimes: keyTimes,
@@ -288,7 +281,7 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除
     ///   - option:动画选项
-    func addKeyframeAnimationRotation(_ values: [Any] = [
+    func dd_addKeyframeAnimationRotation(_ values: [Any] = [
         -5.dd_CGFloat().dd_radians(),
         5.dd_CGFloat().dd_radians(),
         -5.dd_CGFloat().dd_radians(),
@@ -299,7 +292,7 @@ public extension DDExtension where Base: CALayer {
     repeatCount: Float = 1,
     removedOnCompletion: Bool = true,
     option: CAMediaTimingFunctionName = .default) {
-        self.baseKeyframeAnimation(
+        self.dd_baseKeyframeAnimation(
             keyPath: "transform.rotation",
             values: values,
             keyTimes: keyTimes,
@@ -320,14 +313,14 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:是否在动画完成后移除动画
     ///   - option:动画控制选项
-    func addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
-                                                duration: TimeInterval = 2.0,
-                                                delay: TimeInterval = 0,
-                                                repeatCount: Float = 1,
-                                                removedOnCompletion: Bool = false,
-                                                option: CAMediaTimingFunctionName = .default)
+    func dd_addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
+                                                   duration: TimeInterval = 2.0,
+                                                   delay: TimeInterval = 0,
+                                                   repeatCount: Float = 1,
+                                                   removedOnCompletion: Bool = false,
+                                                   option: CAMediaTimingFunctionName = .default)
     {
-        self.baseKeyframeAnimation(
+        self.dd_baseKeyframeAnimation(
             keyPath: "position",
             duration: duration,
             delay: delay,
@@ -349,15 +342,15 @@ public extension DDExtension where Base: CALayer {
     ///   - path:动画路径
     ///   - removedOnCompletion:是否在动画完成之后移除动画
     ///   - option:动画节奏控制选项
-    func baseKeyframeAnimation(keyPath: String,
-                               values: [Any]? = nil,
-                               keyTimes: [NSNumber]? = nil,
-                               duration: TimeInterval = 2.0,
-                               delay: TimeInterval = 0,
-                               repeatCount: Float = 1,
-                               path: CGPath? = nil,
-                               removedOnCompletion: Bool = false,
-                               option: CAMediaTimingFunctionName = .default)
+    func dd_baseKeyframeAnimation(keyPath: String,
+                                  values: [Any]? = nil,
+                                  keyTimes: [NSNumber]? = nil,
+                                  duration: TimeInterval = 2.0,
+                                  delay: TimeInterval = 0,
+                                  repeatCount: Float = 1,
+                                  path: CGPath? = nil,
+                                  removedOnCompletion: Bool = false,
+                                  option: CAMediaTimingFunctionName = .default)
     {
         let keyframeAnimation = CAKeyframeAnimation(keyPath: keyPath)
         // 动画持续时长
@@ -393,12 +386,12 @@ public extension DDExtension where Base: CALayer {
         }
 
         // 添加到图层上
-        self.base.add(keyframeAnimation, forKey: nil)
+        self.add(keyframeAnimation, forKey: nil)
     }
 }
 
 // MARK: - CASpringAnimation 弹簧动画
-public extension DDExtension where Base: CALayer {
+public extension CALayer {
     /// `CASpringAnimation``Bounds` 动画
     /// - Parameters:
     ///   - toValue:动画目标值(CGRect)
@@ -410,17 +403,17 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func addSpringAnimationBounds(_ toValue: Any?,
-                                  delay: TimeInterval = 0,
-                                  mass: CGFloat = 10.0,
-                                  stiffness: CGFloat = 5000,
-                                  damping: CGFloat = 100.0,
-                                  initialVelocity: CGFloat = 5,
-                                  repeatCount: Float = 1,
-                                  removedOnCompletion: Bool = false,
-                                  option: CAMediaTimingFunctionName = .default)
+    func dd_addSpringAnimationBounds(_ toValue: Any?,
+                                     delay: TimeInterval = 0,
+                                     mass: CGFloat = 10.0,
+                                     stiffness: CGFloat = 5000,
+                                     damping: CGFloat = 100.0,
+                                     initialVelocity: CGFloat = 5,
+                                     repeatCount: Float = 1,
+                                     removedOnCompletion: Bool = false,
+                                     option: CAMediaTimingFunctionName = .default)
     {
-        self.baseSpringAnimation(
+        self.dd_baseSpringAnimation(
             path: "bounds",
             toValue: toValue,
             mass: mass,
@@ -445,16 +438,16 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func baseSpringAnimation(path: String?,
-                             toValue: Any? = nil,
-                             delay: TimeInterval = 0,
-                             mass: CGFloat = 10.0,
-                             stiffness: CGFloat = 5000,
-                             damping: CGFloat = 100.0,
-                             initialVelocity: CGFloat = 5,
-                             repeatCount: Float = 1,
-                             removedOnCompletion: Bool = false,
-                             option: CAMediaTimingFunctionName = .default)
+    func dd_baseSpringAnimation(path: String?,
+                                toValue: Any? = nil,
+                                delay: TimeInterval = 0,
+                                mass: CGFloat = 10.0,
+                                stiffness: CGFloat = 5000,
+                                damping: CGFloat = 100.0,
+                                initialVelocity: CGFloat = 5,
+                                repeatCount: Float = 1,
+                                removedOnCompletion: Bool = false,
+                                option: CAMediaTimingFunctionName = .default)
     {
         let springAnimation = CASpringAnimation(keyPath: path)
         // 动画执行时间
@@ -479,12 +472,12 @@ public extension DDExtension where Base: CALayer {
         springAnimation.timingFunction = CAMediaTimingFunction(name: option)
 
         // 添加动画到图层
-        self.base.add(springAnimation, forKey: nil)
+        self.add(springAnimation, forKey: nil)
     }
 }
 
 // MARK: - CAAnimationGroup动画组
-public extension DDExtension where Base: CALayer {
+public extension CALayer {
     /// `CAAnimationGroup`动画
     /// - Parameters:
     ///   - animations:要执行的`CAAnimation`动画数组
@@ -493,12 +486,12 @@ public extension DDExtension where Base: CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func baseAnimationGroup(animations: [CAAnimation]? = nil,
-                            duration: TimeInterval = 2.0,
-                            delay: TimeInterval = 0,
-                            repeatCount: Float = 1,
-                            removedOnCompletion: Bool = false,
-                            option: CAMediaTimingFunctionName = .default)
+    func dd_baseAnimationGroup(animations: [CAAnimation]? = nil,
+                               duration: TimeInterval = 2.0,
+                               delay: TimeInterval = 0,
+                               repeatCount: Float = 1,
+                               removedOnCompletion: Bool = false,
+                               option: CAMediaTimingFunctionName = .default)
     {
         let animationGroup = CAAnimationGroup()
         // 几秒后执行
@@ -515,22 +508,22 @@ public extension DDExtension where Base: CALayer {
         animationGroup.timingFunction = CAMediaTimingFunction(name: option)
 
         // 添加动画组到图层
-        self.base.add(animationGroup, forKey: nil)
+        self.add(animationGroup, forKey: nil)
     }
 }
 
 // MARK: - CATransition 动画
-public extension DDExtension where Base: CALayer {
+public extension CALayer {
     /// 过渡动画
     /// - Parameters:
     ///   - type:过渡动画的类型
     ///   - subtype:过渡动画的方向
     ///   - duration:动画的时间
     ///   - delay:延时
-    func addTransition(_ type: CATransitionType,
-                       subtype: CATransitionSubtype?,
-                       duration: CFTimeInterval = 2.0,
-                       delay: TimeInterval = 0)
+    func dd_addTransition(_ type: CATransitionType,
+                          subtype: CATransitionSubtype?,
+                          duration: CFTimeInterval = 2.0,
+                          delay: TimeInterval = 0)
     {
         let transition = CATransition()
         // 执行时间
@@ -543,16 +536,7 @@ public extension DDExtension where Base: CALayer {
         transition.duration = duration
 
         // 添加动画
-        self.base.add(transition, forKey: nil)
-    }
-}
-
-// MARK: - Defaultable
-extension CALayer: Defaultable {
-    public typealias Associatedtype = CALayer
-
-    @objc open class func `default`() -> Associatedtype {
-        return CALayer()
+        self.add(transition, forKey: nil)
     }
 }
 

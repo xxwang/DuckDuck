@@ -7,10 +7,10 @@
 
 import CoreLocation
 
-// MARK: - 计算属性
-public extension DDExtension where Base == CLVisit {
+// MARK: - 类型转换
+public extension CLVisit {
     /// `CLVisit`转`CLLocation`
-    var as2CLLocation: CLLocation {
-        return CLLocation(latitude: self.base.coordinate.latitude, longitude: self.base.coordinate.longitude)
+    func dd_CLLocation() -> CLLocation {
+        return CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
     }
 }

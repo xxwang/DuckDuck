@@ -7,16 +7,14 @@
 
 import Foundation
 
-extension Locale: DDExtensionable {}
-
 // MARK: - 方法
-public extension DDExtension where Base == Locale {
+public extension Locale {
     /// 是否是12小时制
-    var is12Hour: Bool {
+    func dd_is12Hour() -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
-        dateFormatter.locale = self.base
+        dateFormatter.locale = self
 
         let dateString = dateFormatter.string(from: Date())
 

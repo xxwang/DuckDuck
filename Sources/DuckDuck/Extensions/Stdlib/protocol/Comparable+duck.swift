@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension  Comparable {
+public extension Comparable {
     /// 判断数据是否在指定范围内
     /// - Parameter range: `x...y || x..<y`
     /// - Returns: 是否在范围内

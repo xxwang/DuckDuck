@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 类型转换
-public extension  String {
+public extension String {
     /// 转换为`Bool`
     func dd_Bool() -> Bool {
         let trimmed = self.trimmingCharacters(in: .whitespacesAndNewlines)

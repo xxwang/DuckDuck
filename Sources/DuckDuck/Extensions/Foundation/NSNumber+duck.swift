@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - 方法
-public extension DDExtension where Base: NSNumber {
+public extension NSNumber {
     /// 按指定样式格式化数字
     /// - Parameters:
     ///   - style: 样式
@@ -17,11 +17,11 @@ public extension DDExtension where Base: NSNumber {
     ///   - minDecimalPlaces: 小数点后最少保留位数
     ///   - maxDecimalPlaces: 小数点后最大保留位数
     /// - Returns: 结果字符串
-    func formatter(style: NumberFormatter.Style = .none,
-                   separator: String = ",",
-                   mode: NumberFormatter.RoundingMode = .halfEven,
-                   minDecimalPlaces: Int = 0,
-                   maxDecimalPlaces: Int = 0) -> String?
+    func dd_formatter(style: NumberFormatter.Style = .none,
+                      separator: String = ",",
+                      mode: NumberFormatter.RoundingMode = .halfEven,
+                      minDecimalPlaces: Int = 0,
+                      maxDecimalPlaces: Int = 0) -> String?
     {
         let formater = NumberFormatter()
         // 样式
@@ -35,6 +35,6 @@ public extension DDExtension where Base: NSNumber {
         // 最大位数
         formater.maximumFractionDigits = maxDecimalPlaces
 
-        return formater.string(from: self.base)
+        return formater.string(from: self)
     }
 }

@@ -7,19 +7,11 @@
 
 import UIKit
 
-// MARK: - 计算属性
-public extension DDExtension where Base: NSTextAttachment {
+// MARK: - 类型转换
+public extension NSTextAttachment {
     /// 使用附件创建一个属性字符串
-    var as2NSAttributedString: NSAttributedString {
-        return NSAttributedString(attachment: self.base)
-    }
-}
-
-// MARK: - Defaultable
-extension NSTextAttachment: Defaultable {
-    public typealias Associatedtype = NSTextAttachment
-    @objc open class func `default`() -> Associatedtype {
-        return NSTextAttachment()
+    func dd_NSAttributedString() -> NSAttributedString {
+        return NSAttributedString(attachment: self)
     }
 }
 

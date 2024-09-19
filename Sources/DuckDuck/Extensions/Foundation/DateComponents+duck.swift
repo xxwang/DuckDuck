@@ -7,8 +7,6 @@
 
 import Foundation
 
-extension DateComponents: DDExtensionable {}
-
 // MARK: - 链式语法
 public extension DateComponents {
     /// 设置日历对象

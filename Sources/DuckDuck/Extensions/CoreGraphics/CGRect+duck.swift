@@ -34,7 +34,7 @@ public extension CGRect {
 }
 
 // MARK: - 方法
-public extension  CGRect {
+public extension CGRect {
     /// 通过`目标尺寸`及`锚点`来调整一个`CGRect`
     ///
     ///     (0, 0)左上角,(1, 1)右下角

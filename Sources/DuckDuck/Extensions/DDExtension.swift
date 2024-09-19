@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 // MARK: - DDable
-public protocol DDExtensionable {}
-public extension DDExtensionable {
+public protocol DDExtensionable1 {}
+public extension DDExtensionable1 {
     /// 作用于实例
-    var dd: DDExtension<Self> {
-        return DDExtension(self)
+    var dd: DDExtension1<Self> {
+        return DDExtension1(self)
     }
 
     /// 作用于类型
-    static var dd: DDExtension<Self>.Type {
-        return DDExtension<Self>.self
+    static var dd: DDExtension1<Self>.Type {
+        return DDExtension1<Self>.self
     }
 }
 
 // MARK: - DDExtension
-public class DDExtension<Base> {
+public class DDExtension1<Base> {
     var base: Base
 
     init(_ base: Base) {
@@ -32,4 +32,4 @@ public class DDExtension<Base> {
 }
 
 // MARK: - 继承DDExtensionable的类型
-extension NSObject: DDExtensionable {}
+extension NSObject: DDExtensionable1 {}

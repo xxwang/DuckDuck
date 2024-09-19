@@ -24,14 +24,6 @@ public extension CAGradientLayer {
     }
 }
 
-// MARK: - Defaultable
-public extension CAGradientLayer {
-    typealias Associatedtype = CAGradientLayer
-    override open class func `default`() -> Associatedtype {
-        return CAGradientLayer()
-    }
-}
-
 // MARK: - 链式语法
 public extension CAGradientLayer {
     /// 设置渐变颜色数组

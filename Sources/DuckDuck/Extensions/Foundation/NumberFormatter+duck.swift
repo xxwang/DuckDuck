@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - 静态方法
-public extension DDExtension where Base: NumberFormatter {
+public extension NumberFormatter {
     /// 将`Float`类型格式化为本地字符串
     /// - Parameters:
     ///   - value: `Float`数值
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func numberFormatting(value: Float, style: NumberFormatter.Style = .none) -> String {
+    static func dd_numberFormatting(value: Float, style: NumberFormatter.Style = .none) -> String {
         return NumberFormatter.localizedString(from: NSNumber(value: value), number: style)
     }
 
@@ -23,7 +23,7 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - value: `Double`数值
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func numberFormatting(value: Double, style: NumberFormatter.Style = .none) -> String {
+    static func dd_numberFormatting(value: Double, style: NumberFormatter.Style = .none) -> String {
         return NumberFormatter.localizedString(from: NSNumber(value: value), number: style)
     }
 
@@ -32,7 +32,7 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - value: `String`数值
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func stringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
+    static func dd_stringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
         guard let number = NumberFormatter().number(from: value) else { return nil }
         return NumberFormatter.localizedString(from: number, number: style)
     }
@@ -42,7 +42,7 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - value: `String`数值
     ///   - numberFormatter: 格式化对象
     /// - Returns: 结果字符串
-    static func customFormatter(value: String, numberFormatter: NumberFormatter) -> String? {
+    static func dd_customFormatter(value: String, numberFormatter: NumberFormatter) -> String? {
         guard let number = NumberFormatter().number(from: value) else { return nil }
         guard let formatValue = numberFormatter.string(from: number) else { return nil }
         return formatValue
@@ -55,17 +55,17 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - size: 分割位数
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func groupingSeparatorAndSize(value: String,
-                                         separator: String,
-                                         size: Int,
-                                         style: NumberFormatter.Style = .none) -> String?
+    static func dd_groupingSeparatorAndSize(value: String,
+                                            separator: String,
+                                            size: Int,
+                                            style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
         numberFormatter.usesGroupingSeparator = true
         numberFormatter.groupingSeparator = separator
         numberFormatter.groupingSize = size
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 
     /// 为`String`数值设置`格式宽度`及`填充符`和`填充位置`
@@ -76,18 +76,18 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - paddingPosition: 填充的位置
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func formatWidthPaddingCharacterAndPosition(value: String,
-                                                       formatWidth: Int,
-                                                       paddingCharacter: String,
-                                                       paddingPosition: NumberFormatter.PadPosition = .beforePrefix,
-                                                       style: NumberFormatter.Style = .none) -> String?
+    static func dd_formatWidthPaddingCharacterAndPosition(value: String,
+                                                          formatWidth: Int,
+                                                          paddingCharacter: String,
+                                                          paddingPosition: NumberFormatter.PadPosition = .beforePrefix,
+                                                          style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
         numberFormatter.formatWidth = formatWidth
         numberFormatter.paddingCharacter = paddingCharacter
         numberFormatter.paddingPosition = paddingPosition
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 
     /// 为`String`数值设置`最大整数位数`和`最小整数位数`
@@ -97,16 +97,16 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - minimumIntegerDigits: 最小整数位数
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func maximumIntegerDigitsAndMinimumIntegerDigits(value: String,
-                                                            maximumIntegerDigits: Int,
-                                                            minimumIntegerDigits: Int,
-                                                            style: NumberFormatter.Style = .none) -> String?
+    static func dd_maximumIntegerDigitsAndMinimumIntegerDigits(value: String,
+                                                               maximumIntegerDigits: Int,
+                                                               minimumIntegerDigits: Int,
+                                                               style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
         numberFormatter.maximumIntegerDigits = maximumIntegerDigits
         numberFormatter.minimumIntegerDigits = minimumIntegerDigits
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 
     /// 为`String`数值设置`最大小数位数`和`最小小数位数`
@@ -115,14 +115,14 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - maximumFractionDigits: 最大小数位数
     ///   - minimumFractionDigits: 最小小数位数
     /// - Returns: 结果字符串
-    static func maximumFractionDigitsAndMinimumFractionDigits(value: String,
-                                                              maximumFractionDigits: Int,
-                                                              minimumFractionDigits: Int) -> String?
+    static func dd_maximumFractionDigitsAndMinimumFractionDigits(value: String,
+                                                                 maximumFractionDigits: Int,
+                                                                 minimumFractionDigits: Int) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = maximumFractionDigits
         numberFormatter.minimumFractionDigits = minimumFractionDigits
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 
     /// 为`String`数值设置`前缀`和`后缀`
@@ -132,16 +132,16 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - positiveSuffix: 自定义后缀
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func maximumIntegerDigitsAndMinimumIntegerDigits(value: String,
-                                                            positivePrefix: String,
-                                                            positiveSuffix: String,
-                                                            style: NumberFormatter.Style = .none) -> String?
+    static func dd_maximumIntegerDigitsAndMinimumIntegerDigits(value: String,
+                                                               positivePrefix: String,
+                                                               positiveSuffix: String,
+                                                               style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
         numberFormatter.positivePrefix = positivePrefix
         numberFormatter.positiveSuffix = positiveSuffix
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 
     /// 为`String`数值设置`自定义格式化样式`
@@ -150,13 +150,13 @@ public extension DDExtension where Base: NumberFormatter {
     ///   - positiveFormat: 自定义格式化样式`###,###.##`
     ///   - style: 格式
     /// - Returns: 结果字符串
-    static func positiveFormat(value: String,
-                               positiveFormat: String,
-                               style: NumberFormatter.Style = .none) -> String?
+    static func dd_positiveFormat(value: String,
+                                  positiveFormat: String,
+                                  style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
         numberFormatter.positiveFormat = positiveFormat
-        return customFormatter(value: value, numberFormatter: numberFormatter)
+        return dd_customFormatter(value: value, numberFormatter: numberFormatter)
     }
 }

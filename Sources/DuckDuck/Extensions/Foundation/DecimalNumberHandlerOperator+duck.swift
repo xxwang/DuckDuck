@@ -7,8 +7,6 @@
 
 import Foundation
 
-extension DecimalNumberHandlerOperator: DDExtensionable {}
-
 // MARK: - NSDecimalNumberHandler操作符
 public enum DecimalNumberHandlerOperator: String {
     /// 加法
@@ -22,22 +20,22 @@ public enum DecimalNumberHandlerOperator: String {
 }
 
 // MARK: - 静态方法
-public extension DDExtension where Base: NSDecimalNumberHandler {
+public extension NSDecimalNumberHandler {
     /// 简化数字计算操作
     /// - Parameters:
     ///   - operator: 操作符
     ///   - valueA: 数字1
     ///   - valueB: 数字2
     /// - Returns: 计算结果
-    static func calculation(operator: DecimalNumberHandlerOperator,
-                            valueA: Any,
-                            valueB: Any) -> NSDecimalNumber
+    static func dd_calculation(operator: DecimalNumberHandlerOperator,
+                               valueA: Any,
+                               valueB: Any) -> NSDecimalNumber
     {
-        return self.decimalNumberCalculate(valueA: valueA,
-                                           valueB: valueB,
-                                           operator: `operator`,
-                                           roundingMode: .down,
-                                           scale: 30)
+        return self.dd_decimalNumberCalculate(valueA: valueA,
+                                              valueB: valueB,
+                                              operator: `operator`,
+                                              roundingMode: .down,
+                                              scale: 30)
     }
 
     /// 向下取整
@@ -45,12 +43,12 @@ public extension DDExtension where Base: NSDecimalNumberHandler {
     ///   - valueA: 被除数
     ///   - valueB: 除数
     /// - Returns: 计算结果
-    static func intFloor(valueA: Any, valueB: Any) -> Int {
-        return self.decimalNumberCalculate(valueA: valueA,
-                                           valueB: valueB,
-                                           operator: .div,
-                                           roundingMode: .down,
-                                           scale: 0).intValue
+    static func dd_intFloor(valueA: Any, valueB: Any) -> Int {
+        return self.dd_decimalNumberCalculate(valueA: valueA,
+                                              valueB: valueB,
+                                              operator: .div,
+                                              roundingMode: .down,
+                                              scale: 0).intValue
     }
 
     /// 判断一个数字是否可以被另一个数字整除
@@ -58,12 +56,12 @@ public extension DDExtension where Base: NSDecimalNumberHandler {
     ///   - valueA: 被除数
     ///   - valueB: 除数
     /// - Returns: 判断结果
-    static func isDivisible(valueA: Any, valueB: Any) -> Bool {
-        let value = self.decimalNumberCalculate(valueA: valueA,
-                                                valueB: valueB,
-                                                operator: .div,
-                                                roundingMode: .down,
-                                                scale: 3).stringValue
+    static func dd_isDivisible(valueA: Any, valueB: Any) -> Bool {
+        let value = self.dd_decimalNumberCalculate(valueA: valueA,
+                                                   valueB: valueB,
+                                                   operator: .div,
+                                                   roundingMode: .down,
+                                                   scale: 3).stringValue
         // TODO: -
 //        let values = value.dd.split(with: ".")
 //        guard values.count > 1 else { return true }
@@ -84,15 +82,15 @@ public extension DDExtension where Base: NSDecimalNumberHandler {
     ///   - underflow: 下溢错误处理
     ///   - divideByZero: 除以0的错误处理
     /// - Returns: 计算结果
-    static func decimalNumberCalculate(valueA: Any,
-                                       valueB: Any,
-                                       operator: DecimalNumberHandlerOperator,
-                                       roundingMode: NSDecimalNumber.RoundingMode,
-                                       scale: Int16,
-                                       raiseOnExactness exact: Bool = false,
-                                       raiseOnOverflow overflow: Bool = false,
-                                       raiseOnUnderflow underflow: Bool = false,
-                                       raiseOnDivideByZero divideByZero: Bool = false) -> NSDecimalNumber
+    static func dd_decimalNumberCalculate(valueA: Any,
+                                          valueB: Any,
+                                          operator: DecimalNumberHandlerOperator,
+                                          roundingMode: NSDecimalNumber.RoundingMode,
+                                          scale: Int16,
+                                          raiseOnExactness exact: Bool = false,
+                                          raiseOnOverflow overflow: Bool = false,
+                                          raiseOnUnderflow underflow: Bool = false,
+                                          raiseOnDivideByZero divideByZero: Bool = false) -> NSDecimalNumber
     {
         let amountHandler = NSDecimalNumberHandler(
             roundingMode: roundingMode,

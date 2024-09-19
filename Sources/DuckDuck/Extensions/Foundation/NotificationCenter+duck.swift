@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - 静态方法
-public extension DDExtension where Base: NotificationCenter {
+public extension NotificationCenter {
     /// 发送通知
     /// - Parameters:
     ///   - name: 通知名称
     ///   - object: 对象
     ///   - userInfo: 信息字典
-    static func post(_ name: Notification.Name, object: Any? = nil, userInfo: [AnyHashable: Any]? = nil) {
-        DispatchQueue.dd.async_on_main {
+    static func dd_post(_ name: Notification.Name, object: Any? = nil, userInfo: [AnyHashable: Any]? = nil) {
+        DispatchQueue.dd_async_main {
             NotificationCenter.default.post(name: name, object: object, userInfo: userInfo)
         }
     }
@@ -26,8 +26,8 @@ public extension DDExtension where Base: NotificationCenter {
     ///   - selector: 响应方法
     ///   - name: 通知名称
     ///   - object: 对象
-    static func addObserver(_ observer: Any, selector: Selector, name: Notification.Name, object: Any? = nil) {
-        DispatchQueue.dd.async_on_main {
+    static func dd_addObserver(_ observer: Any, selector: Selector, name: Notification.Name, object: Any? = nil) {
+        DispatchQueue.dd_async_main {
             NotificationCenter.default.addObserver(observer, selector: selector, name: name, object: object)
         }
     }
@@ -37,7 +37,7 @@ public extension DDExtension where Base: NotificationCenter {
     ///   - observer: 要移除的监听者
     ///   - name: 通知名称
     ///   - object: 对象
-    static func removeObserver(_ observer: Any, name: Notification.Name? = nil, object: Any? = nil) {
+    static func dd_removeObserver(_ observer: Any, name: Notification.Name? = nil, object: Any? = nil) {
         guard let name else { // 移除全部
             NotificationCenter.default.removeObserver(observer)
             return
@@ -53,7 +53,7 @@ public extension DDExtension where Base: NotificationCenter {
 
     /// 移除指定监听者的所有通知
     /// - Parameter observer: 监听者
-    static func removeAllObserver(_ observer: Any) {
+    static func dd_removeAllObserver(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer)
     }
 }

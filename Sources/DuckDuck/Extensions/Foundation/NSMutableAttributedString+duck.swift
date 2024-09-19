@@ -7,20 +7,11 @@
 
 import UIKit
 
-// MARK: - 计算属性
-public extension DDExtension where Base == NSMutableAttributedString {
-    /// 可变字符串转不可变字符串
-    var as2NSAttributedString: NSAttributedString {
-        return self.base
-    }
-}
-
-// MARK: - Defaultable
+// MARK: - 类型
 public extension NSMutableAttributedString {
-    typealias Associatedtype = NSMutableAttributedString
-
-    override open class func `default`() -> Associatedtype {
-        return NSMutableAttributedString()
+    /// 可变字符串转不可变字符串
+    func dd_NSAttributedString() -> NSAttributedString {
+        return self
     }
 }
 
@@ -31,7 +22,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_string(_ string: String) -> Self {
-        self.dd_attributedString(string.dd.as2NSAttributedString)
+        self.dd_attributedString(string.dd_NSAttributedString())
         return self
     }
 
@@ -62,7 +53,7 @@ public extension NSMutableAttributedString {
     @discardableResult
     func dd_font(_ font: UIFont?, for range: NSRange? = nil) -> Self {
         if let font {
-            let range = range ?? self.dd.fullNSRange
+            let range = range ?? self.dd_fullNSRange()
             return self.dd_addAttributes([NSAttributedString.Key.font: font], for: range)
         }
         return self
@@ -75,7 +66,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_wordSpacing(_ wordSpacing: CGFloat, for range: NSRange? = nil) -> Self {
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
         self.dd_addAttributes([.kern: wordSpacing], for: range)
         return self
     }
@@ -88,7 +79,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_lineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left, for range: NSRange? = nil) -> Self {
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
@@ -103,7 +94,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_foregroundColor(_ color: UIColor, for range: NSRange? = nil) -> Self {
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
         return self.dd_addAttributes([NSAttributedString.Key.foregroundColor: color], for: range)
     }
 
@@ -115,7 +106,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_underline(_ color: UIColor, stytle: NSUnderlineStyle = .single, for range: NSRange? = nil) -> Self {
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
 
         let lineStytle = NSNumber(value: Int8(stytle.rawValue))
         return self.dd_addAttributes([
@@ -141,7 +132,7 @@ public extension NSMutableAttributedString {
         } else {
             attributes[NSAttributedString.Key.strikethroughStyle] = 0
         }
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
         return self.dd_addAttributes(attributes, for: range)
     }
 
@@ -152,7 +143,7 @@ public extension NSMutableAttributedString {
     func dd_firstLineHeadIndent(_ indent: CGFloat) -> Self {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = indent
-        return self.dd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: self.dd.fullNSRange)
+        return self.dd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: self.dd_fullNSRange())
     }
 
     /// 设置文字倾斜
@@ -162,7 +153,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_obliqueness(_ obliqueness: Float = 0, for range: NSRange? = nil) -> Self {
-        let range = range ?? self.dd.fullNSRange
+        let range = range ?? self.dd_fullNSRange()
         return self.dd_addAttributes([NSAttributedString.Key.obliqueness: obliqueness], for: range)
     }
 
@@ -199,7 +190,7 @@ public extension NSMutableAttributedString {
     @discardableResult
     func dd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange? = nil) -> Self {
         for name in attributes.keys {
-            self.addAttribute(name, value: attributes[name] ?? "", range: range ?? self.dd.fullNSRange)
+            self.addAttribute(name, value: attributes[name] ?? "", range: range ?? self.dd_fullNSRange())
         }
         return self
     }
@@ -211,7 +202,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`
     @discardableResult
     func dd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for text: String) -> Self {
-        let ranges = self.dd.nsRanges(with: [text])
+        let ranges = self.dd_NSRanges(with: [text])
         if !ranges.isEmpty {
             for name in attributes.keys {
                 for range in ranges {
