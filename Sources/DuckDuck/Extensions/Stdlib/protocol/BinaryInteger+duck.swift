@@ -126,6 +126,41 @@ public extension BinaryInteger {
         }
         return result.reversed()
     }
+
+    /// `byte(字节)`转换存储单位
+    /// - Returns: `String`单位大小
+    func dd_storeUnit() -> String {
+        var value = self.dd_Double()
+        var index = 0
+        let units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        while value > 1024 {
+            value /= 1024
+            index += 1
+        }
+        return String(format: "%4.2f %@", value, units[index])
+    }
+
+    /// 数字转罗马数字
+    /// - Returns: `String?`罗马数字
+    func dd_romanNumeral() -> String? {
+        guard self > 0 else { return nil }
+
+        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+
+        var romanValue = ""
+        var startingValue = self.dd_Int()
+
+        for (index, romanChar) in romanValues.enumerated() {
+            let arabicValue = arabicValues[index]
+            let div = startingValue / arabicValue
+            for _ in 0 ..< div {
+                romanValue.append(romanChar)
+            }
+            startingValue -= arabicValue * div
+        }
+        return romanValue
+    }
 }
 
 // MARK: - 方法
@@ -163,5 +198,46 @@ public extension BinaryInteger {
     /// - Returns: `ClosedRange<Int>`
     func dd_closedRange(to: some BinaryInteger) -> ClosedRange<Int> {
         return self.dd_Int() ... to.dd_Int()
+    }
+
+    /// 秒转换成播放时间条的格式
+    /// - Parameters:
+    ///   - component:格式类型`nil`为默认类型
+    /// - Returns:返回时间条
+    func dd_mediaTimeString(component: Calendar.Component? = nil) -> String {
+        if self <= 0 { return "00:00" }
+
+        // 秒
+        let second = self.dd_Int() % 60
+        if component == .second {
+            return String(format: "%02d", self.dd_Int())
+        }
+
+        // 分钟
+        var minute = Int(self / 60)
+        if component == .minute {
+            return String(format: "%02d:%02d", minute, second)
+        }
+
+        // 小时
+        var hour = 0
+        if minute >= 60 {
+            hour = Int(minute / 60)
+            minute = minute - hour * 60
+        }
+
+        if component == .hour {
+            return String(format: "%02d:%02d:%02d", hour, minute, second)
+        }
+
+        // normal 类型
+        if hour > 0 {
+            return String(format: "%02d:%02d:%02d", hour, minute, second)
+        }
+
+        if minute > 0 {
+            return String(format: "%02d:%02d", minute, second)
+        }
+        return String(format: "%02d", second)
     }
 }

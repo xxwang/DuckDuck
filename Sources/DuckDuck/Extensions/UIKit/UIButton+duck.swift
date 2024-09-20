@@ -150,8 +150,8 @@ extension UIButton: AssociatedEventBlock {
     public typealias T = UIButton
 
     public var dd_eventBlock: DDEventBlock? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? DDEventBlock }
-        set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
+        get { AssociatedObject.get(self, &DDAssociateKeys.CallbackKey) as? DDEventBlock }
+        set { AssociatedObject.set(self, &DDAssociateKeys.CallbackKey, newValue) }
     }
 
     @objc func dd_tapAction(_ button: UIButton) {
@@ -164,14 +164,14 @@ public extension UIButton {
     /// 扩大UIButton的点击区域,向四周扩展10像素的点击范围
     /// - Parameter size:向四周扩展像素的点击范围
     func dd_expandSize(size: CGFloat = 10) {
-        AssociatedObject.set(self, &AssociateKeys.ExpandSizeKey, size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+        AssociatedObject.set(self, &DDAssociateKeys.ExpandSizeKey, size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
 }
 
 // MARK: - 触摸范围
 public extension UIButton {
     private func dd_expandRect() -> CGRect {
-        let expandSize = AssociatedObject.get(self, &AssociateKeys.ExpandSizeKey)
+        let expandSize = AssociatedObject.get(self, &DDAssociateKeys.ExpandSizeKey)
         if expandSize != nil {
             return CGRect(
                 x: bounds.origin.x - (expandSize as! CGFloat),
@@ -349,8 +349,8 @@ public extension UIButton {
     /// - Returns: `Self`
     @discardableResult
     func dd_tapBlock(_ block: ((_ button: UIButton?) -> Void)?) -> Self {
-        self.block = block
-        self.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+        self.dd_eventBlock = block
+        self.addTarget(self, action: #selector(dd_tapAction), for: .touchUpInside)
         return self
     }
 

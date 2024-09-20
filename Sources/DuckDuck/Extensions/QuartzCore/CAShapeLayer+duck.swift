@@ -8,6 +8,12 @@
 import QuartzCore
 import UIKit
 
+public extension CAShapeLayer {
+    static func `default`() -> CAShapeLayer {
+        return CAShapeLayer()
+    }
+}
+
 // MARK: - 链式语法
 public extension CAShapeLayer {
     /// 设置路径

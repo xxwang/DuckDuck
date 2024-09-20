@@ -141,7 +141,7 @@ public extension UIBarButtonItem {
     /// - Returns:`Self`
     @discardableResult
     func dd_callback(_ block: ((UIBarButtonItem?) -> Void)?) -> Self {
-        self.eventBlock = block
+        self.dd_eventBlock = block
         self.dd_addTarget(self, action: #selector(eventHandler(_:)))
         return self
     }

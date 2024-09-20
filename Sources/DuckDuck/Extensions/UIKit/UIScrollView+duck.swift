@@ -7,6 +7,102 @@
 
 import UIKit
 
+// MARK: - 方法
+public extension UIScrollView {
+    /// 滚动视图的当前可见区域
+    func dd_visibleRect() -> CGRect {
+        let contentWidth = contentSize.width - contentOffset.x
+        let contentHeight = contentSize.height - contentOffset.y
+        return CGRect(
+            origin: contentOffset,
+            size: CGSize(width: Swift.min(Swift.min(bounds.size.width, contentSize.width), contentWidth),
+                         height: Swift.min(Swift.min(bounds.size.height, contentSize.height), contentHeight))
+        )
+    }
+}
+
+// MARK: - 截图
+public extension UIScrollView {
+    /// 获取`ScrollView`当前可见的部分的快照`截图`
+    override func dd_captureScreenshot() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
+        defer { UIGraphicsEndImageContext() }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        let previousFrame = frame
+        frame = CGRect(origin: frame.origin, size: contentSize)
+        layer.render(in: context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        frame = previousFrame
+
+        return image
+    }
+
+    /// 截取整个`ScrollView``contentSize`的快照(截图)
+    /// - Parameter completion:完成回调
+    func dd_captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
+        // 放一个假的封面
+        let snapshotView = snapshotView(afterScreenUpdates: true)
+        snapshotView?.frame = CGRect(
+            x: frame.minX,
+            y: frame.minY,
+            width: (snapshotView?.frame.width)!,
+            height: (snapshotView?.frame.height)!
+        )
+        superview?.addSubview(snapshotView!)
+
+        // 基的原点偏移
+        let originOffset = contentOffset
+        // 计算页数
+        let page = floorf(Float(contentSize.height / bounds.height))
+        // 打开位图上下文大小为截图的大小
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, UIScreen.main.scale)
+
+        // 这个方法是一个绘图,里面可能有递归调用
+        dd_screenshot(index: 0, maxIndex: page.dd_Int()) {
+            let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            // 设置原点偏移
+            self.setContentOffset(originOffset, animated: false)
+            // 移除封面
+            snapshotView?.removeFromSuperview()
+            // 获取 snapShotContentScroll 时的回调图像
+            completion(screenShotImage)
+        }
+    }
+
+    /// 根据偏移量和页数绘制
+    /// - Parameters:
+    ///   - index:当前要绘制的页码索引
+    ///   - maxIndex:最大页码索引
+    ///   - callback:完成回调
+    func dd_screenshot(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
+        setContentOffset(
+            CGPoint(
+                x: 0,
+                y: index.dd_CGFloat() * frame.size.height
+            ),
+            animated: false
+        )
+        let splitFrame = CGRect(
+            x: 0,
+            y: index.dd_CGFloat() * frame.size.height,
+            width: bounds.width,
+            height: bounds.height
+        )
+
+        DispatchQueue.dd_delay_execute(delay: 0.3) {
+            self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
+            if index < maxIndex {
+                self.dd_screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)
+            } else {
+                callback()
+            }
+        }
+    }
+}
+
 // MARK: - 链式语法
 public extension UIScrollView {
     /// 设置代理

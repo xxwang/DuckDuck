@@ -1,5 +1,5 @@
 //
-//  Date+duck-未完成.swift
+//  Date+duck.swift
 //
 //
 //  Created by 王哥 on 2024/6/21.
@@ -172,13 +172,13 @@ public extension Date {
     }
 
     /// 格林尼治标准时间转换为当地时间
-    var dd_localDate: Date {
+    func dd_localDate() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return self.addingTimeInterval(secondFromGMT)
     }
 
     /// 当地时间转换为格林尼治标准时间
-    var dd_GMTDate: Date {
+    func dd_GMTDate() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return self.addingTimeInterval(-secondFromGMT)
     }
@@ -186,7 +186,7 @@ public extension Date {
     /// 获取当前日期的格林尼治时间戳
     ///
     /// - Note: 单位秒
-    var dd_secondStampFromGMT: Int {
+    func dd_secondStampFromGMT() -> Int {
         let offset = TimeZone.current.secondsFromGMT(for: self)
         return Int(self.timeIntervalSince1970) - offset
     }
@@ -194,19 +194,19 @@ public extension Date {
     /// 获取当前日期的时间戳
     ///
     /// - Note: 单位秒
-    var dd_secondStamp: Double {
+    func dd_secondStamp() -> Double {
         return self.timeIntervalSince1970
     }
 
     /// 获取当前日期的时间戳
     ///
     /// - Note: 单位毫秒
-    var dd_milliStamp: Int {
+    func dd_milliStamp() -> Int {
         return Int(self.timeIntervalSince1970 * 1000)
     }
 
     /// 获取时间与当前时间之间的间隔差距
-    var dd_callTimeAfterNow: String {
+    func dd_callTimeAfterNow() -> String {
         // 获取时间间隔
         let timeInterval = Date().timeIntervalSince(self)
         // 后缀
@@ -242,7 +242,7 @@ public extension Date {
     }
 
     /// 获取当前时区的日期
-    var dd_currentZoneDate: Date {
+    func dd_currentZoneDate() -> Date {
         let date = Date()
         let zone = NSTimeZone.system
         let time = zone.secondsFromGMT(for: date)
@@ -253,11 +253,11 @@ public extension Date {
 
     /// 将日期格式化为`ISO8601`标准的格式
     ///
-    ///     Date().dd_ISO8601String -> "2017-01-12T14:51:29.574Z"
+    ///     Date().dd_ISO8601String() -> "2017-01-12T14:51:29.574Z"
     ///
     /// - Note: `(yyyy-MM-dd'T'HH:mm:ss.SSS)`
     /// - Returns: `ISO8601`标准日期字符串
-    var dd_ISO8601String: String {
+    func dd_ISO8601String() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
@@ -275,7 +275,7 @@ public extension Date {
     ///     date.minute = 44 // "5:44 PM"
     ///     date.dd_nearestFiveMinutes() // "5:45 PM"
     ///
-    var dd_nearestFiveMinutes: Date {
+    func dd_nearestFiveMinutes() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
@@ -288,12 +288,12 @@ public extension Date {
     ///
     ///     let date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
-    ///     date.dd_nearestTenMinutes // "5:30 PM"
+    ///     date.dd_nearestTenMinutes() // "5:30 PM"
     ///
     ///     date.minute = 48 // "5:48 PM"
-    ///     date.dd_nearestTenMinutes // "5:50 PM"
+    ///     date.dd_nearestTenMinutes() // "5:50 PM"
     ///
-    var dd_nearestTenMinutes: Date {
+    func dd_nearestTenMinutes() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute? = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
@@ -306,12 +306,12 @@ public extension Date {
     ///
     ///     let date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
-    ///     date.dd_nearestQuarterHour // "5:30 PM"
+    ///     date.dd_nearestQuarterHour() // "5:30 PM"
     ///
     ///     date.minute = 40 // "5:40 PM"
-    ///     date.dd_nearestQuarterHour // "5:45 PM"
+    ///     date.dd_nearestQuarterHour() // "5:45 PM"
     ///
-    var dd_nearestQuarterHour: Date {
+    func dd_nearestQuarterHour() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
@@ -324,13 +324,13 @@ public extension Date {
     ///
     ///     let date = Date() // "6:07 PM"
     ///     date.minute = 41 // "6:41 PM"
-    ///     date.dd_nearestHalfHour // "6:30 PM"
+    ///     date.dd_nearestHalfHour() // "6:30 PM"
     ///
     ///     date.minute = 51 // "6:51 PM"
-    ///     date.dd_nearestHalfHour // "7:00 PM"
+    ///     date.dd_nearestHalfHour() // "7:00 PM"
     ///
     /// - Returns: 结果`Date`
-    var dd_nearestHalfHour: Date {
+    func dd_nearestHalfHour() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
@@ -342,12 +342,12 @@ public extension Date {
     /// 距离当前日期最近的可以被六十分钟(一小时)整除的时间
     ///
     ///     let date = Date() // "6:17 PM"
-    ///     date.dd_nearestHour // "6:00 PM"
+    ///     date.dd_nearestHour() // "6:00 PM"
     ///
     ///     date.minute = 36 // "6:36 PM"
-    ///     date.dd_nearestHour // "7:00 PM"
+    ///     date.dd_nearestHour() // "7:00 PM"
     ///
-    var dd_nearestHour: Date {
+    func dd_nearestHour() -> Date {
         let min = calendar.component(.minute, from: self)
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour]
         let date = calendar.date(from: calendar.dateComponents(components, from: self))!
@@ -361,24 +361,24 @@ public extension Date {
     /// 返回昨天的日期
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
-    ///     let yesterday = date.dd_yesterday // "Oct 2, 2018, 10:57:11"
+    ///     let yesterday = date.dd_yesterday() // "Oct 2, 2018, 10:57:11"
     ///
-    var dd_yesterday: Date {
+    func dd_yesterday() -> Date {
         return calendar.date(byAdding: .day, value: -1, to: self) ?? Date()
     }
 
     /// 返回明天的日期
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
-    ///     let tomorrow = date.dd_tomorrow // "Oct 4, 2018, 10:57:11"
+    ///     let tomorrow = date.dd_tomorrow() // "Oct 4, 2018, 10:57:11"
     ///
-    var dd_tomorrow: Date {
+    func dd_tomorrow() -> Date {
         return calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
     }
 
     /// 获取当前属于哪个年代
     /// - Returns: 结果年代
-    var dd_era: Int {
+    func dd_era() -> Int {
         return calendar.component(.era, from: self)
     }
 
@@ -394,24 +394,24 @@ public extension Date {
     #endif
 
     /// 获取当前日期是在本年中的第几周
-    var dd_weekOfYear: Int {
+    func dd_weekOfYear() -> Int {
         return calendar.component(.weekOfYear, from: self)
     }
 
     /// 获取当前日期在本月中是第几周
-    var dd_weekOfMonth: Int {
+    func dd_weekOfMonth() -> Int {
         return calendar.component(.weekOfMonth, from: self)
     }
 
     /// 获取当前日期是在本周中的第几天
-    var dd_weekday: Int {
+    func dd_weekday() -> Int {
         return calendar.component(.weekday, from: self)
     }
 
     /// 获取当前日期是星期几
     ///
     /// - Note: 中文表示
-    var dd_weekdayAs2String: String {
+    func dd_weekdayAs2String() -> String {
         let weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
         var calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone(identifier: "Asia/Shanghai")
@@ -423,13 +423,13 @@ public extension Date {
     /// 获取当前日期的月份
     ///
     /// - Note: 英文表示
-    var dd_monthAs2String: String {
+    func dd_monthAs2String() -> String {
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
 
     /// 获取现在的日期
-    static var dd_now: Date {
+    static func dd_now() -> Date {
         if #available(iOS 15, *) {
             return Date.now
         } else {
@@ -438,34 +438,34 @@ public extension Date {
     }
 
     /// 获取今天的日期
-    static var dd_todayDate: Date {
+    static func dd_todayDate() -> Date {
         return Date()
     }
 
     /// 获取昨天的日期
-    static var dd_yesterDayDate: Date? {
+    static func dd_yesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())
     }
 
     /// 获取明天的日期
-    static var dd_tomorrowDate: Date? {
+    static func dd_tomorrowDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 1), to: Date())
     }
 
     /// 获取前天的日期
-    static var dd_theDayBeforYesterDayDate: Date? {
+    static func dd_theDayBeforYesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -2), to: Date())
     }
 
     /// 获取后天的日期
-    static var dd_theDayAfterYesterDayDate: Date? {
+    static func dd_theDayAfterYesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 2), to: Date())
     }
 
     /// 获取当前的时间戳
     ///
     /// - Note: 单位`秒`
-    static var dd_secondStamp: String {
+    static func dd_secondStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         return "\(Int(timeInterval))"
     }
@@ -473,7 +473,7 @@ public extension Date {
     /// 获取当前的时间戳
     ///
     /// - Note: 单位`毫秒`
-    static var dd_milliStamp: String {
+    static func dd_milliStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         let millisecond = CLongLong(Darwin.round(timeInterval * 1000))
         return "\(millisecond)"
@@ -481,63 +481,63 @@ public extension Date {
 
     /// 获取当前月份的天数
     /// - Returns: 结果天数
-    static var dd_currentMonthDays: Int {
+    static func dd_currentMonthDays() -> Int {
         let date = Date()
         return self.dd_daysCount(year: date.dd_year, month: date.dd_month)
     }
 
     /// 判断日期是否在未来
-    var dd_isInFuture: Bool {
+    func dd_isInFuture() -> Bool {
         return self > Date()
     }
 
     /// 判断日期是否在过去
-    var dd_isInPast: Bool {
+    func dd_isInPast() -> Bool {
         return self < Date()
     }
 
     /// 判断日期是否在今天
-    var dd_isInToday: Bool {
+    func dd_isInToday() -> Bool {
         return calendar.isDateInToday(self)
     }
 
     /// 判断日期是否在昨天
-    var dd_isInYesterday: Bool {
+    func dd_isInYesterday() -> Bool {
         return calendar.isDateInYesterday(self)
     }
 
     /// 判断日期是否在明天
-    var dd_isInTomorrow: Bool {
+    func dd_isInTomorrow() -> Bool {
         return calendar.isDateInTomorrow(self)
     }
 
     /// 判断日期是否在周末
-    var dd_isInWeekend: Bool {
+    func dd_isInWeekend() -> Bool {
         return calendar.isDateInWeekend(self)
     }
 
     /// 判断日期是否在工作日
-    var dd_isWorkday: Bool {
+    func dd_isWorkday() -> Bool {
         return !calendar.isDateInWeekend(self)
     }
 
     /// 判断日期是否在本周内
-    var dd_isInCurrentWeek: Bool {
+    func dd_isInCurrentWeek() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
     /// 判断日期是否在本月
-    var dd_isInCurrentMonth: Bool {
+    func dd_isInCurrentMonth() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .month)
     }
 
     /// 判断日期是否在本年
-    var dd_isInCurrentYear: Bool {
+    func dd_isInCurrentYear() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .year)
     }
 
     /// 判断日期所在年是否是润年
-    var dd_isLeapYear: Bool {
+    func dd_isLeapYear() -> Bool {
         let year = self.dd_year
         return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))
     }
@@ -598,15 +598,15 @@ public extension Date {
 
     /// 使用格式化枚举格式化日期返回日期字符串
     ///
-    ///     Date().dd_DateString(of:.short) -> "1/12/17"
-    ///     Date().dd_DateString(of:.medium) -> "Jan 12, 2017"
-    ///     Date().dd_DateString(of:.long) -> "January 12, 2017"
-    ///     Date().dd_DateString(of:.full) -> "Thursday, January 12, 2017"
+    ///     Date().dd_dateString(of:.short) -> "1/12/17"
+    ///     Date().dd_dateString(of:.medium) -> "Jan 12, 2017"
+    ///     Date().dd_dateString(of:.long) -> "January 12, 2017"
+    ///     Date().dd_dateString(of:.full) -> "Thursday, January 12, 2017"
     ///
     /// - Note: 只格式化日期
     /// - Parameter style: 日期格式的样式(默认 `.medium`)
     /// - Returns: 日期字符串
-    func dd_DateString(of style: DateFormatter.Style = .medium) -> String {
+    func dd_dateString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = style

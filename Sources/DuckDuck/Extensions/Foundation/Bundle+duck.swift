@@ -79,14 +79,13 @@ public extension Bundle {
     }
 
     /// 获取应用商店的收据信息
-    static var appStoreReceiptInfo: [String: Any] {
-//        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
-//           let data = try? Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped),
-        // TODO: - 待完善
-//           let res = data.jsonObject(for: [String: Any].self)
-//        {
-//            return res
-//        }
+    static var dd_appStoreReceiptInfo: [String: Any] {
+        if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
+           let data = try? Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped),
+           let res = data.dd_jsonObject(for: [String: Any].self)
+        {
+            return res
+        }
         return [:]
     }
 }

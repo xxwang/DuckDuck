@@ -8,7 +8,7 @@
 import UIKit
 
 public extension NSMutableParagraphStyle {
-    func `default`() -> NSMutableParagraphStyle {
+    static func `default`() -> NSMutableParagraphStyle {
         return NSMutableParagraphStyle()
             .dd_hyphenationFactor(1.0)
             .dd_firstLineHeadIndent(0.0)

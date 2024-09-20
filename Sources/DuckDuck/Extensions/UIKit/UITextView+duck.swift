@@ -142,6 +142,102 @@ public extension UITextView {
     }
 }
 
+// MARK: - 占位符Label
+public extension UITextView {
+    /// 设置占位符
+    var dd_placeholder: String? {
+        get { AssociatedObject.get(self, &DDAssociateKeys.placeholder) as? String }
+        set {
+            AssociatedObject.set(self, &DDAssociateKeys.placeholder, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+
+            guard let dd_placeholderLabel else {
+                self.dd_initPlaceholder(dd_placeholder!)
+                return
+            }
+            dd_placeholderLabel.dd_text(dd_placeholder)
+            self.dd_constraintPlaceholder()
+        }
+    }
+
+    /// 占位文本字体
+    var dd_placeholderFont: UIFont? {
+        get {
+            return (AssociatedObject.get(self, &DDAssociateKeys.placeholdFont) as? UIFont).dd_or(.systemFont(ofSize: 13))
+        }
+        set {
+            AssociatedObject.set(self, &DDAssociateKeys.placeholdFont, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            guard let dd_placeholderLabel = self.dd_placeholderLabel else { return }
+            dd_placeholderLabel.dd_font(dd_placeholderFont!)
+            self.dd_constraintPlaceholder()
+        }
+    }
+
+    /// 占位文本的颜色
+    var dd_placeholderColor: UIColor? {
+        get {
+            return (AssociatedObject.get(self, DDAssociateKeys.placeholdColor) as? UIColor).dd_or(.lightGray)
+        }
+        set {
+            AssociatedObject.set(self, DDAssociateKeys.placeholdColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            dd_placeholderLabel?.textColor = dd_placeholderColor
+        }
+    }
+
+    /// 设置占位文本的`Origin`
+    var dd_placeholderOrigin: CGPoint? {
+        get {
+            return (AssociatedObject.get(self, DDAssociateKeys.placeholderOrigin) as? CGPoint).dd_or(.zero)
+        }
+        set {
+            AssociatedObject.set(self, DDAssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            guard let dd_placeholderLabel, let dd_placeholderOrigin else { return }
+            dd_placeholderLabel.frame.origin = dd_placeholderOrigin
+        }
+    }
+}
+
+// MARK: - 私有(占位符)
+private extension UITextView {
+    /// 默认文本
+    var dd_placeholderLabel: UILabel? {
+        set {
+            AssociatedObject.set(self, DDAssociateKeys.placeholderLabel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get { AssociatedObject.get(self, DDAssociateKeys.placeholderLabel) as? UILabel }
+    }
+
+    /// 初始化占位符Label
+    /// - Parameter placeholder:占位符
+    func dd_initPlaceholder(_ placeholder: String) {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dd_textChangeHandler(_:)),
+                                               name: UITextView.textDidChangeNotification,
+                                               object: self)
+
+        self.dd_placeholderLabel = UILabel.default()
+            .dd_text(dd_placeholder)
+            .dd_font(dd_placeholderFont ?? .systemFont(ofSize: 14))
+            .dd_textColor(dd_placeholderColor ?? .gray)
+            .dd_numberOfLines(0)
+            .dd_add2(self)
+            .dd_isHidden(text.count > 0)
+        self.dd_constraintPlaceholder()
+    }
+
+    /// 为占位Label添加约束
+    func dd_constraintPlaceholder() {
+        guard let dd_placeholderLabel else { return }
+        let placeholderSize = dd_placeholderLabel.dd_textSize()
+        dd_placeholderLabel.dd_frame(CGRect(origin: self.dd_placeholderOrigin.dd_or(.zero), size: placeholderSize))
+    }
+
+    /// 文本框输入内容变化通知处理
+    /// - Parameter notification:动态监听
+    @objc func dd_textChangeHandler(_ notification: Notification) {
+        self.dd_placeholderLabel?.dd_isHidden(text.count > 0)
+    }
+}
+
 // MARK: - 链式语法
 public extension UITextView {
     /// 设置是否可以编辑

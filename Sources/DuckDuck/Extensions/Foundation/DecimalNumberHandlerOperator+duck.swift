@@ -62,11 +62,10 @@ public extension NSDecimalNumberHandler {
                                                    operator: .div,
                                                    roundingMode: .down,
                                                    scale: 3).stringValue
-        // TODO: -
-//        let values = value.dd_split(with: ".")
-//        guard values.count > 1 else { return true }
-//        let decimalValue = values[1]
-//        guard decimalValue.count == 1, decimalValue == "0" else { return false }
+        let values = value.dd_split(with: ".")
+        guard values.count > 1 else { return true }
+        let decimalValue = values[1]
+        guard decimalValue.count == 1, decimalValue == "0" else { return false }
         return true
     }
 

@@ -5,7 +5,122 @@
 //  Created by 王哥 on 2024/6/25.
 //
 
+import AudioToolbox
 import UIKit
+
+// MARK: - 构造方法
+public extension UIAlertController {
+    /// 创建 `UIAlertController`
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 详细的信息
+    ///   - titles: 按钮标题数组
+    ///   - style: 弹出样式
+    ///   - tintColor: `UIAlertController`的`tintColor`
+    ///   - highlightedIndex: 高亮按钮索引
+    ///   - completion: 按钮点击回调
+    convenience init(_ title: String? = nil,
+                     message: String? = nil,
+                     titles: [String] = [],
+                     style: UIAlertController.Style = .alert,
+                     tintColor: UIColor? = nil,
+                     highlightedIndex: Int? = nil,
+                     completion: ((Int) -> Void)? = nil)
+    {
+        self.init(title: title, message: message, preferredStyle: style)
+
+        // 设置tintColor
+        if let color = tintColor { view.tintColor = color }
+
+        // 添加选项按钮
+        for (index, title) in titles.enumerated() {
+            let action = UIAlertAction(title: title, style: .default, handler: { _ in
+                completion?(index)
+            })
+            addAction(action)
+
+            // 高亮按钮
+            if let highlightedIndex, index == highlightedIndex { preferredAction = action }
+        }
+    }
+}
+
+// MARK: - 显示弹窗
+public extension UIAlertController {
+    /// 用于在做任意控制器上显示`UIAlertController`(alert样式)
+    /// - Parameters:
+    ///   - title:提示标题
+    ///   - message:提示内容
+    ///   - titles:按钮标题数组
+    ///   - tintColor: `UIAlertController`的`tintColor`
+    ///   - highlightedIndex:高亮按钮索引
+    ///   - completion:完成回调
+    /// - Returns:`UIAlertController`实例
+    @discardableResult
+    static func dd_showAlertController(_ title: String? = nil,
+                                       message: String? = nil,
+                                       titles: [String] = [],
+                                       tintColor: UIColor? = nil,
+                                       highlightedIndex: Int? = nil,
+                                       completion: ((Int) -> Void)? = nil) -> UIAlertController
+    {
+        // 初始化UIAlertController
+        let alertController = UIAlertController(title, message: message, style: .alert, highlightedIndex: highlightedIndex, completion: completion)
+
+        // 弹出UIAlertController
+        UIWindow.dd_rootViewController()?.present(alertController, animated: true, completion: nil)
+
+        return alertController
+    }
+
+    /// 用于在做任意控制器上显示`UIAlertController`(sheet样式)
+    /// - Parameters:
+    ///   - title:提示标题
+    ///   - message:提示内容
+    ///   - titles:按钮标题数组
+    ///   - tintColor: `UIAlertController`的`tintColor`
+    ///   - highlightedIndex:高亮按钮索引
+    ///   - completion:完成回调
+    /// - Returns:`UIAlertController`实例
+    @discardableResult
+    static func dd_showSheetController(_ title: String? = nil,
+                                       message: String? = nil,
+                                       titles: [String] = [],
+                                       tintColor: UIColor? = nil,
+                                       highlightedIndex: Int? = nil,
+                                       completion: ((Int) -> Void)? = nil) -> UIAlertController
+    {
+        // 初始化UIAlertController
+        let alertController = UIAlertController(title, message: message, style: .actionSheet, highlightedIndex: highlightedIndex, completion: completion)
+
+        // 弹出UIAlertController
+        UIWindow.dd_rootViewController()?.present(alertController, animated: true, completion: nil)
+
+        return alertController
+    }
+
+    /// 用于弹起`UIAlertController`实例
+    /// - Parameters:
+    ///   - animated:是否动画
+    ///   - shake:是否震动
+    ///   - deadline:消失时间
+    ///   - completion:完成回调
+    func dd_show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
+        // 弹起UIAlertController实例
+        UIWindow.dd_window()?.rootViewController?.present(self, animated: animated, completion: completion)
+        // 是否震动
+        if shake { AudioServicesPlayAlertSound(kSystemSoundID_Vibrate) }
+
+        // 是否需要自动消失
+        guard let deadline else { return }
+
+        // 根据deadline来让UIAlertController实例消失
+        DispatchQueue.dd_delay_execute(delay: deadline) { [weak self] in
+            guard let self else { return }
+            dismiss(animated: animated, completion: nil)
+        }
+    }
+}
 
 // MARK: - 链式语法
 public extension UIAlertController {

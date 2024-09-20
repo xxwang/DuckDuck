@@ -100,7 +100,7 @@ public extension UICollectionView {
 public extension UICollectionView {
     /// 开启Item移动(添加长按手势)
     func dd_allowMoveItem() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(UICollectionView.longPressGRHandler(_:)))
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(UICollectionView.dd_longPressGRHandler(_:)))
         self.addGestureRecognizer(longPressGestureRecognizer)
     }
 

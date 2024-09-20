@@ -9,6 +9,10 @@ import UIKit
 
 // MARK: - 计算属性
 public extension UILabel {
+    static func `default`() -> UILabel {
+        return UILabel()
+    }
+
     /// 获取字体的大小
     func dd_fontSize() -> CGFloat {
         let context = NSStringDrawingContext()

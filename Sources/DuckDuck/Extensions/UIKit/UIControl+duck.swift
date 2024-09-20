@@ -20,14 +20,14 @@ public extension UIControl {}
 private extension UIControl {
     /// 重复点击限制时间
     var dd_hitTime: Double? {
-        get { AssociatedObject.get(self, &AssociateKeys.HitTimerKey) as? Double }
-        set { AssociatedObject.set(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+        get { AssociatedObject.get(self, &DDAssociateKeys.HitTimerKey) as? Double }
+        set { AssociatedObject.set(self, &DDAssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 点击回调
     var dd_block: ((_ control: UIControl) -> Void)? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? ((_ control: UIControl) -> Void) }
-        set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
+        get { AssociatedObject.get(self, &DDAssociateKeys.CallbackKey) as? ((_ control: UIControl) -> Void) }
+        set { AssociatedObject.set(self, &DDAssociateKeys.CallbackKey, newValue) }
     }
 
     /// 设置指定时长(单位:秒)内不可重复点击

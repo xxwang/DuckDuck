@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - 方法
 public extension UITableView {
     static func `default`() -> UITableView {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -25,6 +26,95 @@ public extension UITableView {
             .dd_contentInsetAdjustmentBehavior(.never)
             .dd_sectionHeaderTopPadding(0)
         return tableView
+    }
+
+    /// 重新加载数据后调用`completion`回调
+    /// - Parameter completion:完成回调
+    func dd_reloadData(_ completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0, animations: {
+            self.reloadData()
+        }, completion: { _ in
+            completion()
+        })
+    }
+}
+
+// MARK: - UITableViewCell复用相关
+public extension UITableView {
+    /// 使用类名注册`UITableViewCell`
+    /// - Parameters:
+    ///   - nib:用于创建`UITableViewCell`的nib文件
+    ///   - name:`UITableViewCell`类型
+    func dd_register(nib: UINib?, withCellClass name: (some UITableViewCell).Type) {
+        register(nib, forCellReuseIdentifier: String(describing: name))
+    }
+
+    /// 注册`UITableViewCell`,使用其对应类的xib文件
+    /// 假设`xib`文件名和cell类具有相同的名称
+    /// - Parameters:
+    ///   - name:`UITableViewCell`类型
+    ///   - bundleClass:`bundle`实例基于的类
+    func dd_register(nibWithCellClass name: (some UITableViewCell).Type, at bundleClass: AnyClass? = nil) {
+        let identifier = String(describing: name)
+        var bundle: Bundle?
+
+        if let bundleName = bundleClass {
+            bundle = Bundle(for: bundleName)
+        }
+
+        self.register(UINib(nibName: identifier, bundle: bundle), forCellReuseIdentifier: identifier)
+    }
+
+    /// 使用类名获取可重用`UITableViewCell`
+    /// - Parameter name:`UITableViewCell`类型
+    /// - Returns:类名关联的`UITableViewCell`对象
+    func dd_dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: String(describing: name)) as? T else {
+            fatalError(
+                "Couldn't find UITableViewCell for \(String(describing: name)), make sure the cell is registered with table view")
+        }
+        return cell
+    }
+
+    /// 使用`类名`和`indexPath`获取可重用`UITableViewCell`
+    /// - Parameters:
+    ///   - name:`UITableViewCell`类型
+    ///   - indexPath:单元格在`tableView`中的位置
+    /// - Returns:类名关联的`UITableViewCell`对象
+    func dd_dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: String(describing: name), for: indexPath) as? T else {
+            fatalError(
+                "Couldn't find UITableViewCell for \(String(describing: name)), make sure the cell is registered with table view")
+        }
+        return cell
+    }
+}
+
+// MARK: - UITableViewHeaderFooterView复用相关
+public extension UITableView {
+    /// 使用类名注册`UITableViewHeaderFooterView`
+    /// - Parameters:
+    ///   - nib:用于创建页眉或页脚视图的`nib`文件
+    ///   - name:`UITableViewHeaderFooterView`类型
+    func dd_register(nib: UINib?, withHeaderFooterViewClass name: (some UITableViewHeaderFooterView).Type) {
+        register(nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
+    }
+
+    /// 使用类名注册`UITableViewHeaderFooterView`
+    /// - Parameter name:`UITableViewHeaderFooterView`类型
+    func dd_register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
+        register(T.self, forHeaderFooterViewReuseIdentifier: String(describing: name))
+    }
+
+    /// 使用类名获取可重用`UITableViewHeaderFooterView`
+    /// - Parameter name:`UITableViewHeaderFooterView`类型
+    /// - Returns:类名关联的`UITableViewHeaderFooterView`对象
+    func dd_dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
+        guard let headerFooterView = dequeueReusableHeaderFooterView(withIdentifier: String(describing: name)) as? T else {
+            fatalError(
+                "Couldn't find UITableViewHeaderFooterView for \(String(describing: name)), make sure the view is registered with table view")
+        }
+        return headerFooterView
     }
 }
 
