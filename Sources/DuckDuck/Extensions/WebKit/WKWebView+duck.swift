@@ -7,6 +7,27 @@
 
 import WebKit
 
+// MARK: - 方法
+public extension WKWebView {
+    /// 文字大小调整
+    /// - Parameter ratio: 比例
+    func dd_regulateTextSize(_ ratio: CGFloat) {
+        let script = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '\(ratio)%'"
+        self.dd_execute(script: script)
+    }
+
+    /// 适配手机(网页显示不正常)
+    func dd_regulateMobile() {
+        let script = """
+        var meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        meta.setAttribute('content', 'width=device-width');
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        """
+        self.dd_execute(script: script)
+    }
+}
+
 // MARK: - 链式语法
 public extension WKWebView {
     /// 设置导航代理

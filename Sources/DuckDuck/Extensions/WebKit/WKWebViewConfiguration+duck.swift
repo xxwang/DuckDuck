@@ -10,7 +10,7 @@ import WebKit
 public extension WKWebViewConfiguration {
     /// 默认配置
     /// - Returns: `WKWebViewConfiguration`
-    func `default`() -> WKWebViewConfiguration {
+    static func `default`() -> WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.selectionGranularity = .dynamic

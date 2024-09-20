@@ -7,7 +7,9 @@
 
 import UIKit
 
-public class VersionAdapter {
+public class VersionAdapter {}
+
+public extension VersionAdapter {
     /// 适配项目中所有`UIView`
     @available(iOS 12.0, *)
     static func viewAppearance(userInterfaceStyle: UIUserInterfaceStyle = .light) {
