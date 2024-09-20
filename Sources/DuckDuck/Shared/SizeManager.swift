@@ -8,10 +8,12 @@
 import UIKit
 
 // MARK: - SizeManager
-public struct SizeManager {
+public class SizeManager {
     /// 设计图屏幕尺寸
     fileprivate static var sketchSize = CGSize(width: 375, height: 812)
+}
 
+public extension SizeManager {
     /// 设置设计图尺寸
     static func setupSketch(size: CGSize) {
         self.sketchSize = size
