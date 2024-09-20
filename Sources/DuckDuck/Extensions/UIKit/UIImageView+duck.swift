@@ -74,8 +74,8 @@ public extension UIImageView {
     func dd_loadGifWith(imageNamed: String) {
         DispatchQueue.dd_async_global {
             let image = UIImage.dd_loadImageWithGif(name: imageNamed)
-            DispatchQueue.dd.async_on_main {
-                self.base.image = image
+            DispatchQueue.dd_async_main {
+                self.image = image
             }
         }
     }
@@ -85,8 +85,8 @@ public extension UIImageView {
     func dd_loadGifWith(asset: String) {
         DispatchQueue.dd_async_global {
             let image = UIImage.dd_loadImageWithGif(asset: asset)
-            DispatchQueue.dd.async_on_main {
-                self.base.image = image
+            DispatchQueue.dd_async_main {
+                self.image = image
             }
         }
     }
@@ -96,8 +96,8 @@ public extension UIImageView {
     func dd_loadGifWith(url: String) {
         DispatchQueue.dd_async_global {
             let image = UIImage.dd_loadImageWithGif(url: url)
-            DispatchQueue.dd.async_on_main {
-                self.base.image = image
+            DispatchQueue.dd_async_main {
+                self.image = image
             }
         }
     }

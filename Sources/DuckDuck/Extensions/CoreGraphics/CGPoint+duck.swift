@@ -8,8 +8,6 @@
 import CoreGraphics
 import Foundation
 
-extension CGPoint: DDExtensionable {}
-
 // MARK: - 方法
 public extension CGPoint {
     /// 计算两个`CGPoint`之间的`距离`

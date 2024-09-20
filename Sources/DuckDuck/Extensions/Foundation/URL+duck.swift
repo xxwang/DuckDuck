@@ -128,7 +128,7 @@ public extension URL {
     /// 根据视频`URL`在指定时间`秒`截取图像
     ///
     ///     var url = URL(string:"https://video.golem.de/files/1/1/20637/wrkw0718-sd.mp4")!
-    ///     var thumbnail = url.dd.thumbnail()
+    ///     var thumbnail = url.dd_thumbnail()
     ///     thumbnail = url.dd_thumbnail(fromTime:5)
     ///
     ///     DisptachQueue.main.async {

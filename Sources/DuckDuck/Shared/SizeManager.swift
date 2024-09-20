@@ -47,8 +47,8 @@ private extension SizeManager {
     static func format(from value: Any) -> CGFloat {
         if let value = value as? CGFloat { return value }
         if let value = value as? Double { return value }
-        if let value = value as? Float { return value.dd.as2CGFloat }
-        if let value = value as? Int { return value.dd.as2CGFloat }
+        if let value = value as? Float { return value.dd_CGFloat() }
+        if let value = value as? Int { return value.dd_CGFloat() }
         return 0
     }
 

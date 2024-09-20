@@ -42,7 +42,7 @@ public extension UITextView {
             // 联想选中键盘
             let allContent = oldContent.dd_subString(to: range.location) + text
             if allContent.count > maxCharacters {
-                let newContent = allContent.dd.subString(to: maxCharacters)
+                let newContent = allContent.dd_subString(to: maxCharacters)
                 self.text = newContent
                 return false
             }

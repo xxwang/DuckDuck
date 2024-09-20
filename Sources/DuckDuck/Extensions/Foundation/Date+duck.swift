@@ -10,211 +10,205 @@ import Foundation
 private let calendar = Calendar.current
 private let dateFormatter = DateFormatter()
 
-public extension Date {
-    var dd: DDExtension<Self> {
-        return DDExtension(self)
-    }
-}
-
 // MARK: - 计算属性
-public extension DDExtension where Base == Date {
+public extension Date {
     /// 设置或者获取日期中的`年份`
     ///
-    ///     Date().dd.year -> 2017
+    ///     Date().dd_year -> 2017
     ///     var someDate = Date()
-    ///     someDate.dd.year = 2000
+    ///     someDate.dd_year = 2000
     ///
-    var year: Int {
-        get { return calendar.component(.year, from: self.base) }
+    var dd_year: Int {
+        get { return calendar.component(.year, from: self) }
         set {
             guard newValue > 0 else { return }
-            let currentYear = calendar.component(.year, from: self.base)
+            let currentYear = calendar.component(.year, from: self)
             let yearsToAdd = newValue - currentYear
-            guard let date = calendar.date(byAdding: .year, value: yearsToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .year, value: yearsToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`月份`
     ///
-    ///     Date().dd.month -> 1
+    ///     Date().dd_month -> 1
     ///     var someDate = Date()
-    ///     someDate.dd.month = 10
+    ///     someDate.dd_month = 10
     ///
-    var month: Int {
-        get { return calendar.component(.month, from: self.base) }
+    var dd_month: Int {
+        get { return calendar.component(.month, from: self) }
         set {
-            let allowedRange = calendar.range(of: .month, in: .year, for: self.base)!
+            let allowedRange = calendar.range(of: .month, in: .year, for: self)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentMonth = calendar.component(.month, from: self.base)
+            let currentMonth = calendar.component(.month, from: self)
             let monthsToAdd = newValue - currentMonth
-            guard let date = calendar.date(byAdding: .month, value: monthsToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .month, value: monthsToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`天`
     ///
-    ///     Date().dd.day -> 12
+    ///     Date().dd_day -> 12
     ///     var someDate = Date()
-    ///     someDate.dd.day = 1
+    ///     someDate.dd_day = 1
     ///
-    var day: Int {
-        get { return calendar.component(.day, from: self.base) }
+    var dd_day: Int {
+        get { return calendar.component(.day, from: self) }
         set {
-            let allowedRange = calendar.range(of: .day, in: .month, for: self.base)!
+            let allowedRange = calendar.range(of: .day, in: .month, for: self)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentDay = calendar.component(.day, from: self.base)
+            let currentDay = calendar.component(.day, from: self)
             let daysToAdd = newValue - currentDay
-            guard let date = calendar.date(byAdding: .day, value: daysToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .day, value: daysToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`小时`
     ///
-    ///     Date().dd.hour -> 17 // 5 pm
+    ///     Date().dd_hour -> 17 // 5 pm
     ///     var someDate = Date()
-    ///     someDate.dd.hour = 13
+    ///     someDate.dd_hour = 13
     ///
-    var hour: Int {
-        get { return calendar.component(.hour, from: self.base) }
+    var dd_hour: Int {
+        get { return calendar.component(.hour, from: self) }
         set {
-            let allowedRange = calendar.range(of: .hour, in: .day, for: self.base)!
+            let allowedRange = calendar.range(of: .hour, in: .day, for: self)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentHours = calendar.component(.hour, from: self.base)
+            let currentHours = calendar.component(.hour, from: self)
             let hoursToAdd = newValue - currentHours
-            guard let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .hour, value: hoursToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`分钟`
     ///
-    ///     Date().dd.minute -> 39
+    ///     Date().dd_minute -> 39
     ///     var someDate = Date()
-    ///     someDate.dd.minute = 10
+    ///     someDate.dd_minute = 10
     ///
-    var minute: Int {
-        get { return calendar.component(.minute, from: self.base) }
+    var dd_minute: Int {
+        get { return calendar.component(.minute, from: self) }
         set {
-            let allowedRange = calendar.range(of: .minute, in: .hour, for: self.base)!
+            let allowedRange = calendar.range(of: .minute, in: .hour, for: self)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentMinutes = calendar.component(.minute, from: self.base)
+            let currentMinutes = calendar.component(.minute, from: self)
             let minutesToAdd = newValue - currentMinutes
-            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: self.base) {
-                self.base = date
+            if let date = calendar.date(byAdding: .minute, value: minutesToAdd, to: self) {
+                self = date
             }
         }
     }
 
     /// 设置或者获取日期中的`秒`
     ///
-    ///     Date().dd.second -> 55
+    ///     Date().dd_second -> 55
     ///     var someDate = Date()
-    ///     someDate.dd.second = 15
+    ///     someDate.dd_second = 15
     ///
-    var second: Int {
-        get { return calendar.component(.second, from: self.base) }
+    var dd_second: Int {
+        get { return calendar.component(.second, from: self) }
         set {
-            let allowedRange = calendar.range(of: .second, in: .minute, for: self.base)!
+            let allowedRange = calendar.range(of: .second, in: .minute, for: self)!
             guard allowedRange.contains(newValue) else { return }
 
-            let currentSeconds = calendar.component(.second, from: self.base)
+            let currentSeconds = calendar.component(.second, from: self)
             let secondsToAdd = newValue - currentSeconds
-            guard let date = calendar.date(byAdding: .second, value: secondsToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .second, value: secondsToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`毫秒`
     ///
-    ///     Date().dd.millisecond -> 68
+    ///     Date().dd_millisecond -> 68
     ///
     ///     var someDate = Date()
-    ///     someDate.dd.millisecond = 68
+    ///     someDate.dd_millisecond = 68
     ///
-    var millisecond: Int {
-        get { return calendar.component(.nanosecond, from: self.base) / 1_000_000 }
+    var dd_millisecond: Int {
+        get { return calendar.component(.nanosecond, from: self) / 1_000_000 }
         set {
             let nanoSeconds = newValue * 1_000_000
             #if targetEnvironment(macCatalyst)
                 let allowedRange = 0 ..< 1_000_000_000
             #else
-                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self.base)!
+                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self)!
             #endif
             guard allowedRange.contains(nanoSeconds) else { return }
-            guard let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(bySetting: .nanosecond, value: nanoSeconds, of: self) else { return }
+            self = date
         }
     }
 
     /// 设置或者获取日期中的`纳秒`
     ///
-    ///     Date().dd.nanosecond -> 981379985
+    ///     Date().dd_nanosecond -> 981379985
     ///     var someDate = Date()
-    ///     someDate.dd.nanosecond = 981379985
+    ///     someDate.dd_nanosecond = 981379985
     ///
-    var nanosecond: Int {
-        get { return calendar.component(.nanosecond, from: self.base) }
+    var dd_nanosecond: Int {
+        get { return calendar.component(.nanosecond, from: self) }
         set {
             #if targetEnvironment(macCatalyst)
                 let allowedRange = 0 ..< 1_000_000_000
             #else
-                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self.base)!
+                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self)!
             #endif
             guard allowedRange.contains(newValue) else { return }
 
-            let currentNanoseconds = calendar.component(.nanosecond, from: self.base)
+            let currentNanoseconds = calendar.component(.nanosecond, from: self)
             let nanosecondsToAdd = newValue - currentNanoseconds
 
-            guard let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: self.base) else { return }
-            self.base = date
+            guard let date = calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: self) else { return }
+            self = date
         }
     }
 
     /// 格林尼治标准时间转换为当地时间
-    var as2LocalDate: Date {
-        let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self.base))
-        return self.base.addingTimeInterval(secondFromGMT)
+    var dd_localDate: Date {
+        let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
+        return self.addingTimeInterval(secondFromGMT)
     }
 
     /// 当地时间转换为格林尼治标准时间
-    var as2GMTDate: Date {
-        let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self.base))
-        return self.base.addingTimeInterval(-secondFromGMT)
+    var dd_GMTDate: Date {
+        let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
+        return self.addingTimeInterval(-secondFromGMT)
     }
 
     /// 获取当前日期的格林尼治时间戳
     ///
     /// - Note: 单位秒
-    var secondStampFromGMT: Int {
-        let offset = TimeZone.current.secondsFromGMT(for: self.base)
-        return Int(self.base.timeIntervalSince1970) - offset
+    var dd_secondStampFromGMT: Int {
+        let offset = TimeZone.current.secondsFromGMT(for: self)
+        return Int(self.timeIntervalSince1970) - offset
     }
 
     /// 获取当前日期的时间戳
     ///
     /// - Note: 单位秒
-    var secondStamp: Double {
-        return self.base.timeIntervalSince1970
+    var dd_secondStamp: Double {
+        return self.timeIntervalSince1970
     }
 
     /// 获取当前日期的时间戳
     ///
     /// - Note: 单位毫秒
-    var milliStamp: Int {
-        return Int(self.base.timeIntervalSince1970 * 1000)
+    var dd_milliStamp: Int {
+        return Int(self.timeIntervalSince1970 * 1000)
     }
 
     /// 获取时间与当前时间之间的间隔差距
-    var callTimeAfterNow: String {
+    var dd_callTimeAfterNow: String {
         // 获取时间间隔
-        let timeInterval = Date().timeIntervalSince(self.base)
+        let timeInterval = Date().timeIntervalSince(self)
         // 后缀
         let suffix = timeInterval > 0 ? "前" : "后"
 
@@ -248,7 +242,7 @@ public extension DDExtension where Base == Date {
     }
 
     /// 获取当前时区的日期
-    var currentZoneDate: Date {
+    var dd_currentZoneDate: Date {
         let date = Date()
         let zone = NSTimeZone.system
         let time = zone.secondsFromGMT(for: date)
@@ -259,30 +253,30 @@ public extension DDExtension where Base == Date {
 
     /// 将日期格式化为`ISO8601`标准的格式
     ///
-    ///     Date().dd.as2ISO8601String -> "2017-01-12T14:51:29.574Z"
+    ///     Date().dd_ISO8601String -> "2017-01-12T14:51:29.574Z"
     ///
     /// - Note: `(yyyy-MM-dd'T'HH:mm:ss.SSS)`
     /// - Returns: `ISO8601`标准日期字符串
-    var as2ISO8601String: String {
+    var dd_ISO8601String: String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 
-        return dateFormatter.string(from: self.base).appending("Z")
+        return dateFormatter.string(from: self).appending("Z")
     }
 
     /// 距离当前日期最近的可以被五分钟整除的时间
     ///
     ///     let date = Date() // "5:54 PM"
     ///     date.minute = 32 // "5:32 PM"
-    ///     date.dd.nearestFiveMinutes() // "5:30 PM"
+    ///     date.dd_nearestFiveMinutes() // "5:30 PM"
     ///
     ///     date.minute = 44 // "5:44 PM"
-    ///     date.dd.nearestFiveMinutes() // "5:45 PM"
+    ///     date.dd_nearestFiveMinutes() // "5:45 PM"
     ///
-    var nearestFiveMinutes: Date {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self.base)
+    var dd_nearestFiveMinutes: Date {
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
         components.second = 0
@@ -294,13 +288,13 @@ public extension DDExtension where Base == Date {
     ///
     ///     let date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
-    ///     date.dd.nearestTenMinutes // "5:30 PM"
+    ///     date.dd_nearestTenMinutes // "5:30 PM"
     ///
     ///     date.minute = 48 // "5:48 PM"
-    ///     date.dd.nearestTenMinutes // "5:50 PM"
+    ///     date.dd_nearestTenMinutes // "5:50 PM"
     ///
-    var nearestTenMinutes: Date {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self.base)
+    var dd_nearestTenMinutes: Date {
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute? = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
         components.second = 0
@@ -312,13 +306,13 @@ public extension DDExtension where Base == Date {
     ///
     ///     let date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
-    ///     date.dd.nearestQuarterHour // "5:30 PM"
+    ///     date.dd_nearestQuarterHour // "5:30 PM"
     ///
     ///     date.minute = 40 // "5:40 PM"
-    ///     date.dd.nearestQuarterHour // "5:45 PM"
+    ///     date.dd_nearestQuarterHour // "5:45 PM"
     ///
-    var nearestQuarterHour: Date {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self.base)
+    var dd_nearestQuarterHour: Date {
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
         components.second = 0
@@ -330,14 +324,14 @@ public extension DDExtension where Base == Date {
     ///
     ///     let date = Date() // "6:07 PM"
     ///     date.minute = 41 // "6:41 PM"
-    ///     date.dd.nearestHalfHour // "6:30 PM"
+    ///     date.dd_nearestHalfHour // "6:30 PM"
     ///
     ///     date.minute = 51 // "6:51 PM"
-    ///     date.dd.nearestHalfHour // "7:00 PM"
+    ///     date.dd_nearestHalfHour // "7:00 PM"
     ///
     /// - Returns: 结果`Date`
-    var nearestHalfHour: Date {
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self.base)
+    var dd_nearestHalfHour: Date {
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
         components.second = 0
@@ -348,15 +342,15 @@ public extension DDExtension where Base == Date {
     /// 距离当前日期最近的可以被六十分钟(一小时)整除的时间
     ///
     ///     let date = Date() // "6:17 PM"
-    ///     date.dd.nearestHour // "6:00 PM"
+    ///     date.dd_nearestHour // "6:00 PM"
     ///
     ///     date.minute = 36 // "6:36 PM"
-    ///     date.dd.nearestHour // "7:00 PM"
+    ///     date.dd_nearestHour // "7:00 PM"
     ///
-    var nearestHour: Date {
-        let min = calendar.component(.minute, from: self.base)
+    var dd_nearestHour: Date {
+        let min = calendar.component(.minute, from: self)
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour]
-        let date = calendar.date(from: calendar.dateComponents(components, from: self.base))!
+        let date = calendar.date(from: calendar.dateComponents(components, from: self))!
 
         if min < 30 {
             return date
@@ -367,32 +361,32 @@ public extension DDExtension where Base == Date {
     /// 返回昨天的日期
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
-    ///     let yesterday = date.dd.yesterday // "Oct 2, 2018, 10:57:11"
+    ///     let yesterday = date.dd_yesterday // "Oct 2, 2018, 10:57:11"
     ///
-    var yesterday: Date {
-        return calendar.date(byAdding: .day, value: -1, to: self.base) ?? Date()
+    var dd_yesterday: Date {
+        return calendar.date(byAdding: .day, value: -1, to: self) ?? Date()
     }
 
     /// 返回明天的日期
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
-    ///     let tomorrow = date.dd.tomorrow // "Oct 4, 2018, 10:57:11"
+    ///     let tomorrow = date.dd_tomorrow // "Oct 4, 2018, 10:57:11"
     ///
-    var tomorrow: Date {
-        return calendar.date(byAdding: .day, value: 1, to: self.base) ?? Date()
+    var dd_tomorrow: Date {
+        return calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
     }
 
     /// 获取当前属于哪个年代
     /// - Returns: 结果年代
-    var era: Int {
-        return calendar.component(.era, from: self.base)
+    var dd_era: Int {
+        return calendar.component(.era, from: self)
     }
 
     #if !os(Linux)
         /// 获取当前日期属于本年中的第几个季度
         /// - Returns: 结果季度
-        var quarter: Int {
-            let month = Double(calendar.component(.month, from: self.base))
+        var dd_quarter: Int {
+            let month = Double(calendar.component(.month, from: self))
             let numberOfMonths = Double(calendar.monthSymbols.count)
             let numberOfMonthsInQuarter = numberOfMonths / 4
             return Int(Darwin.ceil(month / numberOfMonthsInQuarter))
@@ -400,42 +394,42 @@ public extension DDExtension where Base == Date {
     #endif
 
     /// 获取当前日期是在本年中的第几周
-    var weekOfYear: Int {
-        return calendar.component(.weekOfYear, from: self.base)
+    var dd_weekOfYear: Int {
+        return calendar.component(.weekOfYear, from: self)
     }
 
     /// 获取当前日期在本月中是第几周
-    var weekOfMonth: Int {
-        return calendar.component(.weekOfMonth, from: self.base)
+    var dd_weekOfMonth: Int {
+        return calendar.component(.weekOfMonth, from: self)
     }
 
     /// 获取当前日期是在本周中的第几天
-    var weekday: Int {
-        return calendar.component(.weekday, from: self.base)
+    var dd_weekday: Int {
+        return calendar.component(.weekday, from: self)
     }
 
     /// 获取当前日期是星期几
     ///
     /// - Note: 中文表示
-    var weekdayAs2String: String {
+    var dd_weekdayAs2String: String {
         let weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
         var calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone(identifier: "Asia/Shanghai")
         calendar.timeZone = timeZone!
-        let theComponents = calendar.dateComponents([.weekday], from: self.base)
+        let theComponents = calendar.dateComponents([.weekday], from: self)
         return weekdays[theComponents.weekday! - 1]
     }
 
     /// 获取当前日期的月份
     ///
     /// - Note: 英文表示
-    var monthAs2String: String {
+    var dd_monthAs2String: String {
         dateFormatter.dateFormat = "MMMM"
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     /// 获取现在的日期
-    static var now: Date {
+    static var dd_now: Date {
         if #available(iOS 15, *) {
             return Date.now
         } else {
@@ -444,34 +438,34 @@ public extension DDExtension where Base == Date {
     }
 
     /// 获取今天的日期
-    static var todayDate: Date {
+    static var dd_todayDate: Date {
         return Date()
     }
 
     /// 获取昨天的日期
-    static var yesterDayDate: Date? {
+    static var dd_yesterDayDate: Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())
     }
 
     /// 获取明天的日期
-    static var tomorrowDate: Date? {
+    static var dd_tomorrowDate: Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 1), to: Date())
     }
 
     /// 获取前天的日期
-    static var theDayBeforYesterDayDate: Date? {
+    static var dd_theDayBeforYesterDayDate: Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -2), to: Date())
     }
 
     /// 获取后天的日期
-    static var theDayAfterYesterDayDate: Date? {
+    static var dd_theDayAfterYesterDayDate: Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 2), to: Date())
     }
 
     /// 获取当前的时间戳
     ///
     /// - Note: 单位`秒`
-    static var secondStamp: String {
+    static var dd_secondStamp: String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         return "\(Int(timeInterval))"
     }
@@ -479,7 +473,7 @@ public extension DDExtension where Base == Date {
     /// 获取当前的时间戳
     ///
     /// - Note: 单位`毫秒`
-    static var milliStamp: String {
+    static var dd_milliStamp: String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         let millisecond = CLongLong(Darwin.round(timeInterval * 1000))
         return "\(millisecond)"
@@ -487,64 +481,64 @@ public extension DDExtension where Base == Date {
 
     /// 获取当前月份的天数
     /// - Returns: 结果天数
-    static var currentMonthDays: Int {
+    static var dd_currentMonthDays: Int {
         let date = Date()
-        return self.daysCount(year: date.dd.year, month: date.dd.month)
+        return self.dd_daysCount(year: date.dd_year, month: date.dd_month)
     }
 
     /// 判断日期是否在未来
-    var isInFuture: Bool {
-        return self.base > Date()
+    var dd_isInFuture: Bool {
+        return self > Date()
     }
 
     /// 判断日期是否在过去
-    var isInPast: Bool {
-        return self.base < Date()
+    var dd_isInPast: Bool {
+        return self < Date()
     }
 
     /// 判断日期是否在今天
-    var isInToday: Bool {
-        return calendar.isDateInToday(self.base)
+    var dd_isInToday: Bool {
+        return calendar.isDateInToday(self)
     }
 
     /// 判断日期是否在昨天
-    var isInYesterday: Bool {
-        return calendar.isDateInYesterday(self.base)
+    var dd_isInYesterday: Bool {
+        return calendar.isDateInYesterday(self)
     }
 
     /// 判断日期是否在明天
-    var isInTomorrow: Bool {
-        return calendar.isDateInTomorrow(self.base)
+    var dd_isInTomorrow: Bool {
+        return calendar.isDateInTomorrow(self)
     }
 
     /// 判断日期是否在周末
-    var isInWeekend: Bool {
-        return calendar.isDateInWeekend(self.base)
+    var dd_isInWeekend: Bool {
+        return calendar.isDateInWeekend(self)
     }
 
     /// 判断日期是否在工作日
-    var isWorkday: Bool {
-        return !calendar.isDateInWeekend(self.base)
+    var dd_isWorkday: Bool {
+        return !calendar.isDateInWeekend(self)
     }
 
     /// 判断日期是否在本周内
-    var isInCurrentWeek: Bool {
-        return calendar.isDate(self.base, equalTo: Date(), toGranularity: .weekOfYear)
+    var dd_isInCurrentWeek: Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
     /// 判断日期是否在本月
-    var isInCurrentMonth: Bool {
-        return calendar.isDate(self.base, equalTo: Date(), toGranularity: .month)
+    var dd_isInCurrentMonth: Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .month)
     }
 
     /// 判断日期是否在本年
-    var isInCurrentYear: Bool {
-        return calendar.isDate(self.base, equalTo: Date(), toGranularity: .year)
+    var dd_isInCurrentYear: Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .year)
     }
 
     /// 判断日期所在年是否是润年
-    var isLeapYear: Bool {
-        let year = self.year
+    var dd_isLeapYear: Bool {
+        let year = self.dd_year
         return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))
     }
 }
@@ -583,78 +577,78 @@ public extension Date {
 }
 
 // MARK: - 方法
-public extension DDExtension where Base == Date {
+public extension Date {
     /// 使用格式化字符串格式化日期返回日期字符串
     ///
-    ///     Date().dd.as2String(with:"dd/MM/yyyy") -> "1/12/17"
-    ///     Date().dd.as2String(with:"HH:mm") -> "23:50"
-    ///     Date().dd.as2String(with:"dd/MM/yyyy HH:mm") -> "1/12/17 23:50"
+    ///     Date().dd_String(with:"dd/MM/yyyy") -> "1/12/17"
+    ///     Date().dd_String(with:"HH:mm") -> "23:50"
+    ///     Date().dd_String(with:"dd/MM/yyyy HH:mm") -> "1/12/17 23:50"
     ///
     /// - Parameters:
     ///   - format: 日期格式(默认 `yyyy-MM-dd HH:mm:ss`)
     ///   - isGMT: 是否是`格林尼治时区`
     /// - Returns: 日期字符串
-    func as2String(with format: String = "yyyy-MM-dd HH:mm:ss", isGMT: Bool = false) -> String {
+    func dd_String(with format: String = "yyyy-MM-dd HH:mm:ss", isGMT: Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.locale = .current
         dateFormatter.timeZone = isGMT ? TimeZone(secondsFromGMT: 0) : TimeZone.autoupdatingCurrent
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     /// 使用格式化枚举格式化日期返回日期字符串
     ///
-    ///     Date().dd.as2DateString(of:.short) -> "1/12/17"
-    ///     Date().dd.as2DateString(of:.medium) -> "Jan 12, 2017"
-    ///     Date().dd.as2DateString(of:.long) -> "January 12, 2017"
-    ///     Date().dd.as2DateString(of:.full) -> "Thursday, January 12, 2017"
+    ///     Date().dd_DateString(of:.short) -> "1/12/17"
+    ///     Date().dd_DateString(of:.medium) -> "Jan 12, 2017"
+    ///     Date().dd_DateString(of:.long) -> "January 12, 2017"
+    ///     Date().dd_DateString(of:.full) -> "Thursday, January 12, 2017"
     ///
     /// - Note: 只格式化日期
     /// - Parameter style: 日期格式的样式(默认 `.medium`)
     /// - Returns: 日期字符串
-    func as2DateString(of style: DateFormatter.Style = .medium) -> String {
+    func dd_DateString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = style
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     /// 使用格式化枚举格式化时间时间字符串
     ///
-    ///     Date().dd.as2TimeString(of:.short) -> "7:37 PM"
-    ///     Date().dd.as2TimeString(of:.medium) -> "7:37:02 PM"
-    ///     Date().dd.as2TimeString(of:.long) -> "7:37:02 PM GMT+3"
-    ///     Date().dd.as2TimeString(of:.full) -> "7:37:02 PM GMT+03:00"
+    ///     Date().dd_timeString(of:.short) -> "7:37 PM"
+    ///     Date().dd_timeString(of:.medium) -> "7:37:02 PM"
+    ///     Date().dd_timeString(of:.long) -> "7:37:02 PM GMT+3"
+    ///     Date().dd_timeString(of:.full) -> "7:37:02 PM GMT+03:00"
     ///
     /// - Note: 只格式化时间
     /// - Parameter style: 日期格式的样式(默认 `.medium`)
     /// - Returns: 时间字符串
-    func as2TimeString(of style: DateFormatter.Style = .medium) -> String {
+    func dd_timeString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = .none
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     /// 使用格式化枚举格式化日期和时间返回日期和时间字符串
     ///
-    ///     Date().dd.as2DateTimeString(of:.short) -> "1/12/17, 7:32 PM"
-    ///     Date().dd.as2DateTimeString(of:.medium) -> "Jan 12, 2017, 7:32:00 PM"
-    ///     Date().dd.as2DateTimeString(of:.long) -> "January 12, 2017 at 7:32:00 PM GMT+3"
-    ///     Date().dd.as2DateTimeString(of:.full) -> "Thursday, January 12, 2017 at 7:32:00 PM GMT+03:00"
+    ///     Date().dd_dateTimeString(of:.short) -> "1/12/17, 7:32 PM"
+    ///     Date().dd_dateTimeString(of:.medium) -> "Jan 12, 2017, 7:32:00 PM"
+    ///     Date().dd_dateTimeString(of:.long) -> "January 12, 2017 at 7:32:00 PM GMT+3"
+    ///     Date().dd_dateTimeString(of:.full) -> "Thursday, January 12, 2017 at 7:32:00 PM GMT+03:00"
     ///
     /// - Note: 格式化日期与时间
     /// - Parameter style: 日期格式的样式(默认 `.medium`)
     /// - Returns: 日期和时间字符串
-    func as2DateTimeString(of style: DateFormatter.Style = .medium) -> String {
+    func dd_dateTimeString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = style
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     // MARK: - 月份名称格式枚举
-    enum MonthNameStyle {
+    enum DDMonthNameStyle {
         /// 3 个字母月份的月份名称缩写
         case threeLetters
         /// 月份名称的 1 个字母月份缩写
@@ -665,13 +659,13 @@ public extension DDExtension where Base == Date {
 
     /// 当前日期的月份名称
     ///
-    ///     Date().dd.monthName(of:.oneLetter) -> "J"
-    ///     Date().dd.monthName(of:.threeLetters) -> "Jan"
-    ///     Date().dd.monthName(of:.full) -> "January"
+    ///     Date().dd_monthName(of:.oneLetter) -> "J"
+    ///     Date().dd_monthName(of:.threeLetters) -> "Jan"
+    ///     Date().dd_monthName(of:.full) -> "January"
     ///
     /// - Parameter Style: 月份名称的样式(默认 `MonthNameStyle.full`)
     /// - Returns: 月份名称字符串(例如:`D、Dec、December`)
-    func monthName(of style: DDExtension.MonthNameStyle = .full) -> String {
+    func dd_monthName(of style: DDMonthNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -684,11 +678,11 @@ public extension DDExtension where Base == Date {
             }
         }
         dateFormatter.setLocalizedDateFormatFromTemplate(format)
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     // MARK: - 日期名称格式枚举
-    enum DayNameStyle {
+    enum DDDayNameStyle {
         /// 日期名称的 3 个字母日期缩写
         case threeLetters
         /// 日期名称的 1 个字母日期缩写
@@ -699,13 +693,13 @@ public extension DDExtension where Base == Date {
 
     /// 当前日期的天名称(周一到周日)
     ///
-    ///     Date().dd.dayName(of:.oneLetter) -> "T"
-    ///     Date().dd.dayName(of:.threeLetters) -> "Thu"
-    ///     Date().dd.dayName(of:.full) -> "Thursday"
+    ///     Date().dd_dayName(of:.oneLetter) -> "T"
+    ///     Date().dd_dayName(of:.threeLetters) -> "Thu"
+    ///     Date().dd_dayName(of:.full) -> "Thursday"
     ///
     /// - Parameter Style:日期名称的样式(默认 `DayNameStyle.full`)
     /// - Returns:日期名称字符串(例如:`W、Wed、Wednesday`)
-    func dayName(of style: DDExtension.DayNameStyle = .full) -> String {
+    func dd_dayName(of style: DDDayNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -718,38 +712,38 @@ public extension DDExtension where Base == Date {
             }
         }
         dateFormatter.setLocalizedDateFormatFromTemplate(format)
-        return dateFormatter.string(from: self.base)
+        return dateFormatter.string(from: self)
     }
 
     /// 获取两个日期之间的天数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果天数
-    func daysSince(_ date: Date) -> Double {
-        return self.base.timeIntervalSince(date) / (3600 * 24)
+    func dd_daysSince(_ date: Date) -> Double {
+        return self.timeIntervalSince(date) / (3600 * 24)
     }
 
     /// 获取两个日期之间的小时数
     ///
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果小时数
-    func hoursSince(_ date: Date) -> Double {
-        return self.base.timeIntervalSince(date) / 3600
+    func dd_hoursSince(_ date: Date) -> Double {
+        return self.timeIntervalSince(date) / 3600
     }
 
     /// 获取两个日期之间的分钟数
     ///
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果分钟数
-    func minutesSince(_ date: Date) -> Double {
-        return self.base.timeIntervalSince(date) / 60
+    func dd_minutesSince(_ date: Date) -> Double {
+        return self.timeIntervalSince(date) / 60
     }
 
     /// 获取两个日期之间的秒数
     ///
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果秒钟数
-    func secondsSince(_ date: Date) -> Double {
-        return self.base.timeIntervalSince(date)
+    func dd_secondsSince(_ date: Date) -> Double {
+        return self.timeIntervalSince(date)
     }
 
     /// 比较两个日期之间的距离
@@ -757,8 +751,8 @@ public extension DDExtension where Base == Date {
     /// - Note: 结果为秒数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果秒钟数
-    func distance(_ date: Date) -> TimeInterval {
-        return self.base.timeIntervalSince(date)
+    func dd_distance(_ date: Date) -> TimeInterval {
+        return self.timeIntervalSince(date)
     }
 
     /// 获取指定年份中指定月的天数
@@ -766,7 +760,7 @@ public extension DDExtension where Base == Date {
     ///   - year: 年
     ///   - month: 月
     /// - Returns: 结果天数
-    static func daysCount(year: Int, month: Int) -> Int {
+    static func dd_daysCount(year: Int, month: Int) -> Int {
         switch month {
         case 1, 3, 5, 7, 8, 10, 12:
             return 31
@@ -785,9 +779,9 @@ public extension DDExtension where Base == Date {
     /// - Note: 支持返回秒和毫秒的时间戳
     /// - Parameter isUnix: 是否使用`Unix`格式
     /// - Returns: `Int`类型时间戳
-    func timestamp(isUnix: Bool = true) -> Int {
-        if isUnix { return Int(self.base.timeIntervalSince1970) }
-        return Int(self.base.timeIntervalSince1970 * 1000)
+    func dd_timestamp(isUnix: Bool = true) -> Int {
+        if isUnix { return Int(self.timeIntervalSince1970) }
+        return Int(self.timeIntervalSince1970 * 1000)
     }
 
     /// 时间戳字符串转格式化日期字符串
@@ -795,9 +789,9 @@ public extension DDExtension where Base == Date {
     ///   - timestamp: 时间戳字符串
     ///   - format: 格式化样式
     /// - Returns: 结果字符串
-    static func timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    static func dd_timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         // 时间戳转为Date
-        let date = self.timestampAs2Date(timestamp: timestamp)
+        let date = self.dd_timestampAs2Date(timestamp: timestamp)
         // 设置 dateFormat
         dateFormatter.dateFormat = format
         // 按照dateFormat把Date转化为String
@@ -807,7 +801,7 @@ public extension DDExtension where Base == Date {
     /// 时间戳字符串转`Date`对象
     /// - Parameter timestamp: 时间戳字符串
     /// - Returns: 结果 `Date`
-    static func timestampAs2Date(timestamp: String) -> Date {
+    static func dd_timestampAs2Date(timestamp: String) -> Date {
         guard timestamp.count == 10 || timestamp.count == 13 else {
             #if DEBUG
                 fatalError("时间戳位数不是 10 也不是 13")
@@ -815,7 +809,7 @@ public extension DDExtension where Base == Date {
                 return Date()
             #endif
         }
-        let timestampValue = timestamp.count == 10 ? timestamp.dd.as2Int : timestamp.dd.as2Int / 1000
+        let timestampValue = timestamp.count == 10 ? timestamp.dd_Int() : timestamp.dd_Int() / 1000
         // 时间戳转为Date
         let date = Date(timeIntervalSince1970: TimeInterval(timestampValue))
         return date
@@ -824,23 +818,23 @@ public extension DDExtension where Base == Date {
     /// `Date`对象转时间戳
     /// - Parameter isUnix: 是否使用`Unix`格式
     /// - Returns: 时间戳字符串
-    func dateAs2Timestamp(isUnix: Bool = true) -> String {
-        let interval = isUnix ? CLongLong(Int(self.base.timeIntervalSince1970)) : CLongLong(Darwin.round(self.base.timeIntervalSince1970 * 1000))
+    func dd_dateAs2Timestamp(isUnix: Bool = true) -> String {
+        let interval = isUnix ? CLongLong(Int(self.timeIntervalSince1970)) : CLongLong(Darwin.round(self.timeIntervalSince1970 * 1000))
         return "\(interval)"
     }
 
     /// 判断两个日期是否是同一天
     /// - Parameter date: 参与比较的日期
     /// - Returns: 是否是同一天
-    func isSameDay(date: Date) -> Bool {
-        return Calendar.current.isDate(self.base, inSameDayAs: date)
+    func dd_isSameDay(date: Date) -> Bool {
+        return Calendar.current.isDate(self, inSameDayAs: date)
     }
 
     /// 判断日期是否是同年同月同一天
     /// - Parameter date: 参与比较的日期
     /// - Returns: 是否是同年同月同天
-    func isSameYeaerMountDay(_ date: Date) -> Bool {
-        let com = Calendar.current.dateComponents([.year, .month, .day], from: self.base)
+    func dd_isSameYeaerMountDay(_ date: Date) -> Bool {
+        let com = Calendar.current.dateComponents([.year, .month, .day], from: self)
         let comToday = Calendar.current.dateComponents([.year, .month, .day], from: date)
         return com.day == comToday.day
             && com.month == comToday.month
@@ -852,19 +846,19 @@ public extension DDExtension where Base == Date {
     ///   - date: 参与比较的日期
     ///   - unit: 单位
     /// - Returns: 差距日历组件
-    func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
-        return Calendar.current.dateComponents(unit, from: date, to: self.base)
+    func dd_componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
+        return Calendar.current.dateComponents(unit, from: date, to: self)
     }
 
     /// 判断日期是否在当前指定的日历组件中
     ///
-    ///     Date().dd.isInCurrent(.day) -> true
-    ///     Date().dd.isInCurrent(.year) -> true
+    ///     Date().dd_isInCurrent(.day) -> true
+    ///     Date().dd_isInCurrent(.year) -> true
     ///
     /// - Parameter component: 日历组件
     /// - Returns: 是否在指定的日历组件中
-    func isInCurrent(_ component: Calendar.Component) -> Bool {
-        return calendar.isDate(self.base, equalTo: Date(), toGranularity: component)
+    func dd_isInCurrent(_ component: Calendar.Component) -> Bool {
+        return calendar.isDate(self, equalTo: Date(), toGranularity: component)
     }
 
     /// 判断当前日期是否在给定的两个日期对象区间之中
@@ -873,11 +867,11 @@ public extension DDExtension where Base == Date {
     ///   - endDate: 结束日期
     ///   - includeBounds: 是否包含边界
     /// - Returns: 是否在指定日期中
-    func isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
+    func dd_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
         if includeBounds {
-            return startDate.compare(self.base).rawValue * self.base.compare(endDate).rawValue >= 0
+            return startDate.compare(self).rawValue * self.compare(endDate).rawValue >= 0
         }
-        return startDate.compare(self.base).rawValue * self.base.compare(endDate).rawValue > 0
+        return startDate.compare(self).rawValue * self.compare(endDate).rawValue > 0
     }
 
     /// 判断日历组件的值是否包含在当前日期和指定日期之间
@@ -886,8 +880,8 @@ public extension DDExtension where Base == Date {
     ///   - component: 日历组件
     ///   - date: 结果日期
     /// - Returns: 是否包含
-    func isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
-        let components = calendar.dateComponents([component], from: self.base, to: date)
+    func dd_isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
+        let components = calendar.dateComponents([component], from: self, to: date)
         let componentValue = components.value(for: component)!
         return Darwin.abs(Int32(componentValue)) <= value
     }
@@ -897,7 +891,7 @@ public extension DDExtension where Base == Date {
     /// - Note: 不包含结果日期本身
     /// - Parameter range: 日期区间
     /// - Returns: 随机结果
-    static func random(in range: Range<Date>) -> Date {
+    static func dd_random(in range: Range<Date>) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound
@@ -909,7 +903,7 @@ public extension DDExtension where Base == Date {
     /// - Note: 包含结果日期本身
     /// - Parameter range: 日期区间
     /// - Returns: 随机结果
-    static func random(in range: ClosedRange<Date>) -> Date {
+    static func dd_random(in range: ClosedRange<Date>) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound
@@ -923,7 +917,7 @@ public extension DDExtension where Base == Date {
     ///   - range: 日期区间
     ///   - generator: 生成器
     /// - Returns: 随机结果
-    static func random(in range: Range<Date>, using generator: inout some RandomNumberGenerator) -> Date {
+    static func dd_random(in range: Range<Date>, using generator: inout some RandomNumberGenerator) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
                 in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound.timeIntervalSinceReferenceDate,
@@ -938,7 +932,7 @@ public extension DDExtension where Base == Date {
     ///   - range: 日期区间
     ///   - generator: 生成器
     /// - Returns: 随机结果
-    static func random(in range: ClosedRange<Date>, using generator: inout some RandomNumberGenerator) -> Date {
+    static func dd_random(in range: ClosedRange<Date>, using generator: inout some RandomNumberGenerator) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
                 in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound.timeIntervalSinceReferenceDate,
@@ -949,122 +943,122 @@ public extension DDExtension where Base == Date {
     /// 获取两个日期之间的天数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果天数
-    func numberOfDays(from date: Date) -> Int? {
-        return self.componentCompare(from: date, unit: [.day]).day
+    func dd_numberOfDays(from date: Date) -> Int? {
+        return self.dd_componentCompare(from: date, unit: [.day]).day
     }
 
     /// 获取两个日期之间的小时数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果小时数
-    func numberOfHours(from date: Date) -> Int? {
-        return self.componentCompare(from: date, unit: [.hour]).hour
+    func dd_numberOfHours(from date: Date) -> Int? {
+        return self.dd_componentCompare(from: date, unit: [.hour]).hour
     }
 
     /// 获取两个日期之间的分钟数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果分钟数
-    func numberOfMinutes(from date: Date) -> Int? {
-        return self.componentCompare(from: date, unit: [.minute]).minute
+    func dd_numberOfMinutes(from date: Date) -> Int? {
+        return self.dd_componentCompare(from: date, unit: [.minute]).minute
     }
 
     /// 获取两个日期之间的秒数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果秒数
-    func numberOfSeconds(from date: Date) -> Int? {
-        return self.componentCompare(from: date, unit: [.second]).second
+    func dd_numberOfSeconds(from date: Date) -> Int? {
+        return self.dd_componentCompare(from: date, unit: [.second]).second
     }
 
     /// 向当前日期增加指定天数
     /// - Parameter day: 要增加的天数
     /// - Returns: 结果日期
-    func adding(day: Int) -> Date? {
-        return Calendar.current.date(byAdding: DateComponents(day: day), to: self.base)
+    func dd_adding(day: Int) -> Date? {
+        return Calendar.current.date(byAdding: DateComponents(day: day), to: self)
     }
 
     /// 添加指定日历组件的值到当前日期
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
-    ///     let date2 = date.dd.adding(.minute, value:-10) // "Jan 12, 2017, 6:57 PM"
-    ///     let date3 = date.dd.adding(.day, value:4) // "Jan 16, 2017, 7:07 PM"
-    ///     let date4 = date.dd.adding(.month, value:2) // "Mar 12, 2017, 7:07 PM"
-    ///     let date5 = date.dd.adding(.year, value:13) // "Jan 12, 2030, 7:07 PM"
+    ///     let date2 = date.dd_adding(.minute, value:-10) // "Jan 12, 2017, 6:57 PM"
+    ///     let date3 = date.dd_adding(.day, value:4) // "Jan 16, 2017, 7:07 PM"
+    ///     let date4 = date.dd_adding(.month, value:2) // "Mar 12, 2017, 7:07 PM"
+    ///     let date5 = date.dd_adding(.year, value:13) // "Jan 12, 2030, 7:07 PM"
     ///
     /// - Parameters:
     ///   - component: 日历组件
     ///   - value: 日历组件对应的值
     /// - Returns: 结果日期
-    func adding(_ component: Calendar.Component, value: Int) -> Date {
-        return Calendar.current.date(byAdding: component, value: value, to: self.base)!
+    func dd_adding(_ component: Calendar.Component, value: Int) -> Date {
+        return Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
     /// 个性日期对象指定日历组件的值
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
-    ///     let date2 = date.dd.changing(.minute, value:10) // "Jan 12, 2017, 7:10 PM"
-    ///     let date3 = date.dd.changing(.day, value:4) // "Jan 4, 2017, 7:07 PM"
-    ///     let date4 = date.dd.changing(.month, value:2) // "Feb 12, 2017, 7:07 PM"
-    ///     let date5 = date.dd.changing(.year, value:2000) // "Jan 12, 2000, 7:07 PM"
+    ///     let date2 = date.dd_changing(.minute, value:10) // "Jan 12, 2017, 7:10 PM"
+    ///     let date3 = date.dd_changing(.day, value:4) // "Jan 4, 2017, 7:07 PM"
+    ///     let date4 = date.dd_changing(.month, value:2) // "Feb 12, 2017, 7:07 PM"
+    ///     let date5 = date.dd_changing(.year, value:2000) // "Jan 12, 2000, 7:07 PM"
     ///
     /// - Parameters:
     ///   - component: 日历组件
     ///   - value: 日历组件对应值
     /// - Returns: 结果日期
-    func changing(_ component: Calendar.Component, value: Int) -> Date? {
+    func dd_changing(_ component: Calendar.Component, value: Int) -> Date? {
         switch component {
         case .nanosecond:
             #if targetEnvironment(macCatalyst)
                 let allowedRange = 0 ..< 1_000_000_000
             #else
-                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self.base)!
+                let allowedRange = calendar.range(of: .nanosecond, in: .second, for: self)!
             #endif
             guard allowedRange.contains(value) else { return nil }
-            let currentNanoseconds = calendar.component(.nanosecond, from: self.base)
+            let currentNanoseconds = calendar.component(.nanosecond, from: self)
             let nanosecondsToAdd = value - currentNanoseconds
-            return calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: self.base)
+            return calendar.date(byAdding: .nanosecond, value: nanosecondsToAdd, to: self)
 
         case .second:
-            let allowedRange = calendar.range(of: .second, in: .minute, for: self.base)!
+            let allowedRange = calendar.range(of: .second, in: .minute, for: self)!
             guard allowedRange.contains(value) else { return nil }
-            let currentSeconds = calendar.component(.second, from: self.base)
+            let currentSeconds = calendar.component(.second, from: self)
             let secondsToAdd = value - currentSeconds
-            return calendar.date(byAdding: .second, value: secondsToAdd, to: self.base)
+            return calendar.date(byAdding: .second, value: secondsToAdd, to: self)
 
         case .minute:
-            let allowedRange = calendar.range(of: .minute, in: .hour, for: self.base)!
+            let allowedRange = calendar.range(of: .minute, in: .hour, for: self)!
             guard allowedRange.contains(value) else { return nil }
-            let currentMinutes = calendar.component(.minute, from: self.base)
+            let currentMinutes = calendar.component(.minute, from: self)
             let minutesToAdd = value - currentMinutes
-            return calendar.date(byAdding: .minute, value: minutesToAdd, to: self.base)
+            return calendar.date(byAdding: .minute, value: minutesToAdd, to: self)
 
         case .hour:
-            let allowedRange = calendar.range(of: .hour, in: .day, for: self.base)!
+            let allowedRange = calendar.range(of: .hour, in: .day, for: self)!
             guard allowedRange.contains(value) else { return nil }
-            let currentHour = calendar.component(.hour, from: self.base)
+            let currentHour = calendar.component(.hour, from: self)
             let hoursToAdd = value - currentHour
-            return calendar.date(byAdding: .hour, value: hoursToAdd, to: self.base)
+            return calendar.date(byAdding: .hour, value: hoursToAdd, to: self)
 
         case .day:
-            let allowedRange = calendar.range(of: .day, in: .month, for: self.base)!
+            let allowedRange = calendar.range(of: .day, in: .month, for: self)!
             guard allowedRange.contains(value) else { return nil }
-            let currentDay = calendar.component(.day, from: self.base)
+            let currentDay = calendar.component(.day, from: self)
             let daysToAdd = value - currentDay
-            return calendar.date(byAdding: .day, value: daysToAdd, to: self.base)
+            return calendar.date(byAdding: .day, value: daysToAdd, to: self)
 
         case .month:
-            let allowedRange = calendar.range(of: .month, in: .year, for: self.base)!
+            let allowedRange = calendar.range(of: .month, in: .year, for: self)!
             guard allowedRange.contains(value) else { return nil }
-            let currentMonth = calendar.component(.month, from: self.base)
+            let currentMonth = calendar.component(.month, from: self)
             let monthsToAdd = value - currentMonth
-            return calendar.date(byAdding: .month, value: monthsToAdd, to: self.base)
+            return calendar.date(byAdding: .month, value: monthsToAdd, to: self)
 
         case .year:
             guard value > 0 else { return nil }
-            let currentYear = calendar.component(.year, from: self.base)
+            let currentYear = calendar.component(.year, from: self)
             let yearsToAdd = value - currentYear
-            return calendar.date(byAdding: .year, value: yearsToAdd, to: self.base)
+            return calendar.date(byAdding: .year, value: yearsToAdd, to: self)
 
         default:
-            return calendar.date(bySetting: component, value: value, of: self.base)
+            return calendar.date(bySetting: component, value: value, of: self)
         }
     }
 
@@ -1073,15 +1067,15 @@ public extension DDExtension where Base == Date {
         /// 获取以指定日历组件为开头的日期
         ///
         ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
-        ///     let date2 = date.dd.beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
-        ///     let date3 = date.dd.beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
-        ///     let date4 = date.dd.beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
+        ///     let date2 = date.dd_beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
+        ///     let date3 = date.dd_beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
+        ///     let date4 = date.dd_beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
         ///
         /// - Note: 由于日期格式的原因, 显示因格式不一样
         /// - Parameter component: 日历组件
         /// - Returns: 结果日期
-        func beginning(of component: Calendar.Component) -> Date? {
-            if component == .day { return calendar.startOfDay(for: self.base) }
+        func dd_beginning(of component: Calendar.Component) -> Date? {
+            if component == .day { return calendar.startOfDay(for: self) }
 
             var components: Set<Calendar.Component> {
                 switch component {
@@ -1109,56 +1103,56 @@ public extension DDExtension where Base == Date {
             }
 
             guard !components.isEmpty else { return nil }
-            return calendar.date(from: calendar.dateComponents(components, from: self.base))
+            return calendar.date(from: calendar.dateComponents(components, from: self))
         }
     #endif
 
     /// 获取以指定日历组件为结尾的日期
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:27 PM"
-    ///     let date2 = date.dd.end(of:.day) // "Jan 12, 2017, 11:59 PM"
-    ///     let date3 = date.dd.end(of:.month) // "Jan 31, 2017, 11:59 PM"
-    ///     let date4 = date.dd.end(of:.year) // "Dec 31, 2017, 11:59 PM"
+    ///     let date2 = date.dd_end(of:.day) // "Jan 12, 2017, 11:59 PM"
+    ///     let date3 = date.dd_end(of:.month) // "Jan 31, 2017, 11:59 PM"
+    ///     let date4 = date.dd_end(of:.year) // "Dec 31, 2017, 11:59 PM"
     ///
     /// - Parameter component: 日历组件
     /// - Returns: 结果日期
-    func end(of component: Calendar.Component) -> Date? {
+    func dd_end(of component: Calendar.Component) -> Date? {
         switch component {
         case .second:
-            var date = self.adding(.second, value: 1)
+            var date = self.dd_adding(.second, value: 1)
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date))!
-            return date.dd.adding(.second, value: -1)
+            return date.dd_adding(.second, value: -1)
         case .minute:
-            var date = self.adding(.minute, value: 1)
+            var date = self.dd_adding(.minute, value: 1)
             let after = calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date))!
-            date = after.dd.adding(.second, value: -1)
+            date = after.dd_adding(.second, value: -1)
             return date
         case .hour:
-            var date = self.adding(.hour, value: 1)
+            var date = self.dd_adding(.hour, value: 1)
             let after = calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour], from: date))!
-            date = after.dd.adding(.second, value: -1)
+            date = after.dd_adding(.second, value: -1)
             return date
         case .day:
-            var date = self.adding(.day, value: 1)
+            var date = self.dd_adding(.day, value: 1)
             date = calendar.startOfDay(for: date)
-            return date.dd.adding(.second, value: -1)
+            return date.dd_adding(.second, value: -1)
         case .weekOfYear, .weekOfMonth:
-            var date = self.base
+            var date = self
             let beginningOfWeek = calendar.date(from:
                 calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date))!
-            date = beginningOfWeek.dd.adding(.day, value: 7).dd.adding(.second, value: -1)
+            date = beginningOfWeek.dd_adding(.day, value: 7).dd_adding(.second, value: -1)
             return date
         case .month:
-            var date = self.adding(.month, value: 1)
+            var date = self.dd_adding(.month, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month], from: date))!
-            date = after.dd.adding(.second, value: -1)
+            date = after.dd_adding(.second, value: -1)
             return date
         case .year:
-            var date = self.adding(.year, value: 1)
+            var date = self.dd_adding(.year, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year], from: date))!
-            date = after.dd.adding(.second, value: -1)
+            date = after.dd_adding(.second, value: -1)
             return date
         default:
             return nil
@@ -1173,7 +1167,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_year(_ year: Int) -> Self {
-        self.dd.year = year
+        self.dd_year = year
         return self
     }
 
@@ -1182,7 +1176,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_month(_ month: Int) -> Self {
-        self.dd.month = month
+        self.dd_month = month
         return self
     }
 
@@ -1191,7 +1185,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_day(_ day: Int) -> Self {
-        self.dd.day = day
+        self.dd_day = day
         return self
     }
 
@@ -1200,7 +1194,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_hour(_ hour: Int) -> Self {
-        self.dd.hour = hour
+        self.dd_hour = hour
         return self
     }
 
@@ -1209,7 +1203,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_minute(_ minute: Int) -> Self {
-        self.dd.minute = minute
+        self.dd_minute = minute
         return self
     }
 
@@ -1218,7 +1212,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_second(_ second: Int) -> Self {
-        self.dd.second = second
+        self.dd_second = second
         return self
     }
 
@@ -1227,7 +1221,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_millisecond(_ millisecond: Int) -> Self {
-        self.dd.millisecond = millisecond
+        self.dd_millisecond = millisecond
         return self
     }
 
@@ -1236,7 +1230,7 @@ extension Date {
     /// - Returns: `Self`
     @discardableResult
     mutating func dd_nanosecond(_ nanosecond: Int) -> Self {
-        self.dd.nanosecond = nanosecond
+        self.dd_nanosecond = nanosecond
         return self
     }
 }

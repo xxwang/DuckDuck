@@ -135,7 +135,7 @@ private extension UICollectionView {
 }
 
 public extension UICollectionView {
-    override static func `default`() -> UICollectionView {
+    static func `default`() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }

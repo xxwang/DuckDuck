@@ -116,7 +116,7 @@ public extension BinaryFloatingPoint {
     /// - Parameter places: 小数点后位置
     /// - Returns: `Self`
     func dd_truncate(_ places: Int) -> Self {
-        let divisor = pow(10.0, (Swift.max(0, places)).dd.as2Double)
+        let divisor = pow(10.0, (Swift.max(0, places)).dd_Double())
         let res = (self.dd_Double() * divisor).dd_floor() / divisor
         return res as! Self
     }
@@ -125,7 +125,7 @@ public extension BinaryFloatingPoint {
     /// - Parameter places: 小数点后位置
     /// - Returns: `Self`
     func dd_round(_ places: Int) -> Self {
-        let divisor = pow(10.0, (Swift.max(0, places)).dd.as2Double)
+        let divisor = pow(10.0, (Swift.max(0, places)).dd_Double())
         let res = (self.dd_Double() * divisor).rounded() / divisor
         return res as! Self
     }
@@ -136,7 +136,7 @@ public extension BinaryFloatingPoint {
     ///   - rule: 传入规则
     /// - Returns: `Self`
     func dd_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
-        let divisor = pow(10.0, (Swift.max(0, places)).dd.as2Double)
+        let divisor = pow(10.0, (Swift.max(0, places)).dd_Double())
         let res = (self.dd_Double() * divisor).rounded(rule) / divisor
         return res as! Self
     }

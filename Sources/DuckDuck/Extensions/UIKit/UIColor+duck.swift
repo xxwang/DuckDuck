@@ -14,7 +14,7 @@ public extension UIColor {
         let red = Int.random(in: 0 ... 255)
         let green = Int.random(in: 0 ... 255)
         let blue = Int.random(in: 0 ... 255)
-        return UIColor(dd_red: red.dd.as2CGFloat, dd_green: green.dd.as2CGFloat, dd_blue: blue.dd.as2CGFloat)!
+        return UIColor(dd_red: red.dd_CGFloat(), dd_green: green.dd_CGFloat(), dd_blue: blue.dd_CGFloat())!
     }
 
     /// (设置/获取)颜色的透明度
@@ -54,7 +54,7 @@ public extension UIColor {
         let red = Int(color >> 16) & mask
         let green = Int(color >> 8) & mask
         let blue = Int(color) & mask
-        self.init(dd_red: red.dd.as2CGFloat, dd_green: green.dd.as2CGFloat, dd_blue: blue.dd.as2CGFloat, dd_alpha: alpha)!
+        self.init(dd_red: red.dd_CGFloat(), dd_green: green.dd_CGFloat(), dd_blue: blue.dd_CGFloat(), dd_alpha: alpha)!
     }
 
     /// 使用`十六进制ARGB颜色字符串`创建`UIColor`
@@ -80,7 +80,7 @@ public extension UIColor {
         let green = (hexValue >> 8) & 0xFF
         let blue = hexValue & 0xFF
 
-        self.init(red: red.dd.as2CGFloat, green: green.dd.as2CGFloat, blue: blue.dd.as2CGFloat, alpha: alpha.dd.as2CGFloat / 255)
+        self.init(red: red.dd_CGFloat(), green: green.dd_CGFloat(), blue: blue.dd_CGFloat(), alpha: alpha.dd_CGFloat() / 255)
     }
 
     /// 使用16进制值和透明度创建`UIColor`

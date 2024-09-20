@@ -65,15 +65,15 @@ private class DDAssociateKeys {
 // MARK: - AssociatedAttributes
 extension UIBarButtonItem: AssociatedEventBlock {
     public typealias T = UIBarButtonItem
-    public var eventBlock: EventBlock? {
-        get { AssociatedObject.get(self, &AssociateKeys.kBlockKey) as? EventBlock }
-        set { AssociatedObject.set(self, &AssociateKeys.kBlockKey, newValue) }
+    public var dd_eventBlock: DDEventBlock? {
+        get { AssociatedObject.get(self, &DDAssociateKeys.kBlockKey) as? DDEventBlock }
+        set { AssociatedObject.set(self, &DDAssociateKeys.kBlockKey, newValue) }
     }
 
     /// 事件处理
     /// - Parameter event:事件发生者
     @objc func eventHandler(_ event: UIBarButtonItem) {
-        self.eventBlock?(event)
+        self.dd_eventBlock?(event)
     }
 }
 

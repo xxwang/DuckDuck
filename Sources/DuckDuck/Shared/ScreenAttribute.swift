@@ -16,7 +16,7 @@ public var kScreenHeight: CGFloat { return kScreenBounds.height }
 // MARK: - 安全区
 public var kSafeAreaInsets: UIEdgeInsets {
     if #available(iOS 11.0, *) {
-        return UIWindow.dd.window?.safeAreaInsets ?? .zero
+        return UIWindow.dd_window()?.safeAreaInsets ?? .zero
     }
     return .zero
 }
@@ -29,7 +29,7 @@ public var kSafeAreaRight: CGFloat { return kSafeAreaInsets.right }
 // MARK: - 导航栏
 public var kStatusBarHeight: CGFloat {
     if #available(iOS 13.0, *) {
-        if let statusbar = UIWindow.dd.window?.windowScene?.statusBarManager {
+        if let statusbar = UIWindow.dd_window()?.windowScene?.statusBarManager {
             return statusbar.statusBarFrame.size.height
         }
         return 0

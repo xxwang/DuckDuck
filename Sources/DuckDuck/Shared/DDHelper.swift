@@ -59,8 +59,8 @@ public extension DDHelper {
             isLandscape = UIApplication.shared.statusBarOrientation.isLandscape
         }
 
-        if let window = UIWindow.dd.window, isLandscape == false {
-            isLandscape = window.dd.width > window.dd.height
+        if let window = UIWindow.dd_window(), isLandscape == false {
+            isLandscape = window.dd_width > window.dd_height
         }
         return isLandscape
     }
