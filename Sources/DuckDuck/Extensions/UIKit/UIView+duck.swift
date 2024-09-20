@@ -1584,7 +1584,6 @@ public extension UIView {
 }
 
 // MARK: - 链式语法
-@objc
 public extension UIView {
     /// 把`self`添加到父视图
     /// - Parameter superview: 父视图
