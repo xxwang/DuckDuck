@@ -6,90 +6,118 @@
 //
 
 import Foundation
-import os.log
 
 public class DDLog {
-    /// 日志保存在内存里 主要存储产生错误的信息
-    public static func `default`(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        self.log(level: .default, message: message, file: file, line: line, function: function)
-    }
-
-    /// 日志保存在内存里 主要存储对分析错误有用的信息
+    /// 信息
     public static func info(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        self.log(level: .info, message: message, file: file, line: line, function: function)
+        self.log(logType: .info,
+                 message: message,
+                 file: file,
+                 line: line,
+                 function: function)
     }
 
-    /// 日志保存在内存中，在Debug状态下有用，主要用于开发阶段
+    /// 调试
     public static func debug(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        self.log(level: .debug, message: message, file: file, line: line, function: function)
+        self.log(logType: .debug,
+                 message: message,
+                 file: file,
+                 line: line,
+                 function: function)
     }
 
-    /// 日志一直保存在数据仓库中，结合 Activity 使用，会有一个完整日志处理链 用存集成级别错误 process-level
+    /// 成功
+    public static func success(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        self.log(logType: .success,
+                 message: message,
+                 file: file,
+                 line: line,
+                 function: function)
+    }
+
+    /// 失败
+    public static func fail(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        self.log(logType: .fail,
+                 message: message,
+                 file: file,
+                 line: line,
+                 function: function)
+    }
+
+    /// 错误
     public static func error(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        self.log(level: .error, message: message, file: file, line: line, function: function)
-    }
-
-    /// 日志一直保存在数据仓库中，结合 Activity 使用，会有一个完整日志处理链 多用于系统级别错误和多进程错误
-    public static func fault(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        self.log(level: .fault, message: message, file: file, line: line, function: function)
+        self.log(logType: .error,
+                 message: message,
+                 file: file,
+                 line: line,
+                 function: function)
     }
 }
 
 private extension DDLog {
-    @LoggerWrapper
-    private static var logger
-
-    private static func log(level: OSLogType, message: Any..., file: String, line: Int, function: String) {
-        let content = self.makeLog(level: level, message: message, file: file, line: line, function: function)
-        self.logger.log(level: level, "\(content)")
+    /// 输出到终端
+    private static func log(logType: DDLogType, message: Any..., file: String, line: Int, function: String) {
+        let content = self.makeLog(level: logType, message: message, file: file, line: line, function: function)
+        print(content)
     }
 
-    private static func makeLog(level: OSLogType, message: Any..., file: String, line: Int, function: String) -> String {
+    /// 组装日志
+    private static func makeLog(level: DDLogType, message: Any..., file: String, line: Int, function: String) -> String {
         let logEmoji = level.emoji
-        let logDesc = level.desc
+        let logDesc = level.description
         let logDate = level.date
         let fileName = (file as NSString).lastPathComponent
         let content = message.map { "\($0)" }.joined(separator: " ")
 
-        return "\(logEmoji)[\(logDesc)]:WG::[\(logDate)] [\(fileName)(\(line))] \(function): \(content)"
+        return "\(logEmoji)[\(logDesc)]:DD::[\(logDate)] [\(fileName)(\(line))] \(function): \(content)"
     }
 }
 
-private extension OSLogType {
+// MARK: - DDLogType
+private enum DDLogType {
+    case info // 信息
+    case debug // 调试
+    case success // 成功
+    case fail // 失败
+    case error // 错误
+
+    /// 表情
     var emoji: String {
         switch self {
         case .info:
             return "🌸"
         case .debug:
             return "👻"
-        case .error:
-            return "❌"
-        case .fault:
-            return "💣"
-        default:
+        case .success:
             return "✅"
+        case .fail:
+            return "❌"
+        case .error:
+            return "💣"
         }
     }
 
-    var desc: String {
+    /// 描述
+    var description: String {
         switch self {
         case .info:
             return "信息"
         case .debug:
             return "调试"
+        case .success:
+            return "成功"
+        case .fail:
+            return "失败"
         case .error:
             return "错误"
-        case .fault:
-            return "崩溃"
-        default:
-            return "正常"
         }
     }
 
+    /// 日期
     var date: String {
         let dateFormatter = DateFormatter()
         switch self {
-        case .error, .fault:
+        case .error:
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         default:
             dateFormatter.dateFormat = "HH:mm:ss.SSS"
