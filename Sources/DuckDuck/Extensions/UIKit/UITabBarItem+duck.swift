@@ -32,7 +32,7 @@ public extension UITabBarItem {
     /// - Returns:`Self`
     @discardableResult
     func dd_selectedImage(_ image: UIImage) -> Self {
-        self.selectedImage = image
+        self.selectedImage = image.withRenderingMode(.alwaysOriginal)
         return self
     }
 
