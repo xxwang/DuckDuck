@@ -25,22 +25,3 @@ public struct UserDefaultsWrapper<T> {
         self.userDefaults.register(defaults: [key: defaultValue])
     }
 }
-
-// MARK: - ObjectUserDefaultsWrapper
-@propertyWrapper
-public struct ObjectUserDefaultsWrapper<T> where T: Codable {
-    private let userDefaults = UserDefaults.standard
-    private let key: String
-    private let defaultValue: T?
-
-    public var wrappedValue: T? {
-        get { return self.userDefaults.dd_object(T.self, for: key) }
-        set { self.userDefaults.dd_set(newValue, for: key) }
-    }
-
-    public init(_ key: String, defaultValue: T?) {
-        self.key = key
-        self.defaultValue = defaultValue
-        self.userDefaults.register(defaults: [key: defaultValue ?? ""])
-    }
-}

@@ -174,6 +174,16 @@ public extension UITextField {
         return self
     }
 
+    
+    /// 设置是否开启安全模式
+    /// - Parameter isEnable: 是否开启
+    /// - Returns:`Self`
+    @discardableResult
+    func dd_secureTextEntry(_ isEnable: Bool) -> Self {
+        self.isSecureTextEntry = isEnable
+        return self
+    }
+    
     /// 设置左侧`view`模式
     /// - Parameter mode:模式
     /// - Returns:`Self`
