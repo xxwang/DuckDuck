@@ -1161,7 +1161,7 @@ public extension Date {
 }
 
 // MARK: - 链式语法
-extension Date {
+public extension Date {
     /// 设置年份
     /// - Parameter year: 年份
     /// - Returns: `Self`
