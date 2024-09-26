@@ -52,15 +52,10 @@ public extension UIApplication {
     /// 应用在商店中的链接地址
     /// - Parameter appID: 应用在商店中的ID
     /// - Returns: 地址字符串
-    func dd_homeUrlInAppStore(with appID: String) -> String {
-        "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
-    }
-
-    /// 应用在商店中的详情链接地址
-    /// - Parameter appID: 应用在商店中的ID
-    /// - Returns: 地址字符串
-    func dd_detailUrlInAppStore(with appID: String) -> String {
-        "http://itunes.apple.com/cn/lookup?id=\(appID)"
+    func dd_openAppStore(with appID: String) {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?mt=8") {
+            self.dd_openURL(url)
+        }
     }
 }
 
