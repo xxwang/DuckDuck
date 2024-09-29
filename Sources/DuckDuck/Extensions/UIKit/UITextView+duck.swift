@@ -215,9 +215,9 @@ private extension UITextView {
                                                object: self)
 
         self.dd_placeholderLabel = UILabel.default()
-            .dd_text(dd_placeholder)
-            .dd_font(dd_placeholderFont ?? .systemFont(ofSize: 14))
-            .dd_textColor(dd_placeholderColor ?? .gray)
+            .dd_text(self.dd_placeholder)
+            .dd_font(self.dd_placeholderFont ?? .systemFont(ofSize: 14))
+            .dd_textColor(self.dd_placeholderColor ?? .gray)
             .dd_numberOfLines(0)
             .dd_add2(self)
             .dd_isHidden(text.count > 0)
@@ -227,7 +227,7 @@ private extension UITextView {
     /// 为占位Label添加约束
     func dd_constraintPlaceholder() {
         guard let dd_placeholderLabel else { return }
-        let placeholderSize = dd_placeholderLabel.dd_textSize()
+        let placeholderSize = dd_placeholderLabel.dd_textSize(self.dd_width)
         dd_placeholderLabel.dd_frame(CGRect(origin: self.dd_placeholderOrigin.dd_or(.zero), size: placeholderSize))
     }
 
