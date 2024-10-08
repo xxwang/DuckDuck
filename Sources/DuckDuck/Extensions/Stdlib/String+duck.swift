@@ -1488,8 +1488,7 @@ public extension String {
     ///   - lineWidth: 最大宽度
     ///   - font: 字体
     /// - Returns: 结果`CGSize`
-    func dd_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
-                       font: UIFont) -> CGSize
+    func dd_stringSize(_ lineWidth: CGFloat = Double.greatestFiniteMagnitude, font: UIFont) -> CGSize
     {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         // .usesDeviceMetrics, .truncatesLastVisibleLine
@@ -1508,7 +1507,7 @@ public extension String {
     ///   - lineSpacing: 行间距
     ///   - wordSpacing: 字间距
     /// - Returns: 结果`CGSize`
-    func dd_attributedSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
+    func dd_attributedSize(_ lineWidth: CGFloat = Double.greatestFiniteMagnitude,
                            font: UIFont,
                            lineSpacing: CGFloat = 0,
                            wordSpacing: CGFloat = 0) -> CGSize

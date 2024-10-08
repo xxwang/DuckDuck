@@ -61,7 +61,7 @@ public extension NSAttributedString {
     /// 计算属性字符串在指定的宽度下的`CGSize`
     /// - Parameter lineWidth: 宽度
     /// - Returns: 结果`CGSize`
-    func dd_attributedSize(_ lineWidth: CGFloat = kScreenWidth) -> CGSize {
+    func dd_attributedSize(_ lineWidth: CGFloat = Double.greatestFiniteMagnitude) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         // .usesDeviceMetrics, .truncatesLastVisibleLine
         let size = self.boundingRect(
