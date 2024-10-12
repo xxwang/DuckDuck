@@ -82,8 +82,8 @@ public extension WKWebView {
     /// - Parameter script: 要注册的脚本
     /// - Returns: `Self`
     @discardableResult
-    func dd_injection(script: String) -> Self {
-        let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+    func dd_injection(script: String, injectionTime: WKUserScriptInjectionTime = .atDocumentStart, forMainFrameOnly: Bool = false) -> Self {
+        let userScript = WKUserScript(source: script, injectionTime: injectionTime, forMainFrameOnly: forMainFrameOnly)
         self.configuration.userContentController.addUserScript(userScript)
         return self
     }
