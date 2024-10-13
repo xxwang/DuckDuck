@@ -540,7 +540,9 @@ public extension UIView {
     /// - Parameters:
     ///   - radius: 圆角半径
     ///   - corners: 要设置的角
-    func dd_roundCorners(radius: CGFloat, corners: UIRectCorner) {
+    /// - Returns: `Self`
+    @discardableResult
+    func dd_roundCorners(radius: CGFloat, corners: UIRectCorner) -> Self {
         let maskPath = UIBezierPath(
             roundedRect: bounds,
             byRoundingCorners: corners,
@@ -549,7 +551,9 @@ public extension UIView {
 
         let shape = CAShapeLayer()
         shape.path = maskPath.cgPath
-        layer.mask = shape
+        self.layer.mask = shape
+
+        return self
     }
 }
 

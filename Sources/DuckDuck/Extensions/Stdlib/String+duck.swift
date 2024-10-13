@@ -1488,8 +1488,7 @@ public extension String {
     ///   - lineWidth: 最大宽度
     ///   - font: 字体
     /// - Returns: 结果`CGSize`
-    func dd_stringSize(_ lineWidth: CGFloat = Double.greatestFiniteMagnitude, font: UIFont) -> CGSize
-    {
+    func dd_stringSize(_ lineWidth: CGFloat = Double.greatestFiniteMagnitude, font: UIFont) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         // .usesDeviceMetrics, .truncatesLastVisibleLine
         let size = self.dd_NSString()
