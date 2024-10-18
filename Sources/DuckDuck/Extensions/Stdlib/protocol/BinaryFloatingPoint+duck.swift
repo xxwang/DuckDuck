@@ -66,7 +66,7 @@ public extension BinaryFloatingPoint {
 
     /// 转换为`String`
     func dd_String() -> String {
-        return String(self.dd_Double())
+        return "\(self)"
     }
 
     /// 转换为`CGPoint`

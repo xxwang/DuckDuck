@@ -155,7 +155,7 @@ public extension [String] {
     /// - Parameter separator: 分割符
     /// - Returns: 结果字符串
     func dd_string(separator: String = "") -> String {
-        self.joined(separator: separator)
+        return self.joined(separator: separator)
     }
 }
 

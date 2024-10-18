@@ -66,7 +66,7 @@ public extension BinaryInteger {
 
     /// 转换为`String`
     func dd_String() -> String {
-        return String(self)
+        return "\(self)"
     }
 
     /// 转换为`Character`

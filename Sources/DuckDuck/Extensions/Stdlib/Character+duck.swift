@@ -11,7 +11,7 @@ import Foundation
 public extension Character {
     /// 转换为`String`
     func dd_String() -> String {
-        return String(self)
+        return "\(self)"
     }
 }
 
