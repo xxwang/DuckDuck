@@ -1161,9 +1161,9 @@ public extension String {
     ///
     /// - Returns: 编码后的字符串
     @discardableResult
-    mutating func dd_urlEncode() -> String {
+    func dd_urlEncode() -> String {
         if let encoded = addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-            self = encoded
+            return encoded
         }
         return self
     }
@@ -1176,8 +1176,8 @@ public extension String {
     ///
     /// - Returns: 解码后的字符串
     @discardableResult
-    mutating func dd_urlDecode() -> String {
-        if let decoded = removingPercentEncoding { self = decoded }
+    func dd_urlDecode() -> String {
+        if let decoded = removingPercentEncoding { return decoded }
         return self
     }
 }
