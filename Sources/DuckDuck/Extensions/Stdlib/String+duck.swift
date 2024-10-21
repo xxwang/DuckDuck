@@ -1190,7 +1190,7 @@ public extension String {
     ///
     /// - Returns: base64加密结果
     func dd_base64Encoded() -> String? {
-        let plainData = dd_Data()
+        let plainData = self.dd_Data()
         return plainData?.base64EncodedString()
     }
 
