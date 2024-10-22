@@ -286,7 +286,7 @@ extension AuthorizationManager: CLLocationManagerDelegate {
     }
 }
 
-extension AuthorizationManager {
+public extension AuthorizationManager {
     /// 通知授权状态
     var notificationStatus: AuthorizationStatus {
         var status: AuthorizationStatus = .notDetermined
