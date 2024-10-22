@@ -288,10 +288,9 @@ extension AuthorizationManager: CLLocationManagerDelegate {
 
 public extension AuthorizationManager {
     /// 通知授权状态
-    var notificationStatus: AuthorizationStatus {
+    func fetchNotificationStatus(completion: @escaping (_ status: AuthorizationStatus)->Void) {
         var status: AuthorizationStatus = .notDetermined
 
-        let semaphore = DispatchSemaphore(value: 0)
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .notDetermined:
@@ -303,12 +302,9 @@ public extension AuthorizationManager {
             @unknown default:
                 status = .denied
             }
-            semaphore.signal()
+            
+            completion(status)
         }
-
-        semaphore.wait()
-
-        return status
     }
 
     /// 请求通知权限
