@@ -11,19 +11,22 @@ import Contacts
 import CoreLocation
 import Foundation
 import Photos
+import UserNotifications
 
 // MARK: - 状态回调
 public typealias AuthenticationBlock = (_ granted: Bool) -> Void
 
 // MARK: - AuthorizationStatus
 public enum AuthorizationStatus {
-    case notDetermined
-    case denied
-    case authorized
+    case notDetermined // 未授权
+    case denied // 已拒绝
+    case authorized // 已授权
 }
 
 public class AuthorizationManager: NSObject {
+    // 定位状态回调
     private var locationAuthorizationStatusBlock: AuthenticationBlock?
+    // 定位对象
     private var locationManager: CLLocationManager!
 
     public static let shared = AuthorizationManager()
@@ -36,6 +39,7 @@ public class AuthorizationManager: NSObject {
 
 // MARK: - IDFA
 public extension AuthorizationManager {
+    /// idfa状态
     var idfaStatus: AuthorizationStatus {
         if #available(iOS 14, *) {
             let status = ATTrackingManager.trackingAuthorizationStatus
@@ -59,6 +63,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求idfa授权
     func requestIDFA(resultBlock: AuthenticationBlock?) {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -80,6 +85,7 @@ import AVFoundation
 
 // MARK: - 麦克风
 public extension AuthorizationManager {
+    /// 麦克风权限
     var microphoneStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
         switch status {
@@ -94,6 +100,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求麦克风权限
     func requestMicrophone(resultBlock: AuthenticationBlock?) {
         AVCaptureDevice.requestAccess(for: .audio) { granted in
             DispatchQueue.main.async {
@@ -105,6 +112,7 @@ public extension AuthorizationManager {
 
 // MARK: - 相机
 public extension AuthorizationManager {
+    /// 相机权限
     var cameraStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status {
@@ -119,6 +127,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求相机权限
     func requestCamera(resultBlock: AuthenticationBlock?) {
         AVCaptureDevice.requestAccess(for: .video) { granted in
             DispatchQueue.main.async {
@@ -130,6 +139,7 @@ public extension AuthorizationManager {
 
 // MARK: - 相册
 public extension AuthorizationManager {
+    /// 相册权限
     var photoLibraryStatus: AuthorizationStatus {
         var status: PHAuthorizationStatus
         if #available(iOS 14, *) {
@@ -150,6 +160,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求相册权限
     func requestPhotoLibrary(resultBlock: AuthenticationBlock?) {
         if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
@@ -171,6 +182,7 @@ public extension AuthorizationManager {
 
 // MARK: - 通讯录
 public extension AuthorizationManager {
+    /// 通讯录权限
     var contactsStatus: AuthorizationStatus {
         let status = CNContactStore.authorizationStatus(for: .contacts)
         switch status {
@@ -185,6 +197,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求通讯录权限
     func requestContacts(resultBlock: AuthenticationBlock?) {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { granted, error in
@@ -203,16 +216,18 @@ public extension AuthorizationManager {
 
 // MARK: - LocationAuthorizationAction
 public enum LocationAuthorizationAction {
-    case front
-    case back
+    case front // 前台
+    case back // 后台
 }
 
 // MARK: - 定位
 public extension AuthorizationManager {
+    /// 是否开启定位服务
     var locationServicesEnabled: Bool {
         return CLLocationManager.locationServicesEnabled()
     }
 
+    /// 定位权限
     var locationStatus: AuthorizationStatus {
         var status: CLAuthorizationStatus
         if #available(iOS 14.0, *) {
@@ -232,6 +247,7 @@ public extension AuthorizationManager {
         }
     }
 
+    /// 请求定位权限
     func requestLocation(action: LocationAuthorizationAction, completion: AuthenticationBlock?) {
         self.locationAuthorizationStatusBlock = completion
 
@@ -265,6 +281,43 @@ extension AuthorizationManager: CLLocationManagerDelegate {
             DispatchQueue.main.async {
                 block(granted)
                 self.locationAuthorizationStatusBlock = nil
+            }
+        }
+    }
+}
+
+extension AuthorizationManager {
+    /// 通知授权状态
+    func notificationStatys() -> AuthorizationStatus {
+        var status: AuthorizationStatus = .notDetermined
+
+        let semaphore = DispatchSemaphore(value: 0)
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                status = .notDetermined
+            case .denied:
+                status = .denied
+            case .authorized, .provisional, .ephemeral:
+                status = .authorized
+            @unknown default:
+                status = .denied
+            }
+            semaphore.signal()
+        }
+
+        semaphore.wait()
+
+        return status
+    }
+
+    /// 请求通知权限
+    func requestNotification(resultBlock: AuthenticationBlock?) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if error != nil {
+                resultBlock?(false)
+            } else {
+                resultBlock?(granted)
             }
         }
     }
