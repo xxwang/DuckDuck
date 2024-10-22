@@ -288,7 +288,7 @@ extension AuthorizationManager: CLLocationManagerDelegate {
 
 extension AuthorizationManager {
     /// 通知授权状态
-    func notificationStatys() -> AuthorizationStatus {
+    var notificationStatus: AuthorizationStatus {
         var status: AuthorizationStatus = .notDetermined
 
         let semaphore = DispatchSemaphore(value: 0)
