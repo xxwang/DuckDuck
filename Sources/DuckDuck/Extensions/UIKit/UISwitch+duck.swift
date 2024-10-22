@@ -13,8 +13,35 @@ public extension UISwitch {
     /// - Parameter animated: 是否动画
     /// - Returns: `Self`
     @discardableResult
-    func dd_toggle(animated: Bool = true) -> Self {
+    func dd_toggle(_ animated: Bool = true) -> Self {
         self.setOn(!self.isOn, animated: animated)
+        return self
+    }
+
+    /// 打开时颜色
+    /// - Parameter color: 颜色
+    /// - Returns: `Self`
+    @discardableResult
+    func dd_openTintColor(_ color: UIColor?) -> Self {
+        self.onTintColor = color
+        return self
+    }
+
+    /// 关闭时颜色
+    /// - Parameter color: 颜色
+    /// - Returns: `Self`
+    @discardableResult
+    func dd_closeTintColor(_ color: UIColor?) -> Self {
+        self.tintColor = color
+        return self
+    }
+
+    /// 开关滑块的颜色
+    /// - Parameter color: 颜色
+    /// - Returns: `Self`
+    @discardableResult
+    func dd_thumbTintColor(_ color: UIColor?) -> Self {
+        self.thumbTintColor = color
         return self
     }
 }
