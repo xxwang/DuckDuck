@@ -18,16 +18,15 @@ public extension UISwitch {
         return self
     }
 
-        /// 设置开关状态
-        /// - Parameter isOn: 是否开启
-        /// - Returns: `Self`
-        @discardableResult
-        func dd_isOn(_ isOn: Bool = true) -> Self {
-            self.isOn = isOn
-            return self
-        }
+    /// 设置开关状态
+    /// - Parameter isOn: 是否开启
+    /// - Returns: `Self`
+    @discardableResult
+    func dd_isOn(_ isOn: Bool) -> Self {
+        self.isOn = isOn
+        return self
+    }
 
-    
     /// 打开时颜色
     /// - Parameter color: 颜色
     /// - Returns: `Self`
