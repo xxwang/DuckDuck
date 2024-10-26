@@ -76,8 +76,8 @@ public extension UIView {
 
     /// 以`frame`为基准的中心点
     var dd_center: CGPoint {
-        get { return self.dd_center }
-        set { self.dd_center = newValue }
+        get { return self.center }
+        set { self.center = newValue }
     }
 
     /// 控件中心点`x`
