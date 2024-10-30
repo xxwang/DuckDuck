@@ -1401,7 +1401,7 @@ public extension String {
     func dd_appendByTemp() -> String {
         let directory = NSTemporaryDirectory()
         self.dd_createDirs(directory)
-        return directory + "/\(self)"
+        return directory + "\(self)"
     }
 }
 
