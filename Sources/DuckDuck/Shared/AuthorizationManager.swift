@@ -307,8 +307,8 @@ public extension AuthorizationManager {
     }
 
     /// 请求通知权限
-    func requestNotification(resultBlock: AuthenticationBlock?) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+    func requestNotification(options: UNAuthorizationOptions = [.alert, .sound, .badge], resultBlock: AuthenticationBlock?) {
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
             if error != nil {
                 resultBlock?(false)
             } else {
