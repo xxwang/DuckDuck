@@ -135,3 +135,29 @@ public extension Collection where Element: FloatingPoint {
         return self.reduce(.zero, +) / Self.Element(self.count)
     }
 }
+
+// MARK: - JSON
+public extension Collection {
+    /// 将集合类型转成`String`
+    /// - Parameter prettify: 是否美化`JSON`样式
+    /// - Returns: `String`
+    func dd_String(prettify: Bool = false) -> String? {
+        if let data = self.dd_Data(prettify: prettify) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+
+    /// 集合类型转`Data`
+    /// - Parameter prettify: 是否美化`JSON`样式
+    /// - Returns: `Data`
+    func dd_Data(prettify: Bool = false) -> Data? {
+        let isValidJSONObject = JSONSerialization.isValidJSONObject(self)
+        let options: JSONSerialization.WritingOptions = (prettify == true && isValidJSONObject) ? .prettyPrinted : []
+        do {
+            return try JSONSerialization.data(withJSONObject: self, options: options)
+        } catch {
+            return nil
+        }
+    }
+}

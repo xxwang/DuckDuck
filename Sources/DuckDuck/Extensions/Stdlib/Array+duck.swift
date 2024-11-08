@@ -374,3 +374,63 @@ public extension Array where Element: NSAttributedString {
         return dd_joined(separator: separator)
     }
 }
+
+// MARK: - Array<Encodable>
+public extension Array where Element: Encodable {
+    /// 将`Array<Encodable>`的数组转换为`Data`
+    /// - Returns: `Data`
+    func dd_Data() -> Data? {
+        do {
+            return try JSONEncoder().encode(self)
+        } catch {
+            return nil
+        }
+    }
+
+    /// 将`Array<Encodable>`的数组转换为`String`
+    /// - Returns: `String`
+    func dd_String() -> String? {
+        if let data = self.dd_Data() {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
+    }
+}
+
+// MARK: - Array<Decodable>
+public extension Array where Element: Decodable {
+    /// 将`[[String: Any]]`反序列化为遵守`Decodable`协议的模型对象数组
+    /// - Parameter dictionary: 要反序列化的`[[String: Any]]`
+    /// - Returns: 遵守`Decodable`协议的模型对象数组
+    static func dd_models(_ array: [[String: Any]]?) -> Self where Self: Decodable {
+        guard let array else { return [] }
+        do {
+            let data = try JSONSerialization.data(withJSONObject: array)
+            return self.dd_models(data)
+        } catch {
+            return []
+        }
+    }
+
+    /// 将`String`反序列化为遵守`Decodable`协议的模型对象数组
+    /// - Parameter string: 要反序列化的`String`
+    /// - Returns: 遵守`Decodable`协议的模型对象数组
+    static func dd_models(_ string: String?) -> Self where Self: Decodable {
+        if let data = string?.dd_Data() {
+            return self.dd_models(data)
+        }
+        return []
+    }
+
+    /// 将`Data`反序列化为遵守`Decodable`协议的模型对象数组
+    /// - Parameter data: 要反序列化的`Data`
+    /// - Returns: 遵守`Decodable`协议的模型对象数组
+    static func dd_models(_ data: Data?) -> Self where Self: Decodable {
+        guard let data else { return [] }
+        do {
+            return try JSONDecoder().decode(Self.self, from: data)
+        } catch {
+            return []
+        }
+    }
+}

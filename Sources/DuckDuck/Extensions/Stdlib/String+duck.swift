@@ -2293,3 +2293,45 @@ public extension String {
         return String(repeating: rhs, count: lhs)
     }
 }
+
+// MARK: - 转字典/字典数组/JSON格式化
+public extension String {
+    /// 将`String`转为`[[String: Any]]`
+    /// - Returns: `[[String: Any]]`
+    func dd_JSONObjects() -> [[String: Any]]? {
+        guard let data = self.dd_Data() else { return nil }
+        do {
+            return try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
+        } catch {
+            return nil
+        }
+    }
+
+    /// 将`String`转为`[String: Any]`
+    /// - Returns: `[String: Any]`
+    func dd_JSONObject() -> [String: Any]? {
+        guard let data = self.dd_Data() else { return nil }
+        do {
+            return try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        } catch {
+            return nil
+        }
+    }
+
+    /// 格式化并返回`JSON`格式的字符串
+    /// - Returns: `String`
+    func dd_JSONFormat() -> String {
+        guard let data = self.dd_Data() else { return self }
+        do {
+            let anyObject = try JSONSerialization.jsonObject(with: data)
+            let jsonData = try JSONSerialization.data(withJSONObject: anyObject, options: .prettyPrinted)
+            return String(data: jsonData, encoding: .utf8)?.replacingOccurrences(
+                of: "\\/",
+                with: "/",
+                options: .caseInsensitive, range: nil
+            ) ?? self
+        } catch {
+            return self
+        }
+    }
+}
