@@ -27,7 +27,7 @@ public extension Collection {
     /// - Parameter index: 元素下标索引
     /// - Returns: 下标对应元素
     subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
+        return self.indices.contains(index) ? self[index] : nil
     }
 }
 
