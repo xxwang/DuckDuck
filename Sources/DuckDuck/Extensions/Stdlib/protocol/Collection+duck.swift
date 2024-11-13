@@ -143,7 +143,7 @@ public extension Collection {
     /// - Returns: `String`
     func dd_String(prettify: Bool = false) -> String? {
         if let data = self.dd_Data(prettify: prettify) {
-            return String(data: data, encoding: .utf8)
+            return data.dd_String()
         }
         return nil
     }

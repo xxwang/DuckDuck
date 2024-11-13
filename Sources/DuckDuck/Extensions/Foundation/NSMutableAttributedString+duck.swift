@@ -21,7 +21,7 @@ public extension NSMutableAttributedString {
     /// - Parameter string: 内容
     /// - Returns: `Self`
     @discardableResult
-    func dd_string(_ string: String) -> Self {
+    func dd_String(_ string: String) -> Self {
         self.dd_attributedString(string.dd_NSAttributedString())
         return self
     }

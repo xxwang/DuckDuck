@@ -150,11 +150,11 @@ public extension Array {
 public extension [String] {
     /// 数组转字符转
     ///
-    ///     ["1", "2", "3"].dd_string(separator: "-") //"1-2-3"
+    ///     ["1", "2", "3"].dd_String(separator: "-") //"1-2-3"
     ///
     /// - Parameter separator: 分割符
     /// - Returns: 结果字符串
-    func dd_string(separator: String = "") -> String {
+    func dd_String(separator: String = "") -> String {
         return self.joined(separator: separator)
     }
 }
@@ -391,7 +391,7 @@ public extension Array where Element: Encodable {
     /// - Returns: `String`
     func dd_String() -> String? {
         if let data = self.dd_Data() {
-            return String(data: data, encoding: .utf8)
+            return data.dd_String()
         }
         return nil
     }

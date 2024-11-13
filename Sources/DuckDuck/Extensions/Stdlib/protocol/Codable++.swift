@@ -24,7 +24,7 @@ public extension Encodable {
     /// - Returns: `String`类型数据
     func dd_String() -> String? {
         if let data = self.dd_Data() {
-            return String(data: data, encoding: .utf8)
+            return data.dd_String()
         }
         return nil
     }
