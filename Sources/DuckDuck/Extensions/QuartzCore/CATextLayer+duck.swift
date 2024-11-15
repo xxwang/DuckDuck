@@ -59,7 +59,7 @@ public extension CATextLayer {
     /// - Parameter scale: 内容缩放(默认:`UIScreen.main.scale`)
     /// - Returns: `Self`
     @discardableResult
-    func dd_contentsScale(_ scale: CGFloat = UIScreen.main.scale) -> Self {
+    @MainActor func dd_contentsScale(_ scale: CGFloat = UIScreen.main.scale) -> Self {
         self.contentsScale = scale
         return self
     }

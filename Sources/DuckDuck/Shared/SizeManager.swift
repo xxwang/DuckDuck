@@ -10,7 +10,7 @@ import UIKit
 // MARK: - SizeManager
 public class SizeManager {
     /// 设计图屏幕尺寸
-    fileprivate static var sketchSize = CGSize(width: 375, height: 812)
+    nonisolated(unsafe) private static var sketchSize = CGSize(width: 375, height: 812)
 }
 
 public extension SizeManager {

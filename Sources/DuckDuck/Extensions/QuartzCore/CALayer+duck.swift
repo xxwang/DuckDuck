@@ -554,7 +554,7 @@ public extension CALayer {
     /// 添加到父视图
     /// - Parameter superView: 父视图(`UIView`)
     /// - Returns: `Self`
-    @discardableResult
+    @MainActor @discardableResult
     func dd_add2(_ superView: UIView) -> Self {
         superView.layer.addSublayer(self)
         return self

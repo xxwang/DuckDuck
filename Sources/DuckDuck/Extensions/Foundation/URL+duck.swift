@@ -24,7 +24,7 @@ public extension URL {
 public extension URL {
     /// 检测应用是否能打开这个`URL`
     /// - Returns: `Bool`
-    func dd_canOpen() -> Bool {
+    @MainActor func dd_canOpen() -> Bool {
         return UIApplication.shared.canOpenURL(self)
     }
 
