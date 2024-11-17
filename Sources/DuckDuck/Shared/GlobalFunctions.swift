@@ -1,5 +1,5 @@
 //
-//  Functions.swift
+//  GlobalFunctions.swift
 //
 //
 //  Created by 王哥 on 2024/7/9.
@@ -22,7 +22,7 @@ public func dd_configure<T: AnyObject>(_ object: T, closure: (T) -> Void) {
 ///   - model: 遵守`Codable`协议的模型类型
 ///   - json: 需要转模型的`JSON`数据
 /// - Returns: 遵守`Codable`协议的模型对象
-public func dd_JSON2Model<T: Codable>(_ model: T.Type, _ json: Any?) -> T? {
+public func dd_JSONToModel<T: Codable>(_ model: T.Type, _ json: Any?) -> T? {
     guard let json else { return nil }
 
     let jsonData: Data?
