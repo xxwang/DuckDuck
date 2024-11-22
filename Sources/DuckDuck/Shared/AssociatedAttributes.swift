@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: - 关联事件回调属性
-public protocol AssociatedEventBlock {
+public protocol EventCallbackable {
     associatedtype T
-    typealias DDEventBlock = (T?) -> Void
-    var dd_eventBlock: DDEventBlock? { get set }
+    typealias EventCallback = (T?) -> Void
+    var eventCallback: EventCallback? { get set }
 }

@@ -20,7 +20,7 @@ public extension Timer {
     convenience init(timeInterval: TimeInterval,
                      repeats: Bool,
                      forMode mode: RunLoop.Mode,
-                     block:@escaping ((Timer) -> Void))
+                     block: @escaping ((Timer) -> Void))
     {
         if #available(iOS 10.0, *) {
             self.init(timeInterval: timeInterval,
