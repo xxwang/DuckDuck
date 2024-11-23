@@ -542,7 +542,7 @@ public extension UIView {
     ///   - corners: 要设置的角
     /// - Returns: `Self`
     @discardableResult
-    func dd_roundCorners(radius: CGFloat, corners: UIRectCorner) -> Self {
+    func dd_corner(radius: CGFloat, corners: UIRectCorner) -> Self {
         let maskPath = UIBezierPath(
             roundedRect: bounds,
             byRoundingCorners: corners,
@@ -600,7 +600,7 @@ public extension UIView {
                                shadowRadius: CGFloat = 3)
     {
         // 添加圆角
-        self.dd_roundCorners(radius: radius, corners: corners)
+        self.dd_corner(radius: radius, corners: corners)
 
         // 设置阴影
         let subLayer = CALayer()

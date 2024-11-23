@@ -815,7 +815,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - radius:角半径(可选),如果未指定,结果图像将为圆形
     /// - Returns:带圆角的`UIImage`
-    func dd_roundCorners(radius: CGFloat? = nil) -> UIImage? {
+    func dd_corner(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height) / 2
         let cornerRadius: CGFloat
         if let radius, radius > 0, radius <= maxRadius {
@@ -841,7 +841,7 @@ public extension UIImage {
     ///   - radius:圆角大小 (默认:3.0,图片大小)
     ///   - corners:切圆角的方式
     /// - Returns:剪切后的图片
-    func dd_roundCorners(size: CGSize?,
+    func dd_corner(size: CGSize?,
                          radius: CGFloat,
                          corners: UIRectCorner = .allCorners) -> UIImage?
     {
@@ -882,7 +882,7 @@ public extension UIImage {
     ///   - borderColor:边框颜色
     ///   - backgroundColor:背景颜色
     /// - Returns:最终图片
-    func dd_roundCorners(size: CGSize,
+    func dd_corner(size: CGSize,
                          radius: CGFloat,
                          corners: UIRectCorner = .allCorners,
                          borderWidth: CGFloat,
@@ -939,7 +939,7 @@ public extension UIImage {
     /// 设置圆形图片
     /// - Returns:圆形图片
     func dd_roundImage() -> UIImage? {
-        dd_roundCorners(size: size,
+        self.dd_corner(size: size,
                         radius: (size.width < size.height ? size.width : size.height) / 2.0,
                         corners: .allCorners)
     }
