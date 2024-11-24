@@ -218,9 +218,12 @@ public extension URL {
                     }
                 }
             } else {
-                imageGenerator.generateCGImagesAsynchronously(forTimes: [time]) { actualTime, cgImage, cmTime, result, error in
-                    // TODO: - <#内容#>
+                var actualTime = CMTimeMake(value: 0, timescale: 0)
+                guard let cgImage = try? imageGenerator.copyCGImage(at: cmTime, actualTime: &actualTime) else {
+                    continuation.resume(returning: nil)
+                    return
                 }
+                continuation.resume(returning: UIImage(cgImage: cgImage))
             }
         }
     }
