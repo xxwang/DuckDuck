@@ -15,7 +15,7 @@ private class AssociateKeys {
 }
 
 // MARK: - 限制连续点击时间间隔
-private extension UIControl {
+extension UIControl {
     /// 重复点击限制时间
     var dd_hitTime: Double? {
         get { AssociatedObject.get(self, key: &AssociateKeys.HitTimerKey) as? Double }
@@ -51,9 +51,6 @@ private extension UIControl {
         if let block = self.onEvent { block(sender) }
     }
 }
-
-// MARK: - 方法
-public extension UIControl {}
 
 // MARK: - 链式语法
 public extension UIControl {

@@ -7,15 +7,19 @@
 
 import UIKit
 
-// MARK: - 关联键
-@MainActor
-private class AssociateKeys {
-    static var eventKey = UnsafeRawPointer(bitPattern: ("UISlider" + "eventKey").hashValue)
+// MARK: - 类型
+extension UISlider {
+    // MARK: - 关联键
+    @MainActor
+    private class AssociateKeys {
+        static var eventKey = UnsafeRawPointer(bitPattern: ("UISlider" + "eventKey").hashValue)
+    }
 }
 
 // MARK: - EventHandler
 extension UISlider: @preconcurrency EventHandler {
     public typealias EventHandlerParams = Float
+
     public var onEvent: EventHandlerCallback? {
         get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? EventHandlerCallback }
         set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }

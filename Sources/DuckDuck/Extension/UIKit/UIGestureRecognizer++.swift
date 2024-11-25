@@ -7,24 +7,26 @@
 
 import UIKit
 
-// MARK: - 关联键
-@MainActor
-private class AssociateKeys {
-    static var eventKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "eventKey").hashValue)
-    static var stateChangeKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "stateChangeKey").hashValue)
+public extension UIGestureRecognizer {
+    // MARK: - 关联键
+    @MainActor
+    class AssociateKeys {
+        static var eventKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "eventKey").hashValue)
+        static var stateChangeKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "stateChangeKey").hashValue)
+    }
 }
 
 // MARK: - 私有方法
-private extension UIGestureRecognizer {
-    // 私有方法，手势识别成功后的回调
-    @objc private func dd_onRecognizedClosure() {
+extension UIGestureRecognizer {
+    /// 手势识别成功后的回调
+    @objc func dd_onRecognizedClosure() {
         if let closure = AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
             closure(self)
         }
     }
 
-    // 私有方法，手势状态变化时调用
-    @objc private func dd_onStateChange() {
+    /// 手势状态变化时调用
+    @objc func dd_onStateChange() {
         if let closure = AssociatedObject.get(self, key: &AssociateKeys.stateChangeKey) as? (UIGestureRecognizer.State) -> Void {
             closure(self.state)
         }
