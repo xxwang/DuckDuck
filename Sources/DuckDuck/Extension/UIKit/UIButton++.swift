@@ -30,6 +30,20 @@ public extension UIButton {
     }
 }
 
+// MARK: - 事件关联
+extension UIButton {
+    /// 事件回调
+    public var dd_onEvent_button: ((UIButton) -> Void)? {
+        get { return AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIButton) -> Void }
+        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+    }
+
+    /// 按钮点击回调
+    @objc func dd_tappedAction(_ button: UIButton) {
+        self.dd_onEvent_button?(button)
+    }
+}
+
 // MARK: - 按钮布局管理
 public extension UIButton {
     /// 调整按钮图片和标题的相对位置
@@ -251,22 +265,6 @@ public extension UIButton {
     }
 }
 
-// MARK: - EventHandler
-extension UIButton: @preconcurrency EventHandler {
-    public typealias EventHandlerParams = UIButton
-
-    /// 事件回调
-    public var onEvent: EventHandlerCallback? {
-        get { return AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? EventHandlerCallback }
-        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
-    }
-
-    /// 按钮点击回调
-    @objc func dd_tappedAction(_ button: UIButton) {
-        self.onEvent?(button)
-    }
-}
-
 // MARK: - 链式语法
 public extension UIButton {
     /// 设置按钮标题
@@ -476,8 +474,8 @@ public extension UIButton {
     /// }
     /// ```
     @discardableResult
-    func dd_onTapped(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
-        self.onEvent = closure
+    func dd_onEvent(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
+        self.dd_onEvent_button = closure
         self.addTarget(self, action: #selector(dd_tappedAction), for: .touchUpInside)
         return self
     }

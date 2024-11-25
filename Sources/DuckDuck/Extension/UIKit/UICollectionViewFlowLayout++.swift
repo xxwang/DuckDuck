@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - UICollectionViewFlowLayout 链式语法扩展
+// MARK: - UICollectionViewFlowLayout 链式语法
 public extension UICollectionViewFlowLayout {
     /// 设置滚动方向间距
     /// - Parameter spacing: 滚动方向的间距

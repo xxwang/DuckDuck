@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - 事件处理协议
-public protocol EventHandler {
+public protocol OnEventHandler {
     /// 关联回调闭包参数类型
-    associatedtype EventHandlerParams
+    associatedtype OnEvent
 
     /// 回调闭包别名
-    typealias EventHandlerCallback = (EventHandlerParams?) -> Void
+    typealias OnEventHandlerCallback = (OnEvent?) -> Void
 
     /// 事件处理闭包
-    var onEvent: EventHandlerCallback? { get set }
+    var onEvent: OnEventHandlerCallback? { get set }
 }

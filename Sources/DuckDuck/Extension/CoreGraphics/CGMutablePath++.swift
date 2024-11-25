@@ -26,7 +26,7 @@ public extension CGMutablePath {
     }
 }
 
-// MARK: - 链式语法扩展
+// MARK: - 链式语法
 public extension CGMutablePath {
     /// 添加路径
     ///

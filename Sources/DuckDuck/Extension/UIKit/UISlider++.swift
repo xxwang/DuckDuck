@@ -16,20 +16,20 @@ extension UISlider {
     }
 }
 
-// MARK: - EventHandler
+// MARK: - 事件关联
 @MainActor
-public extension EventHandler where Self: UISlider {
-    typealias EventHandlerParams = Float
-    var onEvent: EventHandlerCallback? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? EventHandlerCallback }
+extension UISlider {
+    /// 事件回调
+    var dd_onEvent_slider: ((Float) -> Void)? {
+        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (Float) -> Void }
         set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
     }
 
     /// 事件处理
     /// - Parameter event: 事件发生者
     /// 处理 `UISlider` 值改变的事件。
-    internal func dd_sliderValueChanged(_ sender: UISlider) {
-        self.onEvent?(sender.value)
+    @objc func dd_sliderValueChanged(_ sender: UISlider) {
+        self.dd_onEvent_slider?(sender.value)
     }
 }
 
@@ -183,8 +183,8 @@ public extension UISlider {
     ///     print("Slider value changed: \(value)")
     /// })
     /// ```
-    func dd_onEvent(_ closure: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
-        self.onEvent = closure
+    func dd_onEvent(_ closure: ((Float) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
+        self.dd_onEvent_slider = closure
         self.addTarget(self, action: #selector(dd_sliderValueChanged), for: controlEvent)
         return self
     }

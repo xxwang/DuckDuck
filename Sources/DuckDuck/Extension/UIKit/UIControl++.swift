@@ -7,35 +7,28 @@
 
 import UIKit
 
-// MARK: - 关联键
-@MainActor
-private class AssociateKeys {
-    static var callbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
-    static var hitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
-}
-
-// MARK: - EventHandler
-extension UIControl: @preconcurrency EventHandler {
-    public typealias EventHandlerParams = UIControl
-    public var onEvent: EventHandlerCallback? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? EventHandlerCallback }
-        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+// MARK: - 类型
+extension UIControl {
+    // MARK: - 关联键
+    @MainActor
+    class AssociateKeys {
+        static var callbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
+        static var hitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
     }
 }
 
-// MARK: - 限制连续点击时间间隔
-public extension UIControl {
+// MARK: - 事件关联
+extension UIControl {
+    /// 事件回调
+    var dd_onEvent_control: ((UIControl) -> Void)? {
+        get { AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIControl) -> Void }
+        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+    }
+
     /// 重复点击限制时间
     var dd_hitTime: Double? {
         get { AssociatedObject.get(self, key: &AssociateKeys.hitTimerKey) as? Double }
         set { AssociatedObject.set(self, key: &AssociateKeys.hitTimerKey, value: newValue, policy: .OBJC_ASSOCIATION_ASSIGN) }
-    }
-
-    /// 设置指定时长(单位:秒)内不可重复点击
-    /// - Parameter hitTime:时长
-    func dd_doubleHit(hitTime: Double = 1) {
-        self.dd_hitTime = hitTime
-        self.addTarget(self, action: #selector(self.dd_preventDoubleHit), for: .touchUpInside)
     }
 
     /// 防止重复点击实现
@@ -51,7 +44,17 @@ public extension UIControl {
     /// 事件处理方法
     /// - Parameter sender:事件发起者
     @objc func dd_controlEventHandler(_ sender: UIControl) {
-        if let block = self.onEvent { block(sender) }
+        if let block = self.dd_onEvent_control { block(sender) }
+    }
+}
+
+// MARK: - 限制连续点击时间间隔
+public extension UIControl {
+    /// 设置指定时长(单位:秒)内不可重复点击
+    /// - Parameter hitTime:时长
+    func dd_doubleHit(hitTime: Double = 1) {
+        self.dd_hitTime = hitTime
+        self.addTarget(self, action: #selector(self.dd_preventDoubleHit), for: .touchUpInside)
     }
 }
 
@@ -197,8 +200,8 @@ public extension UIControl {
     /// }
     /// ```
     @discardableResult
-    func dd_onEvent(_ closure: EventHandlerCallback?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
-        self.onEvent = closure
+    @objc func dd_onEvent(_ closure: ((UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
+        self.dd_onEvent_control = closure
         self.addTarget(self, action: #selector(dd_controlEventHandler(_:)), for: controlEvent)
         return self
     }

@@ -1305,7 +1305,7 @@ public extension [UIColor] {
     }
 }
 
-// MARK: - 链式语法扩展
+// MARK: - 链式语法
 public extension UIColor {
     /// 设置颜色的透明度（链式调用）
     /// - Parameter alpha: 透明度（范围 0.0 ~ 1.0）

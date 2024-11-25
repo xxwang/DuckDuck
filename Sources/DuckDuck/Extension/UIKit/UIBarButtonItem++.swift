@@ -7,7 +7,30 @@
 
 import UIKit
 
-import UIKit
+// MARK: - 类型
+extension UIBarButtonItem {
+    // MARK: - 关联键
+    @MainActor
+    class AssociateKeys {
+        /// 用于存储事件回调的关联键
+        static var eventKey = UnsafeRawPointer(bitPattern: ("UIBarButtonItem" + "eventKey").hashValue)
+    }
+}
+
+// MARK: - 事件关联
+extension UIBarButtonItem {
+    /// 事件回调
+    public var dd_onEvent_barButtonItem: ((UIBarButtonItem) -> Void)? {
+        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (UIBarButtonItem) -> Void }
+        set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
+    }
+
+    /// 事件触发时的处理方法
+    /// - Parameter event: 事件发生的 `UIBarButtonItem`
+    @objc func eventHandler(_ event: UIBarButtonItem) {
+        self.dd_onEvent_barButtonItem?(event)
+    }
+}
 
 // MARK: - 构造方法
 public extension UIBarButtonItem {
@@ -76,29 +99,6 @@ public extension UIBarButtonItem {
         button.dd_spacing(3)
 
         self.init(customView: button)
-    }
-}
-
-// MARK: - 关联键
-@MainActor
-private class AssociateKeys {
-    /// 用于存储事件回调的关联键
-    static var eventKey = UnsafeRawPointer(bitPattern: ("UIBarButtonItem" + "eventKey").hashValue)
-}
-
-// MARK: - EventHandler
-extension UIBarButtonItem: @preconcurrency EventHandler {
-    public typealias EventHandlerParams = UIBarButtonItem
-
-    public var onEvent: EventHandlerCallback? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? EventHandlerCallback }
-        set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
-    }
-
-    /// 事件触发时的处理方法
-    /// - Parameter event: 事件发生的 `UIBarButtonItem`
-    @objc func eventHandler(_ event: UIBarButtonItem) {
-        self.onEvent?(event)
     }
 }
 
@@ -246,7 +246,7 @@ public extension UIBarButtonItem {
     /// ```
     @discardableResult
     func dd_onEvent(_ closure: ((UIBarButtonItem?) -> Void)?) -> Self {
-        self.onEvent = closure
+        self.dd_onEvent_barButtonItem = closure
         self.dd_addTarget(self, action: #selector(eventHandler(_:)))
         return self
     }

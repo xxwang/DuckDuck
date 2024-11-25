@@ -130,7 +130,7 @@ public extension DDExtension where Base: UISlider {
     /// })
     /// ```
     func onEvent(_ closure: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
-        self.base.onEvent = closure
+        self.base.dd_onEvent_slider = closure
         self.base.addTarget(self.base, action: #selector(self.base.dd_sliderValueChanged), for: controlEvent)
         return self
     }

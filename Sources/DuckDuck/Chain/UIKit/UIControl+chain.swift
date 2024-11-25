@@ -151,7 +151,7 @@ public extension DDExtension where Base: UIControl {
     /// ```
     @discardableResult
     func onEvent(_ closure: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
-        self.base.onEvent = closure
+        self.base.dd_onEvent_control = closure
         self.base.addTarget(self.base, action: #selector(self.base.dd_controlEventHandler(_:)), for: controlEvent)
         return self
     }

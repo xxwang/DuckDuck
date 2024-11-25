@@ -212,13 +212,13 @@ public extension DDExtension where Base: UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.dd.onTapped { button in
+    /// button.dd.onEvent { button in
     ///     // 处理按钮点击事件
     /// }
     /// ```
     @discardableResult
-    func onTapped(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
-        self.base.onEvent = closure
+    func onEvent(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
+        self.base.dd_onEvent_button = closure
         self.base.addTarget(self, action: #selector(self.base.dd_tappedAction), for: .touchUpInside)
         return self
     }

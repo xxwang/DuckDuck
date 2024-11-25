@@ -154,7 +154,7 @@ public extension DDExtension where Base: UIBarButtonItem {
     /// ```
     @discardableResult
     func onEvent(_ closure: ((UIBarButtonItem?) -> Void)?) -> Self {
-        self.base.onEvent = closure
+        self.base.dd_onEvent_barButtonItem = closure
         self.base.dd.addTarget(self.base, action: #selector(self.base.eventHandler(_:)))
         return self
     }
