@@ -1808,7 +1808,6 @@ public extension String {
     func isHasContinuousNumber() -> Bool {
         let chars = self.dd_toCharacters()
 
-        var previousWasDigit = false // 标记前一个字符是否为数字
         var consecutiveCount = 0 // 连续数字的计数
 
         for c in chars {

@@ -2045,6 +2045,9 @@ public extension UIView {
     func dd_add2(_ superview: UIView?) -> Self {
         if let superview {
             superview.addSubview(self)
+            if self.needsLayoutUpdate {
+                self.calculateLayout()
+            }
         }
         return self
     }

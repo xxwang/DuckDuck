@@ -49,7 +49,7 @@ public extension NSNumber {
         // 是否使用千位分隔符
         formatter.usesGroupingSeparator = usesGroupingSeparator
         // 格式化后的字符串
-        var formattedString = formatter.string(from: self)
+        let formattedString = formatter.string(from: self)
 
         // 添加前缀和后缀
         if let result = formattedString {
