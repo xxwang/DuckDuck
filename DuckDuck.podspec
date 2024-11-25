@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   # 项目名称
   spec.name         = "DuckDuck"
   # 项目版本号
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   # 项目介绍
   spec.summary      = "常用工具库"
 
@@ -32,10 +32,10 @@ Pod::Spec.new do |spec|
   spec.module_name = 'DuckDuck'
 
   # 指定语言版本
-  spec.swift_version = '5'
+  spec.swift_version = '6'
 
   # 项目源文件
-  spec.source       = { :git => "https://github.com/xxwang/DuckDuck.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/xxwang/DuckDuck.git", :branch => 'swift6' }
 
   # 文件目录
   spec.source_files  = 'Sources/DuckDuck/**/*.{c,h,m,swift}'
