@@ -303,7 +303,7 @@ public extension WKWebView {
     func dd_customErrorPage(html: String) -> Self {
         let script = "document.body.innerHTML = '\(html)';"
         Task {
-            let result = try? await self.dd_executeJavaScript(script: script)
+            _ = try? await self.dd_executeJavaScript(script: script)
         }
         return self
     }
@@ -317,7 +317,7 @@ public extension WKWebView {
     func dd_scrollToAnchor(anchor: String) -> Self {
         let script = "document.getElementById('\(anchor)').scrollIntoView();"
         Task {
-            let result = try? await self.dd_executeJavaScript(script: script)
+            _ = try? await self.dd_executeJavaScript(script: script)
         }
         return self
     }

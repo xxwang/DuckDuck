@@ -81,13 +81,17 @@ public extension Collection {
     /// ```
     /// - Parameter operation: 作用于每个元素的异步闭包
     func dd_parallelForEach(_ operation: @escaping @Sendable (Element) async -> Void) async {
-        await withTaskGroup(of: Void.self) { group in
-            for element in self {
-                group.addTask {
-                    await operation(element)
-                }
-            }
+        for element in self {
+            await operation(element)
         }
+//        await withTaskGroup(of: Void.self) { group in
+//            group.addTask {
+//                for element in self {
+//                    await operation(element)
+//                }
+//            }
+//        }
+        // TODO: - <#内容#>
     }
 
     /// 按指定大小对集合切片并执行异步操作
@@ -122,6 +126,7 @@ public extension Collection where Element: Equatable {
     /// ```
     /// - Parameter item: 指定元素
     /// - Returns: 符合条件的索引数组
+    @MainActor
     func dd_indices(of item: Element) -> [Index] {
         self.dd_indices { $0 == item } ?? []
     }

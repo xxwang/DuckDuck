@@ -34,16 +34,3 @@ public class DDExtension<Base> {
         self.base = base
     }
 }
-
-// MARK: - UIView 扩展
-extension UIView: DDExtensionable {}
-public extension DDExtension where Base: UIView {
-    /// 为类型提供的功能
-    /// - Parameter closure: 配置闭包
-    /// - Returns: `Self`
-    @discardableResult
-    func apply(_ closure: (Base) -> Void) -> Self {
-        closure(base)
-        return self
-    }
-}

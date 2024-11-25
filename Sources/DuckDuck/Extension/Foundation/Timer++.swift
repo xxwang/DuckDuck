@@ -213,7 +213,7 @@ public extension Timer {
     /// - Parameter mode: `RunLoop`模式
     /// - Returns: 当前定时器，支持链式调用
     @discardableResult
-    func dd_mode(_ mode: RunLoop.Mode) -> Timer {
+    func dd_mode(_ mode: RunLoop.Mode) -> Self {
         RunLoop.current.add(self, forMode: mode)
         return self
     }
@@ -221,7 +221,7 @@ public extension Timer {
     /// 启动定时器
     /// - Returns: 当前定时器，支持链式调用
     @discardableResult
-    func dd_start() -> Timer {
+    func dd_start() -> Self {
         self.fire()
         return self
     }

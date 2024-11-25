@@ -7,24 +7,27 @@
 
 import UIKit
 
-// MARK: - 关联键
-@MainActor
-private class AssociateKeys {
-    static var callbackKey = UnsafeRawPointer(bitPattern: ("UIButton" + "callbackKey").hashValue)
-    static var expandSizeKey = UnsafeRawPointer(bitPattern: ("UIButton" + "expandSizeKey").hashValue)
-}
+// MARK: - 类型
+public extension UIButton {
+    // MARK: - 关联键
+    @MainActor
+    class AssociateKeys {
+        static var callbackKey = UnsafeRawPointer(bitPattern: ("UIButton" + "callbackKey").hashValue)
+        static var expandSizeKey = UnsafeRawPointer(bitPattern: ("UIButton" + "expandSizeKey").hashValue)
+    }
 
-/// 按钮的所有状态
-private var buttonAllStates: [UIControl.State] {
-    return [.normal, .selected, .highlighted, .disabled]
-}
+    /// 按钮的所有状态
+    var buttonAllStates: [UIControl.State] {
+        return [.normal, .selected, .highlighted, .disabled]
+    }
 
-// 枚举定义按钮图片和标题的布局方式
-public enum ImagePosition {
-    case top // 图片位于标题上方
-    case bottom // 图片位于标题下方
-    case left // 图片位于标题左侧
-    case right // 图片位于标题右侧
+    // 枚举定义按钮图片和标题的布局方式
+    enum ImagePosition {
+        case top // 图片位于标题上方
+        case bottom // 图片位于标题下方
+        case left // 图片位于标题左侧
+        case right // 图片位于标题右侧
+    }
 }
 
 // MARK: - 按钮布局管理

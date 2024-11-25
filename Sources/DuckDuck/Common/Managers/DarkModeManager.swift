@@ -348,28 +348,42 @@ public extension DarkModeManager {
     /// imageView.image = image
     /// ```
     func imageForCurrentMode(light: String, dark: String) -> UIImage? {
-        if #available(iOS 13.0, *) {
-            // 创建特征配置
-            let lightTraitCollection = UITraitCollection(userInterfaceStyle: .light)
-            let darkTraitCollection = UITraitCollection(userInterfaceStyle: .dark)
+        if #available(iOS 17.0, *) {
+            // 获取当前的界面模式（浅色或深色模式）
+            let userInterfaceStyle = UITraitCollection.current.userInterfaceStyle
 
-            // 用字符串创建图片
+            // 用字符串创建图片，先尝试从图片资源中获取，如果没有，再尝试用系统图片
             let lightImage = UIImage(named: light) ?? UIImage(systemName: light)
             let darkImage = UIImage(named: dark) ?? UIImage(systemName: dark)
 
-            // 获取图片并为浅色和深色模式分别配置
-            guard let lightImage = lightImage?.withConfiguration(UIImage.SymbolConfiguration(traitCollection: lightTraitCollection)),
-                  let darkImage = darkImage?.withConfiguration(UIImage.SymbolConfiguration(traitCollection: darkTraitCollection))
-            else {
+            // 根据当前模式设置图片
+            let lightTraitCollection = UITraitCollection(userInterfaceStyle: .light)
+            let darkTraitCollection = UITraitCollection(userInterfaceStyle: .dark)
+
+            let lightImageConfig = lightImage?.withConfiguration(UIImage.SymbolConfiguration(traitCollection: lightTraitCollection))
+            let darkImageConfig = darkImage?.withConfiguration(UIImage.SymbolConfiguration(traitCollection: darkTraitCollection))
+
+            if userInterfaceStyle == .dark {
+                return darkImageConfig ?? darkImage
+            } else {
+                return lightImageConfig ?? lightImage
+            }
+
+        } else if #available(iOS 13.0, *) {
+            // iOS 13 至 iOS 16，直接根据界面模式返回适当的图片
+            let userInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+
+            let lightImage = UIImage(named: light) ?? UIImage(systemName: light)
+            let darkImage = UIImage(named: dark) ?? UIImage(systemName: dark)
+
+            if userInterfaceStyle == .dark {
+                return darkImage
+            } else {
                 return lightImage
             }
 
-            // 将深色模式图片注册到浅色图片的 imageAsset 中
-            lightImage.imageAsset?.register(darkImage, with: darkTraitCollection)
-
-            // 根据当前系统界面模式返回适当的图片（浅色或深色）
-            return lightImage.imageAsset?.image(with: UITraitCollection.current) ?? lightImage
         } else {
+            // iOS 13 以下，直接返回 light 或 dark 图片
             return isLightModeEnabled ? UIImage(systemName: light) : UIImage(systemName: dark)
         }
     }

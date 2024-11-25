@@ -6,7 +6,8 @@ struct DuckDuck {
 }
 
 extension DuckDuck {
-    @MainActor static func sayHello() {
+    @MainActor
+    static func sayHello() {
         Logger.info(self.text)
     }
 }

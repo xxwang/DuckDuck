@@ -1375,30 +1375,43 @@ public extension Date {
 // MARK: - 链式语法
 public extension Date {
     /// 设置年份
-    /// - Parameter year: 年份
-    /// - Returns: `Self`
+    /// - Parameter year: 年份，整数值，表示日期的年份部分
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_year(2024)
+    /// ```
     @discardableResult
     mutating func dd_year(_ year: Int) -> Self {
-        let components = calendar.dateComponents([.year], from: self)
         let updatedDate = calendar.date(bySetting: .year, value: year, of: self)!
         self = updatedDate
         return self
     }
 
     /// 设置月份
-    /// - Parameter month: 月份
-    /// - Returns: `Self`
+    /// - Parameter month: 月份，整数值，表示日期的月份部分（1 至 12）
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_month(12)
+    /// ```
     @discardableResult
     mutating func dd_month(_ month: Int) -> Self {
-        let components = calendar.dateComponents([.month], from: self)
         let updatedDate = calendar.date(bySetting: .month, value: month, of: self)!
         self = updatedDate
         return self
     }
 
     /// 设置天
-    /// - Parameter day: 天
-    /// - Returns: `Self`
+    /// - Parameter day: 天，整数值，表示日期的天数部分
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_day(15)
+    /// ```
     @discardableResult
     mutating func dd_day(_ day: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .day, value: day, of: self)!
@@ -1407,8 +1420,13 @@ public extension Date {
     }
 
     /// 设置小时
-    /// - Parameter hour: 小时
-    /// - Returns: `Self`
+    /// - Parameter hour: 小时，整数值，表示日期的小时部分（0 至 23）
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_hour(18)
+    /// ```
     @discardableResult
     mutating func dd_hour(_ hour: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .hour, value: hour, of: self)!
@@ -1417,8 +1435,13 @@ public extension Date {
     }
 
     /// 设置分钟
-    /// - Parameter minute: 分钟
-    /// - Returns: `Self`
+    /// - Parameter minute: 分钟，整数值，表示日期的分钟部分（0 至 59）
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_minute(30)
+    /// ```
     @discardableResult
     mutating func dd_minute(_ minute: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .minute, value: minute, of: self)!
@@ -1427,8 +1450,13 @@ public extension Date {
     }
 
     /// 设置秒
-    /// - Parameter second: 秒
-    /// - Returns: `Self`
+    /// - Parameter second: 秒，整数值，表示日期的秒数部分（0 至 59）
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_second(45)
+    /// ```
     @discardableResult
     mutating func dd_second(_ second: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .second, value: second, of: self)!
@@ -1437,8 +1465,13 @@ public extension Date {
     }
 
     /// 设置毫秒
-    /// - Parameter millisecond: 毫秒
-    /// - Returns: `Self`
+    /// - Parameter millisecond: 毫秒，整数值，表示日期的毫秒部分（0 至 999）
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_millisecond(500)
+    /// ```
     @discardableResult
     mutating func dd_millisecond(_ millisecond: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .nanosecond, value: millisecond * 1_000_000, of: self)!
@@ -1447,8 +1480,13 @@ public extension Date {
     }
 
     /// 设置纳秒
-    /// - Parameter nanosecond: 纳秒
-    /// - Returns: `Self`
+    /// - Parameter nanosecond: 纳秒，整数值，表示日期的纳秒部分
+    /// - Returns: 返回更新后的日期对象，支持链式调用
+    /// - Example:
+    /// ```swift
+    /// var date = Date()
+    /// date.dd_nanosecond(500_000_000)
+    /// ```
     @discardableResult
     mutating func dd_nanosecond(_ nanosecond: Int) -> Self {
         let updatedDate = calendar.date(bySetting: .nanosecond, value: nanosecond, of: self)!
