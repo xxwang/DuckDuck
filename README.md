@@ -1,6 +1,21 @@
 # DuckDuck
 
-// MARK: - 使用方法
+`.dd.`使用方法
+
+```Swift
+let view = UIView()
+view.dd.backgroundColor(.red)
+```
+
+`dd_`使用方法
+
+```Swift
+let view = UIView()
+view.dd_backgroundColor(.red)
+```
+
+`.dd.`自定义扩展
+
 ```
 // 要扩展的类型需要先遵守协议
 extension [类型]: DDExtensionable {}
@@ -10,23 +25,9 @@ public extension DDExtension where Base: [类型] {
     //TODO: - 具体方法
 }
 
-// 调用方法
-类型实例.dd.方法名() //实例方法
-类型.dd.方法名() //类型方法
+//实例方法调用
+类型实例.dd.方法名()
 
-
-// MARK: - 演示
-class Person {
-    var name: String = "..."
-}
-
-extension Person: DDExtensionable {}
-extension DDExtension where Base: Person {
-   func printName() {
-       print(self.base.name)
-   }
-}
-
-let person = Person()
-person.dd.printName()
+//类型方法调用
+类型.dd.方法名()
 ```
