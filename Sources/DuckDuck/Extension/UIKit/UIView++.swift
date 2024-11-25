@@ -1728,6 +1728,33 @@ public extension UIView {
         // 返回截图
         return viewImage
     }
+
+    /// 将当前视图渲染为图片，并根据指定的区域裁剪。
+    ///
+    /// 此方法会将整个视图渲染为一张图片，并根据提供的裁剪区域 (`rect`) 返回裁剪后的图片。
+    ///
+    /// - Parameter rect: 需要裁剪的区域，相对于视图坐标的矩形。
+    /// - Returns: 裁剪后的图片（`UIImage`），如果渲染失败或裁剪区域无效则返回 `nil`。
+    ///
+    /// 示例：
+    /// ```swift
+    /// let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    /// view.backgroundColor = .red
+    /// let cropRect = CGRect(x: 50, y: 50, width: 100, height: 100)
+    ///
+    /// if let croppedImage = view.dd_viewToImage(rect: cropRect) {
+    ///     print("裁剪成功，图片大小：\(croppedImage.size)")
+    /// } else {
+    ///     print("裁剪失败")
+    /// }
+    /// ```
+    func dd_viewToImage(rect: CGRect) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+        let viewImage = renderer.image { context in
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        }
+        return viewImage.dd_cropped(to: rect)
+    }
 }
 
 // MARK: - 过渡动画效果
