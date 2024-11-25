@@ -10,22 +10,25 @@ import UIKit
 // MARK: - 关联键
 @MainActor
 private class AssociateKeys {
-    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
-    static var HitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
+    static var callbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
+    static var hitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
+}
+
+// MARK: - EventHandler
+extension UIControl: @preconcurrency EventHandler {
+    public typealias EventHandlerParams = UIControl
+    public var onEvent: EventHandlerCallback? {
+        get { AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? EventHandlerCallback }
+        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+    }
 }
 
 // MARK: - 限制连续点击时间间隔
-extension UIControl {
+public extension UIControl {
     /// 重复点击限制时间
     var dd_hitTime: Double? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.HitTimerKey) as? Double }
-        set { AssociatedObject.set(self, key: &AssociateKeys.HitTimerKey, value: newValue, policy: .OBJC_ASSOCIATION_ASSIGN) }
-    }
-
-    /// 点击回调
-    var onEvent: ((_ control: UIControl) -> Void)? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.CallbackKey) as? ((_ control: UIControl) -> Void) }
-        set { AssociatedObject.set(self, key: &AssociateKeys.CallbackKey, value: newValue) }
+        get { AssociatedObject.get(self, key: &AssociateKeys.hitTimerKey) as? Double }
+        set { AssociatedObject.set(self, key: &AssociateKeys.hitTimerKey, value: newValue, policy: .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 设置指定时长(单位:秒)内不可重复点击
@@ -194,7 +197,7 @@ public extension UIControl {
     /// }
     /// ```
     @discardableResult
-    func dd_onEvent(_ closure: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
+    func dd_onEvent(_ closure: EventHandlerCallback?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
         self.onEvent = closure
         self.addTarget(self, action: #selector(dd_controlEventHandler(_:)), for: controlEvent)
         return self

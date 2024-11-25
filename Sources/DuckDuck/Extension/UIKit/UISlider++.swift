@@ -11,16 +11,16 @@ import UIKit
 extension UISlider {
     // MARK: - 关联键
     @MainActor
-    private class AssociateKeys {
+    class AssociateKeys {
         static var eventKey = UnsafeRawPointer(bitPattern: ("UISlider" + "eventKey").hashValue)
     }
 }
 
 // MARK: - EventHandler
-extension UISlider: @preconcurrency EventHandler {
-    public typealias EventHandlerParams = Float
-
-    public var onEvent: EventHandlerCallback? {
+@MainActor
+public extension EventHandler where Self: UISlider {
+    typealias EventHandlerParams = Float
+    var onEvent: EventHandlerCallback? {
         get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? EventHandlerCallback }
         set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
     }
@@ -28,7 +28,7 @@ extension UISlider: @preconcurrency EventHandler {
     /// 事件处理
     /// - Parameter event: 事件发生者
     /// 处理 `UISlider` 值改变的事件。
-    @objc func dd_sliderValueChanged(_ sender: UISlider) {
+    internal func dd_sliderValueChanged(_ sender: UISlider) {
         self.onEvent?(sender.value)
     }
 }
