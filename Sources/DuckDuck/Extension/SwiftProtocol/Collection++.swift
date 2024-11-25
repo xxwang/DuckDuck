@@ -84,14 +84,6 @@ public extension Collection {
         for element in self {
             await operation(element)
         }
-//        await withTaskGroup(of: Void.self) { group in
-//            group.addTask {
-//                for element in self {
-//                    await operation(element)
-//                }
-//            }
-//        }
-        // TODO: - <#内容#>
     }
 
     /// 按指定大小对集合切片并执行异步操作
