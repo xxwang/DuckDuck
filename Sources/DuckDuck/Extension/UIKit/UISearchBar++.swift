@@ -143,10 +143,7 @@ public extension UISearchBar {
     /// ```
     @discardableResult
     func dd_delegate(_ delegate: (any UISearchBarDelegate)?) -> Self {
-        // 设置 UISearchBar 的代理
         self.delegate = delegate
-
-        // 返回当前实例以支持链式调用
         return self
     }
 }
