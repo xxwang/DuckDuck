@@ -8,7 +8,10 @@
 import UIKit
 
 // MARK: - Creatable 协议
-public protocol Creatable: NSObject {}
+public protocol Creatable: NSObject {
+    static func create<T: Creatable>(_ aClass: T.Type) -> T
+    static func `default`<T: Creatable>(_ aClass: T.Type) -> T
+}
 
 // MARK: - Creatable默认实现
 public extension Creatable {
