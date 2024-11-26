@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIBarButtonItem {
+    /// 纯净的创建方法
+    static func create<T: UIBarButtonItem>(_ aClass: T.Type = UIBarButtonItem.self) -> T {
+        let barButtonItem = UIBarButtonItem()
+        return barButtonItem as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIBarButtonItem>(_ aClass: T.Type = UIBarButtonItem.self) -> T {
+        let barButtonItem: UIBarButtonItem = self.create()
+        return barButtonItem as! T
+    }
+}
+
 // MARK: - 类型
 extension UIBarButtonItem {
     // MARK: - 关联键

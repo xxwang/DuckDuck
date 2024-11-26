@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UITextView {
+    /// 纯净的创建方法
+    static func create<T: UITextView>(_ aClass: T.Type = UITextView.self) -> T {
+        let textView = UITextView()
+        return textView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UITextView>(_ aClass: T.Type = UITextView.self) -> T {
+        let textView: UITextView = self.create()
+        return textView as! T
+    }
+}
+
 // MARK: - 方法
 public extension UITextView {
     /// 限制输入的字数

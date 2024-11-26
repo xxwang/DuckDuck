@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIImageView {
+    /// 纯净的创建方法
+    static func create<T: UIImageView>(_ aClass: T.Type = UIImageView.self) -> T {
+        let imageView = UIImageView()
+        return imageView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIImageView>(_ aClass: T.Type = UIImageView.self) -> T {
+        let imageView: UIImageView = self.create()
+        return imageView as! T
+    }
+}
+
 // MARK: - 方法
 public extension UIImageView {
     /// 添加模糊效果

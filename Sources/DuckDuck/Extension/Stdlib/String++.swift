@@ -1235,6 +1235,7 @@ public extension String {
     ///   - lineWidth: 行宽
     ///   - font: 字体
     /// - Returns: 字符串数组
+    @MainActor
     func dd_wrapLines(toWidth lineWidth: CGFloat, font: UIFont) -> [String] {
         let style = NSMutableParagraphStyle.default()
             .dd_lineBreakMode(.byCharWrapping)

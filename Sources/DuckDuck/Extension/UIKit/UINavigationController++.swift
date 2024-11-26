@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UINavigationController {
+    /// 纯净的创建方法
+    static func create<T: UINavigationController>(_ aClass: T.Type = UINavigationController.self) -> T {
+        let navigationController = UINavigationController()
+        return navigationController as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UINavigationController>(_ aClass: T.Type = UINavigationController.self) -> T {
+        let navigationController: UINavigationController = self.create()
+        return navigationController as! T
+    }
+}
+
 // MARK: - 方法
 public extension UINavigationController {
     /// 把控制器压入导航栈中
@@ -119,6 +134,23 @@ public extension UINavigationController {
     @discardableResult
     func dd_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
         self.setNavigationBarHidden(hidden, animated: animated)
+        return self
+    }
+
+    /// 设置视图控制器栈，并且返回当前导航控制器
+    /// - Parameters:
+    ///   - viewControllers: 一个 `UIViewController` 数组，表示导航控制器的视图控制器栈。
+    ///   - animated: 一个布尔值，表示是否使用动画来设置视图控制器。
+    /// - Returns: 当前的 `UINavigationController` 实例，支持链式调用。
+    ///
+    /// 示例用法：
+    /// ```swift
+    /// let navigationController = UINavigationController()
+    /// navigationController.dd_viewControllers([vc1, vc2, vc3], animated: true)
+    /// ```
+    @discardableResult
+    func dd_viewControllers(_ viewControllers: [UIViewController], animated: Bool = false) -> Self {
+        self.setViewControllers(viewControllers, animated: animated)
         return self
     }
 }

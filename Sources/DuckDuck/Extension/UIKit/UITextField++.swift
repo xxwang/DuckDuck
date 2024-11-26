@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UITextField {
+    /// 纯净的创建方法
+    static func create<T: UITextField>(_ aClass: T.Type = UITextField.self) -> T {
+        let textField = UITextField()
+        return textField as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UITextField>(_ aClass: T.Type = UITextField.self) -> T {
+        let textField: UITextField = self.create()
+        return textField as! T
+    }
+}
+
 // MARK: - 计算属性
 public extension UITextField {
     /// 内容是否为空

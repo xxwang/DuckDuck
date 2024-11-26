@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UICollectionViewCell {
+    /// 纯净的创建方法
+    static func create<T: UICollectionViewCell>(_ aClass: T.Type = UICollectionViewCell.self) -> T {
+        let cell = UICollectionViewCell()
+        return cell as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UICollectionViewCell>(_ aClass: T.Type = UICollectionViewCell.self) -> T {
+        let cell: UICollectionViewCell = self.create()
+        return cell as! T
+    }
+}
+
 // MARK: - 计算属性
 public extension UICollectionViewCell {
     /// 获取 `UICollectionViewCell` 所在的 `UICollectionView`

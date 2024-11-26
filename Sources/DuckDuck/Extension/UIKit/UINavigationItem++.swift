@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UINavigationItem {
+    /// 纯净的创建方法
+    static func create<T: UINavigationItem>(_ aClass: T.Type = UINavigationItem.self) -> T {
+        let navigationItem = UINavigationItem()
+        return navigationItem as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UINavigationItem>(_ aClass: T.Type = UINavigationItem.self) -> T {
+        let navigationItem: UINavigationItem = self.create()
+        return navigationItem as! T
+    }
+}
+
 // MARK: - 方法
 public extension UINavigationItem {
     /// 设置导航栏 `titleView` 为图片

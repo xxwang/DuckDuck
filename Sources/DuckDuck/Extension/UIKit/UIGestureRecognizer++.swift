@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIGestureRecognizer {
+    /// 纯净的创建方法
+    static func create<T: UIGestureRecognizer>(_ aClass: T.Type = UIGestureRecognizer.self) -> T {
+        let gesture = UIGestureRecognizer()
+        return gesture as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIGestureRecognizer>(_ aClass: T.Type = UIGestureRecognizer.self) -> T {
+        let gesture: UIGestureRecognizer = self.create()
+        return gesture as! T
+    }
+}
+
 public extension UIGestureRecognizer {
     // MARK: - 关联键
     @MainActor

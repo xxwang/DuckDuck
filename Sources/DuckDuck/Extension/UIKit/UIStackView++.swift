@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIStackView {
+    /// 纯净的创建方法
+    static func create<T: UIStackView>(_ aClass: T.Type = UIStackView.self) -> T {
+        let stackView = UIStackView()
+        return stackView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIStackView>(_ aClass: T.Type = UIStackView.self) -> T {
+        let stackView: UIStackView = self.create()
+        return stackView as! T
+    }
+}
+
 // MARK: - UIStackView 初始化
 public extension UIStackView {
     /// 使用`UIView`数组和其他参数初始化`UIStackView`

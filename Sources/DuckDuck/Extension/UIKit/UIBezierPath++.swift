@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIBezierPath {
+    /// 纯净的创建方法
+    static func create<T: UIBezierPath>(_ aClass: T.Type = UIBezierPath.self) -> T {
+        let bezierPath = UIBezierPath()
+        return bezierPath as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIBezierPath>(_ aClass: T.Type = UIBezierPath.self) -> T {
+        let bezierPath: UIBezierPath = self.create()
+        return bezierPath as! T
+    }
+}
+
 // MARK: - 构造方法
 public extension UIBezierPath {
     /// 使用从一个`CGPoint`到另一个`CGPoint`的直线初始化`UIBezierPath`

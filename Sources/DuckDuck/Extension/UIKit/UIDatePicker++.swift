@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIDatePicker {
+    /// 纯净的创建方法
+    static func create<T: UIDatePicker>(_ aClass: T.Type = UIDatePicker.self) -> T {
+        let datePicker = UIDatePicker(frame: .zero)
+        return datePicker as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIDatePicker>(_ aClass: T.Type = UIDatePicker.self) -> T {
+        let datePicker: UIDatePicker = self.create()
+        return datePicker as! T
+    }
+}
+
 // MARK: - 链式语法
 public extension UIDatePicker {
     /// 设置时区

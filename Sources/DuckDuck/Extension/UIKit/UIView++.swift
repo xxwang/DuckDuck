@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIView {
+    /// 纯净的创建方法
+    static func create<T: UIView>(_ aClass: T.Type = UIView.self) -> T {
+        let view = UIView()
+        return view as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIView>(_ aClass: T.Type = UIView.self) -> T {
+        let view: UIView = self.create()
+        return view as! T
+    }
+}
+
 // MARK: - 布局相关计算属性
 public extension UIView {
     /// 控件的`frame`
@@ -1801,21 +1816,6 @@ public extension UIView {
         UIView.animate(withDuration: duration, animations: {
             self.alpha = 0
         }, completion: completion)
-    }
-}
-
-// MARK: - Creatable
-extension Creatable where Self: UIView {
-    @MainActor
-    static func create() -> UIView {
-        let view = UIView()
-        return view
-    }
-
-    @MainActor
-    static func `default`() -> UIView {
-        let view = self.create()
-        return view
     }
 }
 

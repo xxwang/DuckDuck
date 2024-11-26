@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIControl {
+    /// 纯净的创建方法
+    static func create<T: UIControl>(_ aClass: T.Type = UIControl.self) -> T {
+        let control = UIControl(frame: .zero)
+        return control as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIControl>(_ aClass: T.Type = UIControl.self) -> T {
+        let control: UIControl = self.create()
+        return control as! T
+    }
+}
+
 // MARK: - 类型
 extension UIControl {
     // MARK: - 关联键

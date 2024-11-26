@@ -7,6 +7,21 @@
 
 import WebKit
 
+// MARK: - Creatable
+public extension WKWebView {
+    /// 纯净的创建方法
+    static func create<T: WKWebView>(_ aClass: T.Type = WKWebView.self) -> T {
+        let webView = WKWebView()
+        return webView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: WKWebView>(_ aClass: T.Type = WKWebView.self) -> T {
+        let webView: WKWebView = self.create()
+        return webView as! T
+    }
+}
+
 // MARK: - Associated Keys
 class AssociatedKeys {
     // 使用静态常量来作为关联对象的键，避免暴露内部表示

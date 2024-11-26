@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIProgressView {
+    /// 纯净的创建方法
+    static func create<T: UIProgressView>(_ aClass: T.Type = UIProgressView.self) -> T {
+        let progressView = UIProgressView()
+        return progressView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIProgressView>(_ aClass: T.Type = UIProgressView.self) -> T {
+        let progressView: UIProgressView = self.create()
+        return progressView as! T
+    }
+}
+
 // MARK: - 方法
 public extension UIProgressView {
     /// 设置动画进度的速度

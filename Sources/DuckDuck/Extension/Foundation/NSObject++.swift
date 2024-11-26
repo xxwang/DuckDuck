@@ -7,9 +7,6 @@
 
 import UIKit
 
-// MARK: - Creatable
-extension NSObject: Creatable {}
-
 // MARK: - 获取类信息
 public extension NSObject {
     /// 获取对象的类名字符串

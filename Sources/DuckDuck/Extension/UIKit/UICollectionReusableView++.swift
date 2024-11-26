@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UICollectionReusableView {
+    /// 纯净的创建方法
+    static func create<T: UICollectionReusableView>(_ aClass: T.Type = UICollectionReusableView.self) -> T {
+        let reusableView = UICollectionReusableView()
+        return reusableView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UICollectionReusableView>(_ aClass: T.Type = UICollectionReusableView.self) -> T {
+        let reusableView: UICollectionReusableView = self.create()
+        return reusableView as! T
+    }
+}
+
 // MARK: - 计算属性
 public extension UICollectionReusableView {
     /// 获取当前类的唯一标识符（通常用于注册和复用时）

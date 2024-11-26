@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UILabel {
+    /// 纯净的创建方法
+    static func create<T: UILabel>(_ aClass: T.Type = UILabel.self) -> T {
+        let label = UILabel()
+        return label as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UILabel>(_ aClass: T.Type = UILabel.self) -> T {
+        let label: UILabel = self.create()
+        return label as! T
+    }
+}
+
 // MARK: - UILabel 计算属性扩展
 public extension UILabel {
     /// 当前字体的实际大小

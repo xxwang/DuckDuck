@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIViewController {
+    /// 纯净的创建方法
+    static func create<T: UIViewController>(_ aClass: T.Type = UIViewController.self) -> T {
+        let viewController = UIViewController()
+        return viewController as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIViewController>(_ aClass: T.Type = UIViewController.self) -> T {
+        let viewController: UIViewController = self.create()
+        return viewController as! T
+    }
+}
+
 // MARK: - 类方法
 public extension UIViewController {
     /// 从`UIStoryboard`中实例化`UIViewController`

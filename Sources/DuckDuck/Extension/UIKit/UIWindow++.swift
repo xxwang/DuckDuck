@@ -7,7 +7,22 @@
 
 import UIKit
 
-// MARK: - UIWindow Extensions
+// MARK: - Creatable
+public extension UIWindow {
+    /// 纯净的创建方法
+    static func create<T: UIWindow>(_ aClass: T.Type = UIWindow.self) -> T {
+        let window = UIWindow()
+        return window as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIWindow>(_ aClass: T.Type = UIWindow.self) -> T {
+        let window: UIWindow = self.create()
+        return window as! T
+    }
+}
+
+// MARK: - UIWindow
 public extension UIWindow {
     /// 返回当前有效的`UIWindow`
     /// - Returns: 返回一个有效的`UIWindow`，如果没有找到有效窗口则返回`nil`
@@ -98,7 +113,7 @@ public extension UIWindow {
     }
 }
 
-// MARK: - UIViewController Extensions
+// MARK: - UIViewController
 public extension UIWindow {
     /// 返回当前可用窗口的根视图控制器
     /// - Returns: 返回`UIViewController?`，如果找不到返回`nil`

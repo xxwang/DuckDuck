@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UISearchBar {
+    /// 纯净的创建方法
+    static func create<T: UISearchBar>(_ aClass: T.Type = UISearchBar.self) -> T {
+        let searchBar = UISearchBar()
+        return searchBar as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UISearchBar>(_ aClass: T.Type = UISearchBar.self) -> T {
+        let searchBar: UISearchBar = self.create()
+        return searchBar as! T
+    }
+}
+
 // MARK: - 计算属性
 public extension UISearchBar {
     /// 搜索栏中的`UITextField`(如果适用)
@@ -114,6 +129,24 @@ public extension UISearchBar {
     @discardableResult
     func dd_setTextFieldBackgroundColor(_ color: UIColor) -> Self {
         self.dd_textField?.backgroundColor = color
+        return self
+    }
+
+    /// 设置代理并返回当前的 UISearchBar 实例，支持链式调用
+    /// - Parameter delegate: 一个符合 `UISearchBarDelegate` 协议的代理对象。
+    /// - Returns: 当前的 `UISearchBar` 实例，支持链式调用。
+    ///
+    /// 示例用法：
+    /// ```swift
+    /// let searchBar = UISearchBar()
+    /// searchBar.dd_delegate(self)
+    /// ```
+    @discardableResult
+    func dd_delegate(_ delegate: (any UISearchBarDelegate)?) -> Self {
+        // 设置 UISearchBar 的代理
+        self.delegate = delegate
+
+        // 返回当前实例以支持链式调用
         return self
     }
 }

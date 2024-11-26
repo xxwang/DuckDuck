@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UITableViewCell {
+    /// 纯净的创建方法
+    static func create<T: UITableViewCell>(_ aClass: T.Type = UITableViewCell.self) -> T {
+        let cell = UITableViewCell()
+        return cell as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UITableViewCell>(_ aClass: T.Type = UITableViewCell.self) -> T {
+        let cell: UITableViewCell = self.create()
+        return cell as! T
+    }
+}
+
 // MARK: - 计算属性
 public extension UITableViewCell {
     /// 标识符(使用类名注册时)

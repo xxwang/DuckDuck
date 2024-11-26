@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UINavigationBar {
+    /// 纯净的创建方法
+    static func create<T: UINavigationBar>(_ aClass: T.Type = UINavigationBar.self) -> T {
+        let navigationBar = UINavigationBar()
+        return navigationBar as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UINavigationBar>(_ aClass: T.Type = UINavigationBar.self) -> T {
+        let navigationBar: UINavigationBar = self.create()
+        return navigationBar as! T
+    }
+}
+
 // MARK: - 关联键
 @MainActor
 private class AssociateKeys {

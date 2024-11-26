@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIButton {
+    /// 纯净的创建方法
+    static func create<T: UIButton>(_ aClass: T.Type = UIButton.self) -> T {
+        let button = UIButton(type: .custom)
+        return button as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIButton>(_ aClass: T.Type = UIButton.self) -> T {
+        let button: UIButton = self.create()
+        return button as! T
+    }
+}
+
 // MARK: - 类型
 public extension UIButton {
     // MARK: - 关联键

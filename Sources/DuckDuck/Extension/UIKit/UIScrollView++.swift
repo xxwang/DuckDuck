@@ -7,6 +7,21 @@
 
 import UIKit
 
+// MARK: - Creatable
+public extension UIScrollView {
+    /// 纯净的创建方法
+    static func create<T: UIScrollView>(_ aClass: T.Type = UIScrollView.self) -> T {
+        let scrollView = UIScrollView()
+        return scrollView as! T
+    }
+
+    /// 带默认配置的创建方法
+    static func `default`<T: UIScrollView>(_ aClass: T.Type = UIScrollView.self) -> T {
+        let scrollView: UIScrollView = self.create()
+        return scrollView as! T
+    }
+}
+
 // MARK: - 方法
 public extension UIScrollView {
     /// 获取 `ScrollView` 当前可见区域

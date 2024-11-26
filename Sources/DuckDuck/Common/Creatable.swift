@@ -7,18 +7,21 @@
 
 import UIKit
 
-// MARK: - 对象默认创建协议
-public protocol Creatable {
-    static func `default`<T: NSObject>() -> T
-}
+// MARK: - Creatable 协议
+public protocol Creatable: NSObject {}
 
-// MARK: - 泛型方法实现
+// MARK: - Creatable默认实现
 public extension Creatable {
-    static func create<T: NSObject>() -> T {
-        return T.init()
+    /// 纯净的创建方法
+    static func create<T: Creatable>(_ aClass: T.Type = NSObject.self) -> T {
+        return aClass.init()
     }
 
-    static func `default`<T: NSObject>() -> T {
-        return self.create()
+    /// 带默认配置的创建方法
+    static func `default`<T: Creatable>(_ aClass: T.Type = NSObject.self) -> T {
+        return self.create(aClass)
     }
 }
+
+// MARK: - NSObject: Creatable
+extension NSObject: Creatable {}
