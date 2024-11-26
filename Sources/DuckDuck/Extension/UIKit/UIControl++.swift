@@ -1,8 +1,8 @@
 //
 //  UIControl++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 23/11/2024.
+//  Created by xxwang on 23/11/2024.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ extension UIControl {
 // MARK: - 事件关联
 extension UIControl {
     /// 事件回调
-    var dd_onEvent_control: ((UIControl) -> Void)? {
+    var control_onEventHandler: ((UIControl) -> Void)? {
         get { AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIControl) -> Void }
         set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
     }
@@ -44,7 +44,7 @@ extension UIControl {
     /// 事件处理方法
     /// - Parameter sender:事件发起者
     @objc func dd_controlEventHandler(_ sender: UIControl) {
-        if let block = self.dd_onEvent_control { block(sender) }
+        if let block = self.control_onEventHandler { block(sender) }
     }
 }
 
@@ -200,8 +200,8 @@ public extension UIControl {
     /// }
     /// ```
     @discardableResult
-    @objc func dd_onEvent(_ closure: ((UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
-        self.dd_onEvent_control = closure
+    @objc func dd_onEvent(_ handler: ((UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
+        self.control_onEventHandler = handler
         self.addTarget(self, action: #selector(dd_controlEventHandler(_:)), for: controlEvent)
         return self
     }

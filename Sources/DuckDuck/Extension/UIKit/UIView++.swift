@@ -1,8 +1,8 @@
 //
 //  UIView++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 24/11/2024.
+//  Created by xxwang on 24/11/2024.
 //
 
 import UIKit
@@ -1801,6 +1801,21 @@ public extension UIView {
         UIView.animate(withDuration: duration, animations: {
             self.alpha = 0
         }, completion: completion)
+    }
+}
+
+// MARK: - Creatable
+extension Creatable where Self: UIView {
+    @MainActor
+    static func create() -> UIView {
+        let view = UIView()
+        return view
+    }
+
+    @MainActor
+    static func `default`() -> UIView {
+        let view = self.create()
+        return view
     }
 }
 

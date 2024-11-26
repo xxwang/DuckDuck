@@ -1,8 +1,8 @@
 //
 //  UIButton++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 24/11/2024.
+//  Created by xxwang on 24/11/2024.
 //
 
 import UIKit
@@ -33,14 +33,14 @@ public extension UIButton {
 // MARK: - 事件关联
 extension UIButton {
     /// 事件回调
-    public var dd_onEvent_button: ((UIButton) -> Void)? {
+    public var button_onEventHandler: ((UIButton) -> Void)? {
         get { return AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIButton) -> Void }
         set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
     }
 
     /// 按钮点击回调
     @objc func dd_tappedAction(_ button: UIButton) {
-        self.dd_onEvent_button?(button)
+        self.button_onEventHandler?(button)
     }
 }
 
@@ -474,8 +474,8 @@ public extension UIButton {
     /// }
     /// ```
     @discardableResult
-    func dd_onEvent(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
-        self.dd_onEvent_button = closure
+    func dd_onEvent(_ handler: ((_ button: UIButton?) -> Void)?) -> Self {
+        self.button_onEventHandler = handler
         self.addTarget(self, action: #selector(dd_tappedAction), for: .touchUpInside)
         return self
     }

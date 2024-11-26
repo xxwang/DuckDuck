@@ -2,7 +2,7 @@
 //  UIButton+chain.swift
 //  DuckDuck
 //
-//  Created by 王哥 on 25/11/2024.
+//  Created by xxwang on 25/11/2024.
 //
 
 import UIKit
@@ -217,8 +217,8 @@ public extension DDExtension where Base: UIButton {
     /// }
     /// ```
     @discardableResult
-    func onEvent(_ closure: ((_ button: UIButton?) -> Void)?) -> Self {
-        self.base.dd_onEvent_button = closure
+    func onEvent(_ handler: ((_ button: UIButton?) -> Void)?) -> Self {
+        self.base.button_onEventHandler = handler
         self.base.addTarget(self, action: #selector(self.base.dd_tappedAction), for: .touchUpInside)
         return self
     }

@@ -1,40 +1,14 @@
 //
 //  UITableView++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 24/11/2024.
+//  Created by xxwang on 24/11/2024.
 //
 
 import UIKit
 
 // MARK: - 方法
 public extension UITableView {
-    /// 创建一个默认配置的 `UITableView`
-    /// - Returns: 默认配置的 `UITableView`
-    ///
-    /// 示例：
-    /// ```swift
-    /// let tableView = UITableView.default()
-    /// ```
-    static func `default`() -> UITableView {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-            .dd_rowHeight(UITableView.automaticDimension)
-            .dd_estimatedRowHeight(50)
-            .dd_backgroundColor(.clear)
-            .dd_sectionHeaderHeight(0.001)
-            .dd_sectionFooterHeight(0.001)
-            .dd_showsHorizontalScrollIndicator(false)
-            .dd_showsVerticalScrollIndicator(false)
-            .dd_cellLayoutMarginsFollowReadableWidth(false)
-            .dd_separatorStyle(.none)
-            .dd_keyboardDismissMode(.onDrag)
-            .dd_showsHorizontalScrollIndicator(false)
-            .dd_showsVerticalScrollIndicator(false)
-            .dd_contentInsetAdjustmentBehavior(.never)
-            .dd_sectionHeaderTopPadding(0)
-        return tableView
-    }
-
     /// 重新加载数据后调用 `completion` 回调
     /// - Parameter completion: 完成回调
     ///
@@ -164,6 +138,35 @@ public extension UITableView {
                 "Couldn't find UITableViewHeaderFooterView for \(String(describing: name)), make sure the view is registered with table view")
         }
         return headerFooterView
+    }
+}
+
+// MARK: - Creatable
+public extension Creatable where Self: UITableView {
+    @MainActor
+    static func create() -> UITableView {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        return tableView
+    }
+
+    @MainActor
+    static func `default`() -> UITableView {
+        let tableView = self.create()
+            .dd_rowHeight(UITableView.automaticDimension)
+            .dd_estimatedRowHeight(50)
+            .dd_backgroundColor(.clear)
+            .dd_sectionHeaderHeight(0.001)
+            .dd_sectionFooterHeight(0.001)
+            .dd_showsHorizontalScrollIndicator(false)
+            .dd_showsVerticalScrollIndicator(false)
+            .dd_cellLayoutMarginsFollowReadableWidth(false)
+            .dd_separatorStyle(.none)
+            .dd_keyboardDismissMode(.onDrag)
+            .dd_showsHorizontalScrollIndicator(false)
+            .dd_showsVerticalScrollIndicator(false)
+            .dd_contentInsetAdjustmentBehavior(.never)
+            .dd_sectionHeaderTopPadding(0)
+        return tableView
     }
 }
 

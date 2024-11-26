@@ -1,8 +1,8 @@
 //
 //  NSMutableParagraphStyle++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 22/11/2024.
+//  Created by xxwang on 22/11/2024.
 //
 
 import UIKit
@@ -12,11 +12,26 @@ public extension NSMutableParagraphStyle {
     /// - Returns: 一个设置了基本属性的 `NSMutableParagraphStyle` 实例
     static func `default`() -> NSMutableParagraphStyle {
         return NSMutableParagraphStyle()
+    }
+}
+
+// MARK: - Creatable
+public extension Creatable where Self: NSMutableParagraphStyle {
+    @MainActor
+    static func create() -> NSMutableParagraphStyle {
+        let style = NSMutableParagraphStyle()
+        return style
+    }
+
+    @MainActor
+    static func `default`() -> NSMutableParagraphStyle {
+        let style = self.create()
             .dd_hyphenationFactor(1.0) // 设置连字符系数
             .dd_firstLineHeadIndent(0.0) // 设置第一行缩进
             .dd_paragraphSpacingBefore(0.0) // 设置段落前间距
             .dd_headIndent(0) // 设置头部缩进
             .dd_tailIndent(0) // 设置尾部缩进
+        return style
     }
 }
 

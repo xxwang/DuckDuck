@@ -2,7 +2,7 @@
 //  DDExtension.swift
 //  DuckDuck
 //
-//  Created by 王哥 on 24/11/2024.
+//  Created by xxwang on 24/11/2024.
 //
 
 import UIKit

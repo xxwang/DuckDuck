@@ -1,8 +1,8 @@
 //
 //  SCNVector3++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 20/11/2024.
+//  Created by xxwang on 20/11/2024.
 //
 
 import SceneKit

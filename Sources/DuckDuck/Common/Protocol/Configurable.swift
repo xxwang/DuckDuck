@@ -1,8 +1,8 @@
 //
 //  Configurable.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 15/11/2024.
+//  Created by xxwang on 15/11/2024.
 //
 
 import UIKit

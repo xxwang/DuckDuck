@@ -1,8 +1,8 @@
 //
 //  UIBarButtonItem++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 23/11/2024.
+//  Created by xxwang on 23/11/2024.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ extension UIBarButtonItem {
 // MARK: - 事件关联
 extension UIBarButtonItem {
     /// 事件回调
-    public var dd_onEvent_barButtonItem: ((UIBarButtonItem) -> Void)? {
+    public var barButtonItem_onEventHandler: ((UIBarButtonItem) -> Void)? {
         get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (UIBarButtonItem) -> Void }
         set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
     }
@@ -28,7 +28,7 @@ extension UIBarButtonItem {
     /// 事件触发时的处理方法
     /// - Parameter event: 事件发生的 `UIBarButtonItem`
     @objc func eventHandler(_ event: UIBarButtonItem) {
-        self.dd_onEvent_barButtonItem?(event)
+        self.barButtonItem_onEventHandler?(event)
     }
 }
 
@@ -245,8 +245,8 @@ public extension UIBarButtonItem {
     /// }
     /// ```
     @discardableResult
-    func dd_onEvent(_ closure: ((UIBarButtonItem?) -> Void)?) -> Self {
-        self.dd_onEvent_barButtonItem = closure
+    func dd_onEvent(_ handler: ((UIBarButtonItem?) -> Void)?) -> Self {
+        self.barButtonItem_onEventHandler = handler
         self.dd_addTarget(self, action: #selector(eventHandler(_:)))
         return self
     }

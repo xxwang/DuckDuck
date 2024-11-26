@@ -1,8 +1,8 @@
 //
 //  UISlider++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 23/11/2024.
+//  Created by xxwang on 23/11/2024.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ extension UISlider {
 @MainActor
 extension UISlider {
     /// 事件回调
-    var dd_onEvent_slider: ((Float) -> Void)? {
+    var slider_onEventHandler: ((Float) -> Void)? {
         get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (Float) -> Void }
         set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
     }
@@ -29,7 +29,7 @@ extension UISlider {
     /// - Parameter event: 事件发生者
     /// 处理 `UISlider` 值改变的事件。
     @objc func dd_sliderValueChanged(_ sender: UISlider) {
-        self.dd_onEvent_slider?(sender.value)
+        self.slider_onEventHandler?(sender.value)
     }
 }
 
@@ -183,8 +183,8 @@ public extension UISlider {
     ///     print("Slider value changed: \(value)")
     /// })
     /// ```
-    func dd_onEvent(_ closure: ((Float) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
-        self.dd_onEvent_slider = closure
+    func dd_onEvent(_ handler: ((Float) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
+        self.slider_onEventHandler = handler
         self.addTarget(self, action: #selector(dd_sliderValueChanged), for: controlEvent)
         return self
     }

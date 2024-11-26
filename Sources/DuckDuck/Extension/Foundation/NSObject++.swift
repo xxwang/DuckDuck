@@ -1,11 +1,14 @@
 //
 //  NSObject++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 15/11/2024.
+//  Created by xxwang on 15/11/2024.
 //
 
-import Foundation
+import UIKit
+
+// MARK: - Creatable
+extension NSObject: Creatable {}
 
 // MARK: - 获取类信息
 public extension NSObject {

@@ -2,7 +2,7 @@
 //  UIBarButtonItem+chain.swift
 //  DuckDuck
 //
-//  Created by 王哥 on 25/11/2024.
+//  Created by xxwang on 25/11/2024.
 //
 
 import UIKit
@@ -153,8 +153,8 @@ public extension DDExtension where Base: UIBarButtonItem {
     /// }
     /// ```
     @discardableResult
-    func onEvent(_ closure: ((UIBarButtonItem?) -> Void)?) -> Self {
-        self.base.dd_onEvent_barButtonItem = closure
+    func onEvent(_ handler: ((UIBarButtonItem?) -> Void)?) -> Self {
+        self.base.barButtonItem_onEventHandler = handler
         self.base.dd.addTarget(self.base, action: #selector(self.base.eventHandler(_:)))
         return self
     }

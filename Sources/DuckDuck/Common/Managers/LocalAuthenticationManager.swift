@@ -1,8 +1,8 @@
 //
 //  LocalAuthenticationManager.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 21/11/2024.
+//  Created by xxwang on 21/11/2024.
 //
 
 import LocalAuthentication

@@ -2,7 +2,7 @@
 //  UISlider+chain.swift
 //  DuckDuck
 //
-//  Created by 王哥 on 25/11/2024.
+//  Created by xxwang on 25/11/2024.
 //
 
 import UIKit
@@ -129,8 +129,8 @@ public extension DDExtension where Base: UISlider {
     ///     print("Slider value changed: \(value)")
     /// })
     /// ```
-    func onEvent(_ closure: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
-        self.base.dd_onEvent_slider = closure
+    func onEvent(_ handler: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
+        self.base.slider_onEventHandler = handler
         self.base.addTarget(self.base, action: #selector(self.base.dd_sliderValueChanged), for: controlEvent)
         return self
     }

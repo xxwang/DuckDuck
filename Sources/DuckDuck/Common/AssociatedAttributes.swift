@@ -1,8 +1,8 @@
 //
 //  AssociatedAttributes.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 23/11/2024.
+//  Created by xxwang on 23/11/2024.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ public protocol OnEventHandler {
     associatedtype OnEvent
 
     /// 回调闭包别名
-    typealias OnEventHandlerCallback = (OnEvent?) -> Void
+    typealias OnEventHandlerClosure = (OnEvent?) -> Void
 
     /// 事件处理闭包
-    var onEvent: OnEventHandlerCallback? { get set }
+    var onEvent: OnEventHandlerClosure? { get set }
 }

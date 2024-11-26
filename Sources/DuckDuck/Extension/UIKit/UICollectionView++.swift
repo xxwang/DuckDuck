@@ -1,8 +1,8 @@
 //
 //  UICollectionView++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 24/11/2024.
+//  Created by xxwang on 24/11/2024.
 //
 
 import UIKit
@@ -214,18 +214,19 @@ private extension UICollectionView {
     }
 }
 
-// MARK: - 默认创建 UICollectionView
-public extension UICollectionView {
-    /// 创建并返回一个默认配置的 `UICollectionView`
-    /// - Returns: 一个带有 `UICollectionViewFlowLayout` 的 `UICollectionView` 实例
-    ///
-    /// 示例：
-    /// ```swift
-    /// let collectionView = UICollectionView.default()
-    /// ```
-    static func `default`() -> UICollectionView {
+// MARK: - Creatable
+public extension Creatable where Self: UICollectionView {
+    @MainActor
+    static func create() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
+    }
+
+    @MainActor
+    static func `default`() -> UICollectionView {
+        let collectionView = Self.create()
+        return collectionView
     }
 }
 

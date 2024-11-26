@@ -1,8 +1,8 @@
 //
 //  Timer++.swift
-//  DuckDuck-temp
+//  DuckDuck
 //
-//  Created by 王哥 on 22/11/2024.
+//  Created by xxwang on 22/11/2024.
 //
 
 import Foundation

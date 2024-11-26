@@ -2,7 +2,7 @@
 //  DateFormatter+chian.swift
 //  DuckDuck
 //
-//  Created by 王哥 on 25/11/2024.
+//  Created by xxwang on 25/11/2024.
 //
 
 import Foundation
