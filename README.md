@@ -22,13 +22,13 @@ end
 .package(url: "https://github.com/xxwang/DuckDuck.git", branch: "swift6")
 ```
 
-## 使用方法
-
 ### 导入`DuckDuck`
 
 ```Swift
 import DuckDUck
 ```
+
+## 使用方法
 
 ### `dd_`使用方法
 
