@@ -22,13 +22,12 @@ end
 .package(url: "https://github.com/xxwang/DuckDuck.git", branch: "swift6")
 ```
 
-### 导入`DuckDuck`
+## 使用方法
 
+使用前需要先导入`DuckDuck`
 ```Swift
 import DuckDUck
 ```
-
-## 使用方法
 
 ### `dd_`使用方法
 
@@ -61,4 +60,5 @@ public extension DDExtension where Base: [类型] {
 //类型方法调用
 类型.dd.方法名()
 ```
+
 
