@@ -43,7 +43,7 @@ let view = UIView()
 view.dd.backgroundColor(.red)
 ```
 
-### `.dd.`自定义扩展
+## 自定义扩展
 
 ```Swift
 // 要扩展的类型需要先遵守协议
