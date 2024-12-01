@@ -6,7 +6,7 @@
 
 ### Cocoapods
 
-```Swift
+```Ruby
 platform :ios, '15.0'
 use_frameworks!
 
@@ -60,4 +60,6 @@ public extension DDExtension where Base: [类型] {
 //类型方法调用
 类型.dd.方法名()
 ```
+
+
 
