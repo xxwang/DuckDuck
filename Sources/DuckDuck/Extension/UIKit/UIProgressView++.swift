@@ -33,11 +33,11 @@ public extension UIProgressView {
     ///
     /// 示例：
     /// ```swift
-    /// progressView.dd_setProgressAnimated(0.5, animated: true, duration: 0.3) {
+    /// progressView.dd_progressAnimated(0.5, animated: true, duration: 0.3) {
     ///     // 动画完成后的回调
     /// }
     /// ```
-    func dd_setProgressAnimated(_ progress: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
+    func dd_progressAnimated(_ progress: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, animations: {
                 self.progress = progress

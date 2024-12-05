@@ -14,9 +14,9 @@ extension SKShapeNode {
     ///   - width: 边框宽度
     /// - Example:
     ///   ```swift
-    ///   shapeNode.dd_setOutline(color: .black, width: 2.0)
+    ///   shapeNode.dd_outline(color: .black, width: 2.0)
     ///   ```
-    func dd_setOutline(color: UIColor, width: CGFloat) {
+    func dd_outline(color: UIColor, width: CGFloat) {
         self.strokeColor = color
         self.lineWidth = width
     }

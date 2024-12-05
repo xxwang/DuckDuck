@@ -95,10 +95,10 @@ public extension UISegmentedControl {
     ///
     /// 示例:
     /// ```swift
-    /// segmentedControl.dd_setBackgroundImage(image, for: .normal)
+    /// segmentedControl.dd_backgroundImage(image, for: .normal)
     /// ```
     @discardableResult
-    func dd_setBackgroundImage(_ image: UIImage, for state: UIControl.State) -> Self {
+    func dd_backgroundImage(_ image: UIImage, for state: UIControl.State) -> Self {
         self.setBackgroundImage(image, for: state, barMetrics: .default)
         return self
     }
@@ -142,7 +142,7 @@ public extension UISegmentedControl {
     /// segmentedControl.dd_setWidth(100, forSegmentAt: 0)
     /// ```
     @discardableResult
-    func dd_setWidth(_ width: CGFloat, forSegmentAt index: Int) -> Self {
+    func dd_width(_ width: CGFloat, forSegmentAt index: Int) -> Self {
         self.setWidth(width, forSegmentAt: index)
         return self
     }

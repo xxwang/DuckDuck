@@ -68,19 +68,6 @@ public extension UITabBarController {
         return self
     }
 
-    /// 设置 `UITabBarController` 的子控制器
-    /// - Parameter viewControllers: 子控制器数组
-    /// - Returns: `Self` 返回当前对象，实现链式调用
-    /// - Example:
-    /// ```swift
-    /// tabBarController.dd_viewControllers([viewController1, viewController2])
-    /// ```
-    @discardableResult
-    func dd_viewControllers(_ viewControllers: [UIViewController]?) -> Self {
-        self.viewControllers = viewControllers
-        return self
-    }
-
     /// 设置 `UITabBarController` 的子控制器，并指定是否使用动画
     /// - Parameters:
     ///   - viewControllers: 子控制器数组
@@ -88,11 +75,15 @@ public extension UITabBarController {
     /// - Returns: `Self` 返回当前对象，实现链式调用
     /// - Example:
     /// ```swift
-    /// tabBarController.dd_setViewControllers([viewController1, viewController2], animated: true)
+    /// tabBarController.dd_viewControllers([viewController1, viewController2], animated: true)
     /// ```
     @discardableResult
-    func dd_setViewControllers(_ viewControllers: [UIViewController]?, animated: Bool = false) -> Self {
-        self.setViewControllers(viewControllers, animated: animated)
+    func dd_viewControllers(_ viewControllers: [UIViewController]?, animated: Bool = false) -> Self {
+        if animated {
+            self.setViewControllers(viewControllers, animated: true)
+        } else {
+            self.viewControllers = viewControllers
+        }
         return self
     }
 

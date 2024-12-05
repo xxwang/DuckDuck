@@ -298,10 +298,10 @@ public extension UILabel {
     /// - 使用示例:
     /// ```swift
     /// let label = UILabel()
-    /// label.dd_setText("Swift makes programming fun!", lineSpacing: 6, wordSpacing: 1.5)
+    /// label.dd_text("Swift makes programming fun!", lineSpacing: 6, wordSpacing: 1.5)
     /// ```
     @discardableResult
-    func dd_setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
+    func dd_text(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.alignment = self.textAlignment
@@ -332,10 +332,10 @@ public extension UILabel {
     /// ```swift
     /// let label = UILabel()
     /// label.text = "This is a long text example for UILabel."
-    /// let lines = label.dd_linesContent(lineSpacing: 4)
+    /// let lines = label.dd_lineContents(lineSpacing: 4)
     /// print("每行内容: \(lines)")
     /// ```
-    func dd_linesContent(_ labelWidth: CGFloat? = nil,
+    func dd_lineContents(_ labelWidth: CGFloat? = nil,
                          lineSpacing: CGFloat = 0.0,
                          wordSpacing: CGFloat = 0.0,
                          paragraphSpacing: CGFloat = 0.0) -> [String]

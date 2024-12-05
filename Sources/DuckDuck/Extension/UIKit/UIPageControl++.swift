@@ -176,11 +176,11 @@ public extension UIPageControl {
     ///
     /// 示例:
     /// ```swift
-    /// pageControl.dd_setIndicatorImage(UIImage(named: "customIndicator"), forPage: 0)
+    /// pageControl.dd_indicatorImage(UIImage(named: "customIndicator"), forPage: 0)
     /// ```
     @discardableResult
     @available(iOS 14.0, *)
-    func dd_setIndicatorImage(_ image: UIImage?, forPage page: Int) -> Self {
+    func dd_indicatorImage(_ image: UIImage?, forPage page: Int) -> Self {
         self.setIndicatorImage(image, forPage: page)
         return self
     }
@@ -192,11 +192,11 @@ public extension UIPageControl {
     ///
     /// 示例:
     /// ```swift
-    /// pageControl.dd_setCurrentPageIndicatorImage(UIImage(named: "currentPageCustomIndicator"), forPage: 1)
+    /// pageControl.dd_currentPageIndicatorImage(UIImage(named: "currentPageCustomIndicator"), forPage: 1)
     /// ```
     @discardableResult
     @available(iOS 16.0, *)
-    func dd_setCurrentPageIndicatorImage(_ image: UIImage?, forPage page: Int) -> Self {
+    func dd_currentPageIndicatorImage(_ image: UIImage?, forPage page: Int) -> Self {
         self.setCurrentPageIndicatorImage(image, forPage: page)
         return self
     }

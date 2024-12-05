@@ -59,11 +59,11 @@ public extension UISlider {
     ///
     /// 示例：
     /// ```swift
-    /// slider.dd_setValue(0.5, animated: true, duration: 0.3) {
+    /// slider.dd_value(0.5, animated: true, duration: 0.3) {
     ///     // 动画完成后的回调
     /// }
     /// ```
-    func dd_setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
+    func dd_value(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, animations: {
                 self.setValue(value, animated: true)

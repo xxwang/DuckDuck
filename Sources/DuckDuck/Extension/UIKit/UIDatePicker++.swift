@@ -246,10 +246,10 @@ public extension UIDatePicker {
     /// 示例：
     /// ```swift
     /// let datePicker = UIDatePicker()
-    /// datePicker.dd_setDate(Date(), animated: true)
+    /// datePicker.dd_date(Date(), animated: true)
     /// ```
     @discardableResult
-    func dd_setDate(_ date: Date, animated: Bool) -> Self {
+    func dd_date(_ date: Date, animated: Bool) -> Self {
         self.setDate(date, animated: animated)
         return self
     }

@@ -129,10 +129,10 @@ public extension UINavigationController {
     /// - Returns: `Self`，支持链式调用
     /// - Example:
     /// ```swift
-    /// navigationController?.dd_setNavigationBarHidden(true, animated: true)
+    /// navigationController?.dd_navigationBarHidden(true, animated: true)
     /// ```
     @discardableResult
-    func dd_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
+    func dd_navigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
         self.setNavigationBarHidden(hidden, animated: animated)
         return self
     }

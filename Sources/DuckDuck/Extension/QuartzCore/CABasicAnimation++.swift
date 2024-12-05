@@ -58,10 +58,10 @@ public extension CABasicAnimation {
     ///
     /// **示例**：
     /// ```swift
-    /// let animation = CABasicAnimation().dd_setValue(1, forKeyPath: "transform.scale")  // 设置自定义值
+    /// let animation = CABasicAnimation().dd_value(1, forKeyPath: "transform.scale")  // 设置自定义值
     /// ```
     @discardableResult
-    func dd_setValue(_ value: Any?, forKeyPath keyPath: String) -> Self {
+    func dd_value(_ value: Any?, forKeyPath keyPath: String) -> Self {
         self.setValue(value, forKeyPath: keyPath)
         return self
     }

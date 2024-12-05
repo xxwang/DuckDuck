@@ -43,9 +43,9 @@ public extension UINavigationBar {
     /// - Parameter tintColor: `tintColor` 导航条上的按钮和文字颜色
     /// - Example:
     /// ```swift
-    /// navigationBar.dd_setTransparent(with: .white)
+    /// navigationBar.dd_transparent(with: .white)
     /// ```
-    func dd_setTransparent(with tintColor: UIColor = .white) {
+    func dd_transparent(with tintColor: UIColor = .white) {
         self.dd_isTranslucent(true)
             .dd_backgroundColor(.clear)
             .dd_backgroundImage(UIImage())
@@ -61,9 +61,9 @@ public extension UINavigationBar {
     ///   - text: 文字颜色
     /// - Example:
     /// ```swift
-    /// navigationBar.dd_setColors(background: .blue, text: .white)
+    /// navigationBar.dd_colors(background: .blue, text: .white)
     /// ```
-    func dd_setColors(background: UIColor, text: UIColor) {
+    func dd_colors(background: UIColor, text: UIColor) {
         self.isTranslucent = false
         self.backgroundColor = background
         self.barTintColor = background
@@ -78,7 +78,7 @@ public extension UINavigationBar {
     /// ```swift
     /// navigationBar.dd_setStatusBarBackgroundColor(with: .red)
     /// ```
-    func dd_setStatusBarBackgroundColor(with color: UIColor) {
+    func dd_statusBarBackgroundColor(with color: UIColor) {
         guard self.dd_statusBar == nil else {
             self.dd_statusBar?.backgroundColor = color
             return

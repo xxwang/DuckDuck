@@ -310,10 +310,10 @@ public extension UIStackView {
     ///
     /// 示例用法：
     /// ```swift
-    /// stackView.dd_setCustomSpacing(10, after: arrangedSubview)
+    /// stackView.dd_customSpacing(10, after: arrangedSubview)
     /// ```
     @discardableResult
-    func dd_setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) -> Self {
+    func dd_customSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) -> Self {
         if #available(iOS 11.0, *) {
             self.setCustomSpacing(spacing, after: arrangedSubview)
         }

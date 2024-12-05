@@ -1572,10 +1572,10 @@ public extension UIImage {
     /// 示例:
     /// ```swift
     /// let image = UIImage(named: "example.png")
-    /// let newImage = image?.dd_setBackgroundColor(.blue)
+    /// let newImage = image?.dd_backgroundColor(.blue)
     /// // newImage: 设置了蓝色背景的图像
     /// ```
-    func dd_setBackgroundColor(_ backgroundColor: UIColor) -> UIImage {
+    func dd_backgroundColor(_ backgroundColor: UIColor) -> UIImage {
         #if !os(watchOS)
             if #available(tvOS 10.0, *) {
                 let format = UIGraphicsImageRendererFormat()

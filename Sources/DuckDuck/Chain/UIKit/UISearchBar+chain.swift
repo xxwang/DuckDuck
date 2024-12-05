@@ -95,19 +95,19 @@ public extension DDExtension where Base: UISearchBar {
         self.base.dd_textField?.backgroundColor = color
         return self
     }
-    
-        /// 设置代理并返回当前的 UISearchBar 实例，支持链式调用
-        /// - Parameter delegate: 一个符合 `UISearchBarDelegate` 协议的代理对象。
-        /// - Returns: 当前的 `UISearchBar` 实例，支持链式调用。
-        ///
-        /// 示例用法：
-        /// ```swift
-        /// let searchBar = UISearchBar()
-        /// searchBar.dd.delegate(self)
-        /// ```
-        @discardableResult
-        func delegate(_ delegate: (any UISearchBarDelegate)?) -> Self {
-            self.base.delegate = delegate
-            return self
-        }
+
+    /// 设置代理并返回当前的 UISearchBar 实例，支持链式调用
+    /// - Parameter delegate: 一个符合 `UISearchBarDelegate` 协议的代理对象。
+    /// - Returns: 当前的 `UISearchBar` 实例，支持链式调用。
+    ///
+    /// 示例用法：
+    /// ```swift
+    /// let searchBar = UISearchBar()
+    /// searchBar.dd.delegate(self)
+    /// ```
+    @discardableResult
+    func delegate(_ delegate: (any UISearchBarDelegate)?) -> Self {
+        self.base.delegate = delegate
+        return self
+    }
 }

@@ -304,10 +304,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setAttributedTitle(attributedText, for: .normal)
+    /// button.dd_attributedTitle(attributedText, for: .normal)
     /// ```
     @discardableResult
-    func dd_setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
+    func dd_attributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
         self.setAttributedTitle(title, for: state)
         return self
     }
@@ -319,10 +319,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setTitleColor(.red, for: .normal)
+    /// button.dd_titleColor(.red, for: .normal)
     /// ```
     @discardableResult
-    func dd_setTitleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func dd_titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         self.setTitleColor(color, for: state)
         return self
     }
@@ -347,10 +347,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setImage(UIImage(named: "buttonImage"), for: .normal)
+    /// button.dd_image(UIImage(named: "buttonImage"), for: .normal)
     /// ```
     @discardableResult
-    func dd_setImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func dd_image(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         self.setImage(image, for: state)
         return self
     }
@@ -363,10 +363,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setImage("buttonImage", in: .main, for: .normal)
+    /// button.dd_image("buttonImage", in: .main, for: .normal)
     /// ```
     @discardableResult
-    func dd_setImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func dd_image(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         self.setImage(image, for: state)
         return self
@@ -381,10 +381,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setImage("buttonImage", in: "MyBundle", from: MyClass.self, for: .normal)
+    /// button.dd_image("buttonImage", in: "MyBundle", from: MyClass.self, for: .normal)
     /// ```
     @discardableResult
-    func dd_setImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func dd_image(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -401,10 +401,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setImage(.red, size: CGSize(width: 50, height: 50), for: .normal)
+    /// button.dd_image(.red, size: CGSize(width: 50, height: 50), for: .normal)
     /// ```
     @discardableResult
-    func dd_setImage(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
+    func dd_image(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color, size: size)
         self.setImage(image, for: state)
         return self
@@ -417,10 +417,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setBackgroundImage(UIImage(named: "backgroundImage"), for: .normal)
+    /// button.dd_backgroundImage(UIImage(named: "backgroundImage"), for: .normal)
     /// ```
     @discardableResult
-    func dd_setBackgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func dd_backgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         self.setBackgroundImage(image, for: state)
         return self
     }
@@ -434,10 +434,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setBackgroundImage("backgroundImage", in: "MyBundle", from: MyClass.self, for: .normal)
+    /// button.dd_backgroundImage("backgroundImage", in: "MyBundle", from: MyClass.self, for: .normal)
     /// ```
     @discardableResult
-    func dd_setBackgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func dd_backgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -454,10 +454,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.dd_setBackgroundImage("backgroundImage", in: .main, for: .normal)
+    /// button.dd_backgroundImage("backgroundImage", in: .main, for: .normal)
     /// ```
     @discardableResult
-    func dd_setBackgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func dd_backgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         self.setBackgroundImage(image, for: state)
         return self
@@ -470,10 +470,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.setBackgroundImage(.blue, for: .normal)
+    /// button.dd_backgroundColor(.blue, for: .normal)
     /// ```
     @discardableResult
-    func dd_setBackgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func dd_backgroundColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color)
         self.setBackgroundImage(image, for: state)
         return self
@@ -513,10 +513,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.dd_setImageForAllStates(UIImage(named: "buttonImage")!)
+    /// button.dd_image2AllStates(UIImage(named: "buttonImage")!)
     /// ```
     @discardableResult
-    func dd_setImageForAllStates(_ image: UIImage) -> Self {
+    func dd_image2AllStates(_ image: UIImage) -> Self {
         buttonAllStates.forEach { self.setImage(image, for: $0) }
         return self
     }
@@ -526,10 +526,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.dd_setTitleColorForAllStates(.red)
+    /// button.dd_titleColor2AllStates(.red)
     /// ```
     @discardableResult
-    func dd_setTitleColorForAllStates(_ color: UIColor) -> Self {
+    func dd_titleColor2AllStates(_ color: UIColor) -> Self {
         buttonAllStates.forEach { self.setTitleColor(color, for: $0) }
         return self
     }
@@ -539,10 +539,10 @@ public extension UIButton {
     /// - Returns: 当前按钮实例，以便链式调用
     /// - Example:
     /// ```swift
-    /// button.dd_setTitleForAllStates("Click Me")
+    /// button.dd_title2AllStates("Click Me")
     /// ```
     @discardableResult
-    func dd_setTitleForAllStates(_ title: String) -> Self {
+    func dd_title2AllStates(_ title: String) -> Self {
         buttonAllStates.forEach { self.setTitle(title, for: $0) }
         return self
     }

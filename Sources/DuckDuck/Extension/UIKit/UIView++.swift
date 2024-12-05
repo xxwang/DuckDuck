@@ -729,9 +729,9 @@ public extension UIView {
     ///   - isInverted: 是否逆向旋转（默认为 `false`）
     /// - Example:
     /// ```swift
-    /// view.dd_setRotation(.pi / 4)
+    /// view.dd_rotation(.pi / 4)
     /// ```
-    func dd_setRotation(_ angle: CGFloat, isInverted: Bool = false) {
+    func dd_rotation(_ angle: CGFloat, isInverted: Bool = false) {
         transform = isInverted
             ? CGAffineTransform(rotationAngle: angle).inverted()
             : CGAffineTransform(rotationAngle: angle)
@@ -741,9 +741,9 @@ public extension UIView {
     /// - Parameter angle: 旋转角度（弧度制）
     /// - Example:
     /// ```swift
-    /// view.dd_set3DRotationX(.pi / 2)
+    /// view.dd_3DRotationX(.pi / 2)
     /// ```
-    func dd_set3DRotationX(_ angle: CGFloat) {
+    func dd_3DRotationX(_ angle: CGFloat) {
         layer.transform = CATransform3DMakeRotation(angle, 1.0, 0.0, 0.0)
     }
 
@@ -751,9 +751,9 @@ public extension UIView {
     /// - Parameter angle: 旋转角度（弧度制）
     /// - Example:
     /// ```swift
-    /// view.dd_set3DRotationY(.pi)
+    /// view.dd_3DRotationY(.pi)
     /// ```
-    func dd_set3DRotationY(_ angle: CGFloat) {
+    func dd_3DRotationY(_ angle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = -1.0 / 1000.0 // 增加透视效果
         transform = CATransform3DRotate(transform, angle, 0.0, 1.0, 0.0)
@@ -764,9 +764,9 @@ public extension UIView {
     /// - Parameter angle: 旋转角度（弧度制）
     /// - Example:
     /// ```swift
-    /// view.dd_set3DRotationZ(.pi / 4)
+    /// view.dd_3DRotationZ(.pi / 4)
     /// ```
-    func dd_set3DRotationZ(_ angle: CGFloat) {
+    func dd_3DRotationZ(_ angle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = -1.0 / 1000.0
         transform = CATransform3DRotate(transform, angle, 0.0, 0.0, 1.0)
@@ -780,9 +780,9 @@ public extension UIView {
     ///   - zAngle: Z轴旋转角度（弧度制）
     /// - Example:
     /// ```swift
-    /// view.dd_setRotation(xAngle: .pi / 4, yAngle: .pi / 4, zAngle: .pi / 4)
+    /// view.dd_rotation(xAngle: .pi / 4, yAngle: .pi / 4, zAngle: .pi / 4)
     /// ```
-    func dd_setRotation(xAngle: CGFloat, yAngle: CGFloat, zAngle: CGFloat) {
+    func dd_rotation(xAngle: CGFloat, yAngle: CGFloat, zAngle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = -1.0 / 1000.0
         transform = CATransform3DRotate(transform, xAngle, 1.0, 0.0, 0.0)
@@ -797,9 +797,9 @@ public extension UIView {
     ///   - y: 垂直方向缩放倍数
     /// - Example:
     /// ```swift
-    /// view.dd_setScale(x: 1.5, y: 0.8)
+    /// view.dd_scale(x: 1.5, y: 0.8)
     /// ```
-    func dd_setScale(x: CGFloat, y: CGFloat) {
+    func dd_scale(x: CGFloat, y: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = -1.0 / 1000.0
         transform = CATransform3DScale(transform, x, y, 1)
@@ -1340,12 +1340,12 @@ public extension UIView {
     ///
     /// 示例：
     /// ```swift
-    /// view.dd_setupBadge("99")
+    /// view.dd_customBadge("99")
     /// ```
-    func dd_setupBadge(_ number: String) {
+    func dd_customBadge(_ number: String) {
         var badgeLabel: UILabel? = viewWithTag(6202) as? UILabel
         if number == "0" {
-            dd_removeBadege() // 如果数字为 0，则移除角标
+            self.dd_removeCustomBadege() // 如果数字为 0，则移除角标
             return
         }
 
@@ -1454,7 +1454,7 @@ public extension UIView {
 
     /// 移除角标
     /// 清除当前视图上的角标
-    func dd_removeBadege() {
+    func dd_removeCustomBadege() {
         DispatchQueue.main.async {
             let badge = self.viewWithTag(6202) // 根据标签查找角标视图
             badge?.removeFromSuperview() // 移除角标视图

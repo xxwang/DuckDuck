@@ -66,10 +66,10 @@ public extension UISearchBar {
     ///
     /// 示例:
     /// ```swift
-    /// searchBar.dd_setPlaceholder("Search here")
+    /// searchBar.dd_placeholder("Search here")
     /// ```
     @discardableResult
-    func dd_setPlaceholder(_ placeholder: String) -> Self {
+    func dd_placeholder(_ placeholder: String) -> Self {
         self.placeholder = placeholder
         return self
     }
@@ -80,10 +80,10 @@ public extension UISearchBar {
     ///
     /// 示例:
     /// ```swift
-    /// searchBar.dd_setStyle(.minimal)
+    /// searchBar.dd_searchBarStyle(.minimal)
     /// ```
     @discardableResult
-    func dd_setStyle(_ style: UISearchBar.Style) -> Self {
+    func dd_searchBarStyle(_ style: UISearchBar.Style) -> Self {
         self.searchBarStyle = style
         return self
     }
@@ -94,27 +94,13 @@ public extension UISearchBar {
     ///
     /// 示例:
     /// ```swift
-    /// searchBar.dd_setCancelButtonTitle("Done")
+    /// searchBar.dd_cancelButtonTitle("Done")
     /// ```
     @discardableResult
-    func dd_setCancelButtonTitle(_ title: String) -> Self {
+    func dd_cancelButtonTitle(_ title: String) -> Self {
         if let cancelButton = self.value(forKey: "_cancelButton") as? UIButton {
             cancelButton.setTitle(title, for: .normal)
         }
-        return self
-    }
-
-    /// 设置背景颜色
-    /// - Parameter color: 背景颜色
-    /// - Returns: `Self`
-    ///
-    /// 示例:
-    /// ```swift
-    /// searchBar.dd_setBackgroundColor(.lightGray)
-    /// ```
-    @discardableResult
-    func dd_setBackgroundColor(_ color: UIColor) -> Self {
-        self.barTintColor = color
         return self
     }
 
@@ -124,10 +110,10 @@ public extension UISearchBar {
     ///
     /// 示例:
     /// ```swift
-    /// searchBar.dd_setTextFieldBackgroundColor(.white)
+    /// searchBar.dd_textFieldBackgroundColor(.white)
     /// ```
     @discardableResult
-    func dd_setTextFieldBackgroundColor(_ color: UIColor) -> Self {
+    func dd_textFieldBackgroundColor(_ color: UIColor) -> Self {
         self.dd_textField?.backgroundColor = color
         return self
     }

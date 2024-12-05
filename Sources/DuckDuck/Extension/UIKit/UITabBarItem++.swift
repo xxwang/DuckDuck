@@ -46,10 +46,10 @@ public extension UITabBarItem {
     ///
     /// 示例：
     /// ```swift
-    /// barButtonItem.dd_setTitleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
+    /// barButtonItem.dd_titleTextAttributes([.foregroundColor: UIColor.red], for: .normal)
     /// ```
     @discardableResult
-    func dd_setTitleTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) -> Self {
+    func dd_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) -> Self {
         self.setTitleTextAttributes(attributes, for: state)
         return self
     }
@@ -118,10 +118,10 @@ public extension UITabBarItem {
     ///
     /// 示例：
     /// ```swift
-    /// tabBarItem.dd_setBadgeTextAttributes([.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 12)], for: .normal)
+    /// tabBarItem.dd_badgeTextAttributes([.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 12)], for: .normal)
     /// ```
     @discardableResult
-    func dd_setBadgeTextAttributes(_ textAttributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) -> Self {
+    func dd_badgeTextAttributes(_ textAttributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) -> Self {
         self.setBadgeTextAttributes(textAttributes, for: state)
         return self
     }

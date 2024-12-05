@@ -14,9 +14,9 @@ extension SKLabelNode {
     ///   - fontSize: 字体大小
     /// - Example:
     ///   ```swift
-    ///   labelNode.dd_setFontStyle(fontName: "Arial", fontSize: 30)
+    ///   labelNode.dd_fontStyle(fontName: "Arial", fontSize: 30)
     ///   ```
-    func dd_setFontStyle(fontName: String, fontSize: CGFloat) {
+    func dd_fontStyle(fontName: String, fontSize: CGFloat) {
         self.fontName = fontName
         self.fontSize = fontSize
     }
@@ -25,9 +25,9 @@ extension SKLabelNode {
     /// - Parameter text: 标签显示的文本
     /// - Example:
     ///   ```swift
-    ///   labelNode.dd_setText("Game Over")
+    ///   labelNode.dd_text("Game Over")
     ///   ```
-    func dd_setText(_ text: String) {
+    func dd_text(_ text: String) {
         self.text = text
     }
 
@@ -35,9 +35,9 @@ extension SKLabelNode {
     /// - Parameter alignment: 对齐方式
     /// - Example:
     ///   ```swift
-    ///   labelNode.dd_setHorizontalAlignmentMode(.center)
+    ///   labelNode.dd_horizontalAlignmentMode(.center)
     ///   ```
-    func dd_setHorizontalAlignmentMode(_ alignment: SKLabelHorizontalAlignmentMode) {
+    func dd_horizontalAlignmentMode(_ alignment: SKLabelHorizontalAlignmentMode) {
         self.horizontalAlignmentMode = alignment
     }
 
@@ -45,9 +45,9 @@ extension SKLabelNode {
     /// - Parameter alignment: 对齐方式
     /// - Example:
     ///   ```swift
-    ///   labelNode.dd_setHorizontalAlignmentMode(.center)
+    ///   labelNode.dd_verticalAlignmentMode(.center)
     ///   ```
-    func dd_setVerticalAlignmentMode(_ alignment: SKLabelVerticalAlignmentMode) {
+    func dd_verticalAlignmentMode(_ alignment: SKLabelVerticalAlignmentMode) {
         self.verticalAlignmentMode = alignment
     }
 
@@ -55,9 +55,9 @@ extension SKLabelNode {
     /// - Parameter color: 颜色
     /// - Example:
     ///   ```swift
-    ///   labelNode.dd_setColor(.red)
+    ///   labelNode.dd_fontColor(.red)
     ///   ```
-    func dd_setColor(_ color: UIColor) {
+    func dd_fontColor(_ color: UIColor) {
         self.fontColor = color
     }
 }

@@ -39,7 +39,7 @@ public extension NSMutableAttributedString {
     /// - Returns: `Self`，支持链式调用
     @discardableResult
     func dd_string(_ string: String) -> Self {
-        self.dd_setAttributedString(string.dd_toNSAttributedString())
+        self.dd_attributedString(string.dd_toNSAttributedString())
         return self
     }
 
@@ -51,12 +51,12 @@ public extension NSMutableAttributedString {
     /// ```swift
     /// let attributedString = NSMutableAttributedString()
     /// let newAttributedString = NSAttributedString(string: "New Content")
-    /// attributedString.dd_setAttributedString(newAttributedString)
+    /// attributedString.dd_attributedString(newAttributedString)
     /// ```
     /// - Parameter attributedString: 新的不可变字符串
     /// - Returns: `Self`，支持链式调用
     @discardableResult
-    func dd_setAttributedString(_ attributedString: NSAttributedString) -> Self {
+    func dd_attributedString(_ attributedString: NSAttributedString) -> Self {
         self.setAttributedString(attributedString)
         return self
     }

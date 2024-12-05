@@ -288,12 +288,12 @@ public extension UICollectionView {
     ///
     /// 示例：
     /// ```swift
-    /// collectionView.dd_setCollectionViewLayout(newLayout, animated: true) { success in
+    /// collectionView.dd_collectionViewLayout(newLayout, animated: true) { success in
     ///     // 布局设置完成后的处理
     /// }
     /// ```
     @discardableResult
-    func dd_setCollectionViewLayout(_ layout: UICollectionViewLayout, animated: Bool = true, completion: ((Bool) -> Void)? = nil) -> Self {
+    func dd_collectionViewLayout(_ layout: UICollectionViewLayout, animated: Bool = true, completion: ((Bool) -> Void)? = nil) -> Self {
         self.setCollectionViewLayout(layout, animated: animated, completion: completion)
         return self
     }
@@ -391,10 +391,10 @@ public extension UICollectionView {
     ///
     /// 示例：
     /// ```swift
-    /// collectionView.dd_setContentOffset(CGPoint(x: 0, y: 200))
+    /// collectionView.dd_contentOffset(CGPoint(x: 0, y: 200))
     /// ```
     @discardableResult
-    func dd_setContentOffset(_ contentOffset: CGPoint = .zero, animated: Bool = true) -> Self {
+    func dd_contentOffset(_ contentOffset: CGPoint = .zero, animated: Bool = true) -> Self {
         self.setContentOffset(contentOffset, animated: animated)
         return self
     }
