@@ -1,5 +1,5 @@
 //
-//  AuthorizationManager+PHPhotoLibrary.swift
+//  AuthorizationManager+Album.swift
 //  DuckDuck
 //
 //  Created by xxwang on 19/11/2024.
@@ -18,7 +18,7 @@ public extension AuthorizationManager {
     ///
     /// - Example:
     /// ```swift
-    /// let status = await AuthorizationManager.shared.photoLibraryAuthorizationStatus
+    /// let status = await AuthorizationManager.shared.albumAuthorizationStatus
     /// switch status {
     /// case .notDetermined:
     ///     print("权限未确定")
@@ -28,7 +28,7 @@ public extension AuthorizationManager {
     ///     print("权限已授权")
     /// }
     /// ```
-    var photoLibraryAuthorizationStatus: AuthorizationStatus {
+    var albumAuthorizationStatus: AuthorizationStatus {
         let status: PHAuthorizationStatus
         if #available(iOS 14, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -57,7 +57,7 @@ public extension AuthorizationManager {
     /// - Example:
     /// ```swift
     /// async {
-    ///     let granted = await AuthorizationManager.shared.requestPhotoLibraryAuthorization()
+    ///     let granted = await AuthorizationManager.shared.requestAlbumAuthorization()
     ///     if granted {
     ///         print("相册权限已授权")
     ///     } else {
@@ -65,7 +65,7 @@ public extension AuthorizationManager {
     ///     }
     /// }
     /// ```
-    func requestPhotoLibraryAuthorization() async -> Bool {
+    func requestAlbumAuthorization() async -> Bool {
         // 请求相册权限，支持 iOS 14 及以上版本
         if #available(iOS 14, *) {
             // 使用 async/await 版本的权限请求方法

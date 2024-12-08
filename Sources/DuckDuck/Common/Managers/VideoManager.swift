@@ -155,14 +155,14 @@ public extension VideoManager {
     /// ```
     func saveVideoToGallery(from videoUrl: URL, completed: @escaping (Bool) -> Void) async {
         // 获取相册权限状态
-        let status = AuthorizationManager.shared.photoLibraryAuthorizationStatus
+        let status = AuthorizationManager.shared.albumAuthorizationStatus
 
         if status == .authorized {
             // 已授权，直接保存视频
             saveVideoToGallery(videoUrl: videoUrl, completed: completed)
         } else if status == .notDetermined {
             // 如果权限尚未确定，申请授权
-            let granted = await AuthorizationManager.shared.requestPhotoLibraryAuthorization()
+            let granted = await AuthorizationManager.shared.requestAlbumAuthorization()
             if granted {
                 // 授权成功后保存视频
                 saveVideoToGallery(videoUrl: videoUrl, completed: completed)
