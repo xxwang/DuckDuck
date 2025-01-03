@@ -379,8 +379,9 @@ public extension WKWebView {
     }
 
     /// 异步执行 JavaScript 代码，并返回执行结果。
-    /// - 参数 script: 要执行的 JavaScript 代码。
-    /// - 返回: JavaScript 执行结果，类型为 `Any?`。
+    /// - Parameters:
+    /// - script: 要执行的 JavaScript 代码。
+    /// - Returns: JavaScript 执行结果，类型为 `Any?`。
     /// - throws: 如果 JavaScript 执行失败，则抛出错误。
     ///
     /// - Example:
@@ -394,7 +395,6 @@ public extension WKWebView {
     ///     print("JavaScript 执行失败，错误信息: \(error)")
     /// }
     /// ```
-    @discardableResult
     func dd_executeJavaScript(script: String) async throws -> Any? {
         try await withCheckedThrowingContinuation { continuation in
             self.evaluateJavaScript(script) { result, error in

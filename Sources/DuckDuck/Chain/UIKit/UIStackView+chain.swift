@@ -10,34 +10,6 @@ import UIKit
 // MARK: - 链式语法
 @MainActor
 public extension DDExtension where Base: UIStackView {
-    /// 设置布局时是否参照基准线, 默认是 `false`（决定了垂直轴如果是文本的话，是否按照 `baseline` 来参与布局）
-    /// - Parameter arrangement: 是否参照基线进行布局
-    /// - Returns: 当前实例，支持链式调用
-    ///
-    /// 示例:
-    /// ```swift
-    /// stackView.dd.isBaselineRelativeArrangement(true)
-    /// ```
-    @discardableResult
-    func isBaselineRelativeArrangement(_ arrangement: Bool) -> Self {
-        self.base.isBaselineRelativeArrangement = arrangement
-        return self
-    }
-
-    /// 设置布局时是否以控件的 `LayoutMargins` 为标准，默认为 `false`（以控件的 `bounds` 为标准）
-    /// - Parameter arrangement: 是否以控件的 `LayoutMargins` 为标准
-    /// - Returns: 当前实例，支持链式调用
-    ///
-    /// 示例:
-    /// ```swift
-    /// stackView.dd.isLayoutMarginsRelativeArrangement(true)
-    /// ```
-    @discardableResult
-    func isLayoutMarginsRelativeArrangement(_ arrangement: Bool) -> Self {
-        self.base.isLayoutMarginsRelativeArrangement = arrangement
-        return self
-    }
-
     /// 设置子控件的布局方向（水平方向或垂直方向，即轴方向）
     /// - Parameter axis: 轴方向，`NSLayoutConstraint.Axis.horizontal` 或 `NSLayoutConstraint.Axis.vertical`
     /// - Returns: 当前实例，支持链式调用
@@ -94,23 +66,47 @@ public extension DDExtension where Base: UIStackView {
         return self
     }
 
-    /// 添加多个排列的子视图
-    /// - Parameter items: 子视图数组
+    /// 设置自定义间距（iOS 11 及以上）
+    /// - Parameters:
+    ///   - spacing: 自定义间距
+    ///   - arrangedSubview: 要设置间距的视图后面
+    /// - Returns: 当前实例，支持链式调用
+    ///
+    /// 示例用法：
+    /// ```swift
+    /// stackView.dd.setCustomSpacing(10, after: arrangedSubview)
+    /// ```
+    @discardableResult
+    func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) -> Self {
+        self.base.setCustomSpacing(spacing, after: arrangedSubview)
+        return self
+    }
+
+    /// 设置布局时是否参照基准线, 默认是 `false`（决定了垂直轴如果是文本的话，是否按照 `baseline` 来参与布局）
+    /// - Parameter arrangement: 是否参照基线进行布局
     /// - Returns: 当前实例，支持链式调用
     ///
     /// 示例:
     /// ```swift
-    /// stackView.dd.addArrangedSubviews(view1, view2, view3)
+    /// stackView.dd.isBaselineRelativeArrangement(true)
     /// ```
     @discardableResult
-    func addArrangedSubviews(_ items: UIView...) -> Self {
-        if items.isEmpty {
-            return self
-        }
+    func isBaselineRelativeArrangement(_ arrangement: Bool) -> Self {
+        self.base.isBaselineRelativeArrangement = arrangement
+        return self
+    }
 
-        items.compactMap { $0 }.forEach {
-            self.base.addArrangedSubview($0)
-        }
+    /// 设置布局时是否以控件的 `LayoutMargins` 为标准，默认为 `false`（以控件的 `bounds` 为标准）
+    /// - Parameter arrangement: 是否以控件的 `LayoutMargins` 为标准
+    /// - Returns: 当前实例，支持链式调用
+    ///
+    /// 示例:
+    /// ```swift
+    /// stackView.dd.isLayoutMarginsRelativeArrangement(true)
+    /// ```
+    @discardableResult
+    func isLayoutMarginsRelativeArrangement(_ arrangement: Bool) -> Self {
+        self.base.isLayoutMarginsRelativeArrangement = arrangement
         return self
     }
 
@@ -142,21 +138,74 @@ public extension DDExtension where Base: UIStackView {
         return self
     }
 
-    /// 设置自定义间距（iOS 11 及以上）
-    /// - Parameters:
-    ///   - spacing: 自定义间距
-    ///   - arrangedSubview: 要设置间距的视图后面
+    /// 添加多个排列的子视图
+    /// - Parameter items: 子视图数组
     /// - Returns: 当前实例，支持链式调用
     ///
-    /// 示例用法：
+    /// 示例:
     /// ```swift
-    /// stackView.dd.setCustomSpacing(10, after: arrangedSubview)
+    /// stackView.dd.addArrangedSubviews(view1, view2, view3)
     /// ```
     @discardableResult
-    func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) -> Self {
-        if #available(iOS 11.0, *) {
-            self.base.setCustomSpacing(spacing, after: arrangedSubview)
-        }
+    func addArrangedSubviews(_ items: UIView...) -> Self {
+        self.base.dd_addArrangedSubviews(items)
+        return self
+    }
+
+    /// 将多个视图添加到堆栈视图的末尾
+    ///
+    /// - Parameter views: 要添加的视图数组
+    ///
+    /// - Returns: 当前实例，支持链式调用
+    /// 示例:
+    /// ```swift
+    /// stackView.addArrangedSubviews([view1, view2])
+    /// ```
+    @discardableResult
+    func addArrangedSubviews(_ views: [UIView]) -> Self {
+        self.base.dd_addArrangedSubviews(views)
+        return self
+    }
+
+    /// 删除堆栈视图中的所有排列子视图
+    ///
+    /// - Returns: 当前实例，支持链式调用
+    ///
+    /// 示例:
+    /// ```swift
+    /// stackView.removeAllArrangedSubviews()
+    /// ```
+    @discardableResult
+    func removeAllArrangedSubviews() -> Self {
+        self.base.dd_removeAllArrangedSubviews()
+        return self
+    }
+
+    /// 添加子视图到堆栈中
+    /// - Parameter view: 要添加的子视图
+    /// - Returns: 当前实例，支持链式调用
+    ///
+    /// 示例:
+    /// ```swift
+    /// stackView.add(view1)
+    /// ```
+    @discardableResult
+    func add(_ view: UIView) -> Self {
+        self.base.dd_add(view)
+        return self
+    }
+
+    /// 从堆栈中移除子视图
+    /// - Parameter view: 要移除的子视图
+    /// - Returns: 当前实例，支持链式调用
+    ///
+    /// 示例:
+    /// ```swift
+    /// stackView.remove(view1)
+    /// ```
+    @discardableResult
+    func remove(_ view: UIView) -> Self {
+        self.base.dd_remove(view)
         return self
     }
 }

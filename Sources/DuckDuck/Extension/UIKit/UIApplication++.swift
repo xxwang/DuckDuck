@@ -75,7 +75,8 @@ public extension UIApplication {
 // MARK: - App Store 操作
 public extension UIApplication {
     /// 使用 App Store ID 打开应用的 App Store 页面
-    /// - 参数 appID: 应用的 App Store ID
+    /// - Parameters:
+    /// - appID: 应用的 App Store ID
     ///
     /// - Example:
     /// ```swift
@@ -88,8 +89,9 @@ public extension UIApplication {
     }
 
     /// 打开应用的 App Store 详情页
-    /// - 参数 controller: 显示 App Store 页面的控制器
-    /// - 参数 appID: 应用的 App Store ID
+    /// - Parameters:
+    /// - controller: 显示 App Store 页面的控制器
+    /// - appID: 应用的 App Store ID
     func dd_openAppDetailViewController(from controller: UIViewController & SKStoreProductViewControllerDelegate,
                                         appID: String)
     {
@@ -107,7 +109,8 @@ public extension UIApplication {
     }
 
     /// 打开应用的 App Store 评价页面
-    /// - 参数 appID: 应用的 App Store ID
+    /// - Parameters:
+    /// - appID: 应用的 App Store ID
     func dd_openAppStoreRatingPage(appID: String) {
         let urlString = "https://itunes.apple.com/cn/app/id\(appID)?mt=12"
         guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else { return }
@@ -135,7 +138,8 @@ public extension UIApplication {
     }
 
     /// 将应用的当前版本与指定版本字符串进行比较
-    /// - 参数 version: 要比较的版本字符串
+    /// - Parameters:
+    /// - version: 要比较的版本字符串
     /// - 返回: 如果指定版本较新，返回 `true`，否则返回 `false`
     ///
     /// - Example:
@@ -165,7 +169,8 @@ public extension UIApplication {
     }
 
     /// 解析版本字符串为主版本、次版本和补丁版本
-    /// - 参数 version: 版本字符串（如 "1.2.3"）
+    /// - Parameters:
+    /// - version: 版本字符串（如 "1.2.3"）
     /// - 返回: 返回包含有效性标志和版本组件的元组
     ///
     /// - Example:
@@ -206,8 +211,9 @@ public extension UIApplication {
 // MARK: - URL 操作
 public extension UIApplication {
     /// 打开 URL
-    /// - 参数 url: 要打开的 URL
-    /// - 参数 completion: 完成处理程序，指示是否成功打开 URL
+    /// - Parameters:
+    /// - url: 要打开的 URL
+    /// - completion: 完成处理程序，指示是否成功打开 URL
     ///
     /// - Example:
     /// ```swift
@@ -251,11 +257,12 @@ public extension UIApplication {
     }
 
     /// 提示用户打开应用设置页面以修改权限
-    /// - 参数 title: 警告框标题
-    /// - 参数 message: 警告框消息
-    /// - 参数 cancelTitle: 取消按钮标题
-    /// - 参数 confirmTitle: 确认按钮标题
-    /// - 参数 parentController: 显示警告框的父视图控制器
+    /// - Parameters:
+    /// - title: 警告框标题
+    /// - message: 警告框消息
+    /// - cancelTitle: 取消按钮标题
+    /// - confirmTitle: 确认按钮标题
+    /// - parentController: 显示警告框的父视图控制器
     ///
     /// - Example:
     /// ```swift
