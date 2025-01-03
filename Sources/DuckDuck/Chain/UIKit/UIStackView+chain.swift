@@ -159,7 +159,7 @@ public extension DDExtension where Base: UIStackView {
     /// - Returns: 当前实例，支持链式调用
     /// 示例:
     /// ```swift
-    /// stackView.addArrangedSubviews([view1, view2])
+    /// stackView.dd.addArrangedSubviews([view1, view2])
     /// ```
     @discardableResult
     func addArrangedSubviews(_ views: [UIView]) -> Self {
@@ -173,7 +173,7 @@ public extension DDExtension where Base: UIStackView {
     ///
     /// 示例:
     /// ```swift
-    /// stackView.removeAllArrangedSubviews()
+    /// stackView.dd.removeAllArrangedSubviews()
     /// ```
     @discardableResult
     func removeAllArrangedSubviews() -> Self {
@@ -187,7 +187,7 @@ public extension DDExtension where Base: UIStackView {
     ///
     /// 示例:
     /// ```swift
-    /// stackView.add(view1)
+    /// stackView.dd.add(view1)
     /// ```
     @discardableResult
     func add(_ view: UIView) -> Self {
@@ -201,7 +201,7 @@ public extension DDExtension where Base: UIStackView {
     ///
     /// 示例:
     /// ```swift
-    /// stackView.remove(view1)
+    /// stackView.dd.remove(view1)
     /// ```
     @discardableResult
     func remove(_ view: UIView) -> Self {
