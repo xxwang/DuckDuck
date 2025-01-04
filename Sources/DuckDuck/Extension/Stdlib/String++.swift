@@ -298,6 +298,45 @@ public extension String {
     func dd_toUIImage() -> UIImage? {
         return UIImage(named: self)
     }
+
+    /// 创建一个 SF Symbol 图标，支持单色和多色配置
+    /// - Parameters:
+    ///   - color: 单色图标的颜色。如果提供了此参数，图标将以单色渲染。
+    ///   - paletteColors: 多色图标的颜色数组。如果提供了此参数，图标将以多色渲染。
+    ///   - size: 图标的大小（默认值为 20）。
+    ///   - weight: 图标的粗细（默认值为 .regular）。
+    ///   - scale: 图标的缩放比例（默认值为 .default）。
+    /// - Returns: 返回一个可选的 `UIImage`，如果 SF Symbol 名称无效则返回 `nil`
+    func dd_sfSymbol(
+        color: UIColor? = nil,
+        paletteColors: [UIColor]? = nil,
+        size: CGFloat = 20,
+        weight: UIImage.SymbolWeight = .regular,
+        scale: UIImage.SymbolScale = .default
+    ) -> UIImage? {
+        // 创建基础配置，包含大小、粗细和缩放比例
+        var config = UIImage.SymbolConfiguration(
+            pointSize: size,
+            weight: weight,
+            scale: scale
+        )
+
+        // 处理多色
+        if let paletteColors {
+            let paletteConfig = UIImage.SymbolConfiguration(paletteColors: paletteColors)
+            config = config.applying(paletteConfig)
+        }
+        // 处理单色
+        else if let color {
+            let monochromeConfig = UIImage.SymbolConfiguration(paletteColors: [color])
+            config = config.applying(monochromeConfig)
+        }
+
+        // 加载 SF Symbol 图标
+        let image = UIImage(systemName: self, withConfiguration: config)
+
+        return image
+    }
 }
 
 // MARK: - Range
