@@ -1,4 +1,4 @@
---swiftversion 5.8
+--swiftversion 6.0
 
 --disable blankLinesAroundMark
 --disable redundantInit
