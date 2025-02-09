@@ -8,7 +8,7 @@
 
 将下面内容添加到您的`Package.swift`文件中的`dependencies`部分中
 ```Swift
-.package(url: "https://github.com/xxwang/DuckDuck.swift.git", branch: "main")
+.package(url: "https://github.com/xxwang/DuckDuck.git", branch: "main")
 ```
 
 ## 使用方法

@@ -2,25 +2,25 @@ import UIKit
 
 public class SizeCalculator {
     /// 设计图的尺寸
-    nonisolated(unsafe) private static var sketchSize: CGSize = .zero
+    private nonisolated(unsafe) static var sketchSize: CGSize = .zero
 
     private init() {}
 }
 
 public extension SizeCalculator {
-        /// 设置设计图的尺寸，适配不同设备的设计图尺寸（默认使用 iPhone8 尺寸）。
-        ///
-        /// - Parameter size: 设计图的尺寸，通常为设计图的宽度和高度。
-        /// - Default value: 默认设置为 CGSize(width: 375, height: 812)，适配 iPhone 8 尺寸。
-        ///
-        /// - Example:
-        /// ```swift
-        /// let size = CGSize(width: 375, height: 667)
-        /// SizeCalculator.setupSketch(size: size)  // 设置为 iPhone 6, 7, 8 的设计图尺寸
-        /// ```
-        static func setupSketch(size: CGSize = CGSize(width: 375, height: 812)) {
-            self.sketchSize = size
-        }
+    /// 设置设计图的尺寸，适配不同设备的设计图尺寸（默认使用 iPhone8 尺寸）。
+    ///
+    /// - Parameter size: 设计图的尺寸，通常为设计图的宽度和高度。
+    /// - Default value: 默认设置为 CGSize(width: 375, height: 812)，适配 iPhone 8 尺寸。
+    ///
+    /// - Example:
+    /// ```swift
+    /// let size = CGSize(width: 375, height: 667)
+    /// SizeCalculator.setupSketch(size: size)  // 设置为 iPhone 6, 7, 8 的设计图尺寸
+    /// ```
+    static func setupSketch(size: CGSize = CGSize(width: 375, height: 812)) {
+        self.sketchSize = size
+    }
 }
 
 // MARK: - 屏幕适配功能

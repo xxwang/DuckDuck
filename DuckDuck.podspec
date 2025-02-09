@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
   - 这是一个日常开发工具库
                    DESC
 
-  spec.homepage     = "https://github.com/xxwang/DuckDuck.swift"
+  spec.homepage     = "https://github.com/xxwang/DuckDuck"
   spec.license      = "MIT"
   spec.author = { "xxwang" => "78023776@qq.com" }
 
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   spec.module_name = 'DuckDuck'
 
   spec.swift_version = '6'
-  spec.source       = { :git => "https://github.com/xxwang/DuckDuck.swift.git", :branch => 'main' }
+  spec.source       = { :git => "https://github.com/xxwang/DuckDuck.git", :branch => 'main' }
   spec.source_files  = 'Sources/DuckDuck/**/*.{c,h,m,swift}'
   
 end

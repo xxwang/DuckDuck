@@ -24,23 +24,20 @@ let package = Package(
         .target(
             name: "DuckDuckSwift",
             dependencies: [
-                "DuckDuckCpp"
-            ], 
+                "DuckDuckCpp",
+            ],
             path: "DuckDuck-swift",
             swiftSettings: [.define("SPM_MODE")]
         ),
         .target(
             name: "DuckDuckCpp",
             dependencies: [
-                
-            ], 
+            ],
             path: "DuckDuck-cpp",
             publicHeadersPath: ""
-        )
+        ),
     ],
     swiftLanguageModes: [.v6, .v5],
     cLanguageStandard: .c11,
     cxxLanguageStandard: .cxx11
 )
-
-
