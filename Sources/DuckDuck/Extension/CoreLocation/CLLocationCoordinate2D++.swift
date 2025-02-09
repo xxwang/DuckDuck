@@ -1,10 +1,3 @@
-//
-//  CLLocationCoordinate2D++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import CoreLocation
 
 // MARK: - CLLocationCoordinate2D 类型转换

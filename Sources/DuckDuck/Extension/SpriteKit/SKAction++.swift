@@ -1,10 +1,3 @@
-//
-//  SKAction++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import SpriteKit
 
 extension SKAction {

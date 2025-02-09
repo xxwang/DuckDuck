@@ -1,10 +1,3 @@
-//
-//  WKWebView+chain.swift
-//  DuckDuck
-//
-//  Created by xxwang on 25/11/2024.
-//
-
 import WebKit
 
 // MARK: - 链式语法

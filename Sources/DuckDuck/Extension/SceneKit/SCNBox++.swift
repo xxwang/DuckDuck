@@ -1,10 +1,3 @@
-//
-//  SCNBox++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import SceneKit
 import UIKit
 

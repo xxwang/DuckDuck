@@ -1,10 +1,3 @@
-//
-//  CGAffineTransform++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import CoreGraphics
 import UIKit
 

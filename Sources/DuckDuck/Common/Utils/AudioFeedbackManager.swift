@@ -1,10 +1,3 @@
-//
-//  AudioFeedbackManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import AVFoundation
 import AVKit
 import UIKit

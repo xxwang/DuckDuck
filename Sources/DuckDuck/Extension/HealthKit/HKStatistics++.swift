@@ -1,10 +1,3 @@
-//
-//  HKStatistics++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import HealthKit
 
 // MARK: - 活动数据计算

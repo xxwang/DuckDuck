@@ -1,10 +1,3 @@
-//
-//  String++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 16/11/2024.
-//
-
 import CoreGraphics
 import CoreLocation
 import UIKit
@@ -511,6 +504,7 @@ public extension String {
 }
 
 // MARK: - 类/实例
+@MainActor
 public extension String {
     /// 将类名字符串转换为指定类型的类类型（默认为 `AnyClass`）
     ///
@@ -769,6 +763,7 @@ public extension String {
 }
 
 // MARK: - 字符串截取
+@MainActor
 public extension String {
     /// 获取某个位置的字符串
     ///
@@ -988,6 +983,7 @@ public extension String {
 }
 
 // MARK: - 常用方法
+@MainActor
 public extension String {
     /// 从字符串中提取所有数字字符
     ///
@@ -1236,7 +1232,6 @@ public extension String {
     ///   - width: 每行的最大宽度。
     ///   - font: 用于计算文本宽度的字体。
     /// - Returns: 分割后的行内容数组。
-    @MainActor
     func dd_splitIntoLines2(forWidth width: CGFloat, usingFont font: UIFont) -> [String] {
         let label = UILabel()
         label.font = font
@@ -1274,7 +1269,6 @@ public extension String {
     ///   - lineWidth: 行宽
     ///   - font: 字体
     /// - Returns: 字符串数组
-    @MainActor
     func dd_wrapLines(toWidth lineWidth: CGFloat, font: UIFont) -> [String] {
         let style = NSMutableParagraphStyle.default()
             .dd_lineBreakMode(.byCharWrapping)
@@ -1738,6 +1732,7 @@ public extension String {
 }
 
 // MARK: - 字符串判断
+@MainActor
 public extension String {
     /// 检查字符串是否包含字母
     ///
@@ -1893,7 +1888,6 @@ public extension String {
     /// ```
     ///
     /// - Returns: 如果字符串拼写正确，返回 `true`；如果有拼写错误，返回 `false`。
-    @MainActor
     func dd_isSpelledCorrectly() -> Bool {
         // 创建一个文本检查器
         let checker = UITextChecker()
@@ -2136,11 +2130,10 @@ public extension String {
     /// - Parameter complex: 是否要求复杂密码，默认为 `false`，如果设置为 `true`，则要求密码包含多种类型的字符。
     /// - Returns: 如果密码符合规则，返回 `true`，否则返回 `false`。
     func dd_isValidPassword(complex: Bool = false) -> Bool {
-        let pattern: String
-        if complex {
-            pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{}|;:'\",.<>/?]).{8,}$"
+        let pattern = if complex {
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{}|;:'\",.<>/?]).{8,}$"
         } else {
-            pattern = "^(?=.*[a-zA-Z])(?=.*\\d).{6,}$"
+            "^(?=.*[a-zA-Z])(?=.*\\d).{6,}$"
         }
         return dd_matchPattern(pattern)
     }

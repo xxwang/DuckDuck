@@ -1,10 +1,3 @@
-//
-//  Collection++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 16/11/2024.
-//
-
 import Foundation
 
 // MARK: - 集合扩展

@@ -1,10 +1,3 @@
-//
-//  DarkModeManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import UIKit
 
 // MARK: - 深色模式管理器

@@ -1,10 +1,3 @@
-//
-//  UIColor++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import CoreGraphics
 import UIKit
 

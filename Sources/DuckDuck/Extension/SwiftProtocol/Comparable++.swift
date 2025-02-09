@@ -1,10 +1,3 @@
-//
-//  Comparable++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 16/11/2024.
-//
-
 import Foundation
 
 // MARK: - Comparable 扩展

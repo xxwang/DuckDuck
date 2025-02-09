@@ -1,10 +1,3 @@
-//
-//  LocalAuthenticationManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import LocalAuthentication
 
 /// 本地身份认证管理器

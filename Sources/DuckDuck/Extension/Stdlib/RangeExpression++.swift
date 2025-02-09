@@ -1,10 +1,3 @@
-//
-//  RangeExpression++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 15/11/2024.
-//
-
 import Foundation
 
 // MARK: - RangeExpression<Int> 的便捷扩展

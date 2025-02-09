@@ -2,31 +2,20 @@
 
 ## 安装
 
-`DuckDuck`可以通过`CocoaPods`和`Swift Package Manager`安装.
-
-### Cocoapods
-
-```Ruby
-platform :ios, '15.0'
-use_frameworks!
-
-target 'App' do
-  pod 'DuckDuck'
-end
-```
+`DuckDuck`仅支持`Swift Package Manager`安装.
 
 ### SPM
 
 将下面内容添加到您的`Package.swift`文件中的`dependencies`部分中
 ```Swift
-.package(url: "https://github.com/xxwang/DuckDuck.git", branch: "swift6")
+.package(url: "https://github.com/xxwang/DuckDuck.swift.git", branch: "main")
 ```
 
 ## 使用方法
 
 使用前需要先导入`DuckDuck`
 ```Swift
-import DuckDUck
+import DuckDuck
 ```
 
 ### `dd_`使用方法
@@ -60,5 +49,3 @@ public extension DDExtension where Base: [类型] {
 //类型方法调用
 类型.dd.方法名()
 ```
-
-

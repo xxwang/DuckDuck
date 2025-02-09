@@ -1,10 +1,3 @@
-//
-//  LoggerLevel.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 /// 日志级别

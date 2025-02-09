@@ -1,10 +1,3 @@
-//
-//  AuthorizationManager+Microphone.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import AVFoundation
 import Foundation
 

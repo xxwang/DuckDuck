@@ -1,10 +1,3 @@
-//
-//  CommonHelper.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import UIKit
 
 /// 工具类，包含环境和设备相关的判断方法

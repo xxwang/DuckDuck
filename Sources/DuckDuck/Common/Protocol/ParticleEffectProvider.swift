@@ -1,10 +1,3 @@
-//
-//  ParticleEffectProvider.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import UIKit
 
 // MARK: - 粒子特效协议

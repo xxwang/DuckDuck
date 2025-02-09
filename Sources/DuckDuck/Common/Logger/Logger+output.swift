@@ -1,10 +1,3 @@
-//
-//  Logger+output.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 // MARK: - 内部功能

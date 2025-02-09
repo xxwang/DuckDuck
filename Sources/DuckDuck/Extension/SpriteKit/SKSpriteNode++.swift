@@ -1,10 +1,3 @@
-//
-//  SKSpriteNode++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import SpriteKit
 
 // MARK: - SKSpriteNode 扩展方法

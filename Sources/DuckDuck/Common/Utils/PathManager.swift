@@ -1,10 +1,3 @@
-//
-//  PathManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 /// `PathManager` 提供路径和目录管理功能

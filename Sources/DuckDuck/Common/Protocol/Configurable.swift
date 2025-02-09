@@ -1,10 +1,3 @@
-//
-//  Configurable.swift
-//  DuckDuck
-//
-//  Created by xxwang on 15/11/2024.
-//
-
 import UIKit
 
 /// 为便捷地配置和创建对象提供扩展。

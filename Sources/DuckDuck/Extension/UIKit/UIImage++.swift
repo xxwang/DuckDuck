@@ -1,10 +1,3 @@
-//
-//  UIImage++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import AVFoundation
 import CoreImage
 import Dispatch
@@ -967,11 +960,10 @@ public extension UIImage {
     /// 该方法为图片添加圆角效果。如果未指定圆角半径，返回圆形图片。
     func dd_corner(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height) / 2
-        let cornerRadius: CGFloat
-        if let radius, radius > 0, radius <= maxRadius {
-            cornerRadius = radius
+        let cornerRadius: CGFloat = if let radius, radius > 0, radius <= maxRadius {
+            radius
         } else {
-            cornerRadius = maxRadius
+            maxRadius
         }
 
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
@@ -1839,11 +1831,12 @@ public extension UIImage {
 
         var faceFeatures: [CIFaceFeature]!
 
-        // 使用图片元数据来处理图片方向
-        if let orientation = inputImage.properties[kCGImagePropertyOrientation as String] {
-            faceFeatures = detector?.features(in: inputImage, options: [CIDetectorImageOrientation: orientation]) as? [CIFaceFeature]
+            // 使用图片元数据来处理图片方向
+            = if let orientation = inputImage.properties[kCGImagePropertyOrientation as String]
+        {
+            detector?.features(in: inputImage, options: [CIDetectorImageOrientation: orientation]) as? [CIFaceFeature]
         } else {
-            faceFeatures = detector?.features(in: inputImage) as? [CIFaceFeature]
+            detector?.features(in: inputImage) as? [CIFaceFeature]
         }
 
         var rects: [CGRect] = []

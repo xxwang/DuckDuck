@@ -1,10 +1,3 @@
-//
-//  HKHealthStore++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import HealthKit
 
 // MARK: - 数据同步

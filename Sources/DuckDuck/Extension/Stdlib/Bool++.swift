@@ -1,10 +1,3 @@
-//
-//  Bool++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 15/11/2024.
-//
-
 import Foundation
 
 // MARK: - Bool 类型转换

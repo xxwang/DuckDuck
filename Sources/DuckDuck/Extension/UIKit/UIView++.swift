@@ -1,10 +1,3 @@
-//
-//  UIView++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import UIKit
 
 // MARK: - Creatable
@@ -1553,12 +1546,11 @@ public extension UIView {
         CATransaction.begin() // 开始动画事务
 
         // 根据方向选择抖动的动画类型
-        let animation: CAKeyframeAnimation
-        switch shakeDirection {
+        let animation = switch shakeDirection {
         case .horizontal:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.x") // 水平抖动
+            CAKeyframeAnimation(keyPath: "transform.translation.x") // 水平抖动
         case .vertical:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.y") // 垂直抖动
+            CAKeyframeAnimation(keyPath: "transform.translation.y") // 垂直抖动
         }
 
         // 设置动画的时间函数（平滑动画曲线）

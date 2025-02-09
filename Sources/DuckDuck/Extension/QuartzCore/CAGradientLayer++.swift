@@ -1,10 +1,3 @@
-//
-//  CAGradientLayer++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 23/11/2024.
-//
-
 import QuartzCore
 import UIKit
 

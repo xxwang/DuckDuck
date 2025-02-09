@@ -1,10 +1,3 @@
-//
-//  AssociatedObject.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 // MARK: - 关联属性工具类

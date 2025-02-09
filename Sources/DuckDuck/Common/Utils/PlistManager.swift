@@ -1,10 +1,3 @@
-//
-//  PlistManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 /// `PlistManager` 提供 `.plist` 文件的解析、保存和验证功能。

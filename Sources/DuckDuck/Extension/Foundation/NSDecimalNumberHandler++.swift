@@ -1,10 +1,3 @@
-//
-//  NSDecimalNumberHandler++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import Foundation
 
 // MARK: - NSDecimalNumberHandler 操作符

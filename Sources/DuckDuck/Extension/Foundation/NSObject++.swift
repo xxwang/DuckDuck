@@ -1,10 +1,3 @@
-//
-//  NSObject++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 15/11/2024.
-//
-
 import UIKit
 
 // MARK: - 获取类信息

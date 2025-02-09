@@ -1,10 +1,3 @@
-//
-//  AuthorizationManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import CoreLocation
 import Foundation
 import HealthKit

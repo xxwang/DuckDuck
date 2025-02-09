@@ -1,10 +1,3 @@
-//
-//  CATransform3D++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 23/11/2024.
-//
-
 import QuartzCore
 
 // MARK: - 类型转换

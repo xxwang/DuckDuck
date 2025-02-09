@@ -1,13 +1,7 @@
-//
-//  FileManager++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 22/11/2024.
-//
-
 import Foundation
 
 // MARK: - 静态方法
+@MainActor
 public extension FileManager {
     /// 判断路径是否存在
     /// - Parameter path: 路径

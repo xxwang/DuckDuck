@@ -1,10 +1,3 @@
-//
-//  CLLocation++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import CoreLocation
 
 // MARK: - CLLocation 方法扩展

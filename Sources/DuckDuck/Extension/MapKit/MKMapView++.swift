@@ -1,10 +1,3 @@
-//
-//  MKMapView++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import MapKit
 
 // MARK: - 注册/获取可重用大头针

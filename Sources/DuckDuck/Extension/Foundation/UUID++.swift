@@ -1,14 +1,9 @@
-//
-//  UUID++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import Foundation
 
 public extension UUID {
-    static func uuidString() -> String {
+    /// 获取`UUID`字符串
+    /// - Returns: `UUID`字符串
+    static func dd_uuidString() -> String {
         return UUID().uuidString
     }
 }

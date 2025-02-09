@@ -1,10 +1,3 @@
-//
-//  WKWebViewConfiguration++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import WebKit
 
 // MARK: - 默认配置扩展

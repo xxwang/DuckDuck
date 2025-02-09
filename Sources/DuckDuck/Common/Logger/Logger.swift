@@ -1,10 +1,3 @@
-//
-//  Logger.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Foundation
 
 // MARK: - 日志记录器类，提供日志输出到控制台或文件的功能

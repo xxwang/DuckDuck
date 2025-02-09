@@ -1,10 +1,3 @@
-//
-//  LayoutManager.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import UIKit
 
 public extension UIView {
@@ -78,24 +71,20 @@ public extension UIView {
         let left = self.leftLayout ?? 0
         let right = self.rightLayout ?? 0
         let superviewWidth = self.superview?.frame.width ?? 0
-        let width: CGFloat
-
-        if let _ = self.leftLayout, let _ = self.rightLayout {
-            width = superviewWidth - left - right
+        let width: CGFloat = if let _ = self.leftLayout, let _ = self.rightLayout {
+            superviewWidth - left - right
         } else {
-            width = self.widthLayout ?? self.frame.width
+            self.widthLayout ?? self.frame.width
         }
 
         // 计算高度
         let top = self.topLayout ?? 0
         let bottom = self.bottomLayout ?? 0
         let superviewHeight = self.superview?.frame.height ?? 0
-        let height: CGFloat
-
-        if let _ = self.topLayout, let _ = self.bottomLayout {
-            height = superviewHeight - top - bottom
+        let height: CGFloat = if let _ = self.topLayout, let _ = self.bottomLayout {
+            superviewHeight - top - bottom
         } else {
-            height = self.heightLayout ?? self.frame.height
+            self.heightLayout ?? self.frame.height
         }
 
         return (width, height)

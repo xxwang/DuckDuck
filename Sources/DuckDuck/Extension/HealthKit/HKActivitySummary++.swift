@@ -1,10 +1,3 @@
-//
-//  HKActivitySummary++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import HealthKit
 
 // MARK: - 判断目标完成情况

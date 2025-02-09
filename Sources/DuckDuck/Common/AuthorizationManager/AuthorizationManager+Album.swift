@@ -1,10 +1,3 @@
-//
-//  AuthorizationManager+Album.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import Photos
 
 // MARK: - 相册
@@ -29,11 +22,10 @@ public extension AuthorizationManager {
     /// }
     /// ```
     var albumAuthorizationStatus: AuthorizationStatus {
-        let status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        let status: PHAuthorizationStatus = if #available(iOS 14, *) {
+            PHPhotoLibrary.authorizationStatus(for: .readWrite)
         } else {
-            status = PHPhotoLibrary.authorizationStatus()
+            PHPhotoLibrary.authorizationStatus()
         }
 
         switch status {

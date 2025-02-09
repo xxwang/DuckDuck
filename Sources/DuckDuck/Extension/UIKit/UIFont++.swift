@@ -1,10 +1,3 @@
-//
-//  UIFont++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 23/11/2024.
-//
-
 import CoreGraphics
 import CoreText
 import UIKit

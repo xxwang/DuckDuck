@@ -1,10 +1,3 @@
-//
-//  Locale++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 18/11/2024.
-//
-
 import Foundation
 
 // MARK: - Locale扩展

@@ -1,10 +1,3 @@
-//
-//  SKPhysicsBody.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import SpriteKit
 
 // MARK: - 链式语法

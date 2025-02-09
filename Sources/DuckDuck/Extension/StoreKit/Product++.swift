@@ -1,10 +1,3 @@
-//
-//  Product++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import StoreKit
 
 // MARK: - StoreKit.Product 扩展

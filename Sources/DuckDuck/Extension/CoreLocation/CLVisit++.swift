@@ -1,10 +1,3 @@
-//
-//  CLVisit++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import CoreLocation
 
 // MARK: - CLVisit 类型转换

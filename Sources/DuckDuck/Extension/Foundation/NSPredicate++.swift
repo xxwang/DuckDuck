@@ -1,10 +1,3 @@
-//
-//  NSPredicate++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 22/11/2024.
-//
-
 import Foundation
 
 // MARK: - 类型转换

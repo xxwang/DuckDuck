@@ -1,10 +1,3 @@
-//
-//  RuntimeHelper.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import UIKit
 
 /// 一个用于运行时操作的工具类，例如检查类、方法、属性等。

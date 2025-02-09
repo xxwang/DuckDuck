@@ -1,32 +1,26 @@
-//
-//  SizeCalculator.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import UIKit
 
-@MainActor
 public class SizeCalculator {
     /// 设计图的尺寸
-    private static var sketchSize: CGSize = .zero
+    nonisolated(unsafe) private static var sketchSize: CGSize = .zero
 
     private init() {}
+}
 
-    /// 设置设计图的尺寸，适配不同设备的设计图尺寸（默认使用 iPhone8 尺寸）。
-    ///
-    /// - Parameter size: 设计图的尺寸，通常为设计图的宽度和高度。
-    /// - Default value: 默认设置为 CGSize(width: 375, height: 812)，适配 iPhone 8 尺寸。
-    ///
-    /// - Example:
-    /// ```swift
-    /// let size = CGSize(width: 375, height: 667)
-    /// SizeCalculator.setupSketch(size: size)  // 设置为 iPhone 6, 7, 8 的设计图尺寸
-    /// ```
-    static func setupSketch(size: CGSize = CGSize(width: 375, height: 812)) {
-        self.sketchSize = size
-    }
+public extension SizeCalculator {
+        /// 设置设计图的尺寸，适配不同设备的设计图尺寸（默认使用 iPhone8 尺寸）。
+        ///
+        /// - Parameter size: 设计图的尺寸，通常为设计图的宽度和高度。
+        /// - Default value: 默认设置为 CGSize(width: 375, height: 812)，适配 iPhone 8 尺寸。
+        ///
+        /// - Example:
+        /// ```swift
+        /// let size = CGSize(width: 375, height: 667)
+        /// SizeCalculator.setupSketch(size: size)  // 设置为 iPhone 6, 7, 8 的设计图尺寸
+        /// ```
+        static func setupSketch(size: CGSize = CGSize(width: 375, height: 812)) {
+            self.sketchSize = size
+        }
 }
 
 // MARK: - 屏幕适配功能
@@ -126,7 +120,6 @@ private extension SizeCalculator {
 }
 
 // MARK: - 整数适配扩展
-@MainActor
 public extension BinaryInteger {
     /// 自动适配宽度（将整数值按设计图宽度比例适配）。
     ///
@@ -170,7 +163,6 @@ public extension BinaryInteger {
 }
 
 // MARK: - 浮动数字适配扩展
-@MainActor
 public extension BinaryFloatingPoint {
     /// 自动适配宽度（将浮动数字按设计图宽度比例适配）。
     ///

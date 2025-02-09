@@ -1,10 +1,3 @@
-//
-//  AuthorizationManager+Location.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import CoreLocation
 import Foundation
 
@@ -16,11 +9,10 @@ public extension AuthorizationManager {
 
     /// 获取定位的当前授权状态
     var locationAuthorizationStatus: AuthorizationStatus {
-        let status: CLAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = self.locationManager.authorizationStatus
+        let status: CLAuthorizationStatus = if #available(iOS 14, *) {
+            self.locationManager.authorizationStatus
         } else {
-            status = CLLocationManager.authorizationStatus()
+            CLLocationManager.authorizationStatus()
         }
         switch status {
         case .notDetermined: return .notDetermined

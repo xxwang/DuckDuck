@@ -1,10 +1,3 @@
-//
-//  SKPhysicsWorld+chain.swift
-//  DuckDuck
-//
-//  Created by 王哥 on 5/12/2024.
-//
-
 import SpriteKit
 
 extension SKPhysicsWorld: DDExtensionable {}

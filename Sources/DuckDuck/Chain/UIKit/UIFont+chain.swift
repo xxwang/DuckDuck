@@ -1,10 +1,3 @@
-//
-//  UIFont+chain.swift
-//  DuckDuck
-//
-//  Created by xxwang on 25/11/2024.
-//
-
 import UIKit
 
 extension UIFont: DDExtensionable {}

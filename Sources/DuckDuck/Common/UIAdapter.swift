@@ -1,10 +1,3 @@
-//
-//  UIAdapter.swift
-//  DuckDuck
-//
-//  Created by xxwang on 19/11/2024.
-//
-
 import UIKit
 
 // MARK: - 全局外观设置

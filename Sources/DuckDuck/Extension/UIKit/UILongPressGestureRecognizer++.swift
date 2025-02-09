@@ -1,10 +1,3 @@
-//
-//  UILongPressGestureRecognizer++.swift
-//  DuckDuck
-//
-//  Created by 王哥 on 26/11/2024.
-//
-
 import UIKit
 
 // MARK: - Creatable

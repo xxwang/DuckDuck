@@ -1,10 +1,3 @@
-//
-//  MKMapRect++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 21/11/2024.
-//
-
 import MapKit
 
 public extension MKMapRect {

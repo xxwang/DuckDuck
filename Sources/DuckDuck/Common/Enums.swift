@@ -1,9 +1,4 @@
-//
-//  Enums.swift
-//  DuckDuck
-//
-//  Created by xxwang on 18/11/2024.
-//
+import Foundation
 
 /// 应用运行环境
 public enum AppRunEnv {

@@ -1,10 +1,3 @@
-//
-//  Timer++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 22/11/2024.
-//
-
 import Foundation
 
 // MARK: - Timer 构造方法扩展

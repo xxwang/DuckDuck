@@ -1,10 +1,3 @@
-//
-//  UIStackView++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 24/11/2024.
-//
-
 import UIKit
 
 // MARK: - Creatable
@@ -296,8 +289,8 @@ public extension UIStackView {
             return self
         }
 
-        items.compactMap { $0 }.forEach {
-            self.addArrangedSubview($0)
+        for item in items.compactMap(\.self) {
+            self.addArrangedSubview(item)
         }
         return self
     }

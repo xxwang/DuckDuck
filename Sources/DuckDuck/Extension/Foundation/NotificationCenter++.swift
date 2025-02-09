@@ -1,11 +1,3 @@
-//
-//  NotificationCenter++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 18/11/2024.
-//
-
-import Foundation
 import UIKit
 
 // MARK: - NotificationCenter 扩展
@@ -19,7 +11,6 @@ public extension NotificationCenter {
     /// ```swift
     /// NotificationCenter.dd_postNotification(.myCustomNotification, object: self, userInfo: ["key": "value"])
     /// ```
-    @MainActor
     static func dd_postNotification(
         _ name: Notification.Name,
         object: Any? = nil,
@@ -38,7 +29,6 @@ public extension NotificationCenter {
     /// ```swift
     /// NotificationCenter.dd_addObserverForNotification(self, selector: #selector(handleNotification), name: .myCustomNotification)
     /// ```
-    @MainActor
     static func dd_addObserverForNotification(
         _ observer: Any,
         selector: Selector,
@@ -57,7 +47,6 @@ public extension NotificationCenter {
     /// ```swift
     /// NotificationCenter.dd_removeObserverForNotification(self, name: .myCustomNotification)
     /// ```
-    @MainActor
     static func dd_removeObserverForNotification(
         _ observer: Any,
         name: Notification.Name? = nil,
@@ -78,7 +67,6 @@ public extension NotificationCenter {
     /// ```swift
     /// NotificationCenter.dd_removeAllObserversForNotification(self)
     /// ```
-    @MainActor
     static func dd_removeAllObserversForNotification(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer)
     }

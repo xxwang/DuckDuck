@@ -1,14 +1,6 @@
-//
-//  ScreenInfo.swift
-//  DuckDuck
-//
-//  Created by xxwang on 18/11/2024.
-//
-
 import UIKit
 
 // MARK: - 屏幕、导航栏、标签栏等属性管理
-@MainActor
 public class ScreenInfo {}
 
 // MARK: - 屏幕相关属性
@@ -32,8 +24,10 @@ public extension ScreenInfo {
 public extension ScreenInfo {
     /// 安全区的Insets (UIEdgeInsets)
     static var safeAreaInsets: UIEdgeInsets {
-        guard let window = UIWindow.dd_mainWindow() else { return .zero }
-        return window.safeAreaInsets
+        return Task { @MainActor in
+            let inserts = UIWindow.dd_mainWindow()?.safeAreaInsets ?? .zero
+            return inserts
+        }
     }
 
     /// 安全区顶部的高度 (CGFloat)

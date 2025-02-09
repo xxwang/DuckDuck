@@ -1,10 +1,3 @@
-//
-//  UIScreen++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 23/11/2024.
-//
-
 import UIKit
 
 // MARK: - 屏幕事件

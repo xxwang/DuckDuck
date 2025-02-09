@@ -1,10 +1,3 @@
-//
-//  CLGeocoder++.swift
-//  DuckDuck
-//
-//  Created by xxwang on 20/11/2024.
-//
-
 import CoreLocation
 
 // MARK: - CLGeocoder 静态方法扩展
