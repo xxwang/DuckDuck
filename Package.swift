@@ -37,6 +37,7 @@ let package = Package(
             publicHeadersPath: ""
         ),
     ],
+//    swiftLanguageVersions: [.v5, .v6],
     cLanguageStandard: .c11,
     cxxLanguageStandard: .cxx11
 )
