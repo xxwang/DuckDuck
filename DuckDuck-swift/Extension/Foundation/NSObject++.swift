@@ -365,7 +365,6 @@ private extension NSObject {
     /// - Parameters:
     ///   - value: 设置的值
     ///   - key: 键
-    @MainActor
     @objc func dd_hook_setValue(_ value: Any?, forUndefinedKey key: String) {
         Logger.error("setValue(_:forUndefinedKey:), 未知键Key: \(key), 值: \(value ?? "")")
     }
@@ -374,7 +373,6 @@ private extension NSObject {
     /// - Parameters:
     ///   - key: 键
     /// - Returns: `nil`
-    @MainActor
     @objc func dd_hook_value(forUndefinedKey key: String) -> Any? {
         Logger.error("value(forUndefinedKey:), 未知键: \(key)")
         return nil
@@ -383,7 +381,6 @@ private extension NSObject {
     /// 当调用 `setNilValueForKey(:)` 方法时，如果键值为 `nil`，且值不支持 `nil`，会触发此方法
     /// - Parameters:
     ///   - key: 键
-    @MainActor
     @objc func dd_hook_setNilValueForKey(_ key: String) {
         Logger.error("setNilValueForKey(_:), 无法给非指针对象(如`NSInteger`)赋值 `nil` 键: \(key)")
     }
@@ -391,7 +388,6 @@ private extension NSObject {
     /// 替换 `setValuesForKeys(:)` 方法，手动为非对象类型转换为字符串
     /// - Parameters:
     ///   - keyedValues: 键值字典
-    @MainActor
     @objc func dd_hook_setValuesForKeys(_ keyedValues: [String: Any]) {
         for (key, value) in keyedValues {
             Logger.info("\(key) -- \(value)")

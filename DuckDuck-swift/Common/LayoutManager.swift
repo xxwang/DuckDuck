@@ -1,7 +1,7 @@
 import UIKit
 
 public extension UIView {
-    @MainActor
+    
     private struct LayoutKeys {
         static var top = UnsafeRawPointer(bitPattern: "UIView.LayoutKeys.top".hashValue)
         static var bottom = UnsafeRawPointer(bitPattern: "UIView.LayoutKeys.bottom".hashValue)
@@ -92,7 +92,6 @@ public extension UIView {
 }
 
 // MARK: - 布局设置（链式调用）
-@MainActor
 public extension DDExtension where Base: UIView {
     @discardableResult
     func horizontal(_ left: CGFloat, right: CGFloat) -> Self {

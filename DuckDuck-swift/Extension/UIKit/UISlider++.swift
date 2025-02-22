@@ -1,31 +1,14 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UISlider {
-    /// 纯净的创建方法
-    static func create<T: UISlider>(_ aClass: T.Type = UISlider.self) -> T {
-        let slider = UISlider()
-        return slider as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UISlider>(_ aClass: T.Type = UISlider.self) -> T {
-        let slider: UISlider = self.create()
-        return slider as! T
-    }
-}
-
 // MARK: - 类型
 extension UISlider {
     // MARK: - 关联键
-    @MainActor
     class AssociateKeys {
         static var eventKey = UnsafeRawPointer(bitPattern: ("UISlider" + "eventKey").hashValue)
     }
 }
 
 // MARK: - 事件关联
-@MainActor
 extension UISlider {
     /// 事件回调
     var slider_onEventHandler: ((Float) -> Void)? {

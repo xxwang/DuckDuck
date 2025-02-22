@@ -6,7 +6,7 @@ import UIKit
 
 // MARK: - 关联键
 private class AssociateKeys {
-    @MainActor static var saveBlockKey = UnsafeRawPointer(bitPattern: "saveBlockKey".hashValue)
+    static var saveBlockKey = UnsafeRawPointer(bitPattern: "saveBlockKey".hashValue)
 }
 
 // MARK: - 构造方法
@@ -683,7 +683,6 @@ public extension UIImage {
     /// ```swift
     /// let rotatedImage = image.dd_rotate2(degree: 90)
     /// ```
-    @MainActor
     func dd_rotate2(degree: CGFloat) -> UIImage? {
         let radians = degree * .pi / 180
         return dd_rotate2(radians: radians)
@@ -697,7 +696,6 @@ public extension UIImage {
     /// ```swift
     /// let rotatedImage = image.dd_rotate2(radians: .pi / 2)
     /// ```
-    @MainActor
     func dd_rotate2(radians: CGFloat) -> UIImage? {
         guard let cgImage else { return nil }
         let rotationTransform = CGAffineTransform(rotationAngle: radians)
@@ -989,7 +987,6 @@ public extension UIImage {
     /// let imageWithSpecificCorners = image.dd_corner(size: CGSize(width: 100, height: 100), radius: 10, corners: [.topLeft, .bottomRight])
     /// ```
     /// 该方法为图片设置指定圆角，可以选择裁剪的角。
-    @MainActor
     func dd_corner(size: CGSize?,
                    radius: CGFloat,
                    corners: UIRectCorner = .allCorners) -> UIImage?
@@ -1037,7 +1034,6 @@ public extension UIImage {
     /// let imageWithBorder = image.dd_corner(size: CGSize(width: 150, height: 150), radius: 20, corners: .allCorners, borderWidth: 5, borderColor: .black)
     /// ```
     /// 该方法为图片设置圆角效果并添加边框。
-    @MainActor
     func dd_corner(size: CGSize,
                    radius: CGFloat,
                    corners: UIRectCorner = .allCorners,
@@ -1099,7 +1095,6 @@ public extension UIImage {
     /// let roundImage = image.dd_toCornerImage()
     /// ```
     /// 该方法将图片裁剪为圆形。
-    @MainActor
     func dd_toCornerImage() -> UIImage? {
         self.dd_corner(size: size,
                        radius: (size.width < size.height ? size.width : size.height) / 2.0,
@@ -1117,7 +1112,6 @@ public extension UIImage {
     /// let coloredImage = UIImage.dd_makeImage(with: .red, size: CGSize(width: 50, height: 50))
     /// ```
     /// 该方法生成指定颜色和尺寸的纯色图像。
-    @MainActor
     static func dd_makeImage(with color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
         return self.dd_makeImage(with: color, size: size, corners: .allCorners, radius: 0)
     }
@@ -1135,7 +1129,6 @@ public extension UIImage {
     /// let coloredImageWithCorner = UIImage.dd_makeImage(with: .blue, size: CGSize(width: 100, height: 100), corners: [.topLeft], radius: 10)
     /// ```
     /// 该方法生成指定颜色、圆角和尺寸的纯色图像。
-    @MainActor
     static func dd_makeImage(with color: UIColor,
                              size: CGSize,
                              corners: UIRectCorner,
@@ -1971,7 +1964,6 @@ public extension UIImage {
     ///     direction: .vertical
     /// )
     /// ```
-    @MainActor
     static func dd_createLinearGradient(_ hexsString: [String],
                                         size: CGSize = CGSize(width: 1, height: 1),
                                         locations: [CGFloat]? = [0, 1],
@@ -1997,7 +1989,6 @@ public extension UIImage {
     ///     direction: .leftOblique
     /// )
     /// ```
-    @MainActor
     static func dd_createLinearGradient(_ colors: [UIColor],
                                         size: CGSize = CGSize(width: 10, height: 10),
                                         locations: [CGFloat]? = [0, 1],
@@ -2025,7 +2016,6 @@ public extension UIImage {
     ///     direction: .vertical
     /// )
     /// ```
-    @MainActor
     static func dd_createLinearGradient(_ colors: [UIColor],
                                         size: CGSize = CGSize(width: 10, height: 10),
                                         radius: CGFloat,
@@ -2389,7 +2379,6 @@ public extension UIImage {
     /// ```swift
     /// let placeholderImage = UIImage.dd_textImage("A", size: (100, 100), backgroundColor: .blue, textColor: .white)
     /// ```
-    @MainActor
     static func dd_textImage(_ text: String, fontSize: CGFloat = 16, size: (CGFloat, CGFloat), backgroundColor: UIColor = UIColor.orange, textColor: UIColor = UIColor.white, isCircle: Bool = true, isFirstChar: Bool = false) -> UIImage? {
         // 过滤空内容
         if text.isEmpty { return nil }
@@ -2425,7 +2414,6 @@ public extension UIImage {
 }
 
 // MARK: - 保存图片
-@MainActor
 public extension UIImage {
     /// 保存图片到相册
     /// - Parameter completion: 完成回调
@@ -2497,7 +2485,6 @@ public extension UIImage {
     /// ```swift
     /// let tiledImage = originalImage.dd_imageTile(size: CGSize(width: 300, height: 300))
     /// ```
-    @MainActor
     func dd_imageTile(size: CGSize) -> UIImage? {
         let tempView = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
         tempView.backgroundColor = UIColor(patternImage: self)

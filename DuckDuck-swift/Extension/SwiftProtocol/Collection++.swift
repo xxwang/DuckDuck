@@ -111,7 +111,6 @@ public extension Collection where Element: Equatable {
     /// ```
     /// - Parameter item: 指定元素
     /// - Returns: 符合条件的索引数组
-    @MainActor
     func dd_indices(of item: Element) -> [Index] {
         self.dd_indices { $0 == item } ?? []
     }

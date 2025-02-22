@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UILabel {
     /// 设置文字内容
     /// - Parameter text: 文字内容
@@ -144,7 +143,6 @@ public extension DDExtension where Base: UILabel {
 }
 
 // MARK: - 属性文本链式语法
-@MainActor
 public extension DDExtension where Base: UILabel {
     /// 设置特定范围的字体
     /// - Parameters:

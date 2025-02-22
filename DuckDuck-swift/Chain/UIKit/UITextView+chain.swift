@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITextView {
     /// 设置是否可以编辑
     /// - Parameter isEditable: 是否可以编辑

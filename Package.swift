@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 5.10
 
 import PackageDescription
 
@@ -37,7 +37,7 @@ let package = Package(
             publicHeadersPath: ""
         ),
     ],
-    swiftLanguageModes: [.v6, .v5],
+    swiftLanguageModes: [.v5],
     cLanguageStandard: .c11,
     cxxLanguageStandard: .cxx11
 )

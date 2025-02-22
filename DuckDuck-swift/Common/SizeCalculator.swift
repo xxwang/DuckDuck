@@ -24,7 +24,6 @@ public extension SizeCalculator {
 }
 
 // MARK: - 屏幕适配功能
-@MainActor
 private extension SizeCalculator {
     /// 根据设计图宽度计算适配后的宽度。
     ///
@@ -86,7 +85,6 @@ private extension SizeCalculator {
     /// ```swift
     /// let widthRatio = SizeCalculator.calculateWidthRatio()
     /// ```
-    @MainActor
     static func calculateWidthRatio() -> CGFloat {
         return ScreenInfo.screenWidth / self.sketchSize.width
     }
@@ -99,7 +97,6 @@ private extension SizeCalculator {
     /// ```swift
     /// let heightRatio = SizeCalculator.calculateHeightRatio()
     /// ```
-    @MainActor
     static func calculateHeightRatio() -> CGFloat {
         return ScreenInfo.screenHeight / self.sketchSize.height
     }
@@ -123,7 +120,6 @@ private extension SizeCalculator {
 }
 
 // MARK: - 整数适配扩展
-@MainActor
 public extension BinaryInteger {
     /// 自动适配宽度（将整数值按设计图宽度比例适配）。
     ///
@@ -167,7 +163,6 @@ public extension BinaryInteger {
 }
 
 // MARK: - 浮动数字适配扩展
-@MainActor
 public extension BinaryFloatingPoint {
     /// 自动适配宽度（将浮动数字按设计图宽度比例适配）。
     ///

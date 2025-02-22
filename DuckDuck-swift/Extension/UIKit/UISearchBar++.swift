@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UISearchBar {
-    /// 纯净的创建方法
-    static func create<T: UISearchBar>(_ aClass: T.Type = UISearchBar.self) -> T {
-        let searchBar = UISearchBar()
-        return searchBar as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UISearchBar>(_ aClass: T.Type = UISearchBar.self) -> T {
-        let searchBar: UISearchBar = self.create()
-        return searchBar as! T
-    }
-}
-
 // MARK: - 计算属性
 public extension UISearchBar {
     /// 搜索栏中的`UITextField`(如果适用)

@@ -1,24 +1,9 @@
 import WebKit
 
-// MARK: - Creatable
-public extension WKWebView {
-    /// 纯净的创建方法
-    static func create<T: WKWebView>(_ aClass: T.Type = WKWebView.self) -> T {
-        let webView = WKWebView()
-        return webView as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: WKWebView>(_ aClass: T.Type = WKWebView.self) -> T {
-        let webView: WKWebView = self.create()
-        return webView as! T
-    }
-}
-
 // MARK: - Associated Keys
 class AssociatedKeys {
     // 使用静态常量来作为关联对象的键，避免暴露内部表示
-    @MainActor static var progressHandlerKey: Void?
+    static var progressHandlerKey: Void?
 }
 
 // MARK: - 移除加载进度观察者
@@ -30,9 +15,7 @@ public extension WKWebView {
         self.removeObserver(self, forKeyPath: "estimatedProgress")
 
         // 清除保存的回调
-        Task { @MainActor in
-            AssociatedObject.set(self, key: &AssociatedKeys.progressHandlerKey, value: nil, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+        AssociatedObject.set(self, key: &AssociatedKeys.progressHandlerKey, value: nil, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 
@@ -411,10 +394,8 @@ public extension WKWebView {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress", let progress = change?[.newKey] as? Float {
             // 获取保存的 progressHandler
-            Task { @MainActor in
-                if let handler = AssociatedObject.get(self, key: &AssociatedKeys.progressHandlerKey) as? (Float) -> Void {
-                    handler(progress)
-                }
+            if let handler = AssociatedObject.get(self, key: &AssociatedKeys.progressHandlerKey) as? (Float) -> Void {
+                handler(progress)
             }
         }
     }

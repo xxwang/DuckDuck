@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITabBar {
     /// 设置是否半透明
     /// - Parameter isTranslucent: 是否半透明

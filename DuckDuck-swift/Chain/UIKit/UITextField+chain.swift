@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITextField {
     /// 设置文字
     /// - Parameter text: 文字

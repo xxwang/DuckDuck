@@ -3,7 +3,6 @@ import UIKit
 extension UITabBarItem: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITabBarItem {
     /// 设置标题
     /// - Parameter title: 标题

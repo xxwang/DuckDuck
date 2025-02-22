@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UISearchBar {
     /// 清空搜索框内容
     ///

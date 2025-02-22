@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UISlider {
     /// 设置值
     /// - Parameter value: 设置的值

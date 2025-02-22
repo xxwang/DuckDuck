@@ -10,7 +10,6 @@ import HealthKit
 ///     print("相机授权: \(isGranted ? "已授权" : "未授权")")
 /// }
 /// ```
-@MainActor
 public class AuthorizationManager: NSObject {
     /// 健康数据
     var healthStore: HKHealthStore!

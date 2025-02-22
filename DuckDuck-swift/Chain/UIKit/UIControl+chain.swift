@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIControl {
     /// 设置控件是否可用
     /// - Parameter isEnabled:是否可用

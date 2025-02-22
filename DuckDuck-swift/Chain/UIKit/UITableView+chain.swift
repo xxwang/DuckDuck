@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITableView {
     /// 设置 `delegate`
     /// - Parameter delegate: `UITableViewDelegate` 实例

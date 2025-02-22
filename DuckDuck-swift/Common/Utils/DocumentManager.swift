@@ -9,7 +9,6 @@ public typealias FileOperationCallback = (
     _ error: Error?
 ) -> Void
 
-@MainActor
 public class DocumentManager: NSObject {
     /// 文件操作回调
     var operationCompletion: FileOperationCallback?

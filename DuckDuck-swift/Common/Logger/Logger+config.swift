@@ -1,7 +1,6 @@
 import Foundation
 
 // MARK: - 日志设置
-@MainActor
 public extension Logger {
     /// 最低日志级别，低于此级别的日志将不会输出
     static var level: LoggerLevel = .info

@@ -11,7 +11,6 @@ public enum PhotoAlbumResult {
 
 // MARK: - PhotoManager
 /// 管理照片操作，包括相机、相册选择和自定义相册保存功能
-@MainActor
 public class PhotoManager: NSObject {
     /// 是否为编辑状态，决定是否允许编辑图片
     var isEditingEnabled: Bool = false

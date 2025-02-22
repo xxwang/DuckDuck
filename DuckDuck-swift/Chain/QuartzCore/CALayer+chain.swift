@@ -19,7 +19,7 @@ public extension DDExtension where Base: CALayer {
     /// - Parameter superView: 父视图（`UIView`），要将当前图层添加到该视图的图层中
     /// - Returns: 返回 `Self` 以支持链式调用
     /// - Example: `layer.dd.add2(superView)`
-    @MainActor @discardableResult
+    @discardableResult
     func add2(_ superView: UIView) -> Self {
         superView.layer.addSublayer(self.base)
         return self

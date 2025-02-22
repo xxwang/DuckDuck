@@ -12,7 +12,6 @@ public extension DDExtension where Base: UIViewController {
     /// ```swift
     /// controller.dd.overrideUserInterfaceStyle(.dark)
     /// ```
-    @MainActor
     @discardableResult
     func overrideUserInterfaceStyle(_ userInterfaceStyle: UIUserInterfaceStyle) -> Self {
         if #available(iOS 13.0, *) {
@@ -29,7 +28,6 @@ public extension DDExtension where Base: UIViewController {
     /// ```swift
     /// controller.dd.automaticallyAdjustsScrollViewInsets(true)
     /// ```
-    @MainActor
     @discardableResult
     func automaticallyAdjustsScrollViewInsets(_ automaticallyAdjustsScrollViewInsets: Bool) -> Self {
         if #available(iOS 11, *) {} else { // 仅适用于 iOS11 以下版本
@@ -46,7 +44,6 @@ public extension DDExtension where Base: UIViewController {
     /// ```swift
     /// controller.dd.modalPresentationStyle(.fullScreen)
     /// ```
-    @MainActor
     @discardableResult
     func modalPresentationStyle(_ style: UIModalPresentationStyle) -> Self {
         self.base.modalPresentationStyle = style
@@ -61,7 +58,6 @@ public extension DDExtension where Base: UIViewController {
     /// ```swift
     /// controller.dd.backgroundColor(.white)
     /// ```
-    @MainActor
     @discardableResult
     func backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.base.view.backgroundColor = backgroundColor

@@ -16,7 +16,6 @@ public protocol Skinable: AnyObject {
 ///
 /// `SkinProvider` 协议定义了主题管理的方法，包括注册、移除监听者，
 /// 以及更新所有注册监听者的主题。实现该协议的类可以作为主题管理器。
-@MainActor
 public protocol SkinProvider: AnyObject {
     /// 注册一个观察者对象，用于监听主题更新
     /// - Parameter observer: 遵循 `Skinable` 协议的对象，将在主题更新时进行更新。
@@ -63,7 +62,6 @@ public protocol SkinProvider: AnyObject {
 /// }
 /// ```
 /// 当主题更新时，`SkinManager.shared.updateSkin()` 会自动通知所有注册的观察者调用 `apply()` 方法，从而更新它们的主题样式。
-@MainActor
 public class SkinManager: SkinProvider {
     /// 存储观察者对象的弱引用集合
     ///
@@ -135,7 +133,6 @@ public class SkinManager: SkinProvider {
 }
 
 // MARK: - UITraitEnvironment
-@MainActor
 public extension Skinable where Self: UITraitEnvironment {
     /// 返回单例对象
     ///

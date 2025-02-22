@@ -1,34 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UITableView {
-    /// 纯净的创建方法
-    static func create<T: UITableView>(_ aClass: T.Type = UITableView.self) -> T {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        return tableView as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UITableView>(_ aClass: T.Type = UITableView.self) -> T {
-        let tableView: UITableView = self.create()
-            .dd_rowHeight(UITableView.automaticDimension)
-            .dd_estimatedRowHeight(50)
-            .dd_backgroundColor(.clear)
-            .dd_sectionHeaderHeight(0.001)
-            .dd_sectionFooterHeight(0.001)
-            .dd_showsHorizontalScrollIndicator(false)
-            .dd_showsVerticalScrollIndicator(false)
-            .dd_cellLayoutMarginsFollowReadableWidth(false)
-            .dd_separatorStyle(.none)
-            .dd_keyboardDismissMode(.onDrag)
-            .dd_showsHorizontalScrollIndicator(false)
-            .dd_showsVerticalScrollIndicator(false)
-            .dd_contentInsetAdjustmentBehavior(.never)
-            .dd_sectionHeaderTopPadding(0)
-        return tableView as! T
-    }
-}
-
 // MARK: - 方法
 public extension UITableView {
     /// 重新加载数据后调用 `completion` 回调

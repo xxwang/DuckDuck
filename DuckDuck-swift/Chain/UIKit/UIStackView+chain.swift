@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIStackView {
     /// 设置子控件的布局方向（水平方向或垂直方向，即轴方向）
     /// - Parameter axis: 轴方向，`NSLayoutConstraint.Axis.horizontal` 或 `NSLayoutConstraint.Axis.vertical`

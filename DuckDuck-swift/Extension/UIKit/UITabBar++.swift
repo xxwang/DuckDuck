@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UITabBar {
-    /// 纯净的创建方法
-    static func create<T: UITabBar>(_ aClass: T.Type = UITabBar.self) -> T {
-        let tabBar = UITabBar()
-        return tabBar as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UITabBar>(_ aClass: T.Type = UITabBar.self) -> T {
-        let tabBar: UITabBar = self.create()
-        return tabBar as! T
-    }
-}
-
 // MARK: - 链式语法
 public extension UITabBar {
     /// 设置是否半透明

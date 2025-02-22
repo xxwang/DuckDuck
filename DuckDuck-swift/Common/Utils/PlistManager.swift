@@ -3,7 +3,6 @@ import Foundation
 /// `PlistManager` 提供 `.plist` 文件的解析、保存和验证功能。
 ///
 /// 该类包括解析 `.plist` 文件为字典或数组、将数据保存到 `.plist` 文件、以及验证 `.plist` 数据是否符合预期格式等方法。
-@MainActor
 public class PlistManager {
     /// 单例实例
     ///

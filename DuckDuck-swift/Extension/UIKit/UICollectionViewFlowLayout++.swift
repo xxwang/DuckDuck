@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UICollectionViewFlowLayout {
-    /// 纯净的创建方法
-    static func create<T: UICollectionViewFlowLayout>(_ aClass: T.Type = UICollectionViewFlowLayout.self) -> T {
-        let layout = UICollectionViewFlowLayout()
-        return layout as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UICollectionViewFlowLayout>(_ aClass: T.Type = UICollectionViewFlowLayout.self) -> T {
-        let layout: UICollectionViewFlowLayout = self.create()
-        return layout as! T
-    }
-}
-
 // MARK: - UICollectionViewFlowLayout 链式语法
 public extension UICollectionViewFlowLayout {
     /// 设置滚动方向间距

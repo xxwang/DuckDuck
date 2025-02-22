@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITabBarController {
     /// 设置 `UITabBarController` 代理
     /// - Parameter delegate: 代理对象

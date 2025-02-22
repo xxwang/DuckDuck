@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UISegmentedControl {
-    /// 纯净的创建方法
-    static func create<T: UISegmentedControl>(_ aClass: T.Type = UISegmentedControl.self) -> T {
-        let segmentedControl = UISegmentedControl()
-        return segmentedControl as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UISegmentedControl>(_ aClass: T.Type = UISegmentedControl.self) -> T {
-        let segmentedControl: UISegmentedControl = self.create()
-        return segmentedControl as! T
-    }
-}
-
 // MARK: - 属性
 public extension UISegmentedControl {
     /// 图片数组

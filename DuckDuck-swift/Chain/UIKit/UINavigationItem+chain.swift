@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UINavigationItem {
     /// 设置大导航标题显示模式
     /// - Parameter mode: `LargeTitleDisplayMode` 模式，控制大标题的显示行为

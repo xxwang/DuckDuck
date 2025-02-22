@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 屏幕、导航栏、标签栏等属性管理
-@MainActor
 public class ScreenInfo {}
 
 // MARK: - 屏幕相关属性

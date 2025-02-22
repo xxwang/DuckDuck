@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UISwitch {
     /// 切换开关状态
     /// - Parameter animated: 是否启用动画，默认为`true`，表示带动画效果

@@ -82,7 +82,7 @@ public extension DDExtension where Base: CATextLayer {
     /// - Parameter scale: 内容缩放（默认：`UIScreen.main.scale`）
     /// - Returns: `Self`
     @discardableResult
-    @MainActor func contentsScale(_ scale: CGFloat = UIScreen.main.scale) -> Self {
+    func contentsScale(_ scale: CGFloat = UIScreen.main.scale) -> Self {
         self.base.contentsScale = scale
         return self
     }

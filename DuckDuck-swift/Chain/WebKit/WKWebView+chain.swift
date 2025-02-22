@@ -1,7 +1,6 @@
 import WebKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: WKWebView {
     /// 设置网页导航代理
     /// - Parameter delegate: 导航代理对象

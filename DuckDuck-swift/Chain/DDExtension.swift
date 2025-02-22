@@ -2,6 +2,8 @@ import UIKit
 
 // MARK: - DDExtensionable
 public protocol DDExtensionable {}
+
+// MARK: - implementation DDExtensionable
 public extension DDExtensionable {
     /// 获取实例扩展的方法
     var dd: DDExtension<Self> {

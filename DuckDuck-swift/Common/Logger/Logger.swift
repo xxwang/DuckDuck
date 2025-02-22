@@ -1,7 +1,6 @@
 import Foundation
 
 // MARK: - 日志记录器类，提供日志输出到控制台或文件的功能
-@MainActor
 public class Logger {
     /// 打印信息日志
     /// - Parameter message: 日志内容

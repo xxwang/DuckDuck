@@ -3,7 +3,6 @@ import UIKit
 extension UIFont: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base == UIFont {
     /// 设置字体大小
     /// - Parameter size: 字体大小

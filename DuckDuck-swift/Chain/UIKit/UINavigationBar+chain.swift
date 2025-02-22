@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UINavigationBar {
     /// 设置导航栏是否半透明
     /// - Parameter isTranslucent: 是否半透明

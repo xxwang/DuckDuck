@@ -113,7 +113,6 @@ public extension Bundle {
     /// print(userAgent)
     /// ```
     /// - Returns: 设备的 User-Agent 信息字符串
-    @MainActor
     static func dd_userAgent() -> String {
         let executable = self.dd_executableName()
         let bundleID = self.dd_identifier()

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UICollectionView {
     /// 设置 `delegate` 代理
     /// - Parameter delegate: 代理对象

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UISegmentedControl {
     /// 设置选中的分段
     /// - Parameter selectedSegmentIndex: 选中的分段索引

@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UITabBarController {
-    /// 纯净的创建方法
-    static func create<T: UITabBarController>(_ aClass: T.Type = UITabBarController.self) -> T {
-        let tabBarController = UITabBarController()
-        return tabBarController as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UITabBarController>(_ aClass: T.Type = UITabBarController.self) -> T {
-        let tabBarController: UITabBarController = self.create()
-        return tabBarController as! T
-    }
-}
-
 // MARK: - 计算属性
 public extension UITabBarController {
     /// 获取或设置当前 `UITabBarController` 的选中索引

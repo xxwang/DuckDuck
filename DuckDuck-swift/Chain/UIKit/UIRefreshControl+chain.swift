@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIRefreshControl {
     /// 设置刷新控件的富文本标题
     /// - Parameters:

@@ -2,7 +2,6 @@ import UIKit
 
 // MARK: - 深色模式管理器
 /// 管理应用的深色模式相关逻辑，包括动态颜色、动态图片和智能换肤功能。
-@MainActor
 public class DarkModeManager {
     // MARK: - UserDefaults Keys
     /// 是否跟随系统模式的标识

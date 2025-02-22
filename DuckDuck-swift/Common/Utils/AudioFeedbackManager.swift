@@ -3,7 +3,6 @@ import AVKit
 import UIKit
 
 /// 管理音频播放与震动（触觉反馈）
-@MainActor
 public class AudioFeedbackManager {
     public static let shared = AudioFeedbackManager()
     private init() {}

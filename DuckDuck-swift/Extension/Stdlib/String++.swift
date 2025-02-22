@@ -504,7 +504,6 @@ public extension String {
 }
 
 // MARK: - 类/实例
-@MainActor
 public extension String {
     /// 将类名字符串转换为指定类型的类类型（默认为 `AnyClass`）
     ///
@@ -763,7 +762,6 @@ public extension String {
 }
 
 // MARK: - 字符串截取
-@MainActor
 public extension String {
     /// 获取某个位置的字符串
     ///
@@ -983,7 +981,6 @@ public extension String {
 }
 
 // MARK: - 常用方法
-@MainActor
 public extension String {
     /// 从字符串中提取所有数字字符
     ///
@@ -1732,7 +1729,6 @@ public extension String {
 }
 
 // MARK: - 字符串判断
-@MainActor
 public extension String {
     /// 检查字符串是否包含字母
     ///
@@ -2647,7 +2643,6 @@ public extension String {
 }
 
 // MARK: - 沙盒路径
-@MainActor
 public extension String {
     /// 在`Application Support`目录后追加当前路径
     ///
@@ -2704,7 +2699,6 @@ public extension String {
 }
 
 // MARK: - 沙盒URL
-@MainActor
 public extension String {
     /// 在`Application Support`目录后返回拼接的文件路径`URL`
     ///
@@ -2754,7 +2748,6 @@ public extension String {
 }
 
 // MARK: - 文件操作
-@MainActor
 public extension String {
     /// 删除文件
     ///
@@ -3105,7 +3098,6 @@ public extension String {
 }
 
 // MARK: - 属性字符串相关
-@MainActor
 public extension String {
     /// 将 `HTML` 源码转换为属性字符串
     ///

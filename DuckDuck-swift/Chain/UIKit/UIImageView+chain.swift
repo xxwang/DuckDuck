@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIImageView {
     /// 设置图片
     /// - Parameter image: 图片

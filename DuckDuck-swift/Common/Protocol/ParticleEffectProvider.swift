@@ -2,7 +2,6 @@ import UIKit
 
 // MARK: - 粒子特效协议
 public protocol ParticleEffectProvider {}
-@MainActor
 public extension ParticleEffectProvider where Self: UIViewController {
     /// 启动粒子效果
     ///

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UINavigationController {
     /// 设置导航控制器代理
     /// - Parameter delegate: 导航控制器的代理

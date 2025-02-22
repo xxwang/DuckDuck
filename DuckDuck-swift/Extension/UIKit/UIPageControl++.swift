@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UIPageControl {
-    /// 纯净的创建方法
-    static func create<T: UIPageControl>(_ aClass: T.Type = UIPageControl.self) -> T {
-        let pageControl = UIPageControl()
-        return pageControl as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIPageControl>(_ aClass: T.Type = UIPageControl.self) -> T {
-        let pageControl: UIPageControl = self.create()
-        return pageControl as! T
-    }
-}
-
 // MARK: - 链式语法
 public extension UIPageControl {
     /// 设置当前选中指示器的颜色

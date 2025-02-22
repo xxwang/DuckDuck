@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIPickerView {
     /// 设置代理
     /// - Parameter delegate: 代理对象，用于处理 `UIPickerView` 的数据和事件

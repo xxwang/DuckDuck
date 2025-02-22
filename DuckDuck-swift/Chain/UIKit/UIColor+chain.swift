@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIColor {
     /// 设置颜色的透明度（链式调用）
     /// - Parameter alpha: 透明度（范围 0.0 ~ 1.0）

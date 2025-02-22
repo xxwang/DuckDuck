@@ -3,7 +3,6 @@ import UIKit
 extension UIEdgeInsets: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base == UIEdgeInsets {
     /// 基于当前值和顶部偏移创建新的`UIEdgeInsets`
     /// - Parameter top: 顶部的偏移值

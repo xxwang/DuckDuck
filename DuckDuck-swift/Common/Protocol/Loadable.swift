@@ -16,7 +16,6 @@ public extension Loadable where Self: UIView {
     ///     // 使用 customView
     /// }
     /// ```
-    @MainActor
     static func dd_loadNib(nibName: String? = nil, bundle: Bundle? = nil) -> Self? {
         let named = nibName ?? "\(self)"
         let bundle = bundle ?? .main
@@ -45,7 +44,6 @@ public extension Loadable where Self: UIViewController {
     ///     // 使用 viewController
     /// }
     /// ```
-    @MainActor
     static func dd_loadStoryboard(identifier: String? = nil, fileName: String? = nil, bundle: Bundle = .main) -> Self? {
         // 获取`storyboard`文件名称，默认值为`Main.storyboard`
         guard let fileName = fileName ?? (bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String) else {

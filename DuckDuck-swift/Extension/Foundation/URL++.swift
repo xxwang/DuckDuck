@@ -32,7 +32,7 @@ public extension URL {
     /// let canOpen = url.dd_isValid()
     /// print(canOpen) // prints true or false
     /// ```
-    @MainActor func dd_isValid() -> Bool {
+    func dd_isValid() -> Bool {
         return UIApplication.shared.canOpenURL(self)
     }
 
@@ -191,7 +191,6 @@ public extension URL {
     /// 使用异步方式从视频 URL 获取缩略图
     /// - Parameter time: 截取缩略图的时间，单位为秒
     /// - Returns: 截取的图像（`UIImage`），如果失败则返回 `nil`
-    @MainActor
     func dd_thumbnail(from time: Float64 = 0) async -> UIImage? {
         let urlAsset = AVURLAsset(url: self)
         let imageGenerator = AVAssetImageGenerator(asset: urlAsset)

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIProgressView {
     /// 设置当前进度值
     /// - Parameter progress: 当前进度值，取值范围为 0.0 到 1.0

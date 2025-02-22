@@ -4,7 +4,6 @@ import Foundation
 ///
 /// 该类提供了一些常用的路径获取方法以及路径操作方法，包括获取常用系统目录（如 iCloud、Documents、Library 等），
 /// 以及为指定目录生成完整路径，并确保目录存在。
-@MainActor
 public class PathManager {
     /// 单例实例
     ///

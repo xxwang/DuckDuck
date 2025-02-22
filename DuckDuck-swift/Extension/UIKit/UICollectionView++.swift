@@ -1,27 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UICollectionView {
-    /// 纯净的创建方法
-    static func create<T: UICollectionView>(_ aClass: T.Type = UICollectionView.self) -> T {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return collectionView as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UICollectionView>(_ aClass: T.Type = UICollectionView.self) -> T {
-        let collectionView: UICollectionView = self.create()
-            .dd_bounces(true)
-            .dd_isPagingEnabled(false)
-            .dd_isScrollEnabled(true)
-            .dd_showsHorizontalScrollIndicator(false)
-            .dd_showsVerticalScrollIndicator(false)
-            .dd_backgroundColor(.clear)
-        return collectionView as! T
-    }
-}
-
 // MARK: - UICollectionView 扩展
 public extension UICollectionView {
     /// 刷新 `UICollectionView` 的数据，并在刷新完成后调用回调

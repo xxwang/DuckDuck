@@ -1,7 +1,6 @@
 import Foundation
 
 // MARK: - Encodable
-@MainActor
 public extension Encodable {
     /// 转换当前对象为 JSON 字典
     ///
@@ -80,7 +79,6 @@ public extension Encodable {
 }
 
 // MARK: - Decodable
-@MainActor
 public extension Decodable {
     /// 从 JSON 字典创建对象
     ///

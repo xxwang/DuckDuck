@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UITableViewCell {
     /// 设置 `UITableViewCell` 的选中样式
     /// - Parameter style: 样式，选择一种选中样式

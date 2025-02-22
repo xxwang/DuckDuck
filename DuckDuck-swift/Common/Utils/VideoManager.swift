@@ -3,7 +3,6 @@ import AVKit
 import Photos
 import UIKit
 
-@MainActor
 public class VideoManager {
     // 单例实例
     public static let shared = VideoManager()

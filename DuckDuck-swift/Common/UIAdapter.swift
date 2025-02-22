@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 全局外观设置
-@MainActor
 public class UIAdapter {
     public static let shared = UIAdapter()
 
@@ -83,7 +82,6 @@ public class UIAdapter {
 }
 
 // MARK: - `UIView` 外观适配
-@MainActor
 public extension UIView {
     /// 设置当前 `UIView` 的外观（适配界面风格）
     /// - Parameter userInterfaceStyle: 用户界面风格，默认为 `.light`
@@ -100,7 +98,6 @@ public extension UIView {
 }
 
 // MARK: - `UIScrollView` 外观适配
-@MainActor
 public extension UIScrollView {
     /// 设置当前 `UIScrollView` 外观
     /// - Example:
@@ -115,7 +112,6 @@ public extension UIScrollView {
 }
 
 // MARK: - `UITableView` 外观适配
-@MainActor
 public extension UITableView {
     /// 设置当前 `UITableView` 外观
     /// - Example:

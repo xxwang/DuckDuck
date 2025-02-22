@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UINavigationController {
-    /// 纯净的创建方法
-    static func create<T: UINavigationController>(_ aClass: T.Type = UINavigationController.self) -> T {
-        let navigationController = UINavigationController()
-        return navigationController as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UINavigationController>(_ aClass: T.Type = UINavigationController.self) -> T {
-        let navigationController: UINavigationController = self.create()
-        return navigationController as! T
-    }
-}
-
 // MARK: - 方法
 public extension UINavigationController {
     /// 把控制器压入导航栈中

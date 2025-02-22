@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UIRefreshControl {
-    /// 纯净的创建方法
-    static func create<T: UIRefreshControl>(_ aClass: T.Type = UIRefreshControl.self) -> T {
-        let refreshControl = UIRefreshControl()
-        return refreshControl as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIRefreshControl>(_ aClass: T.Type = UIRefreshControl.self) -> T {
-        let refreshControl: UIRefreshControl = self.create()
-        return refreshControl as! T
-    }
-}
-
 // MARK: - UIRefreshControl 扩展
 public extension UIRefreshControl {
     /// 设置刷新控件的富文本标题

@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIDatePicker {
     /// 设置时区
     /// - Parameter timeZone:时区

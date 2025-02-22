@@ -1,25 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension NSMutableParagraphStyle {
-    /// 纯净的创建方法
-    static func create<T: NSMutableParagraphStyle>(_ aClass: T.Type = NSMutableParagraphStyle.self) -> T {
-        let style = NSMutableParagraphStyle()
-        return style as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: NSMutableParagraphStyle>(_ aClass: T.Type = NSMutableParagraphStyle.self) -> T {
-        let style: NSMutableParagraphStyle = self.create()
-            .dd_hyphenationFactor(1.0) // 设置连字符系数
-            .dd_firstLineHeadIndent(0.0) // 设置第一行缩进
-            .dd_paragraphSpacingBefore(0.0) // 设置段落前间距
-            .dd_headIndent(0) // 设置头部缩进
-            .dd_tailIndent(0) // 设置尾部缩进
-        return style as! T
-    }
-}
-
 // MARK: - 链式语法
 public extension NSMutableParagraphStyle {
     /// 设置对齐方式

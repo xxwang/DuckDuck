@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UITabBarItem {
-    /// 纯净的创建方法
-    static func create<T: UITabBarItem>(_ aClass: T.Type = UITabBarItem.self) -> T {
-        let tabBarItem = UITabBarItem()
-        return tabBarItem as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UITabBarItem>(_ aClass: T.Type = UITabBarItem.self) -> T {
-        let tabBarItem: UITabBarItem = self.create()
-        return tabBarItem as! T
-    }
-}
-
 // MARK: - 链式语法
 public extension UITabBarItem {
     /// 设置标题

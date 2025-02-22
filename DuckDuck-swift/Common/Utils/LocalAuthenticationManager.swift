@@ -1,7 +1,6 @@
 import LocalAuthentication
 
 /// 本地身份认证管理器
-@MainActor
 public class LocalAuthenticationManager {
     /// 身份认证上下文
     private lazy var context: LAContext = {

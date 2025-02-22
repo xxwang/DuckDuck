@@ -1,7 +1,6 @@
 import Foundation
 
 // MARK: - 静态方法
-@MainActor
 public extension FileManager {
     /// 判断路径是否存在
     /// - Parameter path: 路径

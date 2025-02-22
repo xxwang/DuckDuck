@@ -1,21 +1,6 @@
 import AudioToolbox
 import UIKit
 
-// MARK: - Creatable
-public extension UIAlertController {
-    /// 纯净的创建方法
-    static func create<T: UIAlertController>(_ aClass: T.Type = UIAlertController.self) -> T {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        return alertController as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIAlertController>(_ aClass: T.Type = UIAlertController.self) -> T {
-        let alertController: UIAlertController = self.create()
-        return alertController as! T
-    }
-}
-
 // MARK: - 构造方法
 public extension UIAlertController {
     /// 创建 `UIAlertController`

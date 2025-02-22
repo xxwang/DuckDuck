@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UIWindow {
-    /// 纯净的创建方法
-    static func create<T: UIWindow>(_ aClass: T.Type = UIWindow.self) -> T {
-        let window = UIWindow()
-        return window as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIWindow>(_ aClass: T.Type = UIWindow.self) -> T {
-        let window: UIWindow = self.create()
-        return window as! T
-    }
-}
-
 // MARK: - UIWindow
 public extension UIWindow {
     /// 返回当前有效的`UIWindow`

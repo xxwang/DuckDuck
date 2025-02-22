@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UIView {
-    /// 纯净的创建方法
-    static func create<T: UIView>(_ aClass: T.Type = UIView.self) -> T {
-        let view = UIView()
-        return view as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIView>(_ aClass: T.Type = UIView.self) -> T {
-        let view: UIView = self.create()
-        return view as! T
-    }
-}
-
 // MARK: - 布局相关计算属性
 public extension UIView {
     /// 控件的`frame`
@@ -1580,7 +1565,6 @@ public extension UIView {
 public extension UIView {
     /// 粒子发射器样式
     /// 用于配置粒子发射器和粒子的行为
-    @MainActor
     class EmitterStyle: NSObject {
         /*------------------- 粒子发射器 -------------------*/
         /// 是否开启三维效果，默认为true

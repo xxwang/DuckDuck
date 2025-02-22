@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIAlertController {
     /// 设置标题
     /// - Parameter title: 标题

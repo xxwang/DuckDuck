@@ -3,7 +3,6 @@ import UIKit
 extension UIBarButtonItem: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIBarButtonItem {
     /// 设置按钮样式
     /// - Parameter style: 样式（如 `.plain`, `.done`）

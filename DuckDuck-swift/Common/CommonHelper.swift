@@ -60,7 +60,6 @@ public extension CommonHelper {
 }
 
 /// 设备判断
-@MainActor
 public extension CommonHelper {
     /// 判断是否为 `iPad`
     ///

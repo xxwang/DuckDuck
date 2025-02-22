@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UIPickerView {
-    /// 纯净的创建方法
-    static func create<T: UIPickerView>(_ aClass: T.Type = UIPickerView.self) -> T {
-        let pickerView = UIPickerView()
-        return pickerView as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UIPickerView>(_ aClass: T.Type = UIPickerView.self) -> T {
-        let pickerView: UIPickerView = self.create()
-        return pickerView as! T
-    }
-}
-
 // MARK: - UIPickerView 扩展方法
 public extension UIPickerView {
     /// 设置代理

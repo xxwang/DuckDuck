@@ -3,7 +3,6 @@ import UIKit
 extension UICollectionViewFlowLayout: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UICollectionViewFlowLayout {
     /// 设置滚动方向间距
     /// - Parameter spacing: 滚动方向的间距

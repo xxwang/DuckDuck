@@ -1,7 +1,6 @@
 import UIKit
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIPageControl {
     /// 设置当前选中指示器的颜色
     /// - Parameter color: 选中指示器的颜色

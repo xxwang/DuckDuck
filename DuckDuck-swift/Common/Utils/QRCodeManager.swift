@@ -1,7 +1,6 @@
 import CoreImage
 import UIKit
 
-@MainActor
 public class QRCodeManager: NSObject {
     /// 单例实例
     public static let shared = QRCodeManager()

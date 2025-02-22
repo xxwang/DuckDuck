@@ -1,20 +1,5 @@
 import UIKit
 
-// MARK: - Creatable
-public extension UISwitch {
-    /// 纯净的创建方法
-    static func create<T: UISwitch>(_ aClass: T.Type = UISwitch.self) -> T {
-        let switchButton = UISwitch()
-        return switchButton as! T
-    }
-
-    /// 带默认配置的创建方法
-    static func `default`<T: UISwitch>(_ aClass: T.Type = UISwitch.self) -> T {
-        let switchButton: UISwitch = self.create()
-        return switchButton as! T
-    }
-}
-
 // MARK: - 链式语法
 public extension UISwitch {
     /// 切换开关状态

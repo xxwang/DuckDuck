@@ -3,7 +3,6 @@ import UIKit
 extension UIView: DDExtensionable {}
 
 // MARK: - 链式语法-功能方法
-@MainActor
 public extension DDExtension where Base: UIView {
     /// 为类型提供的功能
     /// - Parameter closure: 配置闭包
@@ -16,7 +15,6 @@ public extension DDExtension where Base: UIView {
 }
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIView {
     /// 把`self`添加到父视图
     /// - Parameter superview: 父视图，`self`将被添加为该视图的子视图
@@ -329,7 +327,6 @@ public extension DDExtension where Base: UIView {
 }
 
 // MARK: - 链式语法-手势相关
-@MainActor
 public extension DDExtension where Base: UIView {
     /// 添加识别器到`self`
     /// - Parameter recognizer: 要添加的手势识别器
@@ -566,7 +563,6 @@ public extension DDExtension where Base: UIView {
 }
 
 // MARK: - 圆角
-@MainActor
 public extension DDExtension where Base: UIView {
     /// 设置圆角（⚠️前提: 需要视图的 `frame` 已经确定）
     /// - Parameters:

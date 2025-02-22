@@ -1,6 +1,5 @@
 import StoreKit
 
-@MainActor
 public final class StoreKitManager {
     // 单例实例，确保应用中只有一个 `StoreKitManager` 实例
     public static let shared = StoreKitManager()

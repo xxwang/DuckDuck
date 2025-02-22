@@ -3,7 +3,6 @@ import UIKit
 extension UIGestureRecognizer: DDExtensionable {}
 
 // MARK: - 链式语法
-@MainActor
 public extension DDExtension where Base: UIGestureRecognizer {
     /// 将手势识别器添加到指定视图
     ///
