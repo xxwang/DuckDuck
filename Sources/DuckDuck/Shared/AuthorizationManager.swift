@@ -141,11 +141,10 @@ public extension AuthorizationManager {
 public extension AuthorizationManager {
     /// 相册权限
     var photoLibraryStatus: AuthorizationStatus {
-        var status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        var status: PHAuthorizationStatus = if #available(iOS 14, *) {
+            PHPhotoLibrary.authorizationStatus(for: .readWrite)
         } else {
-            status = PHPhotoLibrary.authorizationStatus()
+            PHPhotoLibrary.authorizationStatus()
         }
 
         switch status {
@@ -229,11 +228,10 @@ public extension AuthorizationManager {
 
     /// 定位权限
     var locationStatus: AuthorizationStatus {
-        var status: CLAuthorizationStatus
-        if #available(iOS 14.0, *) {
-            status = self.locationManager.authorizationStatus
+        var status: CLAuthorizationStatus = if #available(iOS 14.0, *) {
+            self.locationManager.authorizationStatus
         } else {
-            status = CLLocationManager.authorizationStatus()
+            CLLocationManager.authorizationStatus()
         }
         switch status {
         case .notDetermined:

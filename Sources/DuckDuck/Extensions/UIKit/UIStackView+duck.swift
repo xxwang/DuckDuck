@@ -181,8 +181,8 @@ public extension UIStackView {
             return self
         }
 
-        items.compactMap { $0 }.forEach {
-            addArrangedSubview($0)
+        for item in items.compactMap(\.self) {
+            addArrangedSubview(item)
         }
         return self
     }

@@ -817,11 +817,10 @@ public extension UIImage {
     /// - Returns:带圆角的`UIImage`
     func dd_roundCorners(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height) / 2
-        let cornerRadius: CGFloat
-        if let radius, radius > 0, radius <= maxRadius {
-            cornerRadius = radius
+        let cornerRadius: CGFloat = if let radius, radius > 0, radius <= maxRadius {
+            radius
         } else {
-            cornerRadius = maxRadius
+            maxRadius
         }
 
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
@@ -1510,11 +1509,12 @@ public extension UIImage {
                                   context: context,
                                   options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         var faceFeatures: [CIFaceFeature]!
-        // 人脸检测需要图片方向(有元数据的话使用元数据,没有就调用featuresInImage)
-        if let orientation = inputImage.properties[kCGImagePropertyOrientation as String] {
-            faceFeatures = (detector!.features(in: inputImage, options: [CIDetectorImageOrientation: orientation]) as! [CIFaceFeature])
+            // 人脸检测需要图片方向(有元数据的话使用元数据,没有就调用featuresInImage)
+            = if let orientation = inputImage.properties[kCGImagePropertyOrientation as String]
+        {
+            (detector!.features(in: inputImage, options: [CIDetectorImageOrientation: orientation]) as! [CIFaceFeature])
         } else {
-            faceFeatures = (detector!.features(in: inputImage) as! [CIFaceFeature])
+            (detector!.features(in: inputImage) as! [CIFaceFeature])
         }
         // 打印所有的面部特征
         // print(faceFeatures)

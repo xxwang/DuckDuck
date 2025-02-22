@@ -72,10 +72,10 @@ public extension UICollectionViewFlowLayout {
         return self
     }
 
-    @discardableResult
     /// 设置组的内间距
     /// - Parameter sectionInset: 内间距
     /// - Returns: `Self`
+    @discardableResult
     func dd_sectionInset(_ sectionInset: UIEdgeInsets) -> Self {
         self.sectionInset = sectionInset
         return self

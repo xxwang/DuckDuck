@@ -1197,12 +1197,11 @@ public extension UIView {
                   completion: (() -> Void)? = nil)
     {
         CATransaction.begin()
-        let animation: CAKeyframeAnimation
-        switch shakeDirection {
+        let animation = switch shakeDirection {
         case .horizontal:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            CAKeyframeAnimation(keyPath: "transform.translation.x")
         case .vertical:
-            animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
+            CAKeyframeAnimation(keyPath: "transform.translation.y")
         }
 
         switch shakeAnimation {
@@ -1633,6 +1632,19 @@ public extension UIView {
     @discardableResult
     func dd_cornerRadius(_ cornerRadius: CGFloat) -> Self {
         self.layer.cornerRadius = cornerRadius
+        return self
+    }
+
+    /// 设置`layer.maskedCorners`
+    /// - Parameter maskedCorners: 要设置的角
+    /// - Returns: 返回`Self`，以便链式调用
+    /// - Example:
+    ///   ```swift
+    ///   view.dd_maskedCorners([.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    ///
+    @discardableResult
+    func dd_maskedCorners(_ maskedCorners: CACornerMask) -> Self {
+        self.layer.maskedCorners = maskedCorners
         return self
     }
 

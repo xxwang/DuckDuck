@@ -11,6 +11,6 @@ import Foundation
 public extension CountableRange<Int> {
     /// 转换为索引数组
     var dd_indexs: [Int] {
-        return self.map { $0 }
+        return self.map(\.self)
     }
 }

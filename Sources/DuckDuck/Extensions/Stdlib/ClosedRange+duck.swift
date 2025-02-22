@@ -11,6 +11,6 @@ import Foundation
 public extension ClosedRange<Int> {
     /// 转换为索引数组
     func dd_indexs() -> [Int] {
-        return self.map { $0 }
+        return self.map(\.self)
     }
 }
