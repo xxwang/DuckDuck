@@ -10,8 +10,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "DuckDuckSwift",
-            targets: ["DuckDuckSwift"]
+            name: "DuckDuck",
+            targets: ["DuckDuck"]
         ),
         .library(
             name: "DuckDuckCpp",
@@ -22,11 +22,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "DuckDuckSwift",
+            name: "DuckDuck",
             dependencies: [
                 "DuckDuckCpp",
             ],
-            path: "DuckDuck-swift",
+            path: "DuckDuck",
             swiftSettings: [.define("SPM_MODE")]
         ),
         .target(
