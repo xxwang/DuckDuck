@@ -1267,7 +1267,7 @@ public extension String {
     ///   - font: 字体
     /// - Returns: 字符串数组
     func dd_wrapLines(toWidth lineWidth: CGFloat, font: UIFont) -> [String] {
-        let style = NSMutableParagraphStyle.default()
+        let style = NSMutableParagraphStyle.dd.default()
             .dd_lineBreakMode(.byCharWrapping)
         let cfFont = CTFontCreateWithName(font.fontName as CFString, font.pointSize, nil)
 
@@ -3141,7 +3141,7 @@ public extension String {
 
         // 设置行间距
         if let lineSpacing {
-            let paragraphStyle = NSMutableParagraphStyle.default()
+            let paragraphStyle = NSMutableParagraphStyle.dd.default()
                 .dd_lineSpacing(lineSpacing)
             htmlString?.addAttribute(.paragraphStyle, value: paragraphStyle, range: dd_fullNSRange())
         }
