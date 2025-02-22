@@ -1,7 +1,6 @@
 import UIKit
 
 public extension UIView {
-    
     private struct LayoutKeys {
         static var top = UnsafeRawPointer(bitPattern: "UIView.LayoutKeys.top".hashValue)
         static var bottom = UnsafeRawPointer(bitPattern: "UIView.LayoutKeys.bottom".hashValue)

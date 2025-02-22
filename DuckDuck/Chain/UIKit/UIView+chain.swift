@@ -86,6 +86,19 @@ public extension DDExtension where Base: UIView {
         return self
     }
 
+    /// 设置`layer.maskedCorners`
+    /// - Parameter maskedCorners: 要设置的角
+    /// - Returns: 返回`Self`，以便链式调用
+    /// - Example:
+    ///   ```swift
+    ///   view.dd.maskedCorners([.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    ///
+    @discardableResult
+    func maskedCorners(_ maskedCorners: CACornerMask) -> Self {
+        self.base.layer.maskedCorners = maskedCorners
+        return self
+    }
+
     /// 设置`tag`
     /// - Parameter tag: 要设置的`tag`数值
     /// - Returns: 返回`Self`，以便链式调用

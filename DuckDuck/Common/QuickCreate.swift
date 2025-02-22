@@ -21,13 +21,13 @@ public extension DDExtension where Base == UITabBarController {
     /// 纯净的创建方法
     static func create() -> Base {
         let tabBarController = UITabBarController()
-        return tabBarController 
+        return tabBarController
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let tabBarController: UITabBarController = self.create()
-        return tabBarController 
+        return tabBarController
     }
 }
 
@@ -36,13 +36,13 @@ public extension DDExtension where Base == UINavigationController {
     /// 纯净的创建方法
     static func create() -> Base {
         let navigationController = UINavigationController()
-        return navigationController 
+        return navigationController
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let navigationController: UINavigationController = self.create()
-        return navigationController 
+        return navigationController
     }
 }
 
@@ -51,13 +51,13 @@ public extension DDExtension where Base == UIViewController {
     /// 纯净的创建方法
     static func create() -> Base {
         let viewController = UIViewController()
-        return viewController 
+        return viewController
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let viewController: UIViewController = self.create()
-        return viewController 
+        return viewController
     }
 }
 
@@ -66,13 +66,13 @@ public extension DDExtension where Base == UIScrollView {
     /// 纯净的创建方法
     static func create() -> Base {
         let scrollView = UIScrollView()
-        return scrollView 
+        return scrollView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let scrollView: UIScrollView = self.create()
-        return scrollView 
+        return scrollView
     }
 }
 
@@ -81,7 +81,7 @@ public extension DDExtension where Base == UITableView {
     /// 纯净的创建方法
     static func create() -> Base {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        return tableView 
+        return tableView
     }
 
     /// 带默认配置的创建方法
@@ -99,7 +99,7 @@ public extension DDExtension where Base == UITableView {
             .dd_contentInsetAdjustmentBehavior(.never)
             .dd_sectionHeaderTopPadding(0)
             .dd_cellLayoutMarginsFollowReadableWidth(false)
-        return tableView 
+        return tableView
     }
 }
 
@@ -108,13 +108,13 @@ public extension DDExtension where Base == UITableViewCell {
     /// 纯净的创建方法
     static func create() -> Base {
         let cell = UITableViewCell()
-        return cell 
+        return cell
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let cell: UITableViewCell = self.create()
-        return cell 
+        return cell
     }
 }
 
@@ -124,7 +124,7 @@ public extension DDExtension where Base == UICollectionView {
     static func create() -> Base {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return collectionView 
+        return collectionView
     }
 
     /// 带默认配置的创建方法
@@ -136,7 +136,7 @@ public extension DDExtension where Base == UICollectionView {
             .dd_showsHorizontalScrollIndicator(false)
             .dd_showsVerticalScrollIndicator(false)
             .dd_backgroundColor(.clear)
-        return collectionView 
+        return collectionView
     }
 }
 
@@ -145,13 +145,13 @@ public extension DDExtension where Base == UICollectionReusableView {
     /// 纯净的创建方法
     static func create() -> Base {
         let reusableView = UICollectionReusableView()
-        return reusableView 
+        return reusableView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let reusableView: UICollectionReusableView = self.create()
-        return reusableView 
+        return reusableView
     }
 }
 
@@ -160,13 +160,13 @@ public extension DDExtension where Base == UICollectionViewCell {
     /// 纯净的创建方法
     static func create() -> Base {
         let cell = UICollectionViewCell()
-        return cell 
+        return cell
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let cell: UICollectionViewCell = self.create()
-        return cell 
+        return cell
     }
 }
 
@@ -175,13 +175,13 @@ public extension DDExtension where Base == UICollectionViewFlowLayout {
     /// 纯净的创建方法
     static func create() -> Base {
         let layout = UICollectionViewFlowLayout()
-        return layout 
+        return layout
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let layout: UICollectionViewFlowLayout = self.create()
-        return layout 
+        return layout
     }
 }
 
@@ -190,13 +190,13 @@ public extension DDExtension where Base == UIControl {
     /// 纯净的创建方法
     static func create() -> Base {
         let control = UIControl(frame: .zero)
-        return control 
+        return control
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let control: UIControl = self.create()
-        return control 
+        return control
     }
 }
 
@@ -205,13 +205,13 @@ public extension DDExtension where Base == UIButton {
     /// 纯净的创建方法
     static func create() -> Base {
         let button = UIButton(type: .custom)
-        return button 
+        return button
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let button: UIButton = self.create()
-        return button 
+        return button
     }
 }
 
@@ -220,13 +220,13 @@ public extension DDExtension where Base == UIBarButtonItem {
     /// 纯净的创建方法
     static func create() -> Base {
         let barButtonItem = UIBarButtonItem()
-        return barButtonItem 
+        return barButtonItem
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let barButtonItem: UIBarButtonItem = self.create()
-        return barButtonItem 
+        return barButtonItem
     }
 }
 
@@ -235,13 +235,13 @@ public extension DDExtension where Base == UINavigationBar {
     /// 纯净的创建方法
     static func create() -> Base {
         let navigationBar = UINavigationBar()
-        return navigationBar 
+        return navigationBar
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let navigationBar: UINavigationBar = self.create()
-        return navigationBar 
+        return navigationBar
     }
 }
 
@@ -250,13 +250,13 @@ public extension DDExtension where Base == UINavigationItem {
     /// 纯净的创建方法
     static func create() -> Base {
         let navigationItem = UINavigationItem()
-        return navigationItem 
+        return navigationItem
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let navigationItem: UINavigationItem = self.create()
-        return navigationItem 
+        return navigationItem
     }
 }
 
@@ -265,13 +265,13 @@ public extension DDExtension where Base == UIDatePicker {
     /// 纯净的创建方法
     static func create() -> Base {
         let datePicker = UIDatePicker(frame: .zero)
-        return datePicker 
+        return datePicker
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let datePicker: UIDatePicker = self.create()
-        return datePicker 
+        return datePicker
     }
 }
 
@@ -280,13 +280,13 @@ public extension DDExtension where Base == UIPickerView {
     /// 纯净的创建方法
     static func create() -> Base {
         let pickerView = UIPickerView()
-        return pickerView 
+        return pickerView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let pickerView: UIPickerView = self.create()
-        return pickerView 
+        return pickerView
     }
 }
 
@@ -295,13 +295,13 @@ public extension DDExtension where Base == UIImageView {
     /// 纯净的创建方法
     static func create() -> Base {
         let imageView = UIImageView()
-        return imageView 
+        return imageView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let imageView: UIImageView = self.create()
-        return imageView 
+        return imageView
     }
 }
 
@@ -310,13 +310,13 @@ public extension DDExtension where Base == UILabel {
     /// 纯净的创建方法
     static func create() -> Base {
         let label = UILabel()
-        return label 
+        return label
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let label: UILabel = self.create()
-        return label 
+        return label
     }
 }
 
@@ -325,7 +325,7 @@ public extension DDExtension where Base == NSMutableParagraphStyle {
     /// 纯净的创建方法
     static func create() -> Base {
         let style = NSMutableParagraphStyle()
-        return style 
+        return style
     }
 
     /// 带默认配置的创建方法
@@ -336,7 +336,7 @@ public extension DDExtension where Base == NSMutableParagraphStyle {
             .dd_paragraphSpacingBefore(0.0) // 设置段落前间距
             .dd_headIndent(0) // 设置头部缩进
             .dd_tailIndent(0) // 设置尾部缩进
-        return style 
+        return style
     }
 }
 
@@ -345,13 +345,13 @@ public extension DDExtension where Base == UIBezierPath {
     /// 纯净的创建方法
     static func create() -> Base {
         let bezierPath = UIBezierPath()
-        return bezierPath 
+        return bezierPath
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let bezierPath: UIBezierPath = self.create()
-        return bezierPath 
+        return bezierPath
     }
 }
 
@@ -360,13 +360,13 @@ public extension DDExtension where Base == UIPageControl {
     /// 纯净的创建方法
     static func create() -> Base {
         let pageControl = UIPageControl()
-        return pageControl 
+        return pageControl
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let pageControl: UIPageControl = self.create()
-        return pageControl 
+        return pageControl
     }
 }
 
@@ -375,13 +375,13 @@ public extension DDExtension where Base == UIProgressView {
     /// 纯净的创建方法
     static func create() -> Base {
         let progressView = UIProgressView()
-        return progressView 
+        return progressView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let progressView: UIProgressView = self.create()
-        return progressView 
+        return progressView
     }
 }
 
@@ -390,13 +390,13 @@ public extension DDExtension where Base == UIRefreshControl {
     /// 纯净的创建方法
     static func create() -> Base {
         let refreshControl = UIRefreshControl()
-        return refreshControl 
+        return refreshControl
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let refreshControl: UIRefreshControl = self.create()
-        return refreshControl 
+        return refreshControl
     }
 }
 
@@ -405,13 +405,13 @@ public extension DDExtension where Base == UISearchBar {
     /// 纯净的创建方法
     static func create() -> Base {
         let searchBar = UISearchBar()
-        return searchBar 
+        return searchBar
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let searchBar: UISearchBar = self.create()
-        return searchBar 
+        return searchBar
     }
 }
 
@@ -420,13 +420,13 @@ public extension DDExtension where Base == UISegmentedControl {
     /// 纯净的创建方法
     static func create() -> Base {
         let segmentedControl = UISegmentedControl()
-        return segmentedControl 
+        return segmentedControl
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let segmentedControl: UISegmentedControl = self.create()
-        return segmentedControl 
+        return segmentedControl
     }
 }
 
@@ -435,13 +435,13 @@ public extension DDExtension where Base == UISlider {
     /// 纯净的创建方法
     static func create() -> Base {
         let slider = UISlider()
-        return slider 
+        return slider
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let slider: UISlider = self.create()
-        return slider 
+        return slider
     }
 }
 
@@ -450,13 +450,13 @@ public extension DDExtension where Base == UIStackView {
     /// 纯净的创建方法
     static func create() -> Base {
         let stackView = UIStackView()
-        return stackView 
+        return stackView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let stackView: UIStackView = self.create()
-        return stackView 
+        return stackView
     }
 }
 
@@ -465,13 +465,13 @@ public extension DDExtension where Base == UISwitch {
     /// 纯净的创建方法
     static func create() -> Base {
         let switchButton = UISwitch()
-        return switchButton 
+        return switchButton
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let switchButton: UISwitch = self.create()
-        return switchButton 
+        return switchButton
     }
 }
 
@@ -480,13 +480,13 @@ public extension DDExtension where Base == UITabBar {
     /// 纯净的创建方法
     static func create() -> Base {
         let tabBar = UITabBar()
-        return tabBar 
+        return tabBar
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let tabBar: UITabBar = self.create()
-        return tabBar 
+        return tabBar
     }
 }
 
@@ -495,13 +495,13 @@ public extension DDExtension where Base == UITabBarItem {
     /// 纯净的创建方法
     static func create() -> Base {
         let tabBarItem = UITabBarItem()
-        return tabBarItem 
+        return tabBarItem
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let tabBarItem: UITabBarItem = self.create()
-        return tabBarItem 
+        return tabBarItem
     }
 }
 
@@ -510,13 +510,13 @@ public extension DDExtension where Base == UITextField {
     /// 纯净的创建方法
     static func create() -> Base {
         let textField = UITextField()
-        return textField 
+        return textField
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let textField: UITextField = self.create()
-        return textField 
+        return textField
     }
 }
 
@@ -525,13 +525,13 @@ public extension DDExtension where Base == UITextView {
     /// 纯净的创建方法
     static func create() -> Base {
         let textView = UITextView()
-        return textView 
+        return textView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let textView: UITextView = self.create()
-        return textView 
+        return textView
     }
 }
 
@@ -540,13 +540,13 @@ public extension DDExtension where Base == UIView {
     /// 纯净的创建方法
     static func create() -> Base {
         let view = UIView()
-        return view 
+        return view
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let view: UIView = self.create()
-        return view 
+        return view
     }
 }
 
@@ -555,13 +555,13 @@ public extension DDExtension where Base == UIWindow {
     /// 纯净的创建方法
     static func create() -> Base {
         let window = UIWindow()
-        return window 
+        return window
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let window: UIWindow = self.create()
-        return window 
+        return window
     }
 }
 
@@ -570,13 +570,13 @@ public extension DDExtension where Base == WKWebView {
     /// 纯净的创建方法
     static func create() -> Base {
         let webView = WKWebView()
-        return webView 
+        return webView
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let webView: WKWebView = self.create()
-        return webView 
+        return webView
     }
 }
 
@@ -585,13 +585,13 @@ public extension DDExtension where Base == UIGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UIGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UIGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -600,13 +600,13 @@ public extension DDExtension where Base == UIHoverGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UIHoverGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UIHoverGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -615,13 +615,13 @@ public extension DDExtension where Base == UILongPressGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UILongPressGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UILongPressGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -630,13 +630,13 @@ public extension DDExtension where Base == UIPanGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let control = UIPanGestureRecognizer()
-        return control 
+        return control
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let control: UIPanGestureRecognizer = self.create()
-        return control 
+        return control
     }
 }
 
@@ -645,13 +645,13 @@ public extension DDExtension where Base == UIPinchGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let control = UIPinchGestureRecognizer()
-        return control 
+        return control
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let control: UIPinchGestureRecognizer = self.create()
-        return control 
+        return control
     }
 }
 
@@ -660,13 +660,13 @@ public extension DDExtension where Base == UIRotationGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UIRotationGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UIRotationGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -675,13 +675,13 @@ public extension DDExtension where Base == UIScreenEdgePanGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UIScreenEdgePanGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UIScreenEdgePanGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -690,13 +690,13 @@ public extension DDExtension where Base == UISwipeGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UISwipeGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UISwipeGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
 
@@ -705,12 +705,12 @@ public extension DDExtension where Base == UITapGestureRecognizer {
     /// 纯净的创建方法
     static func create() -> Base {
         let gesture = UITapGestureRecognizer()
-        return gesture 
+        return gesture
     }
 
     /// 带默认配置的创建方法
     static func `default`() -> Base {
         let gesture: UITapGestureRecognizer = self.create()
-        return gesture 
+        return gesture
     }
 }
