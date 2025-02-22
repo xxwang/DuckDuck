@@ -2,7 +2,7 @@ import UIKit
 import WebKit
 
 // MARK: - UIAlertController
-extension DDExtension where Base == UIAlertController {
+public extension DDExtension where Base == UIAlertController {
     /// 纯净的创建方法
     static func create() -> Base {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -47,7 +47,7 @@ public extension DDExtension where Base == UINavigationController {
 }
 
 // MARK: - UIViewController
-extension DDExtension where Base == UIViewController {
+public extension DDExtension where Base == UIViewController {
     /// 纯净的创建方法
     static func create() -> Base {
         let viewController = UIViewController()
@@ -60,8 +60,6 @@ extension DDExtension where Base == UIViewController {
         return viewController 
     }
 }
-
-// MARK: - View
 
 // MARK: - UIScrollView
 public extension DDExtension where Base == UIScrollView {
