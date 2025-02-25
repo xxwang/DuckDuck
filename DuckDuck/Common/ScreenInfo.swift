@@ -7,7 +7,7 @@ public class ScreenInfo {}
 public extension ScreenInfo {
     /// 屏幕的整体边界 (CGRect)
     static var screenBounds: CGRect {
-        return DispatchQueue.main.sync { UIScreen.main.bounds }
+        return UIScreen.main.bounds
     }
 
     /// 屏幕尺寸 (CGSize)
