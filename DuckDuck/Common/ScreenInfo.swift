@@ -53,7 +53,11 @@ public extension ScreenInfo {
     }
 
     /// 标题栏的高度 (CGFloat)
-    static let titleBarHeight: CGFloat = 44
+    static let titleBarHeight1: CGFloat = 44
+    static var titleBarHeight: CGFloat = {
+        let navigationBar = UINavigationBar()
+        return navigationBar.frame.height
+    }()
 
     /// 导航栏的总高度 (CGFloat)，包含状态栏和标题栏
     static var navFullHeight: CGFloat { statusBarHeight + titleBarHeight }
