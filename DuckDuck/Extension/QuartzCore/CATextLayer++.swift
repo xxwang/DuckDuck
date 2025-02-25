@@ -7,12 +7,12 @@ public extension CATextLayer {
     ///
     /// 示例：
     /// ```swift
-    /// let textLayer = CATextLayer().dd_string("Hello, World!")
+    /// let textLayer = CATextLayer().dd_toString("Hello, World!")
     /// ```
     /// - Parameter string: 文字内容
     /// - Returns: `Self`
     @discardableResult
-    func dd_string(_ string: String) -> Self {
+    func dd_toString(_ string: String) -> Self {
         self.string = string
         return self
     }

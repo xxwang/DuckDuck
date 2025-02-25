@@ -134,12 +134,12 @@ public extension Array {
 public extension [String] {
     /// 将字符串数组转换为单个字符串
     ///
-    ///     ["1", "2", "3"].dd_String(separator: "-")
+    ///     ["1", "2", "3"].dd_toString(separator: "-")
     ///     -> "1-2-3"
     ///
     /// - Parameter separator: 分隔符，默认为空字符串
     /// - Returns: 拼接后的字符串
-    func dd_String(separator: String = "") -> String {
+    func dd_toString(separator: String = "") -> String {
         joined(separator: separator)
     }
 }
@@ -378,26 +378,12 @@ public extension Array {
     /// - Example:
     /// ```swift
     /// let array: [Any] = [...]
-    /// if let data = array.dd_toJSONData() {
+    /// if let data = array.dd_toData() {
     ///     print("Data: \(data)")
     /// }
     /// ```
-    func dd_toJSONData() -> Data? {
+    func dd_toData() -> Data? {
         return try? JSONSerialization.data(withJSONObject: self)
-    }
-
-    /// 将数组转换为 `String`
-    /// - Returns: 转换后的 `String`，若转换失败返回 `nil`
-    /// - Example:
-    /// ```swift
-    /// let array: [Any] = [...]
-    /// if let jsonString = array.dd_toJSONString() {
-    ///     print("String: \(jsonString)")
-    /// }
-    /// ```
-    func dd_toJSONString() -> String? {
-        guard let data = dd_toJSONData() else { return nil }
-        return String(data: data, encoding: .utf8)
     }
 }
 
@@ -408,82 +394,11 @@ public extension Array where Element: Encodable {
     /// - Example:
     /// ```swift
     /// let encodableArray: [SomeEncodableModel] = [...]
-    /// if let data = encodableArray.dd_toJSONData() {
+    /// if let data = encodableArray.dd_toData() {
     ///     print("Encoded Data: \(data)")
     /// }
     /// ```
-    func dd_toJSONData() -> Data? {
-        do {
-            return try JSONEncoder().encode(self)
-        } catch {
-            return nil
-        }
-    }
-
-    /// 将 `Array<Encodable>` 的数组转换为 `String`
-    /// - Returns: 转换后的 `String`，若转换失败返回 `nil`
-    /// - Example:
-    /// ```swift
-    /// let encodableArray: [SomeEncodableModel] = [...]
-    /// if let jsonString = encodableArray.dd_toJSONString() {
-    ///     print("Encoded String: \(jsonString)")
-    /// }
-    /// ```
-    func dd_toJSONString() -> String? {
-        guard let data = dd_toJSONData() else { return nil }
-        return String(data: data, encoding: .utf8)
-    }
-}
-
-// MARK: - Array<Decodable>
-public extension Array where Element: Decodable {
-    /// 将 `[[String: Any]]` 反序列化为遵守 `Decodable` 协议的模型对象数组
-    /// - Parameter dictionarys: 要反序列化的 `[[String: Any]]`
-    /// - Returns: 遵守 `Decodable` 协议的模型对象数组
-    /// - Example:
-    /// ```swift
-    /// let jsonArray: [[String: Any]] = [...]
-    /// let models: [SomeDecodableModel] = SomeDecodableModel.dd_fromJSONDictionarys(jsonArray)
-    /// print(models)
-    /// ```
-    static func dd_fromJSONDictionarys(_ dictionarys: [[String: Any]]?) -> Self where Self: Decodable {
-        guard let dictionarys else { return [] }
-        do {
-            let data = try JSONSerialization.data(withJSONObject: dictionarys)
-            return self.dd_fromJSONData(data)
-        } catch {
-            return []
-        }
-    }
-
-    /// 将 `Data` 反序列化为遵守 `Decodable` 协议的模型对象数组
-    /// - Parameter data: 要反序列化的 `Data`
-    /// - Returns: 遵守 `Decodable` 协议的模型对象数组
-    /// - Example:
-    /// ```swift
-    /// let jsonData: Data = ...
-    /// let models: [SomeDecodableModel] = SomeDecodableModel.dd_fromJSONData(jsonData)
-    /// print(models)
-    /// ```
-    static func dd_fromJSONData(_ data: Data) -> Self where Self: Decodable {
-        do {
-            return try JSONDecoder().decode(Self.self, from: data)
-        } catch {
-            return []
-        }
-    }
-
-    /// 将 `String` 反序列化为遵守 `Decodable` 协议的模型对象数组
-    /// - Parameter string: 要反序列化的 `String`
-    /// - Returns: 遵守 `Decodable` 协议的模型对象数组
-    /// - Example:
-    /// ```swift
-    /// let jsonString: String = "{\"key\": \"value\"}"
-    /// let models: [SomeDecodableModel] = SomeDecodableModel.dd_fromJSONString(jsonString)
-    /// print(models)
-    /// ```
-    static func dd_fromJSONString(_ string: String) -> Self where Self: Decodable {
-        guard let data = string.data(using: .utf8) else { return [] }
-        return self.dd_fromJSONData(data)
+    func dd_toData() -> Data? {
+        return try? JSONEncoder().encode(self)
     }
 }

@@ -149,41 +149,17 @@ public extension Collection where Element: FloatingPoint {
 
 // MARK: - JSON
 public extension Collection where Element: Encodable {
-    /// 将集合类型转换为 JSON 字符串
+    /// 将集合类型转换为`Data`
     ///
     /// - Example:
     /// ```swift
     /// let array = ["a", "b", "c"]
-    /// print(array.dd_toJSONString(prettify: true)!)
-    /// // 输出:
-    /// // [
-    /// //   "a",
-    /// //   "b",
-    /// //   "c"
-    /// // ]
-    /// ```
-    /// - Parameter prettify: 是否美化 JSON 输出（默认 `false`）
-    /// - Returns: 转换后的 JSON 字符串，若失败返回 `nil`
-    func dd_toJSONString(prettify: Bool = false) -> String? {
-        guard let data = try? dd_toJSONData(prettify: prettify) else { return nil }
-        return String(data: data, encoding: .utf8)
-    }
-
-    /// 将集合类型转换为 JSON 数据
-    ///
-    /// - Example:
-    /// ```swift
-    /// let array = ["a", "b", "c"]
-    /// let jsonData = array.dd_toJSONData(prettify: true)!
+    /// let jsonData = array.dd_toData()!
     /// print(String(data: jsonData, encoding: .utf8)!)
     /// ```
     /// - Parameter prettify: 是否美化 JSON 输出（默认 `false`）
     /// - Returns: 转换后的 JSON 数据，若失败返回 `nil`
-    func dd_toJSONData(prettify: Bool = false) throws -> Data {
-        let encoder = JSONEncoder()
-        if prettify {
-            encoder.outputFormatting = .prettyPrinted
-        }
+    func dd_toData(encoder: JSONEncoder = JSONEncoder()) throws -> Data {
         // 将集合转换为数组来进行编码
         return try encoder.encode(Array(self))
     }

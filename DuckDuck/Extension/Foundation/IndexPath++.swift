@@ -6,9 +6,9 @@ public extension IndexPath {
     /// - Example: `"[section: 1, row: 3]"`
     /// ```swift
     /// let indexPath1 = IndexPath(row: 3, section: 1)
-    /// let result = indexPath1.dd_String()  // 返回 [section: 1, row: 3]
+    /// let result = indexPath1.dd_toString()  // 返回 [section: 1, row: 3]
     /// ```
-    func dd_String() -> String {
+    func dd_toString() -> String {
         return String(format: "[section: %d, row: %d]", self.section, self.row)
     }
 

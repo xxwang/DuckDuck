@@ -142,9 +142,22 @@ public extension Data {
 
 // MARK: - JSON
 public extension Data {
-    /// 将 `Data` 转换为 `JSON` 对象格式数据
+    /// 将 `Data` 转换为指定编码的字符串
     ///
-    /// 将 `Data` 解码为 `JSON` 对象。返回指定类型的 JSON 对象。
+    /// - Parameter encoding: 字符串编码格式，默认是 `.utf8`。
+    /// - Returns: 返回解码后的字符串，如果无法解码则返回 `nil`。
+    ///
+    /// - Example:
+    /// ```swift
+    /// let data = "Hello".data(using: .utf8)!
+    /// let string = data.dd_toString()
+    /// print(string)  // 输出: "Hello"
+    /// ```
+    func dd_toString(encoding: String.Encoding = .utf8) -> String? {
+        return String(data: self, encoding: encoding)
+    }
+
+    /// 将 `Data` 转换为 `JSON` 对象格式数据
     ///
     /// - Parameters:
     ///   - name: 目标类型，默认类型为 `Any`，可以指定类型例如 `[String: Any].self`。
@@ -154,31 +167,11 @@ public extension Data {
     /// - Example:
     /// ```swift
     /// let jsonData = Data("{\"name\": \"John\"}".utf8)
-    /// if let jsonObject: [String: Any] = jsonData.dd_JSONObject() {
+    /// if let jsonObject: [String: Any] = jsonData.dd_toObject() {
     ///     print(jsonObject)  // 输出: ["name": "John"]
     /// }
     /// ```
-    func dd_JSONObject<T>(for name: T.Type = [String: Any].self, options: JSONSerialization.ReadingOptions = []) -> T? {
-        do {
-            let jsonObject = try JSONSerialization.jsonObject(with: self, options: options)
-            return jsonObject as? T
-        } catch {
-            return nil
-        }
-    }
-
-    /// 将 `Data` 转换为指定编码的字符串
-    ///
-    /// - Parameter encoding: 字符串编码格式，默认是 `.utf8`。
-    /// - Returns: 返回解码后的字符串，如果无法解码则返回 `nil`。
-    ///
-    /// - Example:
-    /// ```swift
-    /// let data = "Hello".data(using: .utf8)!
-    /// let string = data.dd_String()
-    /// print(string)  // 输出: "Hello"
-    /// ```
-    func dd_String(encoding: String.Encoding = .utf8) -> String? {
-        return String(data: self, encoding: encoding)
+    func dd_toObject<T>(for name: T.Type = [String: Any].self, options: JSONSerialization.ReadingOptions = []) -> T? {
+        return try? JSONSerialization.jsonObject(with: self, options: options) as? T
     }
 }

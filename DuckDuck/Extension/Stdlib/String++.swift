@@ -3261,12 +3261,12 @@ public extension String {
     /// - Example:
     /// ```swift
     /// let input = "Hello <world> & \"everyone\""
-    /// let htmlEncoded = input.dd_stringAsHtmlCharacterEntityReferences()
+    /// let htmlEncoded = input.dd_toStringAsHtmlCharacterEntityReferences()
     /// print(htmlEncoded) // 输出: "&#x0048;&#x0065;&#x006c;&#x006c;&#x006f;&#x0020;&#x003c;&#x0077;&#x006f;&#x0072;&#x006c;&#x0064;&#x003e;&#x0020;&#x0026;&#x0020;&#x0022;&#x0065;&#x0076;&#x0065;&#x0072;&#x0079;&#x006f;&#x006e;&#x0065;&#x0022;"
     /// ```
     ///
     /// - Returns: 转换为 `HTML字符引用` 的字符串
-    func dd_stringAsHtmlCharacterEntityReferences() -> String {
+    func dd_toStringAsHtmlCharacterEntityReferences() -> String {
         var result = ""
         for scalar in utf16 {
             // 将每个字符转换为 HTML 的 Unicode 字符引用格式
@@ -3445,38 +3445,14 @@ public extension String {
 
 // MARK: - JSON 转换与格式化
 public extension String {
-    /// 将 JSON 字符串转换为数组形式的字典 (`[[String: Any]]`)
-    /// - Returns: 转换后的字典数组，如果转换失败则返回 `nil`
-    /// - Example:
-    ///     ```swift
-    ///     let jsonString = "[{\"key\": \"value\"}]"
-    ///     let jsonArray = jsonString.dd_toJSONDictionarys() // returns [["key": "value"]]
-    ///     ```
-    func dd_toJSONDictionarys() -> [[String: Any]]? {
-        guard let data = self.dd_toData() else { return nil }
-        return try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
-    }
-
-    /// 将 JSON 字符串转换为字典形式 (`[String: Any]`)
-    /// - Returns: 转换后的字典，如果转换失败则返回 `nil`
-    /// - Example:
-    ///     ```swift
-    ///     let jsonString = "{\"key\": \"value\"}"
-    ///     let jsonObject = jsonString.dd_toJSONDictionary() // returns ["key": "value"]
-    ///     ```
-    func dd_toJSONDictionary() -> [String: Any]? {
-        guard let data = self.dd_toData() else { return nil }
-        return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-    }
-
-    /// 格式化 JSON 字符串并返回格式化后的字符串
+    /// 格式化`JSON`字符串并返回格式化后的字符串
     /// - Returns: 格式化后的 JSON 字符串，如果格式化失败则返回原始字符串
     /// - Example:
     ///     ```swift
     ///     let jsonString = "{\"key\": \"value\"}"
-    ///     let formattedString = jsonString.dd_JSONFormat() // returns a pretty-printed JSON string
+    ///     let formattedString = jsonString.dd_format() // returns a pretty-printed JSON string
     ///     ```
-    func dd_JSONFormat() -> String {
+    func dd_format() -> String {
         guard let data = self.dd_toData() else { return self }
 
         do {

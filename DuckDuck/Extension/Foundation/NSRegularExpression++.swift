@@ -134,13 +134,13 @@ public extension NSRegularExpression {
     /// ```swift
     /// let regex = try! NSRegularExpression(pattern: "\\d+")
     /// let text = "abc 123 def 456"
-    /// let replaced = regex.dd_stringByReplacingMatches(in: text, range: text.startIndex..<text.endIndex, with: "XYZ")
+    /// let replaced = regex.dd_toStringByReplacingMatches(in: text, range: text.startIndex..<text.endIndex, with: "XYZ")
     /// print(replaced) // 输出: abc XYZ def XYZ
     /// ```
-    func dd_stringByReplacingMatches(in string: String,
-                                     options: NSRegularExpression.MatchingOptions = [],
-                                     range: Range<String.Index>,
-                                     with template: String) -> String
+    func dd_toStringByReplacingMatches(in string: String,
+                                       options: NSRegularExpression.MatchingOptions = [],
+                                       range: Range<String.Index>,
+                                       with template: String) -> String
     {
         return self.stringByReplacingMatches(in: string,
                                              options: options,

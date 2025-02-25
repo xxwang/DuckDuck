@@ -26,12 +26,12 @@ public extension NSMutableAttributedString {
     /// 示例：
     /// ```swift
     /// let attributedString = NSMutableAttributedString()
-    /// attributedString.dd_string("Hello World")
+    /// attributedString.dd_toString("Hello World")
     /// ```
     /// - Parameter string: 新的字符串内容
     /// - Returns: `Self`，支持链式调用
     @discardableResult
-    func dd_string(_ string: String) -> Self {
+    func dd_toString(_ string: String) -> Self {
         self.dd_attributedString(string.dd_toNSAttributedString())
         return self
     }

@@ -35,9 +35,9 @@ public extension NumberFormatter {
     /// - Returns: 格式化后的字符串，若格式化失败则返回 `nil`
     /// - Example:
     /// ```swift
-    /// let formattedValue = NumberFormatter.dd_stringFormattingNumber(value: "12345.67")
+    /// let formattedValue = NumberFormatter.dd_toStringFormattingNumber(value: "12345.67")
     /// ```
-    static func dd_stringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
+    static func dd_toStringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
         guard let number = NumberFormatter().number(from: value) else { return nil }
         return NumberFormatter.localizedString(from: number, number: style)
     }

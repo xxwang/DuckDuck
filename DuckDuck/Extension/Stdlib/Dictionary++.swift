@@ -323,55 +323,15 @@ public extension Dictionary {
 
 // MARK: - JSON
 public extension Dictionary {
-    /// 将字典转换为 JSON 数据
+    /// 将字典转换为`Data?`
     /// - Returns: 转换后的 `Data` 类型 JSON 数据，若转换失败返回 `nil`
     /// - Example:
     /// ```swift
-    /// if let jsonData = myDictionary.dd_toJSONData() {
+    /// if let jsonData = myDictionary.dd_toData() {
     ///     print(jsonData)
     /// }
     /// ```
-    func dd_toJSONData() -> Data? {
+    func dd_toData() -> Data? {
         return try? JSONSerialization.data(withJSONObject: self)
-    }
-
-    /// 将字典转换为 JSON 字符串
-    /// - Returns: 转换后的 JSON 字符串，若转换失败返回 `nil`
-    /// - Example:
-    /// ```swift
-    /// if let jsonString = myDictionary.dd_toJSONString() {
-    ///     print(jsonString)
-    /// }
-    /// ```
-    func dd_toJSONString() -> String? {
-        guard let data = dd_toJSONData() else { return nil }
-        return String(data: data, encoding: .utf8)
-    }
-
-    /// 从 JSON 数据创建字典
-    /// - Parameter data: JSON 数据
-    /// - Returns: 转换后的字典对象，若转换失败返回 `nil`
-    /// - Example:
-    /// ```swift
-    /// if let dictionary = MyDictionaryType.dd_fromJSONData(myData) {
-    ///     print(dictionary)
-    /// }
-    /// ```
-    static func dd_fromJSONData(_ data: Data) -> Self? {
-        return try? JSONSerialization.jsonObject(with: data, options: []) as? Self
-    }
-
-    /// 从 JSON 字符串创建字典
-    /// - Parameter string: JSON 字符串
-    /// - Returns: 转换后的字典对象，若转换失败返回 `nil`
-    /// - Example:
-    /// ```swift
-    /// if let dictionary = MyDictionaryType.dd_fromJSONString(myJSONString) {
-    ///     print(dictionary)
-    /// }
-    /// ```
-    static func dd_fromJSONString(_ string: String) -> Self? {
-        guard let data = string.data(using: .utf8) else { return nil }
-        return self.dd_fromJSONData(data)
     }
 }
