@@ -9,7 +9,7 @@ public extension ScreenInfo {
     static var screenBounds: CGRect {
         return UIScreen.main.bounds
     }
-
+ 
     /// 屏幕尺寸 (CGSize)
     static var screenSize: CGSize { screenBounds.size }
 
