@@ -12,15 +12,15 @@ public extension UIGestureRecognizer {
 extension UIGestureRecognizer {
     /// 手势识别成功后的回调
     @objc func dd_onRecognizedClosure() {
-        if let closure = AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
-            closure(self)
+        if let callback: (_ recognizer: UIGestureRecognizer) -> Void = AttributeBinder.retrieve(self, forKey: &AssociateKeys.eventKey) {
+            callback(self)
         }
     }
 
     /// 手势状态变化时调用
     @objc func dd_onStateChange() {
-        if let closure = AssociatedObject.get(self, key: &AssociateKeys.stateChangeKey) as? (UIGestureRecognizer.State) -> Void {
-            closure(self.state)
+        if let callback: (UIGestureRecognizer.State) -> Void = AttributeBinder.retrieve(self, forKey: &AssociateKeys.stateChangeKey) {
+            callback(self.state)
         }
     }
 }
@@ -147,7 +147,7 @@ public extension UIGestureRecognizer {
     @discardableResult
     func dd_onRecognized(_ closure: @escaping (UIGestureRecognizer) -> Void) -> Self {
         self.addTarget(self, action: #selector(dd_onRecognizedClosure))
-        AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: closure, policy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AttributeBinder.bind(to: self, withKey: &AssociateKeys.eventKey, value: closure, usingPolicy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }
 
@@ -164,7 +164,7 @@ public extension UIGestureRecognizer {
     @discardableResult
     func dd_onStateChanged(_ closure: @escaping (UIGestureRecognizer.State) -> Void) -> Self {
         self.addTarget(self, action: #selector(dd_onStateChange))
-        AssociatedObject.set(self, key: &AssociateKeys.stateChangeKey, value: closure, policy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AttributeBinder.bind(to: self, withKey: &AssociateKeys.stateChangeKey, value: closure, usingPolicy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }
 

@@ -69,7 +69,12 @@ public extension DDExtension where Base: UIGestureRecognizer {
     @discardableResult
     func onRecognized(_ closure: @escaping (UIGestureRecognizer) -> Void) -> Self {
         self.base.dd_addTarget(self.base, action: #selector(self.base.dd_onRecognizedClosure))
-        AssociatedObject.set(self.base, key: &Base.AssociateKeys.eventKey, value: closure, policy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AttributeBinder.bind(
+            to: self.base,
+            withKey: &Base.AssociateKeys.eventKey,
+            value: closure,
+            usingPolicy: .OBJC_ASSOCIATION_COPY_NONATOMIC
+        )
         return self
     }
 
@@ -86,7 +91,12 @@ public extension DDExtension where Base: UIGestureRecognizer {
     @discardableResult
     func onStateChanged(_ closure: @escaping (UIGestureRecognizer.State) -> Void) -> Self {
         self.base.dd_addTarget(self.base, action: #selector(self.base.dd_onStateChange))
-        AssociatedObject.set(self.base, key: &Base.AssociateKeys.stateChangeKey, value: closure, policy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AttributeBinder.bind(
+            to: self.base,
+            withKey: &Base.AssociateKeys.stateChangeKey,
+            value: closure,
+            usingPolicy: .OBJC_ASSOCIATION_COPY_NONATOMIC
+        )
         return self
     }
 

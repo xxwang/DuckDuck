@@ -13,8 +13,13 @@ extension UIBarButtonItem {
 extension UIBarButtonItem {
     /// 事件回调
     public var barButtonItem_onEventHandler: ((UIBarButtonItem) -> Void)? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (UIBarButtonItem) -> Void }
-        set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
+        get { AttributeBinder.retrieve(self, forKey: &AssociateKeys.eventKey) }
+        set { AttributeBinder.bind(
+            to: self,
+            withKey: &AssociateKeys.eventKey,
+            value: newValue
+        )
+        }
     }
 
     /// 事件触发时的处理方法

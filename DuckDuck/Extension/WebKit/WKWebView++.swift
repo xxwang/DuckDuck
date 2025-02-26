@@ -15,7 +15,12 @@ public extension WKWebView {
         self.removeObserver(self, forKeyPath: "estimatedProgress")
 
         // 清除保存的回调
-        AssociatedObject.set(self, key: &AssociatedKeys.progressHandlerKey, value: nil, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        AttributeBinder.bind(
+            to: self,
+            withKey: &AssociatedKeys.progressHandlerKey,
+            value: nil,
+            usingPolicy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+        )
     }
 }
 
@@ -329,7 +334,7 @@ public extension WKWebView {
     func dd_addLoadingProgressObserver(progressHandler: @escaping (Float) -> Void) {
         self.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         // 保存闭包引用
-        AssociatedObject.set(self, key: &AssociatedKeys.progressHandlerKey, value: progressHandler, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        AttributeBinder.bind(to: self, withKey: &AssociatedKeys.progressHandlerKey, value: progressHandler, usingPolicy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
     /// 向WKWebView注入JavaScript脚本
@@ -394,7 +399,7 @@ public extension WKWebView {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress", let progress = change?[.newKey] as? Float {
             // 获取保存的 progressHandler
-            if let handler = AssociatedObject.get(self, key: &AssociatedKeys.progressHandlerKey) as? (Float) -> Void {
+            if let handler: (Float) -> Void = AttributeBinder.retrieve(self, forKey: &AssociatedKeys.progressHandlerKey) {
                 handler(progress)
             }
         }

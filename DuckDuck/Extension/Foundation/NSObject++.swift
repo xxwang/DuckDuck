@@ -143,15 +143,20 @@ public extension NSObject {
     ///   - value: 属性的值
     /// - Example:
     /// ```swift
-    /// myObject.dd_addProperty("newProperty", value: "new value")
+    /// myObject.dd_bindAttribute("newProperty", value: "new value")
     /// ```
-    func dd_addProperty(_ key: String, value: Any) {
+    func dd_bindAttribute(_ key: String, value: Any) {
         // 强制解包
         guard let rawPointer = UnsafeRawPointer(bitPattern: key.hashValue) else {
             return
         }
         // 使用 `rawPointer` 来设置关联对象
-        objc_setAssociatedObject(self, rawPointer, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        AttributeBinder.bind(
+            to: self,
+            withKey: rawPointer,
+            value: value,
+            usingPolicy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+        )
     }
 
     /// 获取动态添加的属性
@@ -159,16 +164,16 @@ public extension NSObject {
     /// - Returns: 属性值
     /// - Example:
     /// ```swift
-    /// let value = myObject.dd_getProperty("newProperty")
+    /// let value = myObject.dd_retrieveAttribute("newProperty")
     /// ```
-    func dd_getProperty(_ key: String) -> Any? {
+    func dd_retrieveAttribute(_ key: String) -> Any? {
         // 使用 `guard` 确保 `UnsafeRawPointer` 不为 `nil`
         guard let rawPointer = UnsafeRawPointer(bitPattern: key.hashValue) else {
             return nil
         }
 
         // 使用 `rawPointer` 获取关联对象
-        return objc_getAssociatedObject(self, rawPointer)
+        return AttributeBinder.retrieve(self, forKey: rawPointer)
     }
 }
 

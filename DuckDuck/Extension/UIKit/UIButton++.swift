@@ -26,8 +26,13 @@ public extension UIButton {
 extension UIButton {
     /// 事件回调
     public var button_onEventHandler: ((UIButton) -> Void)? {
-        get { return AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIButton) -> Void }
-        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+        get { return AttributeBinder.retrieve(self, forKey: &AssociateKeys.callbackKey) }
+        set { AttributeBinder.bind(
+            to: self,
+            withKey: &AssociateKeys.callbackKey,
+            value: newValue
+        )
+        }
     }
 
     /// 按钮点击回调
@@ -205,12 +210,17 @@ public extension UIButton {
     /// button.dd_expandClickArea(by: 15)  // 扩展15像素的点击区域
     /// ```
     func dd_expandClickArea(by size: CGFloat = 10) {
-        AssociatedObject.set(self, key: &AssociateKeys.expandSizeKey, value: size, policy: .OBJC_ASSOCIATION_COPY)
+        AttributeBinder.bind(
+            to: self,
+            withKey: &AssociateKeys.expandSizeKey,
+            value: size,
+            usingPolicy: .OBJC_ASSOCIATION_COPY
+        )
     }
 
     /// 获取扩展的点击区域，如果没有设置扩展范围，则使用按钮的原始大小
     private func dd_expandedRect() -> CGRect {
-        if let expandSize = AssociatedObject.get(self, key: &AssociateKeys.expandSizeKey) as? CGFloat {
+        if let expandSize: CGFloat = AttributeBinder.retrieve(self, forKey: &AssociateKeys.expandSizeKey) {
             return CGRect(
                 x: bounds.origin.x - expandSize,
                 y: bounds.origin.y - expandSize,

@@ -13,14 +13,14 @@ extension UIControl {
 extension UIControl {
     /// 事件回调
     var control_onEventHandler: ((UIControl) -> Void)? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.callbackKey) as? (UIControl) -> Void }
-        set { AssociatedObject.set(self, key: &AssociateKeys.callbackKey, value: newValue) }
+        get { AttributeBinder.retrieve(self, forKey: &AssociateKeys.callbackKey) }
+        set { AttributeBinder.bind(to: self, withKey: &AssociateKeys.callbackKey, value: newValue) }
     }
 
     /// 重复点击限制时间
     var dd_hitTime: Double? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.hitTimerKey) as? Double }
-        set { AssociatedObject.set(self, key: &AssociateKeys.hitTimerKey, value: newValue, policy: .OBJC_ASSOCIATION_ASSIGN) }
+        get { AttributeBinder.retrieve(self, forKey: &AssociateKeys.hitTimerKey) }
+        set { AttributeBinder.bind(to: self, withKey: &AssociateKeys.hitTimerKey, value: newValue, usingPolicy: .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 防止重复点击实现

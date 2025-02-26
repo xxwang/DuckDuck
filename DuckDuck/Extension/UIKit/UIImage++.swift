@@ -2459,9 +2459,14 @@ public extension UIImage {
 
     /// 保存图片完成回调
     private var onCompletion: ((Bool) -> Void)? {
-        get { AssociatedObject.get(self, key: AssociateKeys.saveBlockKey!) as? ((Bool) -> Void) }
+        get { AttributeBinder.retrieve(self, forKey: AssociateKeys.saveBlockKey!) }
         set {
-            AssociatedObject.set(self, key: AssociateKeys.saveBlockKey!, value: newValue, policy: .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            AttributeBinder.bind(
+                to: self,
+                withKey: AssociateKeys.saveBlockKey!,
+                value: newValue,
+                usingPolicy: .OBJC_ASSOCIATION_COPY_NONATOMIC
+            )
         }
     }
 

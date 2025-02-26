@@ -167,7 +167,12 @@ public extension DDExtension where Base: WKWebView {
     func addLoadingProgressObserver(progressHandler: @escaping (Float) -> Void) {
         self.base.addObserver(self.base, forKeyPath: "estimatedProgress", options: .new, context: nil)
         // 保存闭包引用
-        AssociatedObject.set(self.base, key: &AssociatedKeys.progressHandlerKey, value: progressHandler, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        AttributeBinder.bind(
+            to: self.base,
+            withKey: &AssociatedKeys.progressHandlerKey,
+            value: progressHandler,
+            usingPolicy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+        )
     }
 
     /// 向WKWebView注入JavaScript脚本

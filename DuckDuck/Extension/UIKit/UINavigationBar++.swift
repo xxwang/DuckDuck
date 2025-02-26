@@ -9,8 +9,14 @@ private class AssociateKeys {
 private extension UINavigationBar {
     /// 自定义的 `statusBar` 背景视图
     var dd_statusBar: UIView? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.statusBarKey) as? UIView }
-        set { AssociatedObject.set(self, key: &AssociateKeys.statusBarKey, value: newValue, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get { AttributeBinder.retrieve(self, forKey: &AssociateKeys.statusBarKey) }
+        set { AttributeBinder.bind(
+            to: self,
+            withKey: &AssociateKeys.statusBarKey,
+            value: newValue,
+            usingPolicy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+        )
+        }
     }
 }
 

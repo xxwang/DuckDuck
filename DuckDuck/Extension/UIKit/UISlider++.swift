@@ -12,8 +12,8 @@ extension UISlider {
 extension UISlider {
     /// 事件回调
     var slider_onEventHandler: ((Float) -> Void)? {
-        get { AssociatedObject.get(self, key: &AssociateKeys.eventKey) as? (Float) -> Void }
-        set { AssociatedObject.set(self, key: &AssociateKeys.eventKey, value: newValue) }
+        get { AttributeBinder.retrieve(self, forKey: &AssociateKeys.eventKey) }
+        set { AttributeBinder.bind(to: self, withKey: &AssociateKeys.eventKey, value: newValue) }
     }
 
     /// 事件处理
