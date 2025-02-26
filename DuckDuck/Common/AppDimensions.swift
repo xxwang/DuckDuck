@@ -15,9 +15,7 @@ public struct AppDimensions {
 
 public extension AppDimensions {
     /// 屏幕的整体边界 (CGRect)
-    static var screenBounds: CGRect {
-        return UIScreen.main.bounds
-    }
+    static var screenBounds: CGRect { UIScreen.main.bounds }
 
     /// 屏幕尺寸 (CGSize)
     static var screenSize: CGSize { self.screenBounds.size }
@@ -32,9 +30,7 @@ public extension AppDimensions {
 // MARK: - 安全区相关属性
 public extension AppDimensions {
     /// 安全区的Insets (UIEdgeInsets)
-    static var safeAreaInsets: UIEdgeInsets {
-        return UIWindow.dd_mainWindow()?.safeAreaInsets ?? .zero
-    }
+    static var safeAreaInsets: UIEdgeInsets { UIWindow.dd_mainWindow()?.safeAreaInsets ?? .zero }
 
     /// 安全区顶部的高度 (CGFloat)
     static var safeAreaTop: CGFloat { self.safeAreaInsets.top }
@@ -62,8 +58,8 @@ public extension AppDimensions {
 
     /// 标题栏的高度 (CGFloat)
     static var titleBarHeight: CGFloat = {
-        let navigationBar = UINavigationBar()
-        return navigationBar.frame.height
+        let navBarHeight = UINavigationController().navigationBar.frame.height
+        return navBarHeight > 0 ? navBarHeight : 44
     }()
 
     /// 导航栏的总高度 (CGFloat)，包含状态栏和标题栏
@@ -73,7 +69,10 @@ public extension AppDimensions {
 // MARK: - 标签栏相关属性
 public extension AppDimensions {
     /// 标签栏的高度 (CGFloat)
-    static let tabBarHeight: CGFloat = 49
+    static var tabBarHeight: CGFloat = {
+        let tabBarHeight = UITabBarController().tabBar.frame.height
+        return tabBarHeight > 0 ? tabBarHeight : 49
+    }()
 
     /// 标签栏的安全区底部高度 (CGFloat)
     static var tabBarIndentHeight: CGFloat { self.safeAreaBottom }
