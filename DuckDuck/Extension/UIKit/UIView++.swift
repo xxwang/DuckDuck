@@ -1466,7 +1466,7 @@ public extension UIView {
         // 计算水印可以显示多少行
         let rowNum = NSInteger(bounds.height * 3.5 / 80) // 水平间隔
         // 计算水印可以显示多少列
-        let colNum = NSInteger(bounds.width / text.dd_calculateSize(forWidth: bounds.width, font: font).width)
+        let colNum = NSInteger(bounds.width / text.dd_calculateSize(for: bounds.width, font: font).width)
 
         // 循环创建水印文字
         for i in 0 ..< rowNum {

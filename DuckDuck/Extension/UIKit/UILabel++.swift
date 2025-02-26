@@ -160,11 +160,11 @@ public extension UILabel {
     /// - 使用示例:
     /// ```swift
     /// let label = UILabel(text: "This is a test")
-    /// let textSize = label.dd_calculateSize(forWidth: 200)
+    /// let textSize = label.dd_calculateSize(for: 200)
     /// print("Text size: \(textSize)") // 输出内容大小
     /// ```
-    func dd_calculateSize(forWidth lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
-        return self.text?.dd_calculateSize(forWidth: lineWidth, font: self.font) ?? .zero
+    func dd_calculateSize(for lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
+        return self.text?.dd_calculateSize(for: lineWidth, font: self.font) ?? .zero
     }
 
     /// 获取 `UILabel` 中属性字符串的大小 (`CGSize`)

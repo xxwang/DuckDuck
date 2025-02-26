@@ -2486,7 +2486,7 @@ public extension String {
     /// - Example:
     /// ```swift
     /// let font = UIFont.systemFont(ofSize: 16)
-    /// let size = "Hello, world!".dd_calculateSize(forWidth: 200, font: font)
+    /// let size = "Hello, world!".dd_calculateSize(for: 200, font: font)
     /// print(size) // CGSize(width: ..., height: ...)
     /// ```
     ///
@@ -2494,7 +2494,7 @@ public extension String {
     ///   - lineWidth: 最大宽度，默认为无穷大
     ///   - font: 字体对象
     /// - Returns: 计算得到的字符串尺寸
-    func dd_calculateSize(forWidth lineWidth: CGFloat = .greatestFiniteMagnitude, font: UIFont) -> CGSize {
+    func dd_calculateSize(for lineWidth: CGFloat = .greatestFiniteMagnitude, font: UIFont) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         let size = (self as NSString).boundingRect(
             with: constraint,

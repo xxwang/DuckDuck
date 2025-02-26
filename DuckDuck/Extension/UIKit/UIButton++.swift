@@ -247,13 +247,13 @@ public extension UIButton {
     /// - Returns: 文字的尺寸，包含计算后的宽度和高度
     /// - Example:
     /// ```swift
-    /// let size = button.dd_calculateSize(forWidth: 200)
+    /// let size = button.dd_calculateSize(for: 200)
     /// ```
-    func dd_calculateSize(forWidth lineWidth: CGFloat = AppDimensions.screenWidth) -> CGSize {
+    func dd_calculateSize(for lineWidth: CGFloat = AppDimensions.screenWidth) -> CGSize {
         if let currentAttributedTitle = self.currentAttributedTitle {
             return currentAttributedTitle.dd_calculateAttributedSize(forWidth: lineWidth)
         }
-        return self.titleLabel?.dd_calculateSize(forWidth: lineWidth) ?? .zero
+        return self.titleLabel?.dd_calculateSize(for: lineWidth) ?? .zero
     }
 }
 
