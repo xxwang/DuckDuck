@@ -25,13 +25,22 @@ public struct UserDefaultsStorage<T> {
         self.key = key
         self.defaultValue = `default`
         self.userDefaults = userDefaults
-        self.userDefaults.register(defaults: [key: `default`])
+
+        if let value = `default` as? Encodable {
+            do {
+                let value = try JSONEncoder().encode(value)
+                self.userDefaults.register(defaults: [key: value])
+            } catch {
+                Logger.fail("⚠️ 编码失败")
+            }
+        } else {
+            self.userDefaults.register(defaults: [key: `default`])
+        }
     }
 
     /// 包装的属性值
     public var wrappedValue: T {
         get {
-            // 检查 T 是否是基础数据类型
             if T.self is Bool.Type || T.self is Bool?.Type ||
                 T.self is Int.Type || T.self is Int?.Type ||
                 T.self is UInt.Type || T.self is UInt?.Type ||
@@ -40,9 +49,7 @@ public struct UserDefaultsStorage<T> {
                 T.self is String.Type || T.self is String?.Type ||
                 T.self is Data.Type || T.self is Data?.Type
             {
-                let value = self.userDefaults.object(forKey: self.key) as? T ?? self.defaultValue
-                Logger.fail(value)
-                return value
+                return self.userDefaults.object(forKey: self.key) as? T ?? self.defaultValue
             } else if let Type = T.self as? Decodable.Type, let data = self.userDefaults.data(forKey: self.key) {
                 if let value = try? JSONDecoder().decode(Type, from: data) as? T {
                     return value
@@ -70,7 +77,7 @@ public struct UserDefaultsStorage<T> {
             } else if let value = newValue as? Encodable {
                 do {
                     let value = try JSONEncoder().encode(value)
-                    userDefaults.set(value, forKey: key)
+                    self.userDefaults.set(value, forKey: self.key)
                 } catch {
                     Logger.fail("⚠️ 编码失败")
                 }
