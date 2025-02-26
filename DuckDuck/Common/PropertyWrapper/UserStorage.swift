@@ -1,10 +1,8 @@
 import Foundation
 
-// MARK: - AppStorage 属性包装器
-/// 一个基于 `UserDefaults` 的属性包装器，支持基础类型和 `Codable` 对象的存储和读取。
-/// 通过简洁的代码方式管理应用程序的持久化设置。
+// MARK: - UserStorage
 @propertyWrapper
-public struct AppStorage<T: Codable> {
+public struct UserStorage<T: Codable> {
     private let userDefaults: UserDefaults
     private let key: String
     private let defaultValue: T
@@ -40,7 +38,7 @@ public struct AppStorage<T: Codable> {
     ///   - userDefaults: 指定的 `UserDefaults` 实例，默认为 `.standard`
     /// - Example:
     /// ```swift
-    /// @AppStorage("userProfile", defaultValue: UserProfile(name: "Default"))
+    /// @UserStorage("userProfile", defaultValue: UserProfile(name: "Default"))
     /// var userProfile: UserProfile
     /// ```
     public init(
