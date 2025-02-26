@@ -1,6 +1,6 @@
 import QuartzCore
 
-extension CAAnimation: DDExtensionable {}
+extension CAAnimation: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: CAAnimation {

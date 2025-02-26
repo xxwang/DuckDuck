@@ -1,6 +1,6 @@
 import UIKit
 
-extension NSTextAttachment: DDExtensionable {}
+extension NSTextAttachment: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: NSTextAttachment {

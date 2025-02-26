@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIGestureRecognizer: DDExtensionable {}
+extension UIGestureRecognizer: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: UIGestureRecognizer {

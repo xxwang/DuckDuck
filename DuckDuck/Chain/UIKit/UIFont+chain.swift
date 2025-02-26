@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIFont: DDExtensionable {}
+extension UIFont: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base == UIFont {

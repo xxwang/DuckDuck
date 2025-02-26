@@ -1,6 +1,6 @@
 import Foundation
 
-extension DateFormatter: DDExtensionable {}
+extension DateFormatter: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: DateFormatter {

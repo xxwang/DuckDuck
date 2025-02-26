@@ -1,6 +1,6 @@
 import UIKit
 
-extension NSMutableParagraphStyle: DDExtensionable {}
+extension NSMutableParagraphStyle: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: NSMutableParagraphStyle {

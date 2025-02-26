@@ -1,7 +1,7 @@
 import CoreGraphics
 import UIKit
 
-extension CGMutablePath: DDExtensionable {}
+extension CGMutablePath: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: CGMutablePath {

@@ -182,11 +182,11 @@ public extension UILabel {
     /// )
     /// let label = UILabel()
     /// label.attributedText = attributedString
-    /// let attributedTextSize = label.dd_calculateAttributedSize(forWidth: 200)
+    /// let attributedTextSize = label.dd_calculateAttributedSize(for: 200)
     /// print("Attributed text size: \(attributedTextSize)") // 输出内容大小
     /// ```
-    func dd_calculateAttributedSize(forWidth lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
-        return self.attributedText?.dd_calculateAttributedSize(forWidth: lineWidth) ?? .zero
+    func dd_calculateAttributedSize(for lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
+        return self.attributedText?.dd_calculateAttributedSize(for: lineWidth) ?? .zero
     }
 }
 

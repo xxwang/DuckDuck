@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIViewController: DDExtensionable {}
+extension UIViewController: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: UIViewController {

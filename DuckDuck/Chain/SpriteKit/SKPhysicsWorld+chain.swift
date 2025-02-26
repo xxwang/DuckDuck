@@ -1,6 +1,6 @@
 import SpriteKit
 
-extension SKPhysicsWorld: DDExtensionable {}
+extension SKPhysicsWorld: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: SKPhysicsWorld {

@@ -251,7 +251,7 @@ public extension UIButton {
     /// ```
     func dd_calculateSize(for lineWidth: CGFloat = AppDimensions.screenWidth) -> CGSize {
         if let currentAttributedTitle = self.currentAttributedTitle {
-            return currentAttributedTitle.dd_calculateAttributedSize(forWidth: lineWidth)
+            return currentAttributedTitle.dd_calculateAttributedSize(for: lineWidth)
         }
         return self.titleLabel?.dd_calculateSize(for: lineWidth) ?? .zero
     }

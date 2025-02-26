@@ -1,34 +1,31 @@
 import UIKit
 
-// MARK: - DDExtensionable
-public protocol DDExtensionable {}
+// MARK: - DDExtended
+/// 任何遵循此协议的类型都可以通过 `dd` 属性访问扩展功能。
+public protocol DDExtended {}
 
-// MARK: - implementation DDExtensionable
-public extension DDExtensionable {
-    /// 获取实例扩展的方法
+// MARK: - DDExtended 实现
+public extension DDExtended {
+    /// 提供实例级别的扩展功能
     var dd: DDExtension<Self> {
         return DDExtension(self)
     }
 
-    /// 获取类型扩展的方法
+    /// 提供类型级别的扩展功能
     static var dd: DDExtension<Self>.Type {
         return DDExtension<Self>.self
     }
 }
 
 // MARK: - DDExtension
+/// 通过此类为遵循 `DDExtended` 的类型添加扩展方法。
 public class DDExtension<Base> {
-    /// 底层的基类型实例
+    /// 被扩展的实例
     var base: Base
 
     /// 初始化方法
-    /// - Parameter base: 需要扩展的基类型实例
+    /// - Parameter base: 需要扩展的实例
     init(_ base: Base) {
         self.base = base
-    }
-
-    /// 获取真实数据
-    var value: Base {
-        return self.base
     }
 }

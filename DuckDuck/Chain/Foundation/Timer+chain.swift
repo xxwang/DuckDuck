@@ -1,6 +1,6 @@
 import Foundation
 
-extension Timer: DDExtensionable {}
+extension Timer: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: Timer {

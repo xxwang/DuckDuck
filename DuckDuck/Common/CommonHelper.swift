@@ -94,7 +94,7 @@ public extension CommonHelper {
     /// }
     /// ```
     static var isIPhoneX: Bool {
-        return max(AppDimensions.safeAreaLeft, AppDimensions.safeAreaBottom) > 0
+        return max(AppDimensions.safeLeft, AppDimensions.safeBottom) > 0
     }
 
     /// 判断是否为横屏

@@ -1,6 +1,6 @@
 import Foundation
 
-extension Date: DDExtensionable {}
+extension Date: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base == Date {

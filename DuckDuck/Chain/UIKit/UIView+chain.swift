@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIView: DDExtensionable {}
+extension UIView: DDExtended {}
 
 // MARK: - 链式语法-功能方法
 public extension DDExtension where Base: UIView {

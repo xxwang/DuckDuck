@@ -1,6 +1,6 @@
 import UIKit
 
-extension UITabBarItem: DDExtensionable {}
+extension UITabBarItem: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: UITabBarItem {

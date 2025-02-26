@@ -1,6 +1,6 @@
 import Foundation
 
-extension URL: DDExtensionable {}
+extension URL: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base == URL {

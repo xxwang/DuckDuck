@@ -1,6 +1,6 @@
 import UIKit
 
-extension UICollectionViewFlowLayout: DDExtensionable {}
+extension UICollectionViewFlowLayout: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: UICollectionViewFlowLayout {

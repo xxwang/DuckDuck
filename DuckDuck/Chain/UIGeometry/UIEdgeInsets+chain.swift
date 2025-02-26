@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIEdgeInsets: DDExtensionable {}
+extension UIEdgeInsets: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base == UIEdgeInsets {

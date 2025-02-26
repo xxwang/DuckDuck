@@ -14,10 +14,10 @@ public struct AppDimensions {
 }
 
 public extension AppDimensions {
-    /// 屏幕的整体边界 (CGRect)
+    /// 屏幕的整体边界
     static var screenBounds: CGRect { UIScreen.main.bounds }
 
-    /// 屏幕尺寸 (CGSize)
+    /// 屏幕尺寸
     static var screenSize: CGSize { self.screenBounds.size }
 
     /// 屏幕宽度
@@ -33,16 +33,16 @@ public extension AppDimensions {
     static var safeAreaInsets: UIEdgeInsets { UIWindow.dd_mainWindow()?.safeAreaInsets ?? .zero }
 
     /// 安全区顶部的高度
-    static var safeAreaTop: CGFloat { self.safeAreaInsets.top }
+    static var safeTop: CGFloat { self.safeAreaInsets.top }
 
     /// 安全区底部的高度
-    static var safeAreaBottom: CGFloat { self.safeAreaInsets.bottom }
+    static var safeBottom: CGFloat { self.safeAreaInsets.bottom }
 
     /// 安全区左侧的宽度
-    static var safeAreaLeft: CGFloat { self.safeAreaInsets.left }
+    static var safeLeft: CGFloat { self.safeAreaInsets.left }
 
     /// 安全区右侧的宽度
-    static var safeAreaRight: CGFloat { self.safeAreaInsets.right }
+    static var safeRight: CGFloat { self.safeAreaInsets.right }
 }
 
 // MARK: - 导航栏相关属性
@@ -75,7 +75,7 @@ public extension AppDimensions {
     }()
 
     /// 标签栏的安全区底部高度
-    static var tabBarIndentHeight: CGFloat { self.safeAreaBottom }
+    static var tabBarIndentHeight: CGFloat { self.safeBottom }
 
     /// 标签栏的总高度 ，包括标签栏本身和安全区的底部
     static var tabBarFullHeight: CGFloat { self.tabBarHeight + self.tabBarIndentHeight }

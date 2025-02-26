@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIBarButtonItem: DDExtensionable {}
+extension UIBarButtonItem: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: UIBarButtonItem {

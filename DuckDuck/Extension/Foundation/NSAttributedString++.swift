@@ -82,9 +82,9 @@ public extension NSAttributedString {
     /// - Returns: 计算出的 `CGSize`
     /// - Example:
     /// ```swift
-    /// let size = attributedStr.dd_calculateAttributedSize(forWidth: 200)
+    /// let size = attributedStr.dd_calculateAttributedSize(for: 200)
     /// ```
-    func dd_calculateAttributedSize(forWidth lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
+    func dd_calculateAttributedSize(for lineWidth: CGFloat = .greatestFiniteMagnitude) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         let size = self.boundingRect(
             with: constraint,

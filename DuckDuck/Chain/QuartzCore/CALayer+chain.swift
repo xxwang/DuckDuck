@@ -1,7 +1,7 @@
 import QuartzCore
 import UIKit
 
-extension CALayer: DDExtensionable {}
+extension CALayer: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: CALayer {

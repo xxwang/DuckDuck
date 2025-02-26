@@ -1,6 +1,6 @@
 import UIKit
 
-extension NSMutableAttributedString: DDExtensionable {}
+extension NSMutableAttributedString: DDExtended {}
 
 // MARK: - 链式语法
 public extension DDExtension where Base: NSMutableAttributedString {

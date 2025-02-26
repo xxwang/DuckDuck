@@ -2511,7 +2511,7 @@ public extension String {
     /// - Example:
     /// ```swift
     /// let font = UIFont.systemFont(ofSize: 16)
-    /// let size = "Hello, world!".dd_calculateAttributedSize(forWidth: 200, font: font, lineSpacing: 4, wordSpacing: 1)
+    /// let size = "Hello, world!".dd_calculateAttributedSize(for: 200, font: font, lineSpacing: 4, wordSpacing: 1)
     /// print(size) // CGSize(width: ..., height: ...)
     /// ```
     ///
@@ -2522,7 +2522,7 @@ public extension String {
     ///   - wordSpacing: 字间距，默认为 0
     /// - Returns: 计算得到的富文本字符串尺寸
     func dd_calculateAttributedSize(
-        forWidth lineWidth: CGFloat = .greatestFiniteMagnitude,
+        for lineWidth: CGFloat = .greatestFiniteMagnitude,
         font: UIFont,
         lineSpacing: CGFloat = 0,
         wordSpacing: CGFloat = 0
