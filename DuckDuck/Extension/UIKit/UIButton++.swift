@@ -249,7 +249,7 @@ public extension UIButton {
     /// ```swift
     /// let size = button.dd_calculateSize(forWidth: 200)
     /// ```
-    func dd_calculateSize(forWidth lineWidth: CGFloat = ScreenInfo.screenWidth) -> CGSize {
+    func dd_calculateSize(forWidth lineWidth: CGFloat = AppDimensions.screenWidth) -> CGSize {
         if let currentAttributedTitle = self.currentAttributedTitle {
             return currentAttributedTitle.dd_calculateAttributedSize(forWidth: lineWidth)
         }

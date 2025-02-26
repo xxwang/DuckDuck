@@ -1570,7 +1570,7 @@ public extension UIView {
         /// 是否开启三维效果，默认为true
         public var preservesDepth: Bool = true
         /// 发射器的发射位置，默认为屏幕中心下方
-        public var emitterPosition: CGPoint = .init(x: ScreenInfo.screenWidth / 2.0, y: UIScreen.main.bounds.height - 30)
+        public var emitterPosition: CGPoint = .init(x: AppDimensions.screenWidth / 2.0, y: UIScreen.main.bounds.height - 30)
         /// 发射器的形状，默认为球型
         public var emitterShape: CAEmitterLayerEmitterShape = .sphere
 

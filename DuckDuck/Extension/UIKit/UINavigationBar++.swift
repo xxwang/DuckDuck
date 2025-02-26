@@ -63,9 +63,9 @@ public extension UINavigationBar {
 
         let statusBar = UIView(frame: CGRect(
             x: 0,
-            y: -ScreenInfo.statusBarHeight,
-            width: ScreenInfo.screenWidth,
-            height: ScreenInfo.statusBarHeight
+            y: -AppDimensions.statusBarHeight,
+            width: AppDimensions.screenWidth,
+            height: AppDimensions.statusBarHeight
         ))
         statusBar.backgroundColor = color
         statusBar.isUserInteractionEnabled = false

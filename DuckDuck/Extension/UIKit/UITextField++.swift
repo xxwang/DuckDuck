@@ -42,7 +42,7 @@ public extension UITextField {
     /// ```
     @discardableResult
     func dd_addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
-        let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: ScreenInfo.screenWidth, height: height)))
+        let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: AppDimensions.screenWidth, height: height)))
         toolBar.setItems(items, animated: false)
         self.inputAccessoryView = toolBar
         return toolBar

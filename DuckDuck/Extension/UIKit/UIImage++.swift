@@ -2387,7 +2387,7 @@ public extension UIImage {
         let sise = CGSize(width: size.0, height: size.1)
         let rect = CGRect(origin: CGPoint.zero, size: sise)
 
-        let textsize = text.dd_calculateSize(forWidth: ScreenInfo.screenWidth, font: .systemFont(ofSize: fontSize))
+        let textsize = text.dd_calculateSize(forWidth: AppDimensions.screenWidth, font: .systemFont(ofSize: fontSize))
 
         // 开启上下文
         UIGraphicsBeginImageContext(sise)
