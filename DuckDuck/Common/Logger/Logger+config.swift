@@ -9,7 +9,7 @@ public extension Logger {
     static var fileEnabled: Bool = false
 
     /// 日志文件路径
-    static var filePath: String = "/tmp/logs.txt"
+    static var filePath: String = NSTemporaryDirectory() + "logs.txt"
 
     /// 是否显示时间戳
     static var showTimestamp: Bool = true

@@ -27,9 +27,6 @@ public extension DDExtension where Base: UIView {
     func add2(_ superview: UIView?) -> Self {
         if let superview {
             superview.addSubview(self.base)
-            if self.base.needsLayoutUpdate {
-                self.base.calculateLayout()
-            }
         }
         return self
     }
